@@ -119,8 +119,14 @@
                         <xs:complexType>
                             <xs:sequence>
                                 <xs:element ref="a1:Podaci_o_naslovu"/>
-                                <xs:element maxOccurs="unbounded" minOccurs="0" name="Autor"
-                                    type="a1:TAutor"/>
+                                <xs:element minOccurs="0" name="Autori">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element maxOccurs="unbounded" name="Autor"
+                                                type="a1:TAutor"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
                             </xs:sequence>
                         </xs:complexType>
                     </xs:element>

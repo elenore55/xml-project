@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zahtev>
+    <popunjavaPodnosilac>
+        <Podnosilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravno_lice">
+            <Adresa>
+                <Mesto>Beograd</Mesto>
+                <Postanski_broj>11000</Postanski_broj>
+                <Ulica>Knez Mihajlova</Ulica>
+                <Broj>11</Broj>
+            </Adresa>
+            <Poslovno_ime>Poslovnica</Poslovno_ime>
+        </Podnosilac>
+        <Autori>
+            <Autor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TZiv_autor">
+                <Ime>Milica</Ime>
+                <Prezime>Popovic</Prezime>
+                <Adresa>
+                    <Mesto>Novi Sad</Mesto>
+                    <Postanski_broj>21000</Postanski_broj>
+                    <Ulica>Radnicka</Ulica>
+                    <Broj>23</Broj>
+                </Adresa>
+                <Drzavljanstvo>Srbija</Drzavljanstvo>
+            </Autor>
+            <Autor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPokojniAutor">
+                <Ime>Pero</Ime>
+                <Prezime>Peric</Prezime>
+                <Godina_smrti>1990</Godina_smrti>
+            </Autor>
+        </Autori>
+        <Autorsko_delo stvoreno_u_radnom_odnosu="true">
+            <Nacin_koristenja>citanje</Nacin_koristenja>
+            <Vrsta>knjizevno djelo</Vrsta>
+            <Forma_zapisa>knjiga</Forma_zapisa>
+            <Podaci_o_naslovu>
+                <Naslov>Moj naslov</Naslov>
+                <Alternativni_naslov>ALT</Alternativni_naslov>
+            </Podaci_o_naslovu>
+        </Autorsko_delo>
+    </popunjavaPodnosilac>
+    <popunjavaZavod>
+        <Prilog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TOpisDela">
+            <Opis>neki opis</Opis>
+        </Prilog>
+        <Broj_prijave>23</Broj_prijave>
+        <Datum_podnosenja>2022-12-04+01:00</Datum_podnosenja>
+    </popunjavaZavod>
+</zahtev>

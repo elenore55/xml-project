@@ -160,7 +160,7 @@
                         <xs:restriction base="xs:string">
                             <xs:enumeration value="Punomocnik za zastupanje"/>
                             <xs:enumeration value="Punomocnik za prijem pismena"/>
-                            <xs:enumeration value=""/>
+                            <xs:enumeration value="Zajednicki predstavnik"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
