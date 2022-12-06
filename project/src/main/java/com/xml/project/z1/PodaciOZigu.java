@@ -39,8 +39,7 @@ public class PodaciOZigu {
     @XmlElement(name = "Izgled", required = true)
     String izgled;
 
-    // TODO: check this
     @XmlElementWrapper(name = "Nicanska_klasifikacija", required = true)
     @XmlElement(name = "Klasa", required = true)
-    List<String> nicanskaKlasifikacija;
+    List<Integer> nicanskaKlasifikacija;
 }
