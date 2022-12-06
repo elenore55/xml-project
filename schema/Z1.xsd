@@ -46,7 +46,14 @@
                                         <xs:element name="Nicanska_klasifikacija">
                                             <xs:complexType>
                                                 <xs:sequence>
-                                                  <xs:element maxOccurs="45" name="Klasa"/>
+                                                  <xs:element maxOccurs="45" name="Klasa">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:int">
+                                                  <xs:minInclusive value="1"/>
+                                                  <xs:maxInclusive value="45"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
                                                 </xs:sequence>
                                             </xs:complexType>
                                         </xs:element>
@@ -96,21 +103,22 @@
                             <xs:element name="Prilozi">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="Primerak_znaka"/>
+                                        <xs:element name="Primerak_znaka" type="xs:string"/>
                                         <xs:element name="Spisak_robe_i_usluga">
                                             <xs:complexType>
                                                 <xs:sequence>
                                                   <xs:element maxOccurs="unbounded"
-                                                  name="Roba_ili_usluga"/>
+                                                  name="Roba_ili_usluga" type="xs:string"/>
                                                 </xs:sequence>
                                             </xs:complexType>
                                         </xs:element>
-                                        <xs:element name="Punomocje"/>
-                                        <xs:element name="Generalno_punomocje"/>
-                                        <xs:element name="Punomocje_naknadno_dostavljeno"/>
-                                        <xs:element name="Opsti_akt"/>
-                                        <xs:element name="Dokaz_o_pravu_prvenstva"/>
-                                        <xs:element name="Dokaz_o_uplati_takse"/>
+                                        <xs:element name="Punomocje" type="xs:string"/>
+                                        <xs:element name="Generalno_punomocje" type="xs:string"/>
+                                        <xs:element name="Punomocje_naknadno_dostavljeno"
+                                            type="xs:boolean"/>
+                                        <xs:element name="Opsti_akt" type="xs:string"/>
+                                        <xs:element name="Dokaz_o_pravu_prvenstva" type="xs:string"/>
+                                        <xs:element name="Dokaz_o_uplati_takse" type="xs:string"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
