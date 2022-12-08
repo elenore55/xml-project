@@ -35,7 +35,7 @@ public abstract class Autor {
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "TPokojniAutor", propOrder = {"godinaSmrti"})
+    @XmlType(name = "TPokojni_autor", propOrder = {"godinaSmrti"})
     public static class PokojniAutor extends Autor {
 
         @XmlElement(name = "Godina_smrti", required = true)

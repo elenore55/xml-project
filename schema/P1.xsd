@@ -50,23 +50,15 @@
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="Prvobitna_prijava">
+                            <xs:element name="Prvobitna_prijava" minOccurs="0">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="Broj" type="xs:positiveInteger"/>
                                         <xs:element name="Datum_podnosenja" type="xs:date"/>
                                     </xs:sequence>
-                                    <xs:attribute name="tip">
-                                        <xs:simpleType>
-                                            <xs:restriction base="xs:string">
-                                                <xs:enumeration value="dopunska"/>
-                                                <xs:enumeration value="izdvojena"/>
-                                            </xs:restriction>
-                                        </xs:simpleType>
-                                    </xs:attribute>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="Zahtev_za_priznanje_prvenstva">
+                            <xs:element name="Zahtev_za_priznanje_prvenstva" minOccurs="0">
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element maxOccurs="unbounded" name="Ranija_prijava">
@@ -91,6 +83,14 @@
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
+            <xs:attribute name="tip_prijave">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="dopunska"/>
+                        <xs:enumeration value="izdvojena"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
         </xs:complexType>
     </xs:element>
     <xs:element name="Adresa">
@@ -188,7 +188,7 @@
     </xs:complexType>
     <xs:simpleType name="TUppercase_string">
         <xs:restriction base="xs:string">
-            <xs:pattern value="[A-Z]+"/>
+            <xs:pattern value="[ A-Z]+"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

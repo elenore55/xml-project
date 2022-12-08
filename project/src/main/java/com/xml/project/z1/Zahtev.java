@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "zahtev")
+@XmlRootElement(name = "Zahtev")
 @XmlType(name = "", propOrder = {"popunjavaPodnosilac", "popunjavaZavod"})
 public class Zahtev {
 

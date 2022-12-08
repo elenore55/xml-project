@@ -31,7 +31,7 @@ public class PopunjavaPodnosilac {
     @XmlElement(name = "Podaci_o_dostavljanju", required = true)
     PodaciODostavljanju podaciODostavljanju;
 
-    @XmlElement(name = "Prvobitna_prijava", required = true)
+    @XmlElement(name = "Prvobitna_prijava")
     PrvobitnaPrijava prvobitnaPrijava;
 
     @XmlElement(name = "Zahtev_za_priznanje_prvenstva")

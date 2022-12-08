@@ -11,7 +11,20 @@ import lombok.Setter;
 public abstract class Punomocnik extends Lice {
 
     public enum VrstaPunomocnika {
-        PUNOMOCNIK_ZA_ZASTUPANJE, PUNOMOCNIK_ZA_PRIJEM_PISMENA, ZAJEDNICKI_PREDSTAVNIK
+        PUNOMOCNIK_ZA_ZASTUPANJE("Punomocnik za zastupanje"),
+        PUNOMOCNIK_ZA_PRIJEM_PISMENA("Punomocnik za prijem pismena"),
+        ZAJEDNICKI_PREDSTAVNIK("Zajednicki predstavnik");
+
+        private final String name;
+
+        VrstaPunomocnika(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 
     @XmlAttribute(name = "vrsta", required = true)
@@ -21,7 +34,7 @@ public abstract class Punomocnik extends Lice {
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TPunomocnik_fizicko_lice", propOrder = {"ime", "prezime"})
-    public static class FizickoLice {
+    public static class FizickoLice extends Punomocnik {
 
         @XmlElement(name = "Ime", required = true)
         String ime;
@@ -34,7 +47,7 @@ public abstract class Punomocnik extends Lice {
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TPunomocnik_pravno_lice", propOrder = {"poslovnoIme"})
-    public static class PravnoLice {
+    public static class PravnoLice extends Punomocnik {
 
         @XmlElement(name = "Poslovno_ime", required = true)
         String poslovnoIme;

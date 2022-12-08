@@ -12,9 +12,6 @@ import java.util.Date;
 @XmlType(name = "", propOrder = {"broj", "datumPodnosenja"})
 public class PrvobitnaPrijava {
 
-    @XmlAttribute(name = "tip", required = true)
-    String tip;
-
     @XmlElement(name = "Broj", required = true)
     int broj;
 

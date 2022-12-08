@@ -14,7 +14,20 @@ import java.util.List;
 public class PodaciOZigu {
 
     public enum TipZiga {
-        INDIVIDUALNI_ZIG, KOLEKTIVNI_ZIG, ZIG_GARANCIJE
+        INDIVIDUALNI_ZIG("individualni zig"),
+        KOLEKTIVNI_ZIG("kolektivni zig"),
+        ZIG_GARANCIJE("zig garancije");
+
+        private final String name;
+
+        TipZiga(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 
     @XmlElement(name = "Tip_ziga", required = true)

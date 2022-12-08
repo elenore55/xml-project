@@ -14,7 +14,7 @@ public abstract class Prilog {
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "TOpisDela", propOrder = {"opis"})
+    @XmlType(name = "TOpis_dela", propOrder = {"opis"})
     public static class OpisDela extends Prilog {
 
         @XmlElement(name = "Opis", required = true)

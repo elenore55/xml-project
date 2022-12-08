@@ -7,9 +7,27 @@ import lombok.Setter;
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "zahtev")
+@XmlRootElement(name = "Zahtev")
 @XmlType(name = "", propOrder = {"popunjavaZavod", "popunjavaPodnosilac"})
 public class Zahtev {
+
+    public enum TipPrijave {
+        IZDVOJENA("izdvojena"), DOPUNSKA("dopunska");
+
+        private final String name;
+
+        TipPrijave(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    @XmlAttribute(name = "tip_prijave", required = true)
+    TipPrijave tipPrijave;
 
     @XmlElement(name = "Popunjava_zavod", required = true)
     PopunjavaZavod popunjavaZavod;

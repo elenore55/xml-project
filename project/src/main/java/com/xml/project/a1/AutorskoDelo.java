@@ -15,7 +15,7 @@ public class AutorskoDelo {
     @XmlAttribute(name = "stvoreno_u_radnom_odnosu", required = true)
     boolean stvorenoURadnomOdnosu;
 
-    @XmlElement(name = "Nacin_koristenja", required = true)
+    @XmlElement(name = "Nacin_koriscenja", required = true)
     String nacinKoriscenja;
 
     @XmlElement(name = "Vrsta", required = true)
