@@ -34,8 +34,29 @@ public class PopunjavaPodnosilac {
     @XmlElement(name = "Prvobitna_prijava")
     PrvobitnaPrijava prvobitnaPrijava;
 
-    @XmlElement(name = "Zahtev_za_priznanje_prvenstva")
+    @XmlElementWrapper(name = "Zahtev_za_priznanje_prvenstva")
+    @XmlElement(name = "Ranija_prijava")
     List<RanijaPrijava> zahtevZaPriznanjePrvenstva;
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("- Popunjava podnosilac:");
+        builder.append("\n\t- Naziv pronalaska: ").append(nazivPronalaskaSR);
+        builder.append("\n\t- Naziv pronalaska: ").append(nazivPronalaskaEN);
+        builder.append(podnosilacPrijave);
+        if (pronalazac != null)
+            builder.append(pronalazac);
+        builder.append(punomocnik);
+        builder.append(podaciODostavljanju);
+        if (prvobitnaPrijava != null)
+            builder.append(prvobitnaPrijava);
+        if (zahtevZaPriznanjePrvenstva != null) {
+            builder.append("\n\t- Zahtev za priznanje prvenstva");
+            for (RanijaPrijava ranijaPrijava : zahtevZaPriznanjePrvenstva)
+                builder.append("\n").append(ranijaPrijava);
+        }
+        return builder.toString();
+    }
 
     @Getter
     @Setter
@@ -45,6 +66,11 @@ public class PopunjavaPodnosilac {
 
         @XmlAttribute(name = "jezik", required = true)
         String jezik;
+
+        @Override
+        public String toString() {
+            return "\n\t\t- Jezik: " + jezik;
+        }
     }
 
     @Getter
@@ -58,6 +84,14 @@ public class PopunjavaPodnosilac {
 
         @XmlElement(name = "Nacin", required = true)
         String nacin;
+
+        @Override
+        public String toString() {
+            String val = "\n\t- Podaci o dostavljanju: " + "\n\t\t- Nacin: " + nacin;
+            if (adresa != null)
+                val += "\n\t" + adresa;
+            return val;
+        }
     }
 
 }

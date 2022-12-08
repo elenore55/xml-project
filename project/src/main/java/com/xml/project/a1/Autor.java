@@ -19,6 +19,11 @@ public abstract class Autor {
     @XmlElement(name = "Prezime", required = true)
     protected String prezime;
 
+    @Override
+    public String toString() {
+        return "\n\t\t- Ime: " + ime + "\n\t\t- Prezime: " + prezime;
+    }
+
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
@@ -30,6 +35,11 @@ public abstract class Autor {
 
         @XmlElement(name = "Drzavljanstvo", required = true)
         String drzavljanstvo;
+
+        @Override
+        public String toString() {
+            return super.toString() + "\n\t" + adresa + "\n\t\t- Drzavljanstvo: " + drzavljanstvo + "\n";
+        }
     }
 
     @Getter
@@ -40,5 +50,10 @@ public abstract class Autor {
 
         @XmlElement(name = "Godina_smrti", required = true)
         int godinaSmrti;
+
+        @Override
+        public String toString() {
+            return super.toString() + "\n\t\t- Godina smrti: " + godinaSmrti + "\n";
+        }
     }
 }

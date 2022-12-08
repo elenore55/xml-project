@@ -21,4 +21,15 @@ public class PopunjavaPodnosilac {
 
     @XmlElement(name = "Autorsko_delo", required = true)
     AutorskoDelo autorskoDelo;
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("- Popunjava podnosilac:\n");
+        builder.append("\t").append(podnosilac);
+        builder.append("\n\t- Autori: ");
+        for (Autor autor : autori) builder.append(autor);
+        builder.append("\t").append(autorskoDelo);
+        return builder.toString();
+    }
 }

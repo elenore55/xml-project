@@ -21,4 +21,10 @@ public class RanijaPrijava {
 
     @XmlElement(name = "Oznaka", required = true)
     String oznaka;
+
+    @Override
+    public String toString() {
+        return "\t\t- Ranija prijava: " + "\n\t\t\t- Broj prijave: " + broj + "\n\t\t\t- Datum podnosenja: " + datumPodnosenja +
+                "\n\t\t\t- Oznaka: " + oznaka;
+    }
 }

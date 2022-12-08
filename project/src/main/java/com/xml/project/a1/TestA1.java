@@ -14,15 +14,38 @@ public class TestA1 {
     public void doTest() throws JAXBException {
         JAXBContext context = JAXBContext.newInstance("com.xml.project.a1", TestA1.class.getClassLoader());
 
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(new File("src/main/resources/xml_files/a1.xml"));
+        System.out.println(zahtev);
+
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        Zahtev zahtev = createZahtev();
+        updateData(zahtev);
         marshaller.marshal(zahtev, new File("src/main/resources/xml_files/a1.xml"));
 
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        zahtev = (Zahtev) unmarshaller.unmarshal(new File("src/main/resources/xml_files/a1.xml"));
-        System.out.println(zahtev);
     }
+
+    private void updateData(Zahtev zahtev) {
+        System.out.println("IZMENJENI PODACI: ");
+        Autor zivAutor = zahtev.getPopunjavaPodnosilac().getAutori().get(0);
+        zivAutor.setIme("Djura");
+        zivAutor.setPrezime("Djuric");
+        System.out.println("\tIme i prezime autora: 'Djura Djuric'");
+
+        Prilog.OpisDela prilog = new Prilog.OpisDela();
+        prilog.setOpis("Ovo je neki drugi opis mog dela");
+        zahtev.getPopunjavaZavod().setPrilog(prilog);
+        System.out.println("\tOpis dela: 'Ovo je neki drugi opis mog dela'");
+
+        zahtev.getPopunjavaZavod().setDatumPodnosenja(new Date());
+        System.out.println("\tDatum podnosenja zahteva: '" + new Date() + "'");
+
+        zahtev.getPopunjavaPodnosilac().getAutorskoDelo().getPodaciONaslovu().setNaslov("Novi naslov");
+        zahtev.getPopunjavaPodnosilac().getAutorskoDelo().getPodaciONaslovu().setAlternativniNaslov("Novi alternativni naslov");
+        System.out.println("\tNaslov dela: 'Novi naslov'");
+        System.out.println("\tAlternativni naslov dela: 'Novi alternativni naslov'");
+    }
+
 
     private Zahtev createZahtev() {
         Zahtev z = new Zahtev();

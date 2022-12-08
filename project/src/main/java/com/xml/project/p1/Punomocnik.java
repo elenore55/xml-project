@@ -30,6 +30,11 @@ public abstract class Punomocnik extends Lice {
     @XmlAttribute(name = "vrsta", required = true)
     VrstaPunomocnika vrsta;
 
+    @Override
+    public String toString() {
+        return "\n\t- Punomocnik:\n" + super.toString() + "\n\t\t- Vrsta: " + vrsta;
+    }
+
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
@@ -41,6 +46,11 @@ public abstract class Punomocnik extends Lice {
 
         @XmlElement(name = "Prezime", required = true)
         String prezime;
+
+        @Override
+        public String toString() {
+            return super.toString() + "\n\t\t- Ime: " + ime + "\n\t\t- Prezime: " + prezime;
+        }
     }
 
     @Getter
@@ -51,6 +61,11 @@ public abstract class Punomocnik extends Lice {
 
         @XmlElement(name = "Poslovno_ime", required = true)
         String poslovnoIme;
+
+        @Override
+        public String toString() {
+            return super.toString() + "\n\t\t- Poslovno ime: " + poslovnoIme;
+        }
     }
 
 }

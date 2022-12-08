@@ -21,4 +21,9 @@ public class PopunjavaZavod {
     @XmlElement(name = "Datum_podnosenja", required = true)
     @XmlSchemaType(name = "date")
     Date datumPodnosenja;
+
+    @Override
+    public String toString() {
+        return "- Popunjava zavod: \n\t" + prilog + "\n\t- Broj prijave: " + brojPrijave + "\n\t- Datum podnosenja: " + datumPodnosenja;
+    }
 }

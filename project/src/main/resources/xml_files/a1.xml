@@ -12,8 +12,8 @@
         </Podnosilac>
         <Autori>
             <Autor xsi:type="TZiv_autor">
-                <Ime>Milica</Ime>
-                <Prezime>Popovic</Prezime>
+                <Ime>Djura</Ime>
+                <Prezime>Djuric</Prezime>
                 <Adresa>
                     <Mesto>Novi Sad</Mesto>
                     <Postanski_broj>21000</Postanski_broj>
@@ -33,14 +33,14 @@
             <Vrsta>knjizevno djelo</Vrsta>
             <Forma_zapisa>knjiga</Forma_zapisa>
             <Podaci_o_naslovu>
-                <Naslov>Moj naslov</Naslov>
-                <Alternativni_naslov>ALT</Alternativni_naslov>
+                <Naslov>Novi naslov</Naslov>
+                <Alternativni_naslov>Novi alternativni naslov</Alternativni_naslov>
             </Podaci_o_naslovu>
         </Autorsko_delo>
     </Popunjava_podnosilac>
     <Popunjava_zavod>
         <Prilog xsi:type="TOpis_dela">
-            <Opis>neki opis</Opis>
+            <Opis>Ovo je neki drugi opis mog dela</Opis>
         </Prilog>
         <Broj_prijave>23</Broj_prijave>
         <Datum_podnosenja>2022-12-08+01:00</Datum_podnosenja>

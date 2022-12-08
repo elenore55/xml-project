@@ -19,6 +19,6 @@ public class Zahtev {
 
     @Override
     public String toString() {
-        return popunjavaPodnosilac + "\n" + popunjavaZavod;
+        return "ZAHTEV A1\n" + popunjavaPodnosilac + "\n" + popunjavaZavod + "\n";
     }
 }

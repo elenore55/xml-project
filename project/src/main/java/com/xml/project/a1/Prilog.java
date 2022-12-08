@@ -19,6 +19,11 @@ public abstract class Prilog {
 
         @XmlElement(name = "Opis", required = true)
         String opis;
+
+        @Override
+        public String toString() {
+            return "- Opis: " + opis;
+        }
     }
 
     @Getter
@@ -29,5 +34,10 @@ public abstract class Prilog {
 
         @XmlElement(name = "Primer", required = true)
         String primer;
+
+        @Override
+        public String toString() {
+            return "- Primer dela: " + primer;
+        }
     }
 }

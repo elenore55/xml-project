@@ -27,6 +27,16 @@ public class AutorskoDelo {
     @XmlElement(name = "Podaci_o_naslovu", required = true)
     PodaciONaslovu podaciONaslovu;
 
+    @Override
+    public String toString() {
+        String radniOdnos = stvorenoURadnomOdnosu ? "Stvoreno u radnom odnosu" : "Nije stvoreno u radnom odnosu";
+        return "- Autorsko delo: " +
+                "\n\t\t- " + radniOdnos +
+                "\n\t\t- Vrsta: " + vrsta +
+                "\n\t\t- Forma zapisa: " + formaZapisa +
+                "\n\t" + podaciONaslovu;
+    }
+
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
@@ -61,5 +71,15 @@ public class AutorskoDelo {
 
         @XmlElement(name = "Alternativni_naslov")
         String alternativniNaslov;
+
+        @Override
+        public String toString() {
+            String val = "\t- Podaci o naslovu: " + "\n\t\t\t- Naslov: " + naslov;
+            if (alternativniNaslov != null) {
+                val += "\n\t\t\t- Alternativni naslov: " + alternativniNaslov;
+            }
+            return val;
+        }
+
     }
 }

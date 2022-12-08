@@ -21,4 +21,9 @@ public class Pronalazac extends Lice {
 
     @XmlElement(name = "Prezime", required = true)
     String prezime;
+
+    @Override
+    public String toString() {
+        return "\n\t- Pronalazac:\n" + super.toString() + "\n\t\t- Ime: " + ime + "\n\t\t- Prezime: " + prezime;
+    }
 }

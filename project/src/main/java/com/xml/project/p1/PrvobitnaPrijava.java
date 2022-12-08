@@ -18,4 +18,9 @@ public class PrvobitnaPrijava {
     @XmlElement(name = "Datum_podnosenja", required = true)
     @XmlSchemaType(name = "date")
     Date datumPodnosenja;
+
+    @Override
+    public String toString() {
+        return "\n\t- Prvobitna prijava: " + "\n\t\t- Broj prijave: " + broj + "\n\t\t- Datum podnosenja: " + datumPodnosenja;
+    }
 }

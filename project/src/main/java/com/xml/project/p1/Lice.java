@@ -21,4 +21,9 @@ public abstract class Lice {
 
     @XmlElement(name = "E_posta", required = true)
     protected String ePosta;
+
+    @Override
+    public String toString() {
+        return "\t" + adresa + "\n\t\t- Broj telefona: " + brojTelefona + "\n\t\t- E-posta: " + ePosta;
+    }
 }
