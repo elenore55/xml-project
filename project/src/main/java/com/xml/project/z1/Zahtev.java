@@ -16,4 +16,9 @@ public class Zahtev {
 
     @XmlElement(name = "Popunjava_zavod", required = true)
     PopunjavaZavod popunjavaZavod;
+
+    @Override
+    public String toString() {
+        return "\nZAHTEV Z1\n" + popunjavaPodnosilac + "\n" + popunjavaZavod + "\n";
+    }
 }

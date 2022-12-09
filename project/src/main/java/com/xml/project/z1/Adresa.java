@@ -22,9 +22,14 @@ public class Adresa {
     @XmlElement(name = "Postanski_broj", required = true)
     int postanskiBroj;
 
-    @XmlElement(name = "mesto", required = true)
+    @XmlElement(name = "Mesto", required = true)
     String mesto;
 
-    @XmlElement(name = "drzava", required = true)
+    @XmlElement(name = "Drzava", required = true)
     String drzava;
+
+    @Override
+    public String toString() {
+        return "\t- Adresa: " + ulica + " " + broj + " " + postanskiBroj + " " + mesto + " " + drzava;
+    }
 }

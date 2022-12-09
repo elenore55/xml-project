@@ -31,4 +31,19 @@ public class PopunjavaPodnosilac {
 
     @XmlElement(name = "Placene_takse", required = true)
     PlaceneTakse placeneTakse;
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("- Popunjava podnosilac:");
+        builder.append("\n\t- Podnosioci prijave");
+        for (var lice : podnosiociPrijave)
+            builder.append("\n\t").append(lice);
+        builder.append("\n\t- Punomocnik:").append("\n\t").append(punomocnik);
+        if (zajednickiPredstavnik != null)
+            builder.append("\n\t- Zajednicki predstavnik:").append("\n\t").append(zajednickiPredstavnik);
+        builder.append("\n").append(podaciOZigu);
+        builder.append("\n\t- Pravo prvenstva: ").append(pravoPrvenstva);
+        builder.append("\n").append(placeneTakse);
+        return builder.toString();
+    }
 }

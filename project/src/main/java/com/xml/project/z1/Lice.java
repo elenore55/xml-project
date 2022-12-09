@@ -25,6 +25,11 @@ public abstract class Lice {
     @XmlElement(name = "Faks", required = true)
     String faks;
 
+    @Override
+    public String toString() {
+        return adresa + "\n\t\t- Telefon: " + telefon + "\n\t\t- E-mail: " + email + "\n\t\t- Faks: " + faks;
+    }
+
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
@@ -36,6 +41,11 @@ public abstract class Lice {
 
         @XmlElement(name = "Prezime", required = true)
         String prezime;
+
+        @Override
+        public String toString() {
+            return "\t- Ime: " + ime + "\n\t\t- Prezime: " + prezime + "\n\t" + super.toString();
+        }
     }
 
     @Getter
@@ -46,5 +56,10 @@ public abstract class Lice {
 
         @XmlElement(name = "Poslovno_ime", required = true)
         String poslovnoIme;
+
+        @Override
+        public String toString() {
+            return "\t- Poslovno ime: " + poslovnoIme + "\n\t" + super.toString();
+        }
     }
 }

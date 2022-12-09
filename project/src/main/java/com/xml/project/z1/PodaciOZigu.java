@@ -55,4 +55,24 @@ public class PodaciOZigu {
     @XmlElementWrapper(name = "Nicanska_klasifikacija", required = true)
     @XmlElement(name = "Klasa", required = true)
     List<Integer> nicanskaKlasifikacija;
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("\t- Podaci o zigu: ");
+        builder.append("\n\t\t- Tip ziga: ").append(tipZiga);
+        builder.append("\n\t\t- Vrsta znaka: ").append(vrstaZnaka);
+        builder.append("\n\t\t- Boje: ");
+        for (var boja : boje)
+            builder.append("\n\t\t\t- ").append(boja);
+        if (transliteracija != null && !transliteracija.equals(""))
+            builder.append("\n\t\t- Transliteracija: ").append(transliteracija);
+        if (prevod != null && !prevod.equals(""))
+            builder.append("\n\t\t- Prevod: ").append(prevod);
+        builder.append("\n\t\t- Opis: ").append(opis);
+        builder.append("\n\t\t- Izgled: ").append(izgled);
+        builder.append("\n\t\t- Nicanska klasifikacija: ");
+        for (var klasa : nicanskaKlasifikacija)
+            builder.append("\n\t\t\t- ").append(klasa);
+        return builder.toString();
+    }
 }

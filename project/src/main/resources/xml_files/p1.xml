@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" tip_prijave="DOPUNSKA">
     <Popunjava_zavod>
         <Broj_prijave>2</Broj_prijave>
         <Datum_prijema>2022-10-10+02:00</Datum_prijema>
@@ -21,7 +21,7 @@
             <Prezime>PETROVIC</Prezime>
             <Drzavljanstvo>Republika Srbija</Drzavljanstvo>
         </Podnosilac_prijave>
-        <Punomocnik xsi:type="TPunomocnik_pravno_lice">
+        <Punomocnik xsi:type="TPunomocnik_pravno_lice" vrsta="PUNOMOCNIK_ZA_ZASTUPANJE">
             <Adresa>
                 <Mesto>Novi Sad</Mesto>
                 <Postanski_broj>21000</Postanski_broj>

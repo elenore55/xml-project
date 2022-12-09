@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Zahtev
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
->
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Popunjava_podnosilac>
         <Podnosioci_prijave>
             <Podnosilac_prijave xsi:type="TPravno_lice">
@@ -15,7 +13,7 @@
                 <Telefon>1234565</Telefon>
                 <E_mail>email3@gmail.com</E_mail>
                 <Faks>123455</Faks>
-                <Poslovno_ime>Poslovnica</Poslovno_ime>
+                <Poslovno_ime>Novo poslovno ime</Poslovno_ime>
             </Podnosilac_prijave>
         </Podnosioci_prijave>
         <Punomocnik xsi:type="TFizicko_lice">
@@ -46,10 +44,10 @@
             <Poslovno_ime>Neka druga poslovnica</Poslovno_ime>
         </Zajednicki_predstavnik>
         <Podaci_o_zigu>
-            <Tip_ziga>individualni zig</Tip_ziga>
-            <Vrsta_znaka xsi:type="TNabrojana_vrsta_znaka">graficki</Vrsta_znaka>
+            <Tip_ziga>INDIVIDUALNI_ZIG</Tip_ziga>
+            <Vrsta_znaka>graficki</Vrsta_znaka>
             <Boje>
-                <Boja>crvena</Boja>
+                <Boja>zuta</Boja>
                 <Boja>zelena</Boja>
                 <Boja>bela</Boja>
             </Boje>
@@ -62,13 +60,13 @@
         </Podaci_o_zigu>
         <Pravo_prvenstva>Ja imam pravo prvenstva</Pravo_prvenstva>
         <Placene_takse>
-            <Osnovna_taksa>1000.00</Osnovna_taksa>
+            <Osnovna_taksa>1000.0</Osnovna_taksa>
             <Klasa>
                 <Naziv>Neka klasa</Naziv>
-                <Vrednost>200.00</Vrednost>
+                <Vrednost>200.0</Vrednost>
             </Klasa>
-            <Graficko_resenje>150.00</Graficko_resenje>
-            <Ukupno>1350.00</Ukupno>
+            <Graficko_resenje>150.0</Graficko_resenje>
+            <Ukupno>1350.0</Ukupno>
         </Placene_takse>
     </Popunjava_podnosilac>
     <Popunjava_zavod>
@@ -76,7 +74,7 @@
             <Id>23</Id>
             <Godina>2022</Godina>
         </Broj_prijave_ziga>
-        <Datum_podnosenja>2022-11-11</Datum_podnosenja>
+        <Datum_podnosenja>2022-11-11+01:00</Datum_podnosenja>
         <Prilozi>
             <Primerak_znaka>primerak.pdf</Primerak_znaka>
             <Spisak_robe_i_usluga>

@@ -22,6 +22,11 @@ public class PopunjavaZavod {
     @XmlElement(name = "Prilozi")
     Prilozi prilozi;
 
+    @Override
+    public String toString() {
+        return "- Popunjava zavod:" + "\n" + brojPrijaveZiga + "\n\t- Datum podnosenja: " + datumPodnosenja + "\n" + prilozi;
+    }
+
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
@@ -33,5 +38,10 @@ public class PopunjavaZavod {
 
         @XmlElement(name = "Godina", required = true)
         int godina;
+
+        @Override
+        public String toString() {
+            return "\t- Broj prijave ziga: Z-" + id + "/" + godina;
+        }
     }
 }

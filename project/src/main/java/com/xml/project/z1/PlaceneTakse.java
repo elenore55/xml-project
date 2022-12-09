@@ -25,6 +25,18 @@ public class PlaceneTakse {
     @XmlElement(name = "Ukupno", required = true)
     double ukupno;
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("\t- Placene takse:");
+        builder.append("\n\t\t- Osnovna taksa: ").append(osnovnaTaksa).append(" RSD");
+        if (klasa != null)
+            builder.append("\n\t").append(klasa);
+        if (grafickoResenje != 0)
+            builder.append("\n\t\t- Graficko resenje: ").append(grafickoResenje).append(" RSD");
+        builder.append("\n\t\t- Ukupno: ").append(ukupno).append(" RSD");
+        return builder.toString();
+    }
+
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
@@ -36,6 +48,11 @@ public class PlaceneTakse {
 
         @XmlElement(name = "Vrednost", required = true)
         double vrednost;
+
+        @Override
+        public String toString() {
+            return "\t- " + naziv + ": " + vrednost + " RSD";
+        }
     }
 
 }

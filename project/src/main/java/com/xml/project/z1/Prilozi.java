@@ -37,4 +37,20 @@ public class Prilozi {
 
     @XmlElement(name = "Dokaz_o_uplati_takse", required = true)
     String dokazOUplatiTakse;
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("\t- Prilozi:");
+        builder.append("\n\t\t- Primerak znaka: ").append(primerakZnaka);
+        builder.append("\n\t\t- Spisak robe i usluga: ");
+        for (var s : spisakRobeIUsluga)
+            builder.append("\n\t\t\t- ").append(s);
+        builder.append("\n\t\t- Punomocje: ").append(punomocje);
+        builder.append("\n\t\t- Generalno punomocje: ").append(generalnoPunomocje);
+        builder.append("\n\t\t- Punomocje naknadno dostavljeno: ").append(punomocjeNaknadnoDostavljeno);
+        builder.append("\n\t\t- Opsti akt: ").append(opstiAkt);
+        builder.append("\n\t\t- Dokaz o pravu prvenstva: ").append(dokazOPravuPrvenstva);
+        builder.append("\n\t\t- Dokaz o uplati takse: ").append(dokazOUplatiTakse);
+        return builder.toString();
+    }
 }
