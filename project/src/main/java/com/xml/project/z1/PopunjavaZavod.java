@@ -1,5 +1,6 @@
 package com.xml.project.z1;
 
+import com.xml.project.util.Util;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,7 @@ public class PopunjavaZavod {
 
     @Override
     public String toString() {
-        return "- Popunjava zavod:" + "\n" + brojPrijaveZiga + "\n\t- Datum podnosenja: " + datumPodnosenja + "\n" + prilozi;
+        return "- Popunjava zavod:" + "\n" + brojPrijaveZiga + "\n\t- Datum podnosenja: " + Util.dateToStr(datumPodnosenja) + "\n" + prilozi;
     }
 
     @Getter

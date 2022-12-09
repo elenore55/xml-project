@@ -28,7 +28,7 @@ public class PopunjavaPodnosilac {
         builder.append("- Popunjava podnosilac:\n");
         builder.append("\t").append(podnosilac);
         builder.append("\n\t- Autori: ");
-        for (Autor autor : autori) builder.append(autor);
+        for (var autor : autori) builder.append(autor);
         builder.append("\t").append(autorskoDelo);
         return builder.toString();
     }

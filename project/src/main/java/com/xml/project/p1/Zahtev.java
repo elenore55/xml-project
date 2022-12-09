@@ -12,7 +12,7 @@ import lombok.Setter;
 public class Zahtev {
 
     public enum TipPrijave {
-        IZDVOJENA("izdvojena"), DOPUNSKA("dopunska");
+        IZDVOJENA("Izdvojena"), DOPUNSKA("Dopunska");
 
         private final String name;
 

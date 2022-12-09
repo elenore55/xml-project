@@ -23,9 +23,9 @@
                                         <xs:element name="Tip_ziga">
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">
-                                                  <xs:enumeration value="individualni zig"/>
-                                                  <xs:enumeration value="kolektivni zig"/>
-                                                  <xs:enumeration value="zig garancije"/>
+                                                  <xs:enumeration value="INDIVIDUALNI_ZIG"/>
+                                                  <xs:enumeration value="KOLEKTIVNI_ZIG"/>
+                                                  <xs:enumeration value="ZIG_GARANCIJE"/>
                                                 </xs:restriction>
                                             </xs:simpleType>
                                         </xs:element>

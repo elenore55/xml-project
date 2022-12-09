@@ -1,5 +1,6 @@
 package com.xml.project.p1;
 
+import com.xml.project.util.Util;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,7 @@ public class RanijaPrijava {
 
     @Override
     public String toString() {
-        return "\t\t- Ranija prijava: " + "\n\t\t\t- Broj prijave: " + broj + "\n\t\t\t- Datum podnosenja: " + datumPodnosenja +
-                "\n\t\t\t- Oznaka: " + oznaka;
+        return "\t\t- Ranija prijava: " + "\n\t\t\t- Broj prijave: " + broj + "\n\t\t\t- Datum podnosenja: "
+                + Util.dateToStr(datumPodnosenja) + "\n\t\t\t- Oznaka: " + oznaka;
     }
 }

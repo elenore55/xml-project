@@ -8,42 +8,48 @@ import jakarta.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class TestA1 {
+
+    static final String XML_FILE_PATH = "src/main/resources/xml_files/a1.xml";
 
     public void doTest() throws JAXBException {
         JAXBContext context = JAXBContext.newInstance("com.xml.project.a1", TestA1.class.getClassLoader());
 
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(new File("src/main/resources/xml_files/a1.xml"));
+        Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(new File(XML_FILE_PATH));
         System.out.println(zahtev);
 
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         updateData(zahtev);
-        marshaller.marshal(zahtev, new File("src/main/resources/xml_files/a1.xml"));
+        marshaller.marshal(zahtev, new File(XML_FILE_PATH));
 
+        zahtev = (Zahtev) unmarshaller.unmarshal(new File(XML_FILE_PATH));
+        System.out.println(zahtev);
     }
 
     private void updateData(Zahtev zahtev) {
-        System.out.println("IZMENJENI PODACI: ");
+        System.out.println("IZMENA PODATAKA: ");
+        Scanner scanner = new Scanner(System.in);
+
         Autor zivAutor = zahtev.getPopunjavaPodnosilac().getAutori().get(0);
-        zivAutor.setIme("Djura");
-        zivAutor.setPrezime("Djuric");
-        System.out.println("\tIme i prezime autora: 'Djura Djuric'");
+        System.out.print("\tIme autora: ");
+        zivAutor.setIme(scanner.nextLine());
+        System.out.print("\tPrezime autora: ");
+        zivAutor.setPrezime(scanner.nextLine());
 
-        Prilog.OpisDela prilog = new Prilog.OpisDela();
-        prilog.setOpis("Ovo je neki drugi opis mog dela");
-        zahtev.getPopunjavaZavod().setPrilog(prilog);
-        System.out.println("\tOpis dela: 'Ovo je neki drugi opis mog dela'");
-
+        Prilog.OpisDela prilog = (Prilog.OpisDela) zahtev.getPopunjavaZavod().getPrilog();
+        System.out.print("\tOpis dela: ");
+        prilog.setOpis(scanner.nextLine());
         zahtev.getPopunjavaZavod().setDatumPodnosenja(new Date());
-        System.out.println("\tDatum podnosenja zahteva: '" + new Date() + "'");
 
-        zahtev.getPopunjavaPodnosilac().getAutorskoDelo().getPodaciONaslovu().setNaslov("Novi naslov");
-        zahtev.getPopunjavaPodnosilac().getAutorskoDelo().getPodaciONaslovu().setAlternativniNaslov("Novi alternativni naslov");
-        System.out.println("\tNaslov dela: 'Novi naslov'");
-        System.out.println("\tAlternativni naslov dela: 'Novi alternativni naslov'");
+        System.out.print("\tNaslov dela: ");
+        zahtev.getPopunjavaPodnosilac().getAutorskoDelo().getPodaciONaslovu().setNaslov(scanner.nextLine());
+        System.out.print("\tAlternativni naslov dela: ");
+        zahtev.getPopunjavaPodnosilac().getAutorskoDelo().getPodaciONaslovu().setAlternativniNaslov(scanner.nextLine());
+        System.out.println();
     }
 
 

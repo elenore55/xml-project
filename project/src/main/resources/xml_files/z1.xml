@@ -13,7 +13,7 @@
                 <Telefon>1234565</Telefon>
                 <E_mail>email3@gmail.com</E_mail>
                 <Faks>123455</Faks>
-                <Poslovno_ime>Novo poslovno ime</Poslovno_ime>
+                <Poslovno_ime>Poslovnica10</Poslovno_ime>
             </Podnosilac_prijave>
         </Podnosioci_prijave>
         <Punomocnik xsi:type="TFizicko_lice">
@@ -45,7 +45,7 @@
         </Zajednicki_predstavnik>
         <Podaci_o_zigu>
             <Tip_ziga>INDIVIDUALNI_ZIG</Tip_ziga>
-            <Vrsta_znaka>graficki</Vrsta_znaka>
+            <Vrsta_znaka>trodimenzionalni</Vrsta_znaka>
             <Boje>
                 <Boja>zuta</Boja>
                 <Boja>zelena</Boja>

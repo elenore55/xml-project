@@ -7,36 +7,40 @@ import jakarta.xml.bind.Unmarshaller;
 
 import java.io.File;
 import java.util.List;
+import java.util.Scanner;
 
 public class TestZ1 {
+
+    static final String XML_FILE_PATH = "src/main/resources/xml_files/z1.xml";
 
     public void doTest() throws JAXBException {
         JAXBContext context = JAXBContext.newInstance("com.xml.project.z1", TestZ1.class.getClassLoader());
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(new File("src/main/resources/xml_files/z1.xml"));
+        Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(new File(XML_FILE_PATH));
         System.out.println(zahtev);
 
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         updateData(zahtev);
-        marshaller.marshal(zahtev, new File("src/main/resources/xml_files/z1.xml"));
+        marshaller.marshal(zahtev, new File(XML_FILE_PATH));
 
-        // dodati boju u podatke o zigu
-        // tip ziga
+        zahtev = (Zahtev) unmarshaller.unmarshal(new File(XML_FILE_PATH));
+        System.out.println(zahtev);
     }
 
     private void updateData(Zahtev zahtev) {
-        System.out.println("IZMENJENI PODACI: ");
+        System.out.println("IZMENA PODATAKA: ");
+        Scanner scanner = new Scanner(System.in);
         Lice.PravnoLice podnosilac = (Lice.PravnoLice) zahtev.getPopunjavaPodnosilac().getPodnosiociPrijave().get(0);
-        podnosilac.setPoslovnoIme("Novo poslovno ime");
-        System.out.println("\tPoslovno ime podnosioca prijave: 'Novo poslovno ime'" );
+        System.out.print("\tPoslovno ime podnosioca prijave: ");
+        podnosilac.setPoslovnoIme(scanner.nextLine());
 
         PodaciOZigu podaciOZigu = zahtev.getPopunjavaPodnosilac().getPodaciOZigu();
-        podaciOZigu.setTipZiga(PodaciOZigu.TipZiga.INDIVIDUALNI_ZIG);
-        System.out.println("\tTip ziga: 'individualni zig'" );
+        System.out.print("\tVrsta znaka: ");
+        podaciOZigu.setVrstaZnaka(scanner.nextLine());
 
         List<String> boje = zahtev.getPopunjavaPodnosilac().getPodaciOZigu().getBoje();
-        boje.set(0, "zuta");
-        System.out.println("\tBoje ziga: 'zuta, zelena, bela'" );
+        System.out.print("\tBoja ziga: ");
+        boje.add(scanner.nextLine());
     }
 }

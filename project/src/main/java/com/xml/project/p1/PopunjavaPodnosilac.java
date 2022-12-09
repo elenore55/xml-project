@@ -9,15 +9,12 @@ import java.util.List;
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"nazivPronalaskaSR", "nazivPronalaskaEN", "podnosilacPrijave", "pronalazac", "punomocnik",
+@XmlType(name = "", propOrder = {"naziviPronalaska", "podnosilacPrijave", "pronalazac", "punomocnik",
         "podaciODostavljanju", "prvobitnaPrijava", "zahtevZaPriznanjePrvenstva"})
 public class PopunjavaPodnosilac {
 
     @XmlElement(name = "Naziv_pronalaska", required = true)
-    NazivPronalaska nazivPronalaskaSR;
-
-    @XmlElement(name = "Naziv_pronalaska", required = true)
-    NazivPronalaska nazivPronalaskaEN;
+    List<NazivPronalaska> naziviPronalaska;
 
     @XmlElement(name = "Podnosilac_prijave", required = true)
     PodnosilacPrijave podnosilacPrijave;
@@ -41,8 +38,8 @@ public class PopunjavaPodnosilac {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("- Popunjava podnosilac:");
-        builder.append("\n\t- Naziv pronalaska: ").append(nazivPronalaskaSR);
-        builder.append("\n\t- Naziv pronalaska: ").append(nazivPronalaskaEN);
+        for (var naziv : naziviPronalaska)
+            builder.append("\n\t- Naziv pronalaska: ").append(naziv);
         builder.append(podnosilacPrijave);
         if (pronalazac != null)
             builder.append(pronalazac);
@@ -52,7 +49,7 @@ public class PopunjavaPodnosilac {
             builder.append(prvobitnaPrijava);
         if (zahtevZaPriznanjePrvenstva != null) {
             builder.append("\n\t- Zahtev za priznanje prvenstva");
-            for (RanijaPrijava ranijaPrijava : zahtevZaPriznanjePrvenstva)
+            for (var ranijaPrijava : zahtevZaPriznanjePrvenstva)
                 builder.append("\n").append(ranijaPrijava);
         }
         return builder.toString();
@@ -67,9 +64,12 @@ public class PopunjavaPodnosilac {
         @XmlAttribute(name = "jezik", required = true)
         String jezik;
 
+        @XmlValue
+        String naziv;
+
         @Override
         public String toString() {
-            return "\n\t\t- Jezik: " + jezik;
+            return "\n\t\t- Jezik: " + jezik + "\n\t\t" + "- " + naziv;
         }
     }
 

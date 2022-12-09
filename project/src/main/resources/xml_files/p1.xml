@@ -6,7 +6,8 @@
         <Datum_podnosenja>2022-10-08+02:00</Datum_podnosenja>
     </Popunjava_zavod>
     <Popunjava_podnosilac>
-        <Naziv_pronalaska jezik="engleski"/>
+        <Naziv_pronalaska jezik="srpski">Naslov</Naziv_pronalaska>
+        <Naziv_pronalaska jezik="engleski">Title</Naziv_pronalaska>
         <Podnosilac_prijave xsi:type="TPodnosilac_fizicko_lice" pronalazac="false">
             <Adresa>
                 <Mesto>Beograd</Mesto>
@@ -17,8 +18,8 @@
             <Broj_telefona>065123123</Broj_telefona>
             <E_posta>email@gmail.com</E_posta>
             <Broj_faksa>123456</Broj_faksa>
-            <Ime>Petar</Ime>
-            <Prezime>PETROVIC</Prezime>
+            <Ime>Marko</Ime>
+            <Prezime>MARKOVIC</Prezime>
             <Drzavljanstvo>Republika Srbija</Drzavljanstvo>
         </Podnosilac_prijave>
         <Punomocnik xsi:type="TPunomocnik_pravno_lice" vrsta="PUNOMOCNIK_ZA_ZASTUPANJE">
@@ -28,7 +29,7 @@
                 <Ulica>Strazilovska</Ulica>
                 <Broj>1</Broj>
             </Adresa>
-            <Broj_telefona>065112233</Broj_telefona>
+            <Broj_telefona>234234234</Broj_telefona>
             <E_posta>email2@gmail.com</E_posta>
             <Poslovno_ime>NEKO POSLOVNO IME</Poslovno_ime>
         </Punomocnik>
@@ -36,7 +37,7 @@
             <Adresa>
                 <Mesto>Novi Sad</Mesto>
                 <Postanski_broj>21000</Postanski_broj>
-                <Ulica>Jevrejska</Ulica>
+                <Ulica>Bulevar oslobodjenja</Ulica>
                 <Broj>11</Broj>
             </Adresa>
             <Nacin>papirni dokument</Nacin>

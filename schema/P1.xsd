@@ -86,8 +86,8 @@
             <xs:attribute name="tip_prijave">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="dopunska"/>
-                        <xs:enumeration value="izdvojena"/>
+                        <xs:enumeration value="DOPUNSKA"/>
+                        <xs:enumeration value="IZDVOJENA"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
@@ -158,9 +158,9 @@
                 <xs:attribute name="vrsta" use="required">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
-                            <xs:enumeration value="Punomocnik za zastupanje"/>
-                            <xs:enumeration value="Punomocnik za prijem pismena"/>
-                            <xs:enumeration value="Zajednicki predstavnik"/>
+                            <xs:enumeration value="PUNOMOCNIK_ZA_ZASTUPANJE"/>
+                            <xs:enumeration value="PUNOMOCNIK_ZA_PRIJEM_PISMENA"/>
+                            <xs:enumeration value="ZAJEDNICKI_PREDSTAVNIK"/>
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
