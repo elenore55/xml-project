@@ -4,7 +4,11 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
+import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
@@ -12,22 +16,23 @@ import java.util.Scanner;
 
 public class TestA1 {
 
-    static final String XML_FILE_PATH = "src/main/resources/xml_files/a1.xml";
+    static final String XML_PATH = "src/main/resources/xml/a1.xml";
+    static final String XSD_PATH = "src/main/resources/xsd/A1.xsd";
 
-    public void doTest() throws JAXBException {
+    public void doTest() throws JAXBException, SAXException {
         JAXBContext context = JAXBContext.newInstance("com.xml.project.a1", TestA1.class.getClassLoader());
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = schemaFactory.newSchema(new File(XSD_PATH));
 
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(new File(XML_FILE_PATH));
+        unmarshaller.setSchema(schema);
+        Zahtev zahtev = (Zahtev) unmarshaller.unmarshal(new File(XML_PATH));
         System.out.println(zahtev);
 
         Marshaller marshaller = context.createMarshaller();
+        marshaller.setSchema(schema);
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        updateData(zahtev);
-        marshaller.marshal(zahtev, new File(XML_FILE_PATH));
-
-        zahtev = (Zahtev) unmarshaller.unmarshal(new File(XML_FILE_PATH));
-        System.out.println(zahtev);
+        marshaller.marshal(zahtev, new File(XML_PATH));
     }
 
     private void updateData(Zahtev zahtev) {

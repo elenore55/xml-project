@@ -10,20 +10,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"mesto", "postanskiBroj", "ulica", "brojObjekta"})
+@XmlType(name = "", propOrder = {"ulica", "brojObjekta", "postanskiBroj", "mesto", "drzava"})
 public class Adresa {
-
-    @XmlElement(name = "Mesto", required = true)
-    String mesto;
-
-    @XmlElement(name = "Postanski_broj", required = true)
-    int postanskiBroj;
 
     @XmlElement(name = "Ulica", required = true)
     String ulica;
 
     @XmlElement(name = "Broj", required = true)
     int brojObjekta;
+
+    @XmlElement(name = "Postanski_broj", required = true)
+    int postanskiBroj;
+    @XmlElement(name = "Mesto", required = true)
+    String mesto;
+
+    @XmlElement(name = "Drzava", required = true)
+    String drzava;
+
 
     @Override
     public String toString() {

@@ -6,11 +6,12 @@ import com.xml.project.z1.TestZ1;
 import jakarta.xml.bind.JAXBException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.xml.sax.SAXException;
 
 @SpringBootApplication
 public class ProjectApplication {
 
-    public static void main(String[] args) throws JAXBException {
+    public static void main(String[] args) throws JAXBException, SAXException {
         SpringApplication.run(ProjectApplication.class, args);
 
         TestA1 testA1 = new TestA1();
