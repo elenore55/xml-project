@@ -1,10 +1,17 @@
 package com.xml.project.a1;
 
+import com.xml.project.util.Util;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import org.xml.sax.SAXException;
+
+import org.xmldb.api.DatabaseManager;
+import org.xmldb.api.base.*;
+import org.xmldb.api.modules.CollectionManagementService;
+import org.xmldb.api.modules.XMLResource;
+import org.exist.xmldb.EXistResource;
 
 import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
@@ -18,6 +25,87 @@ public class TestA1 {
 
     static final String XML_PATH = "src/main/resources/xml/a1.xml";
     static final String XSD_PATH = "src/main/resources/xsd/A1.xsd";
+
+    public static void writeToDB() throws Exception {
+        System.out.println(TestA1.class.getSimpleName());
+        Util.ConnectionProperties conn = Util.loadProperties();
+
+        var collectionId = "/db/project/autorsko_pravo";
+        var documentId = "a1.xml";
+
+        Class<?> cl = Class.forName(conn.driver);
+        Database database = (Database) cl.newInstance();
+        database.setProperty("create-database", "true");
+        DatabaseManager.registerDatabase(database);
+
+        Collection col = null;
+        XMLResource res = null;
+
+        try {
+            col = getOrCreateCollection(conn, collectionId);
+            res = (XMLResource) col.createResource(documentId, XMLResource.RESOURCE_TYPE);
+            File f = new File(XML_PATH);
+            if (!f.canRead()) {
+                System.out.println("[ERROR] Cannot read the file: " + XML_PATH);
+                return;
+            }
+            res.setContent(f);
+            col.storeResource(res);
+            System.out.println("[INFO] Done.");
+        } finally {
+            if (res != null) {
+                try {
+                    ((EXistResource) res).freeResources();
+                } catch (XMLDBException xe) {
+                    xe.printStackTrace();
+                }
+            }
+            if (col != null) {
+                try {
+                    col.close();
+                } catch (XMLDBException xe) {
+                    xe.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static Collection getOrCreateCollection(Util.ConnectionProperties conn, String collectionUri) throws XMLDBException {
+        return getOrCreateCollection(conn, collectionUri, 0);
+    }
+
+    private static Collection getOrCreateCollection(Util.ConnectionProperties conn, String collectionUri, int pathSegmentOffset) throws XMLDBException {
+        Collection col = DatabaseManager.getCollection(conn.uri + collectionUri, conn.user, conn.password);
+        if (col == null) {
+            if (collectionUri.startsWith("/")) {
+                collectionUri = collectionUri.substring(1);
+            }
+
+            String[] pathSegments = collectionUri.split("/");
+
+            if (pathSegments.length > 0) {
+                StringBuilder path = new StringBuilder();
+                for (int i = 0; i <= pathSegmentOffset; i++) {
+                    path.append("/").append(pathSegments[i]);
+                }
+                Collection startCol = DatabaseManager.getCollection(conn.uri + path, conn.user, conn.password);
+                if (startCol == null) {
+                    String parentPath = path.substring(0, path.lastIndexOf("/"));
+                    Collection parentCol = DatabaseManager.getCollection(conn.uri + parentPath, conn.user, conn.password);
+                    CollectionManagementService mgt = (CollectionManagementService) parentCol.getService("CollectionManagementService", "1.0");
+                    col = mgt.createCollection(pathSegments[pathSegmentOffset]);
+                    col.close();
+                    parentCol.close();
+
+                } else {
+                    startCol.close();
+                }
+            }
+            return getOrCreateCollection(conn, collectionUri, ++pathSegmentOffset);
+        } else {
+            return col;
+        }
+    }
 
     public void doTest() throws JAXBException, SAXException {
         JAXBContext context = JAXBContext.newInstance("com.xml.project.a1", TestA1.class.getClassLoader());
