@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<z1:Zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:z1="http://www.ftn.com/z1">
+    <z1:Popunjava_podnosilac>
+        <z1:Podnosioci_prijave>
+            <z1:Podnosilac_prijave xsi:type="z1:TPravno_lice">
+                <z1:Adresa>
+                    <z1:Ulica>Milana Rakica</z1:Ulica>
+                    <z1:Broj>19</z1:Broj>
+                    <z1:Postanski_broj>21000</z1:Postanski_broj>
+                    <z1:Mesto>Novi Sad</z1:Mesto>
+                    <z1:Drzava>Srbija</z1:Drzava>
+                </z1:Adresa>
+                <z1:Telefon>1234565</z1:Telefon>
+                <z1:E_mail>email3@gmail.com</z1:E_mail>
+                <z1:Faks>123455</z1:Faks>
+                <z1:Poslovno_ime>Novo poslovno ime podnosioca</z1:Poslovno_ime>
+            </z1:Podnosilac_prijave>
+        </z1:Podnosioci_prijave>
+        <z1:Punomocnik xsi:type="z1:TFizicko_lice">
+            <z1:Adresa>
+                <z1:Ulica>Bulevar oslobodjenja</z1:Ulica>
+                <z1:Broj>15</z1:Broj>
+                <z1:Postanski_broj>21000</z1:Postanski_broj>
+                <z1:Mesto>Novi Sad</z1:Mesto>
+                <z1:Drzava>Srbija</z1:Drzava>
+            </z1:Adresa>
+            <z1:Telefon>333333</z1:Telefon>
+            <z1:E_mail>email55@gmail.com</z1:E_mail>
+            <z1:Faks>123123</z1:Faks>
+            <z1:Ime>Pera</z1:Ime>
+            <z1:Prezime>Peric</z1:Prezime>
+        </z1:Punomocnik>
+        <z1:Zajednicki_predstavnik xsi:type="z1:TPravno_lice">
+            <z1:Adresa>
+                <z1:Ulica>Fruskogorska</z1:Ulica>
+                <z1:Broj>12</z1:Broj>
+                <z1:Postanski_broj>21000</z1:Postanski_broj>
+                <z1:Mesto>Novi Sad</z1:Mesto>
+                <z1:Drzava>Srbija</z1:Drzava>
+            </z1:Adresa>
+            <z1:Telefon>11111</z1:Telefon>
+            <z1:E_mail>email22@gmail.com</z1:E_mail>
+            <z1:Faks>2834423</z1:Faks>
+            <z1:Poslovno_ime>Neka druga poslovnica</z1:Poslovno_ime>
+        </z1:Zajednicki_predstavnik>
+        <z1:Podaci_o_zigu>
+            <z1:Tip_ziga>INDIVIDUALNI_ZIG</z1:Tip_ziga>
+            <z1:Vrsta_znaka>graficki</z1:Vrsta_znaka>
+            <z1:Boje>
+                <z1:Boja>zuta</z1:Boja>
+                <z1:Boja>zelena</z1:Boja>
+                <z1:Boja>bela</z1:Boja>
+                <z1:Boja>crvena</z1:Boja>
+            </z1:Boje>
+            <z1:Transliteracija>Tekst znaka</z1:Transliteracija>
+            <z1:Opis>Opis mog znaka</z1:Opis>
+            <z1:Izgled>Lepi znak</z1:Izgled>
+            <z1:Nicanska_klasifikacija>
+                <z1:Klasa>11</z1:Klasa>
+            </z1:Nicanska_klasifikacija>
+        </z1:Podaci_o_zigu>
+        <z1:Pravo_prvenstva>Ja imam pravo prvenstva</z1:Pravo_prvenstva>
+        <z1:Placene_takse>
+            <z1:Osnovna_taksa>1000.0</z1:Osnovna_taksa>
+            <z1:Klasa>
+                <z1:Naziv>Neka klasa</z1:Naziv>
+                <z1:Vrednost>200.0</z1:Vrednost>
+            </z1:Klasa>
+            <z1:Graficko_resenje>150.0</z1:Graficko_resenje>
+            <z1:Ukupno>1350.0</z1:Ukupno>
+        </z1:Placene_takse>
+    </z1:Popunjava_podnosilac>
+    <z1:Popunjava_zavod>
+        <z1:Broj_prijave_ziga>
+            <z1:Id>23</z1:Id>
+            <z1:Godina>2022</z1:Godina>
+        </z1:Broj_prijave_ziga>
+        <z1:Datum_podnosenja>2022-11-11+01:00</z1:Datum_podnosenja>
+        <z1:Prilozi>
+            <z1:Primerak_znaka>primerak.pdf</z1:Primerak_znaka>
+            <z1:Spisak_robe_i_usluga>
+                <z1:Roba_ili_usluga>Neka roba</z1:Roba_ili_usluga>
+                <z1:Roba_ili_usluga>Neka druga roba</z1:Roba_ili_usluga>
+            </z1:Spisak_robe_i_usluga>
+            <z1:Punomocje>punomocje.pdf</z1:Punomocje>
+            <z1:Generalno_punomocje>generalno_punomocje.pdf</z1:Generalno_punomocje>
+            <z1:Punomocje_naknadno_dostavljeno>false</z1:Punomocje_naknadno_dostavljeno>
+            <z1:Opsti_akt>akt.pdf</z1:Opsti_akt>
+            <z1:Dokaz_o_pravu_prvenstva>dokaz1.pdf</z1:Dokaz_o_pravu_prvenstva>
+            <z1:Dokaz_o_uplati_takse>dokaz2.pdf</z1:Dokaz_o_uplati_takse>
+        </z1:Prilozi>
+    </z1:Popunjava_zavod>
+</z1:Zahtev>

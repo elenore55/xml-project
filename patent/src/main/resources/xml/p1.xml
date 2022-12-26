@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p1:Zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p1="http://www.ftn.com/p1" tip_prijave="DOPUNSKA">
+    <p1:Popunjava_zavod>
+        <p1:Broj_prijave>2</p1:Broj_prijave>
+        <p1:Datum_prijema>2022-10-10+02:00</p1:Datum_prijema>
+        <p1:Datum_podnosenja>2022-10-08+02:00</p1:Datum_podnosenja>
+    </p1:Popunjava_zavod>
+    <p1:Popunjava_podnosilac>
+        <p1:Naziv_pronalaska jezik="srpski">Naslov</p1:Naziv_pronalaska>
+        <p1:Naziv_pronalaska jezik="engleski">Title</p1:Naziv_pronalaska>
+        <p1:Podnosilac_prijave xsi:type="p1:TPodnosilac_fizicko_lice" pronalazac="false">
+            <p1:Adresa>
+                <p1:Ulica>Marka Pola</p1:Ulica>
+                <p1:Broj>1</p1:Broj>
+                <p1:Postanski_broj>11000</p1:Postanski_broj>
+                <p1:Mesto>Novi Sad</p1:Mesto>
+                <p1:Drzava>Srbija</p1:Drzava>
+            </p1:Adresa>
+            <p1:Broj_telefona>065123123</p1:Broj_telefona>
+            <p1:E_posta>email@gmail.com</p1:E_posta>
+            <p1:Broj_faksa>123456</p1:Broj_faksa>
+            <p1:Ime>Marko</p1:Ime>
+            <p1:Prezime>MARKOVIC</p1:Prezime>
+            <p1:Drzavljanstvo>Republika Srbija</p1:Drzavljanstvo>
+        </p1:Podnosilac_prijave>
+        <p1:Punomocnik xsi:type="p1:TPunomocnik_pravno_lice" vrsta="PUNOMOCNIK_ZA_ZASTUPANJE">
+            <p1:Adresa>
+                <p1:Ulica>Strazilovska</p1:Ulica>
+                <p1:Broj>10</p1:Broj>
+                <p1:Postanski_broj>21000</p1:Postanski_broj>
+                <p1:Mesto>Novi Sad</p1:Mesto>
+                <p1:Drzava>Srbija</p1:Drzava>
+            </p1:Adresa>
+            <p1:Broj_telefona>234234234</p1:Broj_telefona>
+            <p1:E_posta>email2@gmail.com</p1:E_posta>
+            <p1:Poslovno_ime>NEKO POSLOVNO IME</p1:Poslovno_ime>
+        </p1:Punomocnik>
+        <p1:Podaci_o_dostavljanju>
+            <p1:Adresa>
+                <p1:Ulica>Bulevar oslobodjenja</p1:Ulica>
+                <p1:Broj>11</p1:Broj>
+                <p1:Postanski_broj>21000</p1:Postanski_broj>
+                <p1:Mesto>Novi Sad</p1:Mesto>
+                <p1:Drzava>Srbija</p1:Drzava>
+            </p1:Adresa>
+            <p1:Nacin>papirni dokument</p1:Nacin>
+        </p1:Podaci_o_dostavljanju>
+        <p1:Prvobitna_prijava>
+            <p1:Broj>5</p1:Broj>
+            <p1:Datum_podnosenja>2021-11-23+01:00</p1:Datum_podnosenja>
+        </p1:Prvobitna_prijava>
+        <p1:Zahtev_za_priznanje_prvenstva>
+            <p1:Ranija_prijava>
+                <p1:Broj>1</p1:Broj>
+                <p1:Datum_podnosenja>2022-03-03+01:00</p1:Datum_podnosenja>
+                <p1:Oznaka>AB</p1:Oznaka>
+            </p1:Ranija_prijava>
+            <p1:Ranija_prijava>
+                <p1:Broj>3</p1:Broj>
+                <p1:Datum_podnosenja>2022-02-02+01:00</p1:Datum_podnosenja>
+                <p1:Oznaka>CD</p1:Oznaka>
+            </p1:Ranija_prijava>
+        </p1:Zahtev_za_priznanje_prvenstva>
+    </p1:Popunjava_podnosilac>
+</p1:Zahtev>
