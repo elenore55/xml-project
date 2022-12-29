@@ -1,7 +1,7 @@
-package com.xml.zig.controller;
+package com.xml.patent.controller;
 
-import com.xml.zig.model.Zahtev;
-import com.xml.zig.repository.ZahtevRepository;
+import com.xml.patent.model.Zahtev;
+import com.xml.patent.repository.ZahtevRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "zig/")
+@RequestMapping(value = "patent/")
 public class ZahtevController {
 
     @GetMapping(value = "zahtev/{name}", produces = MediaType.APPLICATION_XML_VALUE)
