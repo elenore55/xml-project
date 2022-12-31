@@ -3,6 +3,8 @@ package com.xml.zig.controller;
 import com.xml.zig.model.Zahtev;
 import com.xml.zig.repository.ZahtevRepository;
 import com.xml.zig.service.HTMLTransformer;
+import com.xml.zig.service.PDFTransformer;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 @RestController
@@ -36,9 +41,23 @@ public class ZahtevController {
     @GetMapping(value = "zahtev/html/{name}")
     public ModelAndView getHtml(@PathVariable String name) {
         var transform = new HTMLTransformer();
-        transform.transformToHtml(name);
+        transform.generateHtml(name);
         var modelAndView = new ModelAndView();
         modelAndView.setViewName("z1.html");
         return modelAndView;
+    }
+
+    @GetMapping(value = "zahtev/pdf/{name}")
+    public ResponseEntity<byte[]> getPdf(@PathVariable String name) throws IOException {
+        var transform = new PDFTransformer();
+        transform.generatePDF(name);
+        byte[] content = Files.readAllBytes(new File(PDFTransformer.PDF_FILE).toPath());
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        // Here you have to set the actual filename of your pdf
+        String filename = "z1.pdf";
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        return new ResponseEntity<>(content, headers, HttpStatus.OK);
     }
 }

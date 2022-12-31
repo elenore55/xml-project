@@ -32,7 +32,7 @@ public class HTMLTransformer {
         transformerFactory = TransformerFactory.newInstance();
     }
 
-    public void transformToHtml(String documentName) {
+    public void generateHtml(String documentName) {
         try {
             zahtevRepository = new ZahtevRepository();
             var transformSource = new StreamSource(new File(XSL_FILE));

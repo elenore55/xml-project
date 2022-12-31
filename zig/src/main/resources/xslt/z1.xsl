@@ -8,17 +8,73 @@
         <html >
             <head>
                 <title>Z1</title>
-                <link rel="stylesheet" type="text/css" href="styles.css"/>
+                <style type="text/css">
+                    body {
+                        font-family: Arial, Helvetica, sans-serif;
+                    }
+
+                    h1, h2, h3 {
+                        text-align: center;
+                    }
+
+                    table {
+                        margin-left: auto;
+                        margin-right: auto;
+                        width: 90%;
+                    }
+
+                    table, th, td {
+                        border-collapse: collapse;
+                        border: 1px solid black;
+                    }
+
+                    .shifted {
+                        margin-top: 40px;
+                    }
+
+                    td {
+                        padding-left: 10px;
+                        font-size: 16px;
+                    }
+
+                    th {
+                        font-size: 16px;
+                    }
+
+                    td.name {
+                        text-align: center;
+                        font-size: 18px;
+                    }
+
+                    td:hover {
+                        font-style: italic;
+                        background-color: #cbd4f2;
+                    }
+
+                    thead {
+                        background-color: #9baefa;
+                    }
+
+                    .aligned-right {
+                        text-align: right;
+                        padding-right: 20px;
+                    }
+
+                    td {
+                        padding-top: 3px;
+                        padding-bottom: 3px;
+                    }
+                </style>
             </head>
             <body>
                 <h1>ZAHTEV ZA PRIZNANJE ŽIGA</h1>
                 <h3>Zavod za intelektualnu svojinu, Kneginje Ljubice 5, 11000 Beograd</h3>
                 <div>
-                    <h2 style="margin-top: 40px">Podnosioci prijave</h2>
-                    <table width="70%" border="1">
+                    <h2 class="shifted">Podnosioci prijave</h2>
+                    <table>
                         <thead>
-                            <th>Ime i prezime/Poslovno ime</th>
-                            <th>Adresa</th>
+                            <th style="width: 25%">Ime i prezime/Poslovno ime</th>
+                            <th style="width: 32%">Adresa</th>
                             <th>Kontakt</th>
                         </thead>
                         <tbody>
@@ -26,10 +82,10 @@
                                 <tr>
                                     <xsl:choose>
                                         <xsl:when test="z1:Poslovno_ime">
-                                            <td id="name" rowspan="3"><xsl:value-of select="z1:Poslovno_ime"/></td>
+                                            <td class="name" rowspan="3"><xsl:value-of select="z1:Poslovno_ime"/></td>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <td id="name" rowspan="3"><xsl:value-of select="z1:Ime"/>&nbsp;<xsl:value-of select="z1:Prezime"/></td>
+                                            <td class="name" rowspan="3"><xsl:value-of select="z1:Ime"/>&nbsp;<xsl:value-of select="z1:Prezime"/></td>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                     <td>
@@ -54,21 +110,21 @@
 
                 <xsl:if test="//z1:Punomocnik">
                     <div>
-                        <h2 style="margin-top: 40px">Punomocnik</h2>
-                        <table width="70%" border="1">
+                        <h2 class="shifted">Punomoćnik</h2>
+                        <table>
                             <thead>
-                                <th>Ime i prezime/Poslovno ime</th>
-                                <th>Adresa</th>
+                                <th style="width: 25%">Ime i prezime/Poslovno ime</th>
+                                <th style="width: 32%">Adresa</th>
                                 <th>Kontakt</th>
                             </thead>
                             <tbody>
                                 <tr>
                                     <xsl:choose>
                                         <xsl:when test="//z1:Punomocnik/z1:Poslovno_ime">
-                                            <td id="name" rowspan="3"><xsl:value-of select="//z1:Punomocnik/z1:Poslovno_ime"/></td>
+                                            <td class="name" rowspan="3"><xsl:value-of select="//z1:Punomocnik/z1:Poslovno_ime"/></td>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <td id="name" rowspan="3"><xsl:value-of select="//z1:Punomocnik/z1:Ime"/>&nbsp;<xsl:value-of select="//z1:Punomocnik/z1:Prezime"/></td>
+                                            <td class="name" rowspan="3"><xsl:value-of select="//z1:Punomocnik/z1:Ime"/>&nbsp;<xsl:value-of select="//z1:Punomocnik/z1:Prezime"/></td>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                     <td>
@@ -93,23 +149,23 @@
 
                 <xsl:if test="//z1:Zajednicki_predstavnik">
                     <div>
-                        <h2 style="margin-top: 40px">Zajednicki predstavnik</h2>
-                        <table width="70%" border="1">
+                        <h2 class="shifted">Zajednički predstavnik</h2>
+                        <table>
                             <thead>
-                                <th>Ime i prezime/Poslovno ime</th>
-                                <th>Adresa</th>
+                                <th style="width: 25%">Ime i prezime/Poslovno ime</th>
+                                <th style="width: 32%">Adresa</th>
                                 <th>Kontakt</th>
                             </thead>
                             <tbody>
                                 <tr>
                                     <xsl:choose>
                                         <xsl:when test="//z1:Zajednicki_predstavnik/z1:Poslovno_ime">
-                                            <td id="name" rowspan="3">
+                                            <td class="name" rowspan="3">
                                                 <xsl:value-of select="//z1:Zajednicki_predstavnik/z1:Poslovno_ime"/>
                                             </td>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <td id="name" rowspan="3">
+                                            <td class="name" rowspan="3">
                                                 <xsl:value-of select="//z1:Zajednicki_predstavnik/z1:Ime"/>&nbsp;<xsl:value-of select="//z1:Zajednicki_predstavnik/z1:Prezime"/>
                                             </td>
                                         </xsl:otherwise>
@@ -134,7 +190,7 @@
                     </div>
                 </xsl:if>
 
-                <table width="70%" border="1" style="margin-top: 40px">
+                <table class="shifted">
                     <thead>
                         <th colspan="3"><h3>Podaci o žigu</h3></th>
                     </thead>
@@ -155,10 +211,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>Vrsta znaka</strong></td>
-                            <td><xsl:value-of select="//z1:Vrsta_znaka" /></td>
+                            <td style="width: 30%"><strong>Vrsta znaka</strong></td>
+                            <td style="width: 30%"><xsl:value-of select="//z1:Vrsta_znaka" /></td>
                             <td rowspan="2">
-                                Boje:
+                                <strong>Boje:</strong>
                                 <ul>
                                     <xsl:for-each select="//z1:Boja">
                                         <li><xsl:value-of select="current()"/></li>
@@ -173,8 +229,8 @@
                         <tr>
                             <td><strong>Izgled znak</strong></td>
                             <td><xsl:value-of select="//z1:Izgled" /></td>
-                            <td rowspan="3">
-                                Klase robe i usluga prema Ničanskoj klasifikaciji:
+                            <td rowspan="2">
+                                <strong>Klase robe i usluga prema Ničanskoj klasifikaciji:</strong>
                                 <ul>
                                     <xsl:for-each select="//z1:Nicanska_klasifikacija/z1:Klasa">
                                         <li><xsl:value-of select="current()"/></li>
@@ -183,17 +239,21 @@
                             </td>
                         </tr>
                         <xsl:if test="//z1:Prevod">
-                            <td><strong>Prevod</strong></td>
-                            <td><xsl:value-of select="//z1:Prevod" /></td>
+                            <tr>
+                                <td><strong>Prevod</strong></td>
+                                <td><xsl:value-of select="//z1:Prevod" /></td>
+                            </tr>
                         </xsl:if>
                         <xsl:if test="//z1:Transliteracija">
-                            <td><strong>Transliteracija</strong></td>
-                            <td><xsl:value-of select="//z1:Transliteracija" /></td>
+                            <tr>
+                                <td><strong>Transliteracija</strong></td>
+                                <td><xsl:value-of select="//z1:Transliteracija" /></td>
+                            </tr>
                         </xsl:if>
                     </tbody>
                 </table>
 
-                <table width="70%" border="1" style="margin-top: 40px">
+                <table class="shifted">
                     <thead>
                         <th><h3>Plaćene takse</h3></th>
                         <th><h3>Dinara</h3></th>
@@ -201,35 +261,35 @@
                     <tbody>
                         <tr>
                             <td><h4>Osnovna taksa</h4></td>
-                            <td><xsl:value-of select="//z1:Osnovna_taksa" /></td>
+                            <td class="aligned-right"><xsl:value-of select="//z1:Osnovna_taksa" /></td>
                         </tr>
                         <xsl:for-each select="//z1:Placene_takse/z1:Klasa">
                             <tr>
                                 <td><h4>Za &nbsp;<xsl:value-of select="z1:Naziv"/></h4></td>
-                                <td><xsl:value-of select="z1:Vrednost"/></td>
+                                <td class="aligned-right"><xsl:value-of select="z1:Vrednost"/></td>
                             </tr>
                         </xsl:for-each>
                         <xsl:if test="//z1:Graficko_resenje">
                             <tr>
                                 <td><h4>Grafičko rešenje</h4></td>
-                                <td><xsl:value-of select="//z1:Graficko_resenje"/></td>
+                                <td class="aligned-right"><xsl:value-of select="//z1:Graficko_resenje"/></td>
                             </tr>
                         </xsl:if>
                         <tr>
                             <td><h4>UKUPNO</h4></td>
-                            <td><strong><xsl:value-of select="//z1:Ukupno"/></strong></td>
+                            <td class="aligned-right"><strong><xsl:value-of select="//z1:Ukupno"/></strong></td>
                         </tr>
                     </tbody>
                 </table>
 
-                <table width="70%" border="1" style="margin-top: 40px">
+                <table class="shifted">
                     <thead>
                         <th colspan="3"><h2>Popunjava zavod</h2></th>
                     </thead>
                     <tbody>
                         <tr>
                             <td colspan="2"><strong>Prilozi uz zahtev</strong></td>
-                            <td rowspan="20">
+                            <td rowspan="9">
                                 <div style="text-align: center; margin: 5px">
                                     <h3>Ž - <xsl:value-of select="//z1:Broj_prijave_ziga/z1:Id" /> /
                                         <xsl:value-of select="//z1:Broj_prijave_ziga/z1:Godina" /></h3>
