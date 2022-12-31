@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:a1="http://www.ftn.com/a1"
-    targetNamespace="http://www.ftn.com/a1" elementFormDefault="qualified">
+           targetNamespace="http://www.ftn.com/a1" elementFormDefault="qualified">
     <xs:element name="Zahtev">
         <xs:complexType>
             <xs:sequence>
@@ -12,7 +12,7 @@
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element maxOccurs="unbounded" name="Autor"
-                                            type="a1:TAutor"/>
+                                                    type="a1:TAutor"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -35,6 +35,8 @@
     <xs:complexType name="TPodnosilac" abstract="true">
         <xs:sequence>
             <xs:element ref="a1:Adresa"/>
+            <xs:element name="Telefon" type="xs:string"/>
+            <xs:element name="E_mail" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TFizicko_lice">
@@ -44,6 +46,7 @@
                     <xs:element name="Ime" type="xs:string"/>
                     <xs:element name="Prezime" type="xs:string"/>
                     <xs:element name="Drzavljanstvo" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Pseudonim" type="xs:string"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -81,6 +84,7 @@
         <xs:sequence>
             <xs:element name="Ime" type="xs:string"/>
             <xs:element name="Prezime" type="xs:string"/>
+            <xs:element minOccurs="0" name="Pseudonim" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TZiv_autor">
@@ -123,7 +127,7 @@
                                     <xs:complexType>
                                         <xs:sequence>
                                             <xs:element maxOccurs="unbounded" name="Autor"
-                                                type="a1:TAutor"/>
+                                                        type="a1:TAutor"/>
                                         </xs:sequence>
                                     </xs:complexType>
                                 </xs:element>

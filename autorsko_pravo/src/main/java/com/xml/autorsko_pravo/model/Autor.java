@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TAutor", propOrder = {"ime", "prezime"})
+@XmlType(name = "TAutor", propOrder = {"ime", "prezime", "pseudonim"})
 public abstract class Autor {
 
     @XmlElement(name = "Ime", required = true)
@@ -18,6 +18,9 @@ public abstract class Autor {
 
     @XmlElement(name = "Prezime", required = true)
     protected String prezime;
+
+    @XmlElement(name = "Pseudonim")
+    protected String pseudonim;
 
     @Override
     public String toString() {

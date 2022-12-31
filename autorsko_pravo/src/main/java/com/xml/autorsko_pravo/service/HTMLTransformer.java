@@ -1,6 +1,6 @@
-package com.xml.zig.service;
+package com.xml.autorsko_pravo.service;
 
-import com.xml.zig.repository.ZahtevRepository;
+import com.xml.autorsko_pravo.repository.ZahtevRepository;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -20,9 +20,9 @@ public class HTMLTransformer {
 
     ZahtevRepository zahtevRepository;
 
-    static final String XSL_FILE = "src/main/resources/xslt/z1.xsl";
+    static final String XSL_FILE = "src/main/resources/xslt/a1.xsl";
 
-    public static final String HTML_FILE = "src/main/resources/templates/z1.html";
+    public static final String HTML_FILE = "src/main/resources/templates/a1.html";
 
     static {
         documentFactory = DocumentBuilderFactory.newInstance();
@@ -47,5 +47,4 @@ public class HTMLTransformer {
             e.printStackTrace();
         }
     }
-
 }

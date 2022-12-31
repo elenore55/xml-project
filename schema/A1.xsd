@@ -35,6 +35,8 @@
     <xs:complexType name="TPodnosilac" abstract="true">
         <xs:sequence>
             <xs:element ref="a1:Adresa"/>
+            <xs:element name="Telefon" type="xs:string"/>
+            <xs:element name="E_mail" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TFizicko_lice">
@@ -44,6 +46,7 @@
                     <xs:element name="Ime" type="xs:string"/>
                     <xs:element name="Prezime" type="xs:string"/>
                     <xs:element name="Drzavljanstvo" type="xs:string"/>
+                    <xs:element minOccurs="0" name="Pseudonim" type="xs:string"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -81,6 +84,7 @@
         <xs:sequence>
             <xs:element name="Ime" type="xs:string"/>
             <xs:element name="Prezime" type="xs:string"/>
+            <xs:element minOccurs="0" name="Pseudonim" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TZiv_autor">

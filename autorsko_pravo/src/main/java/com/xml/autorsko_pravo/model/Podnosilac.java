@@ -10,11 +10,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TPodnosilac", propOrder = {"adresa"})
+@XmlType(name = "TPodnosilac", propOrder = {"adresa", "telefon", "email"})
 public abstract class Podnosilac {
 
     @XmlElement(name = "Adresa", required = true)
     protected Adresa adresa;
+
+    @XmlElement(name = "Telefon", required = true)
+    protected String telefon;
+
+    @XmlElement(name = "E_mail", required = true)
+    protected String email;
 
     @Override
     public String toString() {
@@ -24,7 +30,7 @@ public abstract class Podnosilac {
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "TFizicko_lice", propOrder = {"ime", "prezime", "drzavljanstvo"})
+    @XmlType(name = "TFizicko_lice", propOrder = {"ime", "prezime", "drzavljanstvo", "pseudonim"})
     public static class FizickoLice extends Podnosilac {
 
         @XmlElement(name = "Ime", required = true)
@@ -35,6 +41,9 @@ public abstract class Podnosilac {
 
         @XmlElement(name = "Drzavljanstvo", required = true)
         String drzavljanstvo;
+
+        @XmlElement(name = "Pseudonim")
+        protected String pseudonim;
 
         @Override
         public String toString() {

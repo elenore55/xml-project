@@ -3,6 +3,7 @@ package com.xml.autorsko_pravo.repository;
 import com.xml.autorsko_pravo.model.Zahtev;
 import com.xml.autorsko_pravo.util.AuthUtil;
 import org.exist.xmldb.EXistResource;
+import org.w3c.dom.Node;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
@@ -53,6 +54,25 @@ public class ZahtevRepository {
                 return null;
             } else {
                 return marshalling.unmarshallContent(res.getContentAsDOM());
+            }
+        } finally {
+            cleanUp(res, col);
+        }
+    }
+
+    public Node getAsNode(String documentName) throws Exception {
+        var conn = AuthUtil.loadProperties();
+        setup(conn.driver);
+        res = null;
+        try {
+            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col.setProperty(OutputKeys.INDENT, "yes");
+            res = (XMLResource) col.getResource(documentName);
+            if (res == null) {
+                System.out.println("[WARNING] Document '" + documentName + "' cannot be found!");
+                return null;
+            } else {
+                return res.getContentAsDOM();
             }
         } finally {
             cleanUp(res, col);

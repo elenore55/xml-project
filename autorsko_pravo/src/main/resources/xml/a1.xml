@@ -8,6 +8,8 @@
                 <a1:Ulica>Knez Mihajlova</a1:Ulica>
                 <a1:Broj>11</a1:Broj>
             </a1:Adresa>
+            <a1:Telefon>123455556</a1:Telefon>
+            <a1:E_mail>email@hotmail.com</a1:E_mail>
             <a1:Poslovno_ime>Poslovnica</a1:Poslovno_ime>
         </a1:Podnosilac>
         <a1:Autori>
@@ -28,7 +30,7 @@
                 <a1:Godina_smrti>1990</a1:Godina_smrti>
             </a1:Autor>
         </a1:Autori>
-        <a1:Autorsko_delo stvoreno_u_radnom_odnosu="true">
+        <a1:Autorsko_delo stvoreno_u_radnom_odnosu="true" xsi:type="a1:TAutorsko_delo">
             <a1:Nacin_koriscenja>citanje</a1:Nacin_koriscenja>
             <a1:Vrsta>knjizevno djelo</a1:Vrsta>
             <a1:Forma_zapisa>knjiga</a1:Forma_zapisa>
