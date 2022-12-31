@@ -54,7 +54,6 @@ public class ZahtevController {
         byte[] content = Files.readAllBytes(new File(PDFTransformer.PDF_FILE).toPath());
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        // Here you have to set the actual filename of your pdf
         String filename = "z1.pdf";
         headers.setContentDispositionFormData(filename, filename);
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
