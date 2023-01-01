@@ -8,7 +8,7 @@
     <p1:Popunjava_podnosilac>
         <p1:Naziv_pronalaska jezik="srpski">Naslov</p1:Naziv_pronalaska>
         <p1:Naziv_pronalaska jezik="engleski">Title</p1:Naziv_pronalaska>
-        <p1:Podnosilac_prijave xsi:type="p1:TPodnosilac_fizicko_lice" pronalazac="false">
+        <p1:Podnosilac_prijave xsi:type="p1:TPodnosilac_fizicko_lice" pronalazac="true">
             <p1:Adresa>
                 <p1:Ulica>Marka Pola</p1:Ulica>
                 <p1:Broj>1</p1:Broj>
@@ -23,6 +23,20 @@
             <p1:Prezime>MARKOVIC</p1:Prezime>
             <p1:Drzavljanstvo>Republika Srbija</p1:Drzavljanstvo>
         </p1:Podnosilac_prijave>
+        <p1:Pronalazac>
+            <p1:Adresa>
+                <p1:Ulica>Kordunaska</p1:Ulica>
+                <p1:Broj>15</p1:Broj>
+                <p1:Postanski_broj>11000</p1:Postanski_broj>
+                <p1:Mesto>Beograd</p1:Mesto>
+                <p1:Drzava>Srbija</p1:Drzava>
+            </p1:Adresa>
+            <p1:Broj_telefona>324234234</p1:Broj_telefona>
+            <p1:E_posta>mojemail@gmail.com</p1:E_posta>
+            <p1:Broj_faksa>123123</p1:Broj_faksa>
+            <p1:Ime>Ime</p1:Ime>
+            <p1:Prezime>PREZIME</p1:Prezime>
+        </p1:Pronalazac>
         <p1:Punomocnik xsi:type="p1:TPunomocnik_pravno_lice" vrsta="PUNOMOCNIK_ZA_ZASTUPANJE">
             <p1:Adresa>
                 <p1:Ulica>Strazilovska</p1:Ulica>

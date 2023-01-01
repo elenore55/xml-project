@@ -3,6 +3,7 @@ package com.xml.patent.repository;
 import com.xml.patent.model.Zahtev;
 import com.xml.patent.util.AuthUtil;
 import org.exist.xmldb.EXistResource;
+import org.w3c.dom.Node;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.Database;
@@ -78,6 +79,24 @@ public class ZahtevRepository {
         }
     }
 
+    public Node getAsNode(String documentName) throws Exception {
+        var conn = AuthUtil.loadProperties();
+        setup(conn.driver);
+        res = null;
+        try {
+            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col.setProperty(OutputKeys.INDENT, "yes");
+            res = (XMLResource) col.getResource(documentName);
+            if (res == null) {
+                System.out.println("[WARNING] Document '" + documentName + "' cannot be found!");
+                return null;
+            } else {
+                return res.getContentAsDOM();
+            }
+        } finally {
+            cleanUp(res, col);
+        }
+    }
     private void setup(String driver) throws Exception {
         Database database = (Database) Class.forName(driver).getDeclaredConstructor().newInstance();
         database.setProperty("create-database", "true");
