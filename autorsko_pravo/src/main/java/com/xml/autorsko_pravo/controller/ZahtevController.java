@@ -1,6 +1,7 @@
 package com.xml.autorsko_pravo.controller;
 
 import com.xml.autorsko_pravo.model.Zahtev;
+import com.xml.autorsko_pravo.repository.MetadataRepository;
 import com.xml.autorsko_pravo.repository.ZahtevRepository;
 import com.xml.autorsko_pravo.service.HTMLTransformer;
 import com.xml.autorsko_pravo.service.PDFTransformer;
@@ -58,5 +59,11 @@ public class ZahtevController {
         headers.setContentDispositionFormData(filename, filename);
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
         return new ResponseEntity<>(content, headers, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "metadata/rdf/{name}")
+    public ResponseEntity<Void> extractMetadata(@PathVariable String name) throws Exception {
+        new MetadataRepository().extract(name);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,6 +1,7 @@
 package com.xml.patent.controller;
 
 import com.xml.patent.model.Zahtev;
+import com.xml.patent.repository.MetadataRepository;
 import com.xml.patent.repository.ZahtevRepository;
 import com.xml.patent.service.HTMLTransformer;
 import com.xml.patent.service.PDFTransformer;
@@ -58,5 +59,11 @@ public class ZahtevController {
         headers.setContentDispositionFormData(filename, filename);
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
         return new ResponseEntity<>(content, headers, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "metadata/rdf/{name}")
+    public ResponseEntity<Void> extractMetadata(@PathVariable String name) throws Exception {
+        new MetadataRepository().extract(name);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

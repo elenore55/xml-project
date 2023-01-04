@@ -121,11 +121,11 @@ public class ZahtevRepository {
         }
     }
 
-    private Collection getOrCreateCollection(AuthUtil.ConnectionProperties conn) throws XMLDBException {
+    private Collection getOrCreateCollection(AuthUtil.ExistConnectionProperties conn) throws XMLDBException {
         return getOrCreateCollection(conn, collectionId, 0);
     }
 
-    private Collection getOrCreateCollection(AuthUtil.ConnectionProperties conn, String collectionUri, int pathSegmentOffset) throws XMLDBException {
+    private Collection getOrCreateCollection(AuthUtil.ExistConnectionProperties conn, String collectionUri, int pathSegmentOffset) throws XMLDBException {
         Collection col = DatabaseManager.getCollection(conn.uri + collectionUri, conn.user, conn.password);
         if (col == null) {
             if (collectionUri.startsWith("/")) {
