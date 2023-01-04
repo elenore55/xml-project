@@ -1,5 +1,6 @@
 package com.xml.zig.repository;
 
+import com.xml.zig.model.Zahtev;
 import com.xml.zig.util.AuthUtil;
 import com.xml.zig.util.SparqlUtil;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -15,23 +16,30 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 
-public class MetadataExtraction {
+public class MetadataRepository {
 
     static final String SPARQL_NAMED_GRAPH_URI = "/metadata";
+    static final String XSLT_PATH = "src/main/resources/xslt/metadata.xsl";
+    static final String RDF_PATH = "src/main/resources/rdf/z1.rdf";
     TransformerFactory transformerFactory;
-    static final String XSLT_FILE = "src/main/resources/xslt/metadata.xsl";
+    ZahtevRepository zahtevRepository;
+    Marshalling marshalling;
 
-    public MetadataExtraction() {
+    public MetadataRepository() throws Exception {
         transformerFactory = new TransformerFactoryImpl();
+        zahtevRepository = new ZahtevRepository();
+        marshalling = new Marshalling();
     }
 
-    public void extract() throws Exception {
+    public void extract(String documentName) throws Exception {
+        extract(zahtevRepository.get(documentName));
+    }
+
+    public void extract(Zahtev zahtev) throws Exception {
         var conn = AuthUtil.loadFusekiProperties();
-        String xmlFilePath = "src/main/resources/xml/z1.xml";
-        String rdfFilePath = "src/main/resources/rdf/z1.rdf";
-        extractMetadata(new FileInputStream(xmlFilePath), new FileOutputStream(rdfFilePath));
+        extractMetadata(marshalling.marshallToInputStream(zahtev), new FileOutputStream(RDF_PATH));
         var model = ModelFactory.createDefaultModel();
-        model.read(rdfFilePath);
+        model.read(RDF_PATH);
         var out = new ByteArrayOutputStream();
         model.write(out, SparqlUtil.NTRIPLES);
         model.write(System.out, SparqlUtil.RDF_XML);
@@ -47,7 +55,7 @@ public class MetadataExtraction {
     }
 
     private void extractMetadata(InputStream in, OutputStream out) throws Exception {
-        var transformSource = new StreamSource(new File(XSLT_FILE));
+        var transformSource = new StreamSource(new File(XSLT_PATH));
         var rdfTransformer = transformerFactory.newTransformer(transformSource);
         rdfTransformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
         rdfTransformer.setOutputProperty(OutputKeys.INDENT, "yes");

@@ -7,7 +7,11 @@
 >
     <xsl:template match="/">
         <rdf:RDF>
-            <rdf:Description rdf:about="http://www.ftn.com/z1/Zahtev">
+            <xsl:variable name="Zahtev_id">http://www.ftn.com/z1/Zahtev-<xsl:value-of
+                    select="//z1:Broj_prijave_ziga/z1:Id"/>-<xsl:value-of
+                    select="//z1:Broj_prijave_ziga/z1:Godina"/>
+            </xsl:variable>
+            <rdf:Description rdf:about="{$Zahtev_id}">
                 <pred:Id_prijave_ziga>
                     <xsl:value-of select="//z1:Popunjava_zavod/z1:Broj_prijave_ziga/z1:Id"/>
                 </pred:Id_prijave_ziga>

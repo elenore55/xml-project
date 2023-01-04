@@ -10,9 +10,7 @@ import org.xml.sax.SAXException;
 import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.OutputStream;
+import java.io.*;
 
 
 public class Marshalling {
@@ -56,5 +54,14 @@ public class Marshalling {
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         marshaller.marshal(zahtev, out);
         return out;
+    }
+
+    public InputStream marshallToInputStream(Zahtev zahtev) throws JAXBException {
+        var out = new ByteArrayOutputStream();
+        var marshaller = context.createMarshaller();
+        marshaller.setSchema(schema);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        marshaller.marshal(zahtev, out);
+        return new ByteArrayInputStream(out.toByteArray());
     }
 }
