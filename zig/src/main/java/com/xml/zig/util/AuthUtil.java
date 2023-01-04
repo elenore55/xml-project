@@ -6,9 +6,10 @@ import java.util.Properties;
 
 public class AuthUtil {
 
-    private static final String CONNECTION_URI = "xmldb:exist://%1$s:%2$s/exist/xmlrpc";
 
     static public class ConnectionProperties {
+
+        private static final String CONNECTION_URI = "xmldb:exist://%1$s:%2$s/exist/xmlrpc";
 
         public String host;
         public int port;
@@ -28,6 +29,23 @@ public class AuthUtil {
         }
     }
 
+    public static class FusekiConnectionProperties {
+
+        public String endpoint;
+        public String dataset;
+        public String queryEndpoint;
+        public String updateEndpoint;
+        public String dataEndpoint;
+
+        public FusekiConnectionProperties(Properties props) {
+            dataset = props.getProperty("conn.dataset").trim();
+            endpoint = props.getProperty("conn.endpoint").trim();
+            queryEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.query").trim());
+            updateEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.update").trim());
+            dataEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.data").trim());
+        }
+    }
+
     public static ConnectionProperties loadProperties() throws IOException {
         String propsName = "exist.properties";
         InputStream propsStream = openStream(propsName);
@@ -38,7 +56,17 @@ public class AuthUtil {
         return new ConnectionProperties(props);
     }
 
+    public static FusekiConnectionProperties loadFusekiProperties() throws IOException {
+        String propsName = "fuseki.properties";
+        InputStream propsStream = openStream(propsName);
+        if (propsStream == null)
+            throw new IOException("Could not read properties " + propsName);
+        Properties props = new Properties();
+        props.load(propsStream);
+        return new FusekiConnectionProperties(props);
+    }
+
     public static InputStream openStream(String fileName) {
-        return Util.class.getClassLoader().getResourceAsStream(fileName);
+        return AuthUtil.class.getClassLoader().getResourceAsStream(fileName);
     }
 }
