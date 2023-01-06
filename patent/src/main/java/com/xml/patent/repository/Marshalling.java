@@ -4,6 +4,7 @@ import com.xml.patent.model.Zahtev;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
@@ -12,6 +13,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.*;
 
+@Component
 public class Marshalling {
     static final String XML_PATH = "src/main/resources/xml/";
     static final String XSD_PATH = "src/main/resources/xsd/P1.xsd";

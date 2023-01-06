@@ -9,6 +9,7 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.xalan.xsltc.trax.TransformerFactoryImpl;
+import org.springframework.stereotype.Component;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.TransformerFactory;
@@ -16,6 +17,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 
+@Component
 public class MetadataRepository {
 
     static final String SPARQL_NAMED_GRAPH_URI = "/metadata";
@@ -25,10 +27,10 @@ public class MetadataRepository {
     ZahtevRepository zahtevRepository;
     Marshalling marshalling;
 
-    public MetadataRepository() throws Exception {
+    public MetadataRepository(ZahtevRepository zahtevRepository, Marshalling marshalling) {
         transformerFactory = new TransformerFactoryImpl();
-        zahtevRepository = new ZahtevRepository();
-        marshalling = new Marshalling();
+        this.zahtevRepository = zahtevRepository;
+        this.marshalling = marshalling;
     }
 
     public void extract(String documentName) throws Exception {

@@ -3,6 +3,8 @@ package com.xml.zig.repository;
 import com.xml.zig.model.Zahtev;
 import com.xml.zig.util.AuthUtil;
 import org.exist.xmldb.EXistResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Node;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.Collection;
@@ -10,11 +12,13 @@ import org.xmldb.api.base.Database;
 import org.xmldb.api.base.XMLDBException;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
+import org.xmldb.api.modules.XPathQueryService;
 
 import javax.xml.transform.OutputKeys;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ZahtevRepository {
 
     static final String collectionId = "/db/project/zig";
@@ -22,8 +26,9 @@ public class ZahtevRepository {
     XMLResource res;
     Marshalling marshalling;
 
-    public ZahtevRepository() throws Exception {
-        marshalling = new Marshalling();
+    @Autowired
+    public ZahtevRepository(Marshalling marshalling) {
+        this.marshalling = marshalling;
     }
 
     public void save(Zahtev zahtev, String documentName) throws Exception {
@@ -96,6 +101,33 @@ public class ZahtevRepository {
         } finally {
             cleanUp(res, col);
         }
+    }
+
+    public List<Zahtev> search(String text, boolean matchCase) throws Exception {
+        var conn = AuthUtil.loadProperties();
+        setup(conn.driver);
+        res = null;
+        var retVal = new ArrayList<Zahtev>();
+        try {
+            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col.setProperty(OutputKeys.INDENT, "yes");
+            var xPathQueryService = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+            xPathQueryService.setProperty("indent", "yes");
+            String xPathExp = createXPathExpression(text, matchCase);
+            var iter = xPathQueryService.query(xPathExp).getIterator();
+            while (iter.hasMoreResources()) {
+                res = (XMLResource) iter.nextResource();
+                retVal.add(marshalling.unmarshallContent(res.getContentAsDOM()));
+            }
+            return retVal;
+        } finally {
+            cleanUp(res, col);
+        }
+    }
+
+    private String createXPathExpression(String text, boolean matchCase) {
+        if (matchCase) return String.format("/*[contains(., '%s')]", text);
+        return String.format("/*[contains(lower-case(.), '%s')]", text.toLowerCase());
     }
 
     private void setup(String driver) throws Exception {

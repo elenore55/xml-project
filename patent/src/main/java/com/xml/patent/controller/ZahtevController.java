@@ -5,6 +5,8 @@ import com.xml.patent.repository.MetadataRepository;
 import com.xml.patent.repository.ZahtevRepository;
 import com.xml.patent.service.HTMLTransformer;
 import com.xml.patent.service.PDFTransformer;
+import com.xml.patent.service.ZahtevService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,10 +26,20 @@ import java.util.List;
 @RequestMapping(value = "patent/")
 public class ZahtevController {
 
+    ZahtevService zahtevService;
+    HTMLTransformer htmlTransformer;
+    PDFTransformer pdfTransformer;
+
+    @Autowired
+    public ZahtevController(ZahtevService zahtevService, HTMLTransformer htmlTransformer, PDFTransformer pdfTransformer) {
+        this.zahtevService = zahtevService;
+        this.htmlTransformer = htmlTransformer;
+        this.pdfTransformer = pdfTransformer;
+    }
+
     @GetMapping(value = "zahtev/{name}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Zahtev> getOne(@PathVariable String name) throws Exception {
-        var repository = new ZahtevRepository();
-        var zahtev = repository.get(name);
+        var zahtev = zahtevService.getOne(name);
         if (zahtev == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(zahtev, HttpStatus.OK);
@@ -35,14 +47,12 @@ public class ZahtevController {
 
     @GetMapping(value = "zahtev/all", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Zahtev>> getAll() throws Exception {
-        var repository = new ZahtevRepository();
-        return new ResponseEntity<>(repository.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(zahtevService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "zahtev/html/{name}")
     public ModelAndView getHtml(@PathVariable String name) {
-        var transform = new HTMLTransformer();
-        transform.generateHtml(name);
+        htmlTransformer.generateHtml(name);
         var modelAndView = new ModelAndView();
         modelAndView.setViewName("p1.html");
         return modelAndView;
@@ -50,8 +60,7 @@ public class ZahtevController {
 
     @GetMapping(value = "zahtev/pdf/{name}")
     public ResponseEntity<byte[]> getPdf(@PathVariable String name) throws IOException {
-        var transform = new PDFTransformer();
-        transform.generatePDF(name);
+        pdfTransformer.generatePDF(name);
         byte[] content = Files.readAllBytes(new File(PDFTransformer.PDF_FILE).toPath());
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
@@ -61,9 +70,14 @@ public class ZahtevController {
         return new ResponseEntity<>(content, headers, HttpStatus.OK);
     }
 
+    @GetMapping(value = "zahtev/search/{text}/{matchCase}", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<Zahtev>> search(@PathVariable String text, @PathVariable boolean matchCase) throws Exception {
+        return new ResponseEntity<>(zahtevService.search(text, matchCase), HttpStatus.OK);
+    }
+
     @GetMapping(value = "metadata/rdf/{name}")
     public ResponseEntity<Void> extractMetadata(@PathVariable String name) throws Exception {
-        new MetadataRepository().extract(name);
+        zahtevService.extractMetadata(name);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
