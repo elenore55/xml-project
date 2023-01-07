@@ -3,9 +3,10 @@ package com.xml.patent.repository;
 import com.xml.patent.model.Zahtev;
 import com.xml.patent.util.AuthUtil;
 import com.xml.patent.util.SparqlUtil;
-import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.xalan.xsltc.trax.TransformerFactoryImpl;
@@ -17,6 +18,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class MetadataRepository {
@@ -52,10 +55,63 @@ public class MetadataRepository {
         var processor = UpdateExecutionFactory.createRemote(update, conn.updateEndpoint);
         processor.execute();
         String sparqlQuery = SparqlUtil.selectData(conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, "?s ?p ?o");
-        var query = QueryExecutionFactory.sparqlService(conn.queryEndpoint, sparqlQuery);
+        var query = QueryExecution.service(conn.queryEndpoint).query(sparqlQuery).build();
         var results = query.execSelect();
         ResultSetFormatter.out(System.out, results);
         query.close();
+    }
+
+    public List<Zahtev> simpleMetadataSearch(String name, String value) throws Exception {
+        var conn = AuthUtil.loadFusekiProperties();
+        String sparqlQuery = String.format("""
+                        SELECT * FROM <%s>
+                        WHERE {\s
+                        \t?p1 <http://www.ftn.com/p1/pred/%s> ?%s .
+                        \t?p1 <http://www.ftn.com/p1/pred/Naziv_fajla> ?Naziv_fajla .
+                        \tFILTER(?%s = "%s")
+                        }""",
+                conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, name, name, name, value);
+        return searchMetadata(sparqlQuery);
+    }
+
+    public List<Zahtev> advancedMetadataSearch(List<String> operators, List<List<String>> statements) throws Exception {
+        var conn = AuthUtil.loadFusekiProperties();
+        var filterBuilder = new StringBuilder("FILTER(");
+        var queryBuilder = new StringBuilder(String.format("""
+                        SELECT * FROM <%s>
+                        WHERE {
+                        """,
+                conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI));
+        var stmCnt = 0;
+        for (var op : operators) {
+            var st = statements.get(stmCnt);
+            var value = st.get(2).startsWith("\"") || st.get(2).startsWith("'") ? st.get(2) : String.format("\"%s\"", st.get(2));
+            filterBuilder.append(String.format("?%s %s %s %s ", st.get(0), st.get(1), value, op));
+            queryBuilder.append(String.format("\t?p1 <http://www.ftn.com/p1/pred/%s> ?%s .\n", st.get(0), st.get(0)));
+            stmCnt++;
+        }
+        var st = statements.get(stmCnt);
+        var value = st.get(2).startsWith("\"") || st.get(2).startsWith("'") ? st.get(2) : String.format("\"%s\"", st.get(2));
+        filterBuilder.append(String.format("?%s %s %s)", st.get(0), st.get(1), value));
+        queryBuilder.append(String.format("\t?p1 <http://www.ftn.com/p1/pred/%s> ?%s .\n", st.get(0), st.get(0)));
+        queryBuilder.append("\t?p1 <http://www.ftn.com/p1/pred/Naziv_fajla> ?Naziv_fajla .\n");
+        queryBuilder.append(filterBuilder).append("\n}");
+        System.out.println(queryBuilder);
+        return searchMetadata(queryBuilder.toString());
+    }
+
+    private List<Zahtev> searchMetadata(String sparqlQuery) throws Exception {
+        var conn = AuthUtil.loadFusekiProperties();
+        var query = QueryExecution.service(conn.queryEndpoint).query(sparqlQuery).build();
+        var results = query.execSelect();
+        RDFNode varValue;
+        var retVal = new ArrayList<Zahtev>();
+        while (results.hasNext()) {
+            var querySolution = results.next();
+            varValue = querySolution.get("Naziv_fajla");
+            retVal.add(zahtevRepository.get(varValue.toString()));
+        }
+        return retVal;
     }
 
     private void extractMetadata(InputStream in, OutputStream out) throws Exception {

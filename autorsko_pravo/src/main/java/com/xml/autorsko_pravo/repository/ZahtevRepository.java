@@ -31,8 +31,9 @@ public class ZahtevRepository {
         this.marshalling = marshalling;
     }
 
-    public void save(Zahtev zahtev, String documentName) throws Exception {
+    public void save(Zahtev zahtev) throws Exception {
         var conn = AuthUtil.loadProperties();
+        String documentName = String.format("Zahtev%d.xml", zahtev.getPopunjavaZavod().getBrojPrijave());
         setup(conn.driver);
         try {
             col = getOrCreateCollection(conn);

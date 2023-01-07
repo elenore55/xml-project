@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:a1="http://www.ftn.com/a1" xmlns:pred="http://www.ftn.com/a1/pred/">
 <rdf:Description rdf:about="http://www.ftn.com/a1/Zahtev-25">
+<pred:Naziv_fajla>Zahtev25.xml</pred:Naziv_fajla>
 <pred:Broj_prijave>25</pred:Broj_prijave>
 <pred:Datum_podnosenja>2022-12-25+01:00</pred:Datum_podnosenja>
 <pred:Poslovno_ime_podnosioca>Poslovnica</pred:Poslovno_ime_podnosioca>

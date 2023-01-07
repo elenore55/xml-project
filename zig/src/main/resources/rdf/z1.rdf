@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:pred="http://www.ftn.com/z1/pred/" xmlns:z1="http://www.ftn.com/z1">
-<rdf:Description rdf:about="http://www.ftn.com/z1/Zahtev-11-2022">
-<pred:Id_prijave_ziga>11</pred:Id_prijave_ziga>
-<pred:Godina_prijave_ziga>2022</pred:Godina_prijave_ziga>
+<rdf:Description rdf:about="http://www.ftn.com/z1/Zahtev-30-2023">
+<pred:Naziv_fajla>Zahtev30-2023</pred:Naziv_fajla>
+<pred:Id_prijave_ziga>30</pred:Id_prijave_ziga>
+<pred:Godina_prijave_ziga>2023</pred:Godina_prijave_ziga>
 <pred:Datum_podnosenja>2022-11-11+01:00</pred:Datum_podnosenja>
 <pred:Tip_ziga>INDIVIDUALNI_ZIG</pred:Tip_ziga>
-<pred:Poslovno_ime_podnosioca>Novo poslovno ime podnosioca</pred:Poslovno_ime_podnosioca>
+<pred:Poslovno_ime_podnosioca>Neko drugo ime</pred:Poslovno_ime_podnosioca>
 </rdf:Description>
 </rdf:RDF>

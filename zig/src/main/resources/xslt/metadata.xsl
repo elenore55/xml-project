@@ -12,6 +12,9 @@
                     select="//z1:Broj_prijave_ziga/z1:Godina"/>
             </xsl:variable>
             <rdf:Description rdf:about="{$Zahtev_id}">
+                <pred:Naziv_fajla>Zahtev<xsl:value-of select="//z1:Popunjava_zavod/z1:Broj_prijave_ziga/z1:Id"/>-<xsl:value-of
+                        select="//z1:Popunjava_zavod/z1:Broj_prijave_ziga/z1:Godina"/>.xml
+                </pred:Naziv_fajla>
                 <pred:Id_prijave_ziga>
                     <xsl:value-of select="//z1:Popunjava_zavod/z1:Broj_prijave_ziga/z1:Id"/>
                 </pred:Id_prijave_ziga>
