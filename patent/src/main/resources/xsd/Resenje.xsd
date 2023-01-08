@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ftn.com/p1"
+           elementFormDefault="qualified" xmlns:p1="http://www.ftn.com/p1">
+    <xs:complexType name="TResenje" abstract="true">
+        <xs:sequence>
+            <xs:element name="Datum_resenja" type="xs:date"/>
+            <xs:element name="Ime_sluzbenika" type="xs:string"/>
+            <xs:element name="Prezime_sluzbenika" type="xs:string"/>
+            <xs:element name="Referenca" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TOdobren_zahtev">
+        <xs:complexContent>
+            <xs:extension base="p1:TResenje">
+                <xs:sequence>
+                    <xs:element name="Sifra" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TOdbijen_zahtev">
+        <xs:complexContent>
+            <xs:extension base="p1:TResenje">
+                <xs:sequence>
+                    <xs:element name="Obrazlozenje" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="Resenje" type="p1:TResenje"/>
+</xs:schema>

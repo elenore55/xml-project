@@ -48,4 +48,12 @@ public class ObjectFactory {
     public Zahtev createZahtev() {
         return new Zahtev();
     }
+
+    public Resenje.OdobrenZahtev createOdobrenZahtev() {
+        return new Resenje.OdobrenZahtev();
+    }
+
+    public Resenje.OdbijenZahtev createOdbijenZahtev() {
+        return new Resenje.OdbijenZahtev();
+    }
 }

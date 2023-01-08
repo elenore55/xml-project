@@ -56,4 +56,12 @@ public class ObjectFactory {
     public RanijaPrijava createRanijaPrijava() {
         return new RanijaPrijava();
     }
+
+    public Resenje.OdobrenZahtev createOdobrenZahtev() {
+        return new Resenje.OdobrenZahtev();
+    }
+
+    public Resenje.OdbijenZahtev createOdbijenZahtev() {
+        return new Resenje.OdbijenZahtev();
+    }
 }

@@ -66,4 +66,12 @@ public class ObjectFactory {
     public AutorskoDelo.IzvornoDelo createIzvornoDelo() {
         return new AutorskoDelo.IzvornoDelo();
     }
+
+    public Resenje.OdobrenZahtev createOdobrenZahtev() {
+        return new Resenje.OdobrenZahtev();
+    }
+
+    public Resenje.OdbijenZahtev createOdbijenZahtev() {
+        return new Resenje.OdbijenZahtev();
+    }
 }
