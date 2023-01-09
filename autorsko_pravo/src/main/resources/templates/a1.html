@@ -3,163 +3,235 @@
     <title>A1</title>
     <style type="text/css">
                     body {
-                        font-family: Arial, Helvetica, sans-serif;
+                    font-family: Arial, Helvetica, sans-serif;
                     }
                     table {
-                        margin-left: auto;
-                        margin-right: auto;
-                        width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 80%;
                     }
-                    .shifted {
-                        margin-top: 40px;
+                    .shifted-top-l {
+                    margin-top: 45px;
+                    }
+                    .shifted-top-sm {
+                    margin-top: 20px;
+                    }
+                    .shifted-left {
+                    margin-left: 0;
                     }
                     td {
-                        padding-left: 10px;
-                        font-size: 16px;
-                        padding-top: 3px;
-                        padding-bottom: 3px;
+                    padding-left: 10px;
+                    font-size: 16px;
+                    padding-top: 3px;
+                    padding-bottom: 3px;
                     }
                     th {
-                        font-size: 16px;
+                    font-size: 16px;
                     }
                     td.name {
-                        text-align: center;
-                        font-size: 18px;
+                    text-align: center;
+                    font-size: 18px;
                     }
                     table, td, th {
-                        border: 1px solid black;
-                        border-collapse: collapse;
+                    border: 1px solid black;
+                    border-collapse: collapse;
                     }
                     td:hover {
-                        font-style: italic;
-                        background-color: #cbd4f2;
+                    font-style: italic;
+                    background-color: #cbd4f2;
                     }
-                    thead {
-                        background-color: #9baefa;
+                    .centered {
+                    text-align: center
                     }
                 </style>
   </head>
   <body>
-    <div style="width: 100%">
-      <div style="display: inline-block; width: 80%">
-        <h2>ZAVOD ZA INTELEKTUALNU SVOJINU</h2>
-        <h3>Beograd, Kneginje Ljubice 5</h3>
+    <div style="width: 95%; border: 1px solid black; margin: auto">
+      <div style="border-bottom: 1px solid black; padding: 5px">
+        <div style="width: 100%; margin-left: 10px">
+          <div style="display: inline-block; width: 70%">
+            <h3>ZAVOD ZA INTELEKTUALNU SVOJINU</h3>
+            <h4>Beograd, Kneginje Ljubice 5</h4>
+          </div>
+          <div style="display: inline-block; text-align: right;">
+            <h3>OBRAZAC A-1</h3>
+          </div>
+        </div>
+        <h3 style="text-align: center; padding-bottom: 30px">ZAHTEV ZA UNOŠENJE U EVIDENCIJU I
+                            DEPONOVANJE AUTORSKIH DELA
+                        </h3>
       </div>
-      <div style="display: inline-block; text-align: right;">
-        <h2>OBRAZAC A-1</h2>
-      </div>
-    </div>
-    <h1 style="text-align: center;">ZAHTEV ZA UNOŠENJE U EVIDENCIJU I DEPONOVANJE AUTORSKIH DELA</h1>
-    <h2 style="text-align: center" class="shifted">Podnosilac prijave</h2>
-    <table>
-      <thead>
-        <th>Poslovno ime</th>
-        <th>Sedište</th>
-        <th>Kontakt</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="name" rowspan="2">Poslovnica</td>
-          <td>Knez Mihajlova 11</td>
-          <td>tel:  123455556</td>
-        </tr>
-        <tr>
-          <td>11000 Beograd</td>
-          <td>email:  email@hotmail.com</td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="shifted">
-      <thead>
-        <th colspan="2">
-          <h2 style="margin-bottom: -5px">Autorsko delo</h2>  </th>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="width: 40%">
-            <strong>Naslov</strong>
-          </td>
-          <td>Moj naslov</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>Alternativni naslov</strong>
-          </td>
-          <td>ALT</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>Vrsta</strong>
-          </td>
-          <td>knjizevno djelo</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>Forma zapisa</strong>
-          </td>
-          <td>knjiga</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>Način korišćenja</strong>
-          </td>
-          <td>citanje</td>
-        </tr>
-        <tr>
-          <td colspan="2">
+      <div style="padding: 10px">
+        <div class="shifted-top-sm">
+          <p class="shifted-left">1) Podnosilac prijave:</p>
+          <table class="shifted-top-sm">
+            <thead>
+              <th>Poslovno ime</th>
+              <th>Sedište</th>
+              <th>Kontakt</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="name" rowspan="2">Poslovnica</td>
+                <td>Knez Mihajlova 11</td>
+                <td>tel:  123455556</td>
+              </tr>
+              <tr>
+                <td>11000 Beograd</td>
+                <td>email:  email@hotmail.com</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="shifted-top-l">
+          <p class="shifted-left">2) Naslov autorskog dela, odnosno alternativni naslov, ako
+                                ga ima, po kome autorsko delo može da se identifikuje:
+                            </p>
+          <table>
+            <tbody>
+              <tr>
+                <td style="width:30%">
+                  <strong>Naslov</strong>
+                </td>
+                <td class="centered">Moj naslov</td>
+              </tr>
+              <tr>
+                <td style="width:30%">
+                  <strong>Alternativni naslov</strong>
+                </td>
+                <td class="centered">ALT</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="shifted-top-l">
+          <p class="shifted-left">3) Podaci o naslovu autorskog
+                                    dela na kome se zasniva delo prerade, kao i podatak o autoru izvornog dela:
+                                </p>
+          <table style="margin-top: 10px">
+            <tbody>
+              <tr>
+                <td style="width: 30%">
+                  <strong>Naslov</strong>
+                </td>
+                <td class="centered">Neki izvorni naslov</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Alternativni naslov</strong>
+                </td>
+                <td class="centered">Neki izvorni alt naslov</td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <p>
+                    <strong>Autori:</strong>
+                  </p>
+                  <ul>
+                    <li>
+                      <p>
+                        <strong>Ivo Andric</strong>
+                      </p>
+                      <ul>
+                        <li>Godina smrti:  1975</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="shifted-top-l">
+          <p class="shifted-left">4) Podaci o vrsti autorskog dela
+                                (književno
+                                delo, muzičko delo, likovno delo, računarski program i dr.):
+                                <span style="font-size: 18px">
+              <strong>knjizevno djelo</strong>
+            </span>
+          </p>
+        </div>
+        <div class="shifted-top-l">
+          <p class="shifted-left">5) Podaci o formi zapisa autorskog
+                                dela
+                                (štampani tekst, optički disk i slično):
+                                <span style="font-size: 18px">
+              <strong>knjiga</strong>
+            </span>
+          </p>
+        </div>
+        <p class="shifted-left shifted-top-l">6) Podaci o autorima:
+                            </p>
+        <ul style="margin-left: 40px">
+          <li>
             <p>
-              <strong>Autori:</strong>
+              <strong>Milica Popovic</strong>
             </p>
             <ul>
               <li>
-                <p>
-                  <strong>Milica Popovic</strong>
-                </p>
-                <ul>
-                  <li>
-                                                                Adresa:
-                                                                Radnicka 23, 21000 Novi Sad</li>
-                  <li>
-                                                                Državljanstvo:
-                                                                Srbija</li>
-                </ul>
-              </li>
+                                                        Adresa:
+                                                        Radnicka 23, 21000 Novi Sad</li>
               <li>
-                <p>
-                  <strong>Pero Peric</strong>
-                </p>
-                <ul>
-                  <li>Godina smrti:  1990</li>
-                </ul>
-              </li>
+                                                        Državljanstvo:
+                                                        Srbija</li>
             </ul>
-          </td>
-        </tr>
-        <tr style="border: 1px solid white">
-          <td style="border: 1px solid white" colspan="2">* Delo je stvoreno u radnom odnosu</td>
-        </tr>
-      </tbody>
-    </table>
-    <div style="margin-left: 20px; margin-top: 40px;">
-      <h3>Prilozi uz prijavu:</h3>
-      <p>Opis autorskog dela:  neki opis</p>
+          </li>
+          <li>
+            <p>
+              <strong>Pero Peric</strong>
+            </p>
+            <ul>
+              <li>Godina smrti:  1990</li>
+            </ul>
+          </li>
+        </ul>
+        <div class="shifted-top-l">
+          <p class="shifted-left">7) Podatak da li je u pitanju autorsko
+                                delo stvoreno u radnom odnosu:
+                            </p>
+          <p style="font-size: 18px" class="centered">
+            <strong>
+                                        Delo je stvoreno u radnom odnosu
+                                    </strong>
+          </p>
+        </div>
+        <div class="shifted-top-l">
+          <p class="shifted-left">8) Način korišćenja autorskog dela:
+                                <span style="font-size: 18px">
+              <strong>citanje</strong>
+            </span>
+          </p>
+        </div>
+        <div class="shifted-top-l">
+          <p class="shifted-left">9) Prilozi koji se podnose uz zahtev:
+                            </p>
+          <p style="margin-left: 40px">
+                                        Opis autorskog dela:  <strong>neki opis</strong>
+          </p>
+        </div>
+        <table style="margin: 80px 20px 20px auto; width: 40%;">
+          <tbody>
+            <tr>
+              <td style="font-size: 20px; padding: 15px 0 5px 15px; border-bottom: white">Broj
+                                        prijave
+                                    </td>
+            </tr>
+            <tr>
+              <td style="font-size: 22px; font-weight: bold; padding: 5px 0 15px 15px; border-top: white">
+                                        A -
+                                        24</td>
+            </tr>
+            <tr>
+              <td style="font-size: 20px; padding: 15px 0 5px 15px; border-bottom: white">Datum
+                                        podnošenja:
+                                    </td>
+            </tr>
+            <tr>
+              <td style="font-size: 22px; padding: 5px 0 15px 15px; border-top: white">2022-12-25+01:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <table style="margin-left: auto; margin-right: 20px; width: 30%;">
-      <tbody>
-        <tr>
-          <td style="font-size: 20px; padding: 15px 0 5px 15px; border-bottom: white">Broj prijave</td>
-        </tr>
-        <tr>
-          <td style="font-size: 22px; font-weight: bold; padding: 5px 0 15px 15px; border-top: white">
-                                A - 25</td>
-        </tr>
-        <tr>
-          <td style="font-size: 20px; padding: 15px 0 5px 15px; border-bottom: white">Datum podnošenja:</td>
-        </tr>
-        <tr>
-          <td style="font-size: 22px; padding: 5px 0 15px 15px; border-top: white">2022-12-25+01:00</td>
-        </tr>
-      </tbody>
-    </table>
   </body>
 </html>
