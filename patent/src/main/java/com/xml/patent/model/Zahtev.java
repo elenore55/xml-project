@@ -29,6 +29,9 @@ public class Zahtev {
     @XmlAttribute(name = "tip_prijave", required = true)
     TipPrijave tipPrijave;
 
+    @XmlAttribute(name = "pronalazac_ne_zeli_biti_naveden")
+    boolean pronalazacNeZeliBitiNaveden;
+
     @XmlElement(name = "Popunjava_zavod", required = true)
     PopunjavaZavod popunjavaZavod;
 

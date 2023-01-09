@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<p1:Zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p1="http://www.ftn.com/p1" tip_prijave="DOPUNSKA">
+<p1:Zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p1="http://www.ftn.com/p1" tip_prijave="DOPUNSKA" pronalazac_ne_zeli_biti_naveden="false">
     <p1:Popunjava_zavod>
         <p1:Broj_prijave>2</p1:Broj_prijave>
         <p1:Datum_prijema>2022-10-10+02:00</p1:Datum_prijema>

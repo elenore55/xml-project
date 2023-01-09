@@ -79,11 +79,15 @@ public class PopunjavaPodnosilac {
     @XmlType(name = "", propOrder = {"adresa", "nacin"})
     public static class PodaciODostavljanju {
 
+        public enum NacinDostavljanja {
+            ELEKTRONSKI_DOKUMENT, PAPIRNI_DOKUMENT
+        }
+
         @XmlElement(name = "Adresa")
         Adresa adresa;
 
         @XmlElement(name = "Nacin", required = true)
-        String nacin;
+        NacinDostavljanja nacin;
 
         @Override
         public String toString() {
