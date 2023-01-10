@@ -91,6 +91,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="pronalazac_ne_zeli_biti_naveden" type="xs:boolean"/>
         </xs:complexType>
     </xs:element>
     <xs:element name="Adresa">
