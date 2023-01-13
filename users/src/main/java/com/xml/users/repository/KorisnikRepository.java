@@ -1,6 +1,6 @@
 package com.xml.users.repository;
 
-import com.xml.users.exception.AlreadyRegistered;
+import com.xml.users.exception.AlreadyRegisteredException;
 import com.xml.users.model.Korisnik;
 import com.xml.users.util.AuthUtil;
 import org.exist.xmldb.EXistResource;
@@ -33,7 +33,7 @@ public class KorisnikRepository {
     public void register(Korisnik korisnik) throws Exception {
         String documentName = String.format("%s.xml", korisnik.getKorisnickoIme());
         if (get(documentName) != null)
-            throw new AlreadyRegistered();
+            throw new AlreadyRegisteredException();
         try (var out = marshalling.marshallToOutputStream(korisnik)) {
             saveResource(documentName, out);
         }

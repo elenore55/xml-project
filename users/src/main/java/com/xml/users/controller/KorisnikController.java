@@ -1,5 +1,7 @@
 package com.xml.users.controller;
 
+import com.xml.users.dto.KorisnikDTO;
+import com.xml.users.dto.LoginDTO;
 import com.xml.users.dto.RegistrationDTO;
 import com.xml.users.service.KorisnikService;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,17 @@ public class KorisnikController {
         try {
             korisnikService.register(dto);
             return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value = "login", consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<KorisnikDTO> login(@RequestBody LoginDTO dto) {
+        try {
+            var korisnik = korisnikService.login(dto);
+            return new ResponseEntity<>(korisnik, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
