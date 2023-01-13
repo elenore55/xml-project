@@ -52,7 +52,7 @@ public abstract class GenericRepository {
         setup(conn.driver);
         res = null;
         try {
-            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col = getOrCreateCollection(conn);
             col.setProperty(OutputKeys.INDENT, "yes");
             res = (XMLResource) col.getResource(documentName);
             return res;

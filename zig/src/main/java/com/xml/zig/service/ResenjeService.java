@@ -2,6 +2,7 @@ package com.xml.zig.service;
 
 import com.xml.zig.dto.CreateResenjeDTO;
 import com.xml.zig.model.Resenje;
+import com.xml.zig.repository.ResenjeMetadataRepository;
 import com.xml.zig.repository.ResenjeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +13,15 @@ import java.util.List;
 @Service
 public class ResenjeService {
 
+    MetadataSearchService metadataSearchService;
     ResenjeRepository resenjeRepository;
+    ResenjeMetadataRepository resenjeMetadataRepository;
 
     @Autowired
-    public ResenjeService(ResenjeRepository resenjeRepository) {
+    public ResenjeService(MetadataSearchService metadataSearchService, ResenjeRepository resenjeRepository, ResenjeMetadataRepository resenjeMetadataRepository) {
+        this.metadataSearchService = metadataSearchService;
         this.resenjeRepository = resenjeRepository;
+        this.resenjeMetadataRepository = resenjeMetadataRepository;
     }
 
     public void accept(CreateResenjeDTO dto) throws Exception {
@@ -49,5 +54,20 @@ public class ResenjeService {
 
     public List<Resenje> search(String text, boolean matchCase) throws Exception {
         return resenjeRepository.search(text, matchCase);
+    }
+
+    public void extractMetadata(String name) throws Exception {
+        resenjeMetadataRepository.extract(name);
+    }
+
+    public List<Resenje> simpleMetadataSearch(String name, String value) throws Exception {
+        return resenjeMetadataRepository.simpleMetadataSearch(name, value);
+    }
+
+    public List<Resenje> advancedMetadataSearch(String rawInput) throws Exception {
+        metadataSearchService.generate(rawInput);
+        var operators = metadataSearchService.getOperators();
+        var statements = metadataSearchService.getStatements();
+        return resenjeMetadataRepository.advancedMetadataSearch(operators, statements);
     }
 }

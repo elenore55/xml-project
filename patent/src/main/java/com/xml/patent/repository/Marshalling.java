@@ -84,4 +84,13 @@ public class Marshalling {
         marshaller.marshal(zahtev, out);
         return new ByteArrayInputStream(out.toByteArray());
     }
+
+    public InputStream marshallToInputStream(Resenje resenje) throws JAXBException {
+        var out = new ByteArrayOutputStream();
+        var marshaller = context.createMarshaller();
+        marshaller.setSchema(schemaResenje);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        marshaller.marshal(resenje, out);
+        return new ByteArrayInputStream(out.toByteArray());
+    }
 }

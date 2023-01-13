@@ -1,8 +1,6 @@
 package com.xml.patent.controller;
 
 import com.xml.patent.model.Zahtev;
-import com.xml.patent.repository.MetadataRepository;
-import com.xml.patent.repository.ZahtevRepository;
 import com.xml.patent.service.HTMLTransformer;
 import com.xml.patent.service.PDFTransformer;
 import com.xml.patent.service.ZahtevService;

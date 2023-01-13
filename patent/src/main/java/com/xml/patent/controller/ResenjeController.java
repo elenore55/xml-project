@@ -61,4 +61,20 @@ public class ResenjeController {
     public ResponseEntity<List<Resenje>> search(@PathVariable String text, @PathVariable boolean matchCase) throws Exception {
         return new ResponseEntity<>(resenjeService.search(text, matchCase), HttpStatus.OK);
     }
+
+    @GetMapping(value = "metadata/rdf/{name}")
+    public ResponseEntity<Void> extractMetadata(@PathVariable String name) throws Exception {
+        resenjeService.extractMetadata(name);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "metadata/simpleSearch/{name}/{value}")
+    public ResponseEntity<List<Resenje>> simpleMetadataSearch(@PathVariable String name, @PathVariable String value) throws Exception {
+        return new ResponseEntity<>(resenjeService.simpleMetadataSearch(name, value), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "metadata/advancedSearch/{rawInput}")
+    public ResponseEntity<List<Resenje>> advancedMetadataSearch(@PathVariable String rawInput) throws Exception {
+        return new ResponseEntity<>(resenjeService.advancedMetadataSearch(rawInput), HttpStatus.OK);
+    }
 }

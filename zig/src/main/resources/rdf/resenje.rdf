@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:pred="http://www.ftn.com/z1/pred/" xmlns:z1="http://www.ftn.com/z1">
+<rdf:Description rdf:about="http://www.ftn.com/z1/Resenje-Zahtev23-2022">
+<pred:Naziv_fajla>Resenje_Zahtev23-2022.xml</pred:Naziv_fajla>
+<pred:Datum_resenja>2023-01-13+01:00</pred:Datum_resenja>
+<pred:Ime_sluzbenika>Milica</pred:Ime_sluzbenika>
+<pred:Prezime_sluzbenika>Popovic</pred:Prezime_sluzbenika>
+<pred:Odobren>true</pred:Odobren>
+</rdf:Description>
+</rdf:RDF>
