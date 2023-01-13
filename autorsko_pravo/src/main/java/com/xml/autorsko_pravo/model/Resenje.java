@@ -11,9 +11,10 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Resenje")
 @XmlType(name = "TResenje", propOrder = {"datumResenja", "imeSluzbenika", "prezimeSluzbenika", "referenca"})
-public abstract class Resenje {
+public class Resenje {
 
     @XmlElement(name = "Datum_resenja", required = true)
+    @XmlSchemaType(name = "date")
     protected Date datumResenja;
 
     @XmlElement(name = "Ime_sluzbenika", required = true)
@@ -28,6 +29,7 @@ public abstract class Resenje {
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlRootElement(name = "OdobrenZahtev")
     @XmlType(name = "TOdobrenZahtev", propOrder = {"sifra"})
     public static class OdobrenZahtev extends Resenje {
 
@@ -38,6 +40,7 @@ public abstract class Resenje {
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlRootElement(name = "OdbijenZahtev")
     @XmlType(name = "TOdbijenZahtev", propOrder = {"obrazlozenje"})
     public static class OdbijenZahtev extends Resenje {
 

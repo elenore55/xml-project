@@ -42,8 +42,8 @@
                                         <xs:element name="Nacin">
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">
-                                                    <xs:enumeration value="elektronski dokument"/>
-                                                    <xs:enumeration value="papirni dokument"/>
+                                                    <xs:enumeration value="ELEKTRONSKI_DOKUMENT"/>
+                                                    <xs:enumeration value="PAPIRNI_DOKUMENT"/>
                                                 </xs:restriction>
                                             </xs:simpleType>
                                         </xs:element>

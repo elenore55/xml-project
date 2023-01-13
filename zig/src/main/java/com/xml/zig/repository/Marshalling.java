@@ -19,7 +19,6 @@ import java.io.*;
 public class Marshalling {
     static final String XML_PATH_ZAHTEV = "src/main/resources/xml/";
     static final String XSD_PATH_ZAHTEV = "src/main/resources/xsd/Z1.xsd";
-
     static final String XSD_PATH_RESENJE = "src/main/resources/xsd/Resenje.xsd";
     static final String CONTEXT_PATH = "com.xml.zig.model";
 

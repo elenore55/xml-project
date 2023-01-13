@@ -1,8 +1,8 @@
-package com.xml.zig.repository;
+package com.xml.autorsko_pravo.repository;
 
-import com.xml.zig.exception.DocumentNotFoundException;
-import com.xml.zig.exception.ResenjeAlreadyExistsException;
-import com.xml.zig.model.Resenje;
+import com.xml.autorsko_pravo.exception.DocumentNotFoundException;
+import com.xml.autorsko_pravo.exception.ResenjeAlreadyExistsException;
+import com.xml.autorsko_pravo.model.Resenje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class ResenjeRepository extends GenericRepository {
 
-    static final String collectionId = "/db/project/zig/resenje";
+    static final String collectionId = "/db/project/autorsko_pravo/resenje";
     Marshalling marshalling;
     ZahtevRepository zahtevRepository;
 

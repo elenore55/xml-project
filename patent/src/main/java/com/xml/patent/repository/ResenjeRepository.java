@@ -1,8 +1,8 @@
-package com.xml.zig.repository;
+package com.xml.patent.repository;
 
-import com.xml.zig.exception.DocumentNotFoundException;
-import com.xml.zig.exception.ResenjeAlreadyExistsException;
-import com.xml.zig.model.Resenje;
+import com.xml.patent.exception.DocumentNotFoundException;
+import com.xml.patent.exception.ResenjeAlreadyExistsException;
+import com.xml.patent.model.Resenje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class ResenjeRepository extends GenericRepository {
 
-    static final String collectionId = "/db/project/zig/resenje";
+    static final String collectionId = "/db/project/patent/resenje";
     Marshalling marshalling;
     ZahtevRepository zahtevRepository;
 

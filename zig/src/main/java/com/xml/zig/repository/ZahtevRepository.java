@@ -1,5 +1,6 @@
 package com.xml.zig.repository;
 
+import com.xml.zig.exception.ZahtevAlreadyExistsException;
 import com.xml.zig.model.Zahtev;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,8 @@ public class ZahtevRepository extends GenericRepository {
 
     public void save(Zahtev zahtev) throws Exception {
         String documentName = String.format("Zahtev%d-%d.xml", zahtev.getPopunjavaZavod().getBrojPrijaveZiga().getId(), zahtev.getPopunjavaZavod().getBrojPrijaveZiga().getGodina());
+        if (get(documentName) != null)
+            throw new ZahtevAlreadyExistsException();
         try (var out = marshalling.marshallToOutputStream(zahtev)) {
             saveResource(documentName, out);
         }
