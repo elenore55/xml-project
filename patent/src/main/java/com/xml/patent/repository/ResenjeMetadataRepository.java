@@ -1,6 +1,7 @@
 package com.xml.patent.repository;
 
 import com.xml.patent.model.Resenje;
+import com.xml.patent.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,6 +40,34 @@ public class ResenjeMetadataRepository extends GenericMetadataRepository {
         return searchMetadata(generateAdvancedMetadataSearchQuery(operators, statements));
     }
 
+    public int countOdobreniZahtevi(String startDate, String endDate) throws Exception {
+        var conn = AuthUtil.loadFusekiProperties();
+        String query = String.format("""
+                SELECT * FROM <%s>
+                WHERE {\s
+                \t?p1 <http://www.ftn.com/p1/pred/Datum_resenja> ?Datum_resenja .
+                \t?p1 <http://www.ftn.com/p1/pred/Odobren> ?Odobren .
+                \t?p1 <http://www.ftn.com/p1/pred/Naziv_fajla> ?Naziv_fajla .
+                \tFILTER(?Odobren = "true" && ?Datum_resenja >= "%s" && ?Datum_resenja <= "%s")
+                }""", conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, startDate, endDate);
+        System.out.println(query);
+        return searchMetadata(query).size();
+    }
+
+    public int countOdbijeniZahtevi(String startDate, String endDate) throws Exception {
+        var conn = AuthUtil.loadFusekiProperties();
+        String query = String.format("""
+                SELECT * FROM <%s>
+                WHERE {\s
+                \t?p1 <http://www.ftn.com/p1/pred/Datum_resenja> ?Datum_resenja .
+                \t?p1 <http://www.ftn.com/p1/pred/Odobren> ?Odobren .
+                \t?p1 <http://www.ftn.com/p1/pred/Naziv_fajla> ?Naziv_fajla .
+                \tFILTER(?Odobren = "false" && ?Datum_resenja >= "%s" && ?Datum_resenja <= "%s")
+                }""", conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, startDate, endDate);
+        System.out.println(query);
+        return searchMetadata(query).size();
+    }
+    
     private List<Resenje> searchMetadata(String sparqlQuery) throws Exception {
         var fileNames = getFileNamesByMetadata(sparqlQuery);
         var retVal = new ArrayList<Resenje>();

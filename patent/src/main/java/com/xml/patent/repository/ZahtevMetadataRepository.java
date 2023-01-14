@@ -1,6 +1,7 @@
 package com.xml.patent.repository;
 
 import com.xml.patent.model.Zahtev;
+import com.xml.patent.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,19 @@ public class ZahtevMetadataRepository extends GenericMetadataRepository {
 
     public List<Zahtev> advancedMetadataSearch(List<String> operators, List<List<String>> statements) throws Exception {
         return searchMetadata(generateAdvancedMetadataSearchQuery(operators, statements));
+    }
+
+    public int countZahtevi(String startDate, String endDate) throws Exception {
+        var conn = AuthUtil.loadFusekiProperties();
+        String query = String.format("""
+                SELECT * FROM <%s>
+                WHERE {\s
+                \t?p1 <http://www.ftn.com/p1/pred/Datum_prijema> ?Datum_prijema .
+                \t?p1 <http://www.ftn.com/p1/pred/Naziv_fajla> ?Naziv_fajla .
+                \tFILTER(?Datum_prijema >= "%s" && ?Datum_prijema <= "%s")
+                }""", conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, startDate, endDate);
+        System.out.println(query);
+        return searchMetadata(query).size();
     }
 
     private List<Zahtev> searchMetadata(String sparqlQuery) throws Exception {
