@@ -1,6 +1,7 @@
 package com.xml.zig.repository;
 
 import com.xml.zig.model.Zahtev;
+import com.xml.zig.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,19 @@ public class ZahtevMetadataRepository extends GenericMetadataRepository {
 
     public List<Zahtev> advancedMetadataSearch(List<String> operators, List<List<String>> statements) throws Exception {
         return searchMetadata(generateAdvancedMetadataSearchQuery(operators, statements));
+    }
+
+    public int countZahtevi(String startDate, String endDate) throws Exception {
+        var conn = AuthUtil.loadFusekiProperties();
+        String query = String.format("""
+                SELECT * FROM <%s>
+                WHERE {\s
+                \t?z1 <http://www.ftn.com/z1/pred/Datum_podnosenja> ?Datum_podnosenja .
+                \t?z1 <http://www.ftn.com/z1/pred/Naziv_fajla> ?Naziv_fajla .
+                \tFILTER(?Datum_podnosenja >= "%s" && ?Datum_podnosenja <= "%s")
+                }""", conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, startDate, endDate);
+        System.out.println(query);
+        return searchMetadata(query).size();
     }
 
     private List<Zahtev> searchMetadata(String sparqlQuery) throws Exception {

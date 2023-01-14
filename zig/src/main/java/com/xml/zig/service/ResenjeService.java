@@ -1,9 +1,11 @@
 package com.xml.zig.service;
 
 import com.xml.zig.dto.CreateResenjeDTO;
+import com.xml.zig.dto.TimePeriodDTO;
 import com.xml.zig.model.Resenje;
 import com.xml.zig.repository.ResenjeMetadataRepository;
 import com.xml.zig.repository.ResenjeRepository;
+import com.xml.zig.repository.ZahtevMetadataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +18,18 @@ public class ResenjeService {
     MetadataSearchService metadataSearchService;
     ResenjeRepository resenjeRepository;
     ResenjeMetadataRepository resenjeMetadataRepository;
+    ZahtevMetadataRepository zahtevMetadataRepository;
+    PDFTransformer pdfTransformer;
 
     @Autowired
-    public ResenjeService(MetadataSearchService metadataSearchService, ResenjeRepository resenjeRepository, ResenjeMetadataRepository resenjeMetadataRepository) {
+    public ResenjeService(MetadataSearchService metadataSearchService, ResenjeRepository resenjeRepository,
+                          ResenjeMetadataRepository resenjeMetadataRepository, ZahtevMetadataRepository zahtevMetadataRepository,
+                          PDFTransformer pdfTransformer) {
         this.metadataSearchService = metadataSearchService;
         this.resenjeRepository = resenjeRepository;
         this.resenjeMetadataRepository = resenjeMetadataRepository;
+        this.zahtevMetadataRepository = zahtevMetadataRepository;
+        this.pdfTransformer = pdfTransformer;
     }
 
     public void accept(CreateResenjeDTO dto) throws Exception {
@@ -69,5 +77,12 @@ public class ResenjeService {
         var operators = metadataSearchService.getOperators();
         var statements = metadataSearchService.getStatements();
         return resenjeMetadataRepository.advancedMetadataSearch(operators, statements);
+    }
+
+    public byte[] generateReport(TimePeriodDTO dto) throws Exception {
+        int odobreni = resenjeMetadataRepository.countOdobreniZahtevi(dto.getStart(), dto.getEnd());
+        int odbijeni = resenjeMetadataRepository.countOdbijeniZahtevi(dto.getStart(), dto.getEnd());
+        int svi = zahtevMetadataRepository.countZahtevi(dto.getStart(), dto.getEnd());
+        return pdfTransformer.generateReportPDF(dto, odobreni, odbijeni, svi);
     }
 }

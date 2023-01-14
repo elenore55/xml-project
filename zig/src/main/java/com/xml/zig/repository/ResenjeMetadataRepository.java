@@ -1,6 +1,7 @@
 package com.xml.zig.repository;
 
 import com.xml.zig.model.Resenje;
+import com.xml.zig.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,34 @@ public class ResenjeMetadataRepository extends GenericMetadataRepository {
 
     public List<Resenje> advancedMetadataSearch(List<String> operators, List<List<String>> statements) throws Exception {
         return searchMetadata(generateAdvancedMetadataSearchQuery(operators, statements));
+    }
+
+    public int countOdobreniZahtevi(String startDate, String endDate) throws Exception {
+        var conn = AuthUtil.loadFusekiProperties();
+        String query = String.format("""
+                SELECT * FROM <%s>
+                WHERE {\s
+                \t?z1 <http://www.ftn.com/z1/pred/Datum_resenja> ?Datum_resenja .
+                \t?z1 <http://www.ftn.com/z1/pred/Odobren> ?Odobren .
+                \t?z1 <http://www.ftn.com/z1/pred/Naziv_fajla> ?Naziv_fajla .
+                \tFILTER(?Odobren = "true" && ?Datum_resenja >= "%s" && ?Datum_resenja <= "%s")
+                }""", conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, startDate, endDate);
+        System.out.println(query);
+        return searchMetadata(query).size();
+    }
+
+    public int countOdbijeniZahtevi(String startDate, String endDate) throws Exception {
+        var conn = AuthUtil.loadFusekiProperties();
+        String query = String.format("""
+                SELECT * FROM <%s>
+                WHERE {\s
+                \t?z1 <http://www.ftn.com/z1/pred/Datum_resenja> ?Datum_resenja .
+                \t?z1 <http://www.ftn.com/z1/pred/Odobren> ?Odobren .
+                \t?z1 <http://www.ftn.com/z1/pred/Naziv_fajla> ?Naziv_fajla .
+                \tFILTER(?Odobren = "false" && ?Datum_resenja >= "%s" && ?Datum_resenja <= "%s")
+                }""", conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, startDate, endDate);
+        System.out.println(query);
+        return searchMetadata(query).size();
     }
 
     private List<Resenje> searchMetadata(String sparqlQuery) throws Exception {
