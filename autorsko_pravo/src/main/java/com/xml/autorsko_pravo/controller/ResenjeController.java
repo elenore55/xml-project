@@ -68,12 +68,12 @@ public class ResenjeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "metadata/simpleSearch/{name}/{value}")
+    @GetMapping(value = "metadata/simpleSearch/{name}/{value}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Resenje>> simpleMetadataSearch(@PathVariable String name, @PathVariable String value) throws Exception {
         return new ResponseEntity<>(resenjeService.simpleMetadataSearch(name, value), HttpStatus.OK);
     }
 
-    @GetMapping(value = "metadata/advancedSearch/{rawInput}")
+    @GetMapping(value = "metadata/advancedSearch/{rawInput}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Resenje>> advancedMetadataSearch(@PathVariable String rawInput) throws Exception {
         return new ResponseEntity<>(resenjeService.advancedMetadataSearch(rawInput), HttpStatus.OK);
     }
