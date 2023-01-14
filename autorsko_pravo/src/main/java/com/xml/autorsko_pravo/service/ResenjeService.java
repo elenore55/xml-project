@@ -3,33 +3,40 @@ package com.xml.autorsko_pravo.service;
 import com.xml.autorsko_pravo.dto.CreateResenjeDTO;
 import com.xml.autorsko_pravo.dto.TimePeriodDTO;
 import com.xml.autorsko_pravo.model.Resenje;
+import com.xml.autorsko_pravo.model.Zahtev;
 import com.xml.autorsko_pravo.repository.ResenjeMetadataRepository;
 import com.xml.autorsko_pravo.repository.ResenjeRepository;
 import com.xml.autorsko_pravo.repository.ZahtevMetadataRepository;
+import com.xml.autorsko_pravo.repository.ZahtevRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class ResenjeService {
 
     MetadataSearchService metadataSearchService;
     ResenjeRepository resenjeRepository;
+    ZahtevRepository zahtevRepository;
     ResenjeMetadataRepository resenjeMetadataRepository;
     ZahtevMetadataRepository zahtevMetadataRepository;
     PDFTransformer pdfTransformer;
+    EmailSender emailSender;
 
     @Autowired
-    public ResenjeService(MetadataSearchService metadataSearchService, ResenjeRepository resenjeRepository,
+    public ResenjeService(MetadataSearchService metadataSearchService, ResenjeRepository resenjeRepository, ZahtevRepository zahtevRepository,
                           ResenjeMetadataRepository resenjeMetadataRepository, ZahtevMetadataRepository zahtevMetadataRepository,
-                          PDFTransformer pdfTransformer) {
+                          PDFTransformer pdfTransformer, EmailSender emailSender) {
         this.metadataSearchService = metadataSearchService;
         this.resenjeRepository = resenjeRepository;
+        this.zahtevRepository = zahtevRepository;
         this.resenjeMetadataRepository = resenjeMetadataRepository;
         this.zahtevMetadataRepository = zahtevMetadataRepository;
         this.pdfTransformer = pdfTransformer;
+        this.emailSender = emailSender;
     }
 
     public void accept(CreateResenjeDTO dto) throws Exception {
@@ -40,6 +47,7 @@ public class ResenjeService {
         resenje.setSifra(dto.getNazivDokumenta());
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
+        notifyPodnosilac(resenje);
     }
 
     public void reject(CreateResenjeDTO.CreateOdbijenZahtevDTO dto) throws Exception {
@@ -50,6 +58,42 @@ public class ResenjeService {
         resenje.setObrazlozenje(dto.getObrazlozenje());
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
+        notifyPodnosilac(resenje);
+    }
+
+    Runnable generatePdfTask(Resenje.OdobrenZahtev resenje, Zahtev zahtev) {
+        return () -> {
+            try {
+                pdfTransformer.generateResenjePDF(resenje, zahtev);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        };
+    }
+
+    Runnable generatePdfTask(Resenje.OdbijenZahtev resenje, Zahtev zahtev) {
+        return () -> {
+            try {
+                pdfTransformer.generateResenjePDF(resenje, zahtev);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        };
+    }
+
+    Runnable sendEmailTask(Zahtev zahtev, String status) {
+        return () -> emailSender.send(zahtev.getPopunjavaPodnosilac().getPodnosilac().getEmail(), new EmailMessage(status));
+    }
+    public void notifyPodnosilac(Resenje.OdobrenZahtev resenje) throws Exception {
+        var zahtev = zahtevRepository.get(resenje.getReferenca() + ".xml");
+        CompletableFuture.runAsync(generatePdfTask(resenje, zahtev))
+                .thenRunAsync(sendEmailTask(zahtev, "ODOBREN"));
+    }
+
+    public void notifyPodnosilac(Resenje.OdbijenZahtev resenje) throws Exception {
+        var zahtev = zahtevRepository.get(resenje.getReferenca() + ".xml");
+        CompletableFuture.runAsync(generatePdfTask(resenje, zahtev))
+                .thenRunAsync(sendEmailTask(zahtev, "ODBIJEN"));
     }
 
     public Resenje getOne(String name) throws Exception {
@@ -83,6 +127,6 @@ public class ResenjeService {
         int odobreni = resenjeMetadataRepository.countOdobreniZahtevi(dto.getStart(), dto.getEnd());
         int odbijeni = resenjeMetadataRepository.countOdbijeniZahtevi(dto.getStart(), dto.getEnd());
         int svi = zahtevMetadataRepository.countZahtevi(dto.getStart(), dto.getEnd());
-        return pdfTransformer.generateReportPDF(dto, odobreni, odbijeni, svi);
+        return pdfTransformer.generateIzvestajPDF(dto, odobreni, odbijeni, svi);
     }
 }
