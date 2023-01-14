@@ -32,7 +32,6 @@ public class ZahtevRepository extends GenericRepository {
     public Zahtev get(String documentName) throws Exception {
         var resource = getResource(documentName);
         if (resource == null) {
-            System.out.println("[WARNING] Document '" + documentName + "' cannot be found!");
             return null;
         } else {
             return marshalling.unmarshallContent(resource.getContentAsDOM());
