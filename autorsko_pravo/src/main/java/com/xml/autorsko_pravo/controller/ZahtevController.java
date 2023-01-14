@@ -79,12 +79,12 @@ public class ZahtevController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "metadata/simpleSearch/{name}/{value}")
+    @GetMapping(value = "metadata/simpleSearch/{name}/{value}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Zahtev>> simpleMetadataSearch(@PathVariable String name, @PathVariable String value) throws Exception {
         return new ResponseEntity<>(zahtevService.simpleMetadataSearch(name, value), HttpStatus.OK);
     }
 
-    @GetMapping(value = "metadata/advancedSearch/{rawInput}")
+    @GetMapping(value = "metadata/advancedSearch/{rawInput}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Zahtev>> advancedMetadataSearch(@PathVariable String rawInput) throws Exception {
         return new ResponseEntity<>(zahtevService.advancedMetadataSearch(rawInput), HttpStatus.OK);
     }

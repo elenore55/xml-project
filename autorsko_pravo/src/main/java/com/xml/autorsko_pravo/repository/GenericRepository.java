@@ -65,7 +65,7 @@ public abstract class GenericRepository {
         res = null;
         var result = new ArrayList<XMLResource>();
         try {
-            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col = getOrCreateCollection(conn);
             col.setProperty(OutputKeys.INDENT, "yes");
             for (var documentName : col.listResources()) {
                 res = (XMLResource) col.getResource(documentName);
