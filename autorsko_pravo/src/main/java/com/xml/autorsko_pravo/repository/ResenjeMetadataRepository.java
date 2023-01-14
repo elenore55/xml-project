@@ -62,7 +62,7 @@ public class ResenjeMetadataRepository extends GenericMetadataRepository {
                 \t?a1 <http://www.ftn.com/a1/pred/Datum_resenja> ?Datum_resenja .
                 \t?a1 <http://www.ftn.com/a1/pred/Odobren> ?Odobren .
                 \t?a1 <http://www.ftn.com/a1/pred/Naziv_fajla> ?Naziv_fajla .
-                \tFILTER(?Odobren = "true" && ?Datum_resenja >= "%s" && ?Datum_resenja <= "%s")
+                \tFILTER(?Odobren = "false" && ?Datum_resenja >= "%s" && ?Datum_resenja <= "%s")
                 }""", conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, startDate, endDate);
         System.out.println(query);
         return searchMetadata(query).size();
