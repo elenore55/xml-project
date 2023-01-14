@@ -1,9 +1,11 @@
 package com.xml.autorsko_pravo.controller;
 
 import com.xml.autorsko_pravo.dto.CreateResenjeDTO;
+import com.xml.autorsko_pravo.dto.TimePeriodDTO;
 import com.xml.autorsko_pravo.model.Resenje;
 import com.xml.autorsko_pravo.service.ResenjeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -76,5 +78,22 @@ public class ResenjeController {
     @GetMapping(value = "metadata/advancedSearch/{rawInput}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Resenje>> advancedMetadataSearch(@PathVariable String rawInput) throws Exception {
         return new ResponseEntity<>(resenjeService.advancedMetadataSearch(rawInput), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "report", produces = MediaType.APPLICATION_PDF_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<byte[]> generateReport(@RequestBody TimePeriodDTO dto) {
+        try {
+            var content = resenjeService.generateReport(dto);
+            var headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            String filename = "izvestaj.pdf";
+            headers.setContentDispositionFormData(filename, filename);
+            headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+            return new ResponseEntity<>(content, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
