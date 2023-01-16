@@ -4,10 +4,7 @@ import com.xml.autorsko_pravo.dto.CreateResenjeDTO;
 import com.xml.autorsko_pravo.dto.TimePeriodDTO;
 import com.xml.autorsko_pravo.model.Resenje;
 import com.xml.autorsko_pravo.model.Zahtev;
-import com.xml.autorsko_pravo.repository.ResenjeMetadataRepository;
-import com.xml.autorsko_pravo.repository.ResenjeRepository;
-import com.xml.autorsko_pravo.repository.ZahtevMetadataRepository;
-import com.xml.autorsko_pravo.repository.ZahtevRepository;
+import com.xml.autorsko_pravo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

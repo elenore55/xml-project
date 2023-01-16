@@ -9,7 +9,7 @@ import java.util.Map;
 @Setter
 public class EmailMessage {
     Map<String, Object> templateMap;
-    String template = "resenje-template";
+    String template = "resenje-template.html";
 
     public EmailMessage(String status) {
         templateMap = Map.of("status", status);

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<z1:Zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:z1="http://www.ftn.com/z1">
+<z1:Zahtev xmlns:z1="http://www.ftn.com/z1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <z1:Popunjava_podnosilac>
         <z1:Podnosioci_prijave>
             <z1:Podnosilac_prijave xsi:type="z1:TPravno_lice">
@@ -14,20 +13,6 @@
                 <z1:E_mail>email3@gmail.com</z1:E_mail>
                 <z1:Faks>123455</z1:Faks>
                 <z1:Poslovno_ime>Novo poslovno ime podnosioca</z1:Poslovno_ime>
-            </z1:Podnosilac_prijave>
-            <z1:Podnosilac_prijave xsi:type="z1:TFizicko_lice">
-                <z1:Adresa>
-                    <z1:Ulica>Marka Pola</z1:Ulica>
-                    <z1:Broj>20</z1:Broj>
-                    <z1:Postanski_broj>21000</z1:Postanski_broj>
-                    <z1:Mesto>Novi Sad</z1:Mesto>
-                    <z1:Drzava>Srbija</z1:Drzava>
-                </z1:Adresa>
-                <z1:Telefon>87878787</z1:Telefon>
-                <z1:E_mail>email5@gmail.com</z1:E_mail>
-                <z1:Faks>12345578</z1:Faks>
-                <z1:Ime>Milica</z1:Ime>
-                <z1:Prezime>Popovic</z1:Prezime>
             </z1:Podnosilac_prijave>
         </z1:Podnosioci_prijave>
         <z1:Punomocnik xsi:type="z1:TFizicko_lice">
@@ -86,8 +71,8 @@
     </z1:Popunjava_podnosilac>
     <z1:Popunjava_zavod>
         <z1:Broj_prijave_ziga>
-            <z1:Id>23</z1:Id>
-            <z1:Godina>2022</z1:Godina>
+            <z1:Id>33</z1:Id>
+            <z1:Godina>2023</z1:Godina>
         </z1:Broj_prijave_ziga>
         <z1:Datum_podnosenja>2022-11-11+01:00</z1:Datum_podnosenja>
         <z1:Prilozi>

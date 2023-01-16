@@ -1,15 +1,13 @@
 package com.xml.autorsko_pravo.service;
 
 import com.xml.autorsko_pravo.model.Zahtev;
+import com.xml.autorsko_pravo.repository.Marshalling;
 import com.xml.autorsko_pravo.repository.ZahtevMetadataRepository;
 import com.xml.autorsko_pravo.repository.ZahtevRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @Service
 public class ZahtevService {
@@ -17,12 +15,15 @@ public class ZahtevService {
     MetadataSearchService metadataSearchService;
     ZahtevRepository zahtevRepository;
     ZahtevMetadataRepository zahtevMetadataRepository;
+    Marshalling marshalling;
 
     @Autowired
-    public ZahtevService(MetadataSearchService metadataSearchService, ZahtevRepository zahtevRepository, ZahtevMetadataRepository zahtevMetadataRepository) {
+    public ZahtevService(MetadataSearchService metadataSearchService, ZahtevRepository zahtevRepository,
+                         ZahtevMetadataRepository zahtevMetadataRepository, Marshalling marshalling) {
         this.metadataSearchService = metadataSearchService;
         this.zahtevRepository = zahtevRepository;
         this.zahtevMetadataRepository = zahtevMetadataRepository;
+        this.marshalling = marshalling;
     }
 
     public Zahtev getOne(String name) throws Exception {
@@ -50,5 +51,10 @@ public class ZahtevService {
         var operators = metadataSearchService.getOperators();
         var statements = metadataSearchService.getStatements();
         return zahtevMetadataRepository.advancedMetadataSearch(operators, statements);
+    }
+
+    public void save() throws Exception {
+        var zahtev = marshalling.unmarshalFromFile("a1.xml");
+        zahtevRepository.save(zahtev);
     }
 }

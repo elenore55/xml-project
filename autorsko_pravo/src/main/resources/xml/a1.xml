@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<a1:Zahtev xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:a1="http://www.ftn.com/a1">
+<a1:Zahtev xmlns:a1="http://www.ftn.com/a1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <a1:Popunjava_podnosilac>
         <a1:Podnosilac xsi:type="a1:TPravno_lice">
             <a1:Adresa>
@@ -9,13 +8,13 @@
                 <a1:Broj>11</a1:Broj>
             </a1:Adresa>
             <a1:Telefon>123455556</a1:Telefon>
-            <a1:E_mail>email@hotmail.com</a1:E_mail>
+            <a1:E_mail>milica.popovic55@hotmail.com</a1:E_mail>
             <a1:Poslovno_ime>Poslovnica</a1:Poslovno_ime>
         </a1:Podnosilac>
         <a1:Autori>
             <a1:Autor xsi:type="a1:TZiv_autor">
-                <a1:Ime>Milica</a1:Ime>
-                <a1:Prezime>Popovic</a1:Prezime>
+                <a1:Ime>Marko</a1:Ime>
+                <a1:Prezime>Markovic</a1:Prezime>
                 <a1:Adresa>
                     <a1:Mesto>Novi Sad</a1:Mesto>
                     <a1:Postanski_broj>21000</a1:Postanski_broj>
@@ -30,21 +29,21 @@
                 <a1:Godina_smrti>1990</a1:Godina_smrti>
             </a1:Autor>
         </a1:Autori>
-        <a1:Autorsko_delo stvoreno_u_radnom_odnosu="true" xsi:type="a1:TAutorsko_delo">
-            <a1:Nacin_koriscenja>citanje</a1:Nacin_koriscenja>
-            <a1:Vrsta>knjizevno djelo</a1:Vrsta>
-            <a1:Forma_zapisa>knjiga</a1:Forma_zapisa>
+        <a1:Autorsko_delo stvoreno_u_radnom_odnosu="true">
+            <a1:Nacin_koriscenja>Čitanje</a1:Nacin_koriscenja>
+            <a1:Vrsta>Knjizevno delo</a1:Vrsta>
+            <a1:Forma_zapisa>Knjiga</a1:Forma_zapisa>
             <a1:Podaci_o_naslovu>
                 <a1:Naslov>Moj naslov</a1:Naslov>
-                <a1:Alternativni_naslov>ALT</a1:Alternativni_naslov>
+                <a1:Alternativni_naslov>Alt naslov</a1:Alternativni_naslov>
             </a1:Podaci_o_naslovu>
         </a1:Autorsko_delo>
     </a1:Popunjava_podnosilac>
     <a1:Popunjava_zavod>
         <a1:Prilog xsi:type="a1:TOpis_dela">
-            <a1:Opis>neki opis</a1:Opis>
+            <a1:Opis>Neki opis</a1:Opis>
         </a1:Prilog>
-        <a1:Broj_prijave>23</a1:Broj_prijave>
-        <a1:Datum_podnosenja>2022-12-25+01:00</a1:Datum_podnosenja>
+        <a1:Broj_prijave>28</a1:Broj_prijave>
+        <a1:Datum_podnosenja>2022-12-25</a1:Datum_podnosenja>
     </a1:Popunjava_zavod>
 </a1:Zahtev>

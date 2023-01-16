@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:a1="http://www.ftn.com/a1" xmlns:pred="http://www.ftn.com/a1/pred/">
-<rdf:Description rdf:about="http://www.ftn.com/a1/Zahtev-23">
-<pred:Naziv_fajla>Zahtev23.xml</pred:Naziv_fajla>
-<pred:Broj_prijave>23</pred:Broj_prijave>
+<rdf:Description rdf:about="http://www.ftn.com/a1/Zahtev-28">
+<pred:Naziv_fajla>Zahtev28.xml</pred:Naziv_fajla>
+<pred:Broj_prijave>28</pred:Broj_prijave>
 <pred:Datum_podnosenja>2022-12-25+01:00</pred:Datum_podnosenja>
 <pred:Poslovno_ime_podnosioca>Poslovnica</pred:Poslovno_ime_podnosioca>
 <pred:Stvoreno_u_radnom_odnosu>true</pred:Stvoreno_u_radnom_odnosu>

@@ -1,6 +1,5 @@
 package com.xml.zig.repository;
 
-import com.xml.zig.model.Zahtev;
 import com.xml.zig.util.AuthUtil;
 import org.exist.xmldb.EXistResource;
 import org.w3c.dom.Node;

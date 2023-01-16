@@ -1,6 +1,7 @@
 package com.xml.zig.service;
 
 import com.xml.zig.model.Zahtev;
+import com.xml.zig.repository.Marshalling;
 import com.xml.zig.repository.ZahtevMetadataRepository;
 import com.xml.zig.repository.ZahtevRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,15 @@ public class ZahtevService {
     MetadataSearchService metadataSearchService;
     ZahtevRepository zahtevRepository;
     ZahtevMetadataRepository zahtevMetadataRepository;
+    Marshalling marshalling;
 
     @Autowired
-    public ZahtevService(MetadataSearchService metadataSearchService, ZahtevRepository zahtevRepository, ZahtevMetadataRepository zahtevMetadataRepository) {
+    public ZahtevService(MetadataSearchService metadataSearchService, ZahtevRepository zahtevRepository,
+                         ZahtevMetadataRepository zahtevMetadataRepository, Marshalling marshalling) {
         this.metadataSearchService = metadataSearchService;
         this.zahtevRepository = zahtevRepository;
         this.zahtevMetadataRepository = zahtevMetadataRepository;
+        this.marshalling = marshalling;
     }
 
     public Zahtev getOne(String name) throws Exception {
@@ -47,5 +51,10 @@ public class ZahtevService {
         var operators = metadataSearchService.getOperators();
         var statements = metadataSearchService.getStatements();
         return zahtevMetadataRepository.advancedMetadataSearch(operators, statements);
+    }
+
+    public void save() throws Exception {
+        var zahtev = marshalling.unmarshalFromFile("z1.xml");
+        zahtevRepository.save(zahtev);
     }
 }

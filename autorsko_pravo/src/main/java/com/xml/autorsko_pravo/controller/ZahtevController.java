@@ -88,4 +88,10 @@ public class ZahtevController {
     public ResponseEntity<List<Zahtev>> advancedMetadataSearch(@PathVariable String rawInput) throws Exception {
         return new ResponseEntity<>(zahtevService.advancedMetadataSearch(rawInput), HttpStatus.OK);
     }
+
+    @GetMapping(value = "zahtev/save")
+    public ResponseEntity<Void> save() throws Exception {
+        zahtevService.save();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -2,14 +2,12 @@ package com.xml.autorsko_pravo.service;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.io.File;
@@ -21,17 +19,6 @@ public class EmailSender {
 
     @Configuration
     public static class EmailConfig {
-
-        @Bean
-        @Primary
-        public ITemplateResolver thymeleafTemplateResolver() {
-            ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-            templateResolver.setPrefix("email-templates/");
-            templateResolver.setSuffix(".html");
-            templateResolver.setTemplateMode("HTML");
-            templateResolver.setCharacterEncoding("UTF-8");
-            return templateResolver;
-        }
 
         @Bean
         public ResourceBundleMessageSource emailMessageSource() {
