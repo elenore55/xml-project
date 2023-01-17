@@ -1,20 +1,24 @@
 <template>
-    <div class="centered bordered">
-        <h2 class="centered-text">Molimo Vas da se ulogujete</h2>
-        <div class="grid-container">
-            <label id="username-label">Korisničko ime</label>
-            <input id="username-input" v-model="username" type="text" :class="(!isUsernameValid)?'red-border':'none'" @input="validateUsername" />
-            <p class="error" id="username-error" v-if="!isUsernameValid">Korisničko ime je obavezno</p>
-            <label id="pw-label">Lozinka</label>
-            <input id="pw-input" type="password" v-model="password" :class="(!isPasswordValid)?'red-border':'none'" @input="validatePassword" />
-            <p class="error" id="pw-error" v-if="!isPasswordValid">Lozinka je obaveznа</p>
+    <div class="container">
+        <h2 class="centered-text title">ZAVOD ZA INTELEKTUALNU SVOJINU</h2>
+        <div class="centered bordered">
+            <h2 class="centered-text">Molimo Vas da se ulogujete</h2>
+            <div class="grid-container">
+                <label id="username-label">Korisničko ime</label>
+                <input id="username-input" v-model="username" type="text" :class="(!isUsernameValid)?'red-border':'none'" @input="validateUsername" />
+                <p class="error" id="username-error" v-if="!isUsernameValid">Korisničko ime je obavezno</p>
+                <label id="pw-label">Lozinka</label>
+                <input id="pw-input" type="password" v-model="password" :class="(!isPasswordValid)?'red-border':'none'" @input="validatePassword" />
+                <p class="error" id="pw-error" v-if="!isPasswordValid">Lozinka je obaveznа</p>
+            </div>
+            <button id="btn-login" @click="submit">Login</button>
         </div>
-        <button id="btn-login" @click="submit">Login</button>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import * as xml2js from 'xml2js';
 
 export default {
     name: 'LoginPage',
@@ -42,7 +46,13 @@ export default {
                 </LoginDTO>`
 
                 axios.post("http://localhost:8000/korisnici/login", xmlString, config).then((response) => {
-                    alert(JSON.stringify(response.data));
+                    xml2js.parseString(response.data, function (err, result) {
+                        localStorage.setItem('username', result.KorisnikDTO.korisnickoIme);
+                        localStorage.setItem('email', result.KorisnikDTO.email);
+                        localStorage.setItem('name', result.KorisnikDTO.ime);
+                        localStorage.setItem('surname', result.KorisnikDTO.prezime);
+                        localStorage.setItem('role', result.KorisnikDTO.uloga);
+                    });
                 }).catch((err) => {
                     alert(JSON.stringify(err));
                 });
@@ -75,12 +85,15 @@ export default {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -60%);
-        width: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
         text-align: center;
     }
     .bordered {
-        border: 2px solid black;
+        border: 2px solid gray;
+    }
+    .title {
+        color: dark-gray;
     }
     .centered-text {
         text-align: center;

@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <LoginPage></LoginPage>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 
-import LoginPage from './components/LoginPage.vue';
-
 export default {
   name: 'App',
-  components: {
-    LoginPage
-  }
 }
 </script>
+
+<style>
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+</style>
