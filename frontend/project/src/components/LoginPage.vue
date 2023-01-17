@@ -2,7 +2,7 @@
     <div class="container">
         <h2 class="centered-text title">ZAVOD ZA INTELEKTUALNU SVOJINU</h2>
         <div class="centered bordered">
-            <h2 class="centered-text">Molimo Vas da se ulogujete</h2>
+            <h2 class="centered-text">Molimo Vas da se prijavite na sistem</h2>
             <div class="grid-container">
                 <label id="username-label">Korisničko ime</label>
                 <input id="username-input" v-model="username" type="text" :class="(!isUsernameValid)?'red-border':'none'" @input="validateUsername" />
@@ -11,14 +11,15 @@
                 <input id="pw-input" type="password" v-model="password" :class="(!isPasswordValid)?'red-border':'none'" @input="validatePassword" />
                 <p class="error" id="pw-error" v-if="!isPasswordValid">Lozinka je obaveznа</p>
             </div>
-            <button id="btn-login" @click="submit">Login</button>
+            <button id="btn-login" @click="submit">Prijavite se</button>
+            <p>Nemate nalog? <a href="/#/register" class="centered-text">Registrujte se ovde</a></p>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
 import * as xml2js from 'xml2js';
+import UserService from '@/services/UserService';
 
 export default {
     name: 'LoginPage',
@@ -34,19 +35,8 @@ export default {
         submit() {
             this.validate();
             if (this.isUsernameValid && this.isPasswordValid) {
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/xml'
-                    }
-                }
-                const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
-                <LoginDTO>
-                    <korisnickoIme>${this.username}</korisnickoIme>
-                    <lozinka>${this.password}</lozinka>
-                </LoginDTO>`
-
-                axios.post("http://localhost:8000/korisnici/login", xmlString, config).then((response) => {
-                    xml2js.parseString(response.data, function (err, result) {
+                UserService.login(this.username, this.password).then((response) => {
+                    xml2js.parseString(response.data, function (_err, result) {
                         localStorage.setItem('username', result.KorisnikDTO.korisnickoIme);
                         localStorage.setItem('email', result.KorisnikDTO.email);
                         localStorage.setItem('name', result.KorisnikDTO.ime);
@@ -64,16 +54,10 @@ export default {
             this.validatePassword();
         },
         validateUsername() {
-            if (this.username === '')
-                this.isUsernameValid = false;
-            else
-                this.isUsernameValid = true;
+            this.isUsernameValid = (this.username != '');
         },
         validatePassword() {
-            if (this.password === '')
-                this.isPasswordValid = false;
-            else
-                this.isPasswordValid = true;
+            this.isPasswordValid = (this.password != '');
         }
     }
 }
@@ -85,7 +69,7 @@ export default {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -45%);
         width: 60%;
         text-align: center;
     }
@@ -132,7 +116,7 @@ export default {
     #btn-login {
         font-size: 18px;
         padding: 3px;
-        margin-bottom: 50px;
+        margin-bottom: 25px;
         width: 75%;
     }
     .error {
@@ -146,8 +130,5 @@ export default {
     }
     #pw-error {
         grid-row: 4;
-    }
-    .red-border {
-        border: 1px solid red;
     }
 </style>
