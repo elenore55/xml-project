@@ -62,6 +62,13 @@ public class ZahtevController {
         return modelAndView;
     }
 
+    @GetMapping(value = "zahtev/htmlString/{name}")
+    public ResponseEntity<String> getHtmlString(@PathVariable String name) throws IOException {
+        htmlTransformer.generateHtml(name);
+        String content = new String(Files.readAllBytes(Paths.get(HTMLTransformer.HTML_FILE)));
+        return new ResponseEntity<>(content, HttpStatus.OK);
+    }
+
     @GetMapping(value = "zahtev/pdf/{name}", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> getPdf(@PathVariable String name) throws IOException {
         pdfTransformer.generatePDF(name);
