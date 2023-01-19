@@ -42,4 +42,25 @@ const downloadZahtevHTML = (broj) => {
     });
 }
 
-export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML }
+const generateReport = (period) => {
+    axios({
+        url: `http://localhost:8001/autorsko_pravo/resenje/report`,
+        method: 'POST',
+        data: period,
+        headers: {
+            'Content-Type': 'application/xml'
+        },
+        responseType: 'blob',
+    }).then((response) => {
+        const href = URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', 'zahtev.pdf');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+    });
+}
+
+export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport }
