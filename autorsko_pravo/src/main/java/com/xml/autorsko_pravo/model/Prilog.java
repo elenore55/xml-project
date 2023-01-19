@@ -30,7 +30,7 @@ public abstract class Prilog {
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TPrimer_dela", propOrder = {"primer"})
-    public static class PrimerDela {
+    public static class PrimerDela extends Prilog {
 
         @XmlElement(name = "Primer", required = true)
         String primer;

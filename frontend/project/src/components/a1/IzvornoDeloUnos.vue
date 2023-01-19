@@ -2,9 +2,9 @@
     <div>
         <h3>Podaci o izvornom delu</h3>
         <PodaciONaslovu @updateNaslov="updateNaslov($event)"></PodaciONaslovu>
-        <h3 v-if="autori.length > 0">Autori:</h3>
-        <div v-for="(autor, i) in autori" :key="autor.id" class="indented flex-container">
-            <button type="button" @click="autori.splice(i, 1)" class="btn-delete">-</button>
+        <h3 v-if="autorList.length > 0">Autori:</h3>
+        <div v-for="(autor, i) in autorList" :key="autor.id" class="indented flex-container">
+            <button type="button" @click="autorList.splice(i, 1)" class="btn-delete">-</button>
             <AutorPrikaz :ime="autor.ime" :prezime="autor.prezime" :godinaSmrti="autor.godinaSmrti" :drzavljanstvo="autor.drzavljanstvo" 
                 :adresa="autor.adresa" class="item"></AutorPrikaz>
         </div>
@@ -30,7 +30,7 @@
                 naslov: '',
                 altNaslov: '',
                 autor: {},
-                autori: []
+                autorList: []
             }
         },
         methods: {
@@ -40,7 +40,7 @@
                 this.updateIzvornoDelo();
             },
             addAutor() {
-                this.autori.push(this.autor);
+                this.autorList.push(this.autor);
                 this.updateIzvornoDelo();
             },
             updateAutor(autor) {
@@ -50,7 +50,7 @@
                 this.$emit('updateIzvornoDelo', {
                     naslov: this.naslov,
                     altNaslov: this.altNaslov,
-                    autori: this.autori
+                    autori: {autori: this.autorList} 
                 });
             }
         }

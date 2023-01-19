@@ -51,4 +51,14 @@ public class ZahtevRepository extends GenericRepository {
             result.add(marshalling.unmarshallContent(resource.getContentAsDOM()));
         return result;
     }
+
+    public int generateNextId() {
+        try {
+            return countDocuments() + 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 }

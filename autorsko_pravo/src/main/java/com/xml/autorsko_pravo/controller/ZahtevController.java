@@ -1,5 +1,8 @@
 package com.xml.autorsko_pravo.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.xml.autorsko_pravo.dto.CreateZahtevDTO;
 import com.xml.autorsko_pravo.model.Zahtev;
 import com.xml.autorsko_pravo.service.HTMLTransformer;
 import com.xml.autorsko_pravo.service.PDFTransformer;
@@ -9,16 +12,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.UUID;
+
+import static com.xml.autorsko_pravo.util.Util.PRILOZI_DIR;
 
 @RestController
 @RequestMapping(value = "autorsko-pravo/")
@@ -89,9 +95,29 @@ public class ZahtevController {
         return new ResponseEntity<>(zahtevService.advancedMetadataSearch(rawInput), HttpStatus.OK);
     }
 
-    @GetMapping(value = "zahtev/save")
-    public ResponseEntity<Void> save() throws Exception {
-        zahtevService.save();
+    @PostMapping(value = "zahtev/save", consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<Void> save(@RequestBody CreateZahtevDTO dto) throws Exception {
+        zahtevService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping(value = "zathev/saveWithPrilog", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<String> saveWithPrilog(@RequestParam("prilog") MultipartFile prilog, @RequestParam("dto") String dto) throws JsonProcessingException {
+        String fileName = UUID.randomUUID() + "-" + prilog.getOriginalFilename();
+        var mapper = new XmlMapper();
+        var zahtev = mapper.readValue(dto, CreateZahtevDTO.class);
+        try {
+            var dirPath = Paths.get(PRILOZI_DIR);
+            var destinationFile = dirPath.resolve(Paths.get(fileName)).normalize().toAbsolutePath();
+            try (var inputStream = prilog.getInputStream()) {
+                Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+            zahtevService.save(zahtev, fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return new ResponseEntity<>(fileName, HttpStatus.OK);
+    }
+
 }

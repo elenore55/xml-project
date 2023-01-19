@@ -7,24 +7,41 @@
             <AutorskoDeloUnos @updateAutorskoDelo="updateAutorskoDelo($event)"></AutorskoDeloUnos>
 
             <h2>Autori dela</h2>
-            <div v-for="(autor, i) in autori" :key="autor.id" class="indented flex-container">
-                <button type="button" @click="autori.splice(i, 1)" class="btn-delete">-</button>
+            <div v-for="(autor, i) in autorList" :key="autor.id" class="indented flex-container">
+                <button type="button" @click="autorList.splice(i, 1)" class="btn-delete">-</button>
                 <AutorPrikaz :ime="autor.ime" :prezime="autor.prezime" :godinaSmrti="autor.godinaSmrti" :drzavljanstvo="autor.drzavljanstvo" 
                     :adresa="autor.adresa" class="item"></AutorPrikaz>
             </div>
             
             <AutorUnos @updateAutor="updateAutor($event)" @addAutor="addAutor"></AutorUnos>
+
+            <div>
+                <h2>Prilozi uz prijavu</h2>
+                <div class="flex-container">
+                    <div class="flex-container item">
+                        <input type="radio" name="prilog" checked @change="opisDelaSelected" />
+                        <span>Opis autorskog dela</span>
+                    </div>
+                    <div class="flex-container item">
+                        <input type="radio" name="prilog" @change="primerSelected"/>
+                        <span>Primer autorskog dela</span>
+                    </div>
+                </div>
+                <input v-if="opisDelaFlag" type="text" v-model="opisDela" />
+                <input v-else type="file" ref="file" id="file" @change="handleFileUpload($event)" />
+            </div>
+            <button type="button" @click="submit">Predaj zahtev</button>
         </div>
     </div>
 </template>
 
 <script>
+    import ZahtevService from '@/services/a1/ZahtevService';
     import PodnosilacPrijaveUnos from '@/components/a1/PodnosilacPrijaveUnos.vue';
     import AutorskoDeloUnos from '@/components/a1/AutorskoDeloUnos.vue';
     import AutorUnos from '@/components/a1/AutorUnos.vue';
     import AutorPrikaz from '@/components/a1/AutorPrikaz.vue';
-
-    // prilozi upload
+    import * as js2xml from 'js2xmlparser';
 
     export default {
         name: 'PodnosenjeZahteva',
@@ -38,8 +55,11 @@
             return {
                 podnosilacPrijave: {},
                 autorskoDelo: {},
-                autori: [],
-                autor: {}
+                autorList: [],
+                autor: {},
+                opisDelaFlag: true,
+                opisDela: '',
+                prilog: ''
             }
         },
         methods: {
@@ -54,12 +74,56 @@
                 this.autorskoDelo = delo;
             },
             addAutor() {
-                this.autori.push(this.autor);
+                this.autorList.push(this.autor);
             },
             updateAutor(autor) {
                 this.autor = autor;
+            },
+            opisDelaSelected() {
+                this.opisDelaFlag = true;
+            },
+            primerSelected() {
+                this.opisDelaFlag = false;
+            },
+            handleFileUpload(event) {
+                this.prilog = event.target.files[0];
+            },
+            submit() {
+                if (this.opisDelaFlag) {
+                    const xmlString = js2xml.parse("zahtev", {
+                        podnosilac: this.podnosilacPrijave,
+                        autorskoDelo: this.autorskoDelo,
+                        autori: {
+                            autori: this.autorList
+                        },
+                        opisDela: this.opisDela
+                    });
+                    console.log(xmlString);
+                    ZahtevService.save(xmlString).then(() => {
+                        alert('added');
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                } else {
+                    let formData = new FormData();
+                    formData.append('prilog', this.prilog);
+                    const xmlString = js2xml.parse("zahtev", {
+                        podnosilac: this.podnosilacPrijave,
+                        autorskoDelo: this.autorskoDelo,
+                        autori: {
+                            autori: this.autorList
+                        }
+                    });
+                    formData.append('dto', xmlString);
+                    ZahtevService.saveWithPrilog(formData).then(() => {
+                        alert('added');
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+                }
             }
-        }
+        },
     }
 </script>
 

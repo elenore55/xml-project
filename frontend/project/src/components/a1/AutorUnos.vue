@@ -43,7 +43,7 @@
                 adresa: {},
                 drzavljanstvo: '',
                 godinaSmrti: -1,
-                zivChoice: 1
+                zivChoice: 1,
             }
         },
         methods: {
@@ -59,12 +59,13 @@
                 this.updateAutor();
             },
             updateAutor() {
-                if (this.godinaSmrti) {
+                if (this.zivChoice == 2) {
                     this.$emit('updateAutor', {
                         ime: this.ime,
                         prezime: this.prezime,
                         pseudonim: this.pseudonim,
-                        godinaSmrti: this.godinaSmrti
+                        godinaSmrti: this.godinaSmrti,
+                        ziv: false
                     });
                 }
                 else {
@@ -73,7 +74,8 @@
                         prezime: this.prezime,
                         pseudonim: this.pseudonim,
                         adresa: this.adresa,
-                        drzavljanstvo: this.drzavljanstvo
+                        drzavljanstvo: this.drzavljanstvo,
+                        ziv: true
                     });
                 }
             },

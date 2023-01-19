@@ -1,10 +1,12 @@
 package com.xml.autorsko_pravo.model;
 
+import com.xml.autorsko_pravo.dto.PodnosilacDTO;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -29,9 +31,21 @@ public abstract class Podnosilac {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TFizicko_lice", propOrder = {"ime", "prezime", "drzavljanstvo", "pseudonim"})
     public static class FizickoLice extends Podnosilac {
+
+        public FizickoLice(PodnosilacDTO dto) {
+            this.ime = dto.getIme();
+            this.prezime = dto.getPrezime();
+            this.drzavljanstvo = dto.getDrzavljanstvo();
+            this.telefon = dto.getTelefon();
+            this.email = dto.getEmail();
+            if (!dto.getPseudonimAutora().equals(""))
+                this.pseudonim = dto.getPseudonimAutora();
+            this.adresa = new Adresa(dto.getAdresa());
+        }
 
         @XmlElement(name = "Ime", required = true)
         String ime;
@@ -53,9 +67,17 @@ public abstract class Podnosilac {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TPravno_lice", propOrder = {"poslovnoIme"})
     public static class PravnoLice extends Podnosilac {
+
+        public PravnoLice(PodnosilacDTO dto) {
+            this.poslovnoIme = dto.getPoslovnoIme();
+            this.telefon = dto.getTelefon();
+            this.email = dto.getEmail();
+            this.adresa = new Adresa(dto.getAdresa());
+        }
 
         @XmlElement(name = "Poslovno_ime", required = true)
         String poslovnoIme;
@@ -68,9 +90,18 @@ public abstract class Podnosilac {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TPunomocnik", propOrder = {"ime", "prezime"})
     public static class Punomocnik extends Podnosilac {
+
+        public Punomocnik(PodnosilacDTO dto) {
+            this.ime = dto.getIme();
+            this.prezime = dto.getPrezime();
+            this.telefon = dto.getTelefon();
+            this.email = dto.getEmail();
+            this.adresa = new Adresa(dto.getAdresa());
+        }
 
         @XmlElement(name = "Ime", required = true)
         String ime;
