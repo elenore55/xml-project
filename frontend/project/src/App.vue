@@ -18,4 +18,11 @@ export default {
   .red-border {
     border: 1px solid red;
   }
+  select {
+    font-size: 16px;
+    padding: 2px 5px;
+  }
+  input, label {
+    font-size: 18px;
+  }
 </style>
