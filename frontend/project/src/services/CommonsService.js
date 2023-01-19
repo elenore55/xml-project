@@ -8,4 +8,38 @@ const getOne = (brojZahteva) => {
     return axios.get(`http://localhost:8001/autorsko-pravo/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
 }
 
-export default { osnovnaPretraga, getOne }
+const downloadZahtevPDF = (broj) => {
+    axios({
+        url: `http://localhost:8001/autorsko-pravo/zahtev/pdf/Zahtev${broj}.xml`,
+        method: 'GET',
+        responseType: 'blob',
+    }).then((response) => {
+        const href = URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', 'zahtev.pdf');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+    });
+}
+
+const downloadZahtevHTML = (broj) => {
+    axios({
+        url: `http://localhost:8001/autorsko-pravo/zahtev/html/Zahtev${broj}.xml`,
+        method: 'GET',
+        responseType: 'blob',
+    }).then((response) => {
+        const href = URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', 'zahtev.html');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+    });
+}
+
+export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML }

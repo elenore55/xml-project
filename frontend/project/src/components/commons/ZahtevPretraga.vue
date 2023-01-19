@@ -21,8 +21,10 @@
         <hr/>
         <div class="fullscreen flex-container">
             <div class="item">
-                <div v-for="r in rezultati" :key="r.id" class="link">
+                <div v-for="r in rezultati" :key="r.id" class="link flex-container-sm">
                         <a href="#" @click="prikaziZahtev(r.popunjavaZavod[0].brojPrijave[0])" >Zahtev-{{ r.popunjavaZavod[0].brojPrijave[0] }}</a>
+                        <button type="button" class="small" @click="downloadHTML(r.popunjavaZavod[0].brojPrijave[0])">HTML</button>
+                        <button type="button" class="small" @click="downloadPDF(r.popunjavaZavod[0].brojPrijave[0])">PDF</button>
                 </div>
             </div>
             <div v-html="htmlContent" id="div-html" class="item-big"></div>
@@ -70,7 +72,13 @@
                     this.htmlContent = response.data;
                 }).catch((err) => {
                     console.log(err);
-                })
+                });
+            },
+            downloadPDF(broj) {
+                CommonsService.downloadZahtevPDF(broj);
+            },
+            downloadHTML(broj) {
+                CommonsService.downloadZahtevHTML(broj);
             }
         }
     }
@@ -87,6 +95,12 @@
     .flex-container {
         display: flex;
         gap: 0 70px;
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+    .flex-container-sm {
+        display: flex;
+        gap: 0 25px;
         margin-bottom: 10px;
         margin-top: 20px;
     }
@@ -111,6 +125,9 @@
     }
     button {
         font-size: 16px;
+    }
+    button.small {
+        font-size: 14px;
     }
     .link {
         margin: 20px 0;

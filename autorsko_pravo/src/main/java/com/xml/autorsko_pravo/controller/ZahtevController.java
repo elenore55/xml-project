@@ -8,15 +8,17 @@ import com.xml.autorsko_pravo.service.HTMLTransformer;
 import com.xml.autorsko_pravo.service.PDFTransformer;
 import com.xml.autorsko_pravo.service.ZahtevService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -55,11 +57,15 @@ public class ZahtevController {
     }
 
     @GetMapping(value = "zahtev/html/{name}")
-    public ModelAndView getHtml(@PathVariable String name) {
+    public ResponseEntity<InputStreamResource> getHtml(@PathVariable String name) throws FileNotFoundException {
         htmlTransformer.generateHtml(name);
-        var modelAndView = new ModelAndView();
-        modelAndView.setViewName("a1.html");
-        return modelAndView;
+        var file = new File(HTMLTransformer.HTML_FILE);
+        var resource = new InputStreamResource(new FileInputStream(file));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+                .contentType(MediaType.TEXT_HTML)
+                .contentLength(file.length())
+                .body(resource);
     }
 
     @GetMapping(value = "zahtev/htmlString/{name}")
@@ -70,15 +76,15 @@ public class ZahtevController {
     }
 
     @GetMapping(value = "zahtev/pdf/{name}", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<byte[]> getPdf(@PathVariable String name) throws IOException {
+    public ResponseEntity<InputStreamResource> getPdf(@PathVariable String name) throws IOException {
         pdfTransformer.generatePDF(name);
-        byte[] content = Files.readAllBytes(new File(PDFTransformer.PDF_FILE).toPath());
-        var headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_PDF);
-        String filename = "a1.pdf";
-        headers.setContentDispositionFormData(filename, filename);
-        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-        return new ResponseEntity<>(content, headers, HttpStatus.OK);
+        var file = new File(PDFTransformer.PDF_FILE);
+        var resource = new InputStreamResource(new FileInputStream(file));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+                .contentType(MediaType.APPLICATION_PDF)
+                .contentLength(file.length())
+                .body(resource);
     }
 
     @GetMapping(value = "zahtev/search/{text}/{matchCase}", produces = MediaType.APPLICATION_XML_VALUE)
@@ -126,5 +132,4 @@ public class ZahtevController {
         }
         return new ResponseEntity<>(fileName, HttpStatus.OK);
     }
-
 }
