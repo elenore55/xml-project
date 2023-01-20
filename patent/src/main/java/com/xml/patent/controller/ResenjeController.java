@@ -3,14 +3,18 @@ package com.xml.patent.controller;
 import com.xml.patent.dto.CreateResenjeDTO;
 import com.xml.patent.dto.TimePeriodDTO;
 import com.xml.patent.model.Resenje;
+import com.xml.patent.service.PDFTransformer;
 import com.xml.patent.service.ResenjeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 @RestController
@@ -81,19 +85,19 @@ public class ResenjeController {
     }
 
     @PostMapping(value = "report", produces = MediaType.APPLICATION_PDF_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<byte[]> generateReport(@RequestBody TimePeriodDTO dto) {
+    public ResponseEntity<InputStreamResource> generateReport(@RequestBody TimePeriodDTO dto) {
         try {
-            var content = resenjeService.generateReport(dto);
-            var headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            String filename = "izvestaj.pdf";
-            headers.setContentDispositionFormData(filename, filename);
-            headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-            return new ResponseEntity<>(content, headers, HttpStatus.OK);
+            resenjeService.generateReport(dto);
+            var file = new File(PDFTransformer.IZVESTAJ_PDF_FILE);
+            var resource = new InputStreamResource(new FileInputStream(file));
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .contentLength(file.length())
+                    .body(resource);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
     }
 }
