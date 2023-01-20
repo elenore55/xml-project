@@ -1,16 +1,16 @@
 import axios from 'axios';
 
 const osnovnaPretraga = (tekst, matchCase) => {
-    return axios.get(`http://localhost:8001/autorsko-pravo/zahtev/search/${tekst}/${matchCase}`);
+    return axios.get(`${this.$store.state.host}/zahtev/search/${tekst}/${matchCase}`);
 }
 
 const getOne = (brojZahteva) => {
-    return axios.get(`http://localhost:8001/autorsko-pravo/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
+    return axios.get(`${this.$store.state.host}/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
 }
 
 const downloadZahtevPDF = (broj) => {
     axios({
-        url: `http://localhost:8001/autorsko-pravo/zahtev/pdf/Zahtev${broj}.xml`,
+        url: `${this.$store.state.host}/zahtev/pdf/Zahtev${broj}.xml`,
         method: 'GET',
         responseType: 'blob',
     }).then((response) => {
@@ -27,7 +27,7 @@ const downloadZahtevPDF = (broj) => {
 
 const downloadZahtevHTML = (broj) => {
     axios({
-        url: `http://localhost:8001/autorsko-pravo/zahtev/html/Zahtev${broj}.xml`,
+        url: `${this.$store.state.host}/zahtev/html/Zahtev${broj}.xml`,
         method: 'GET',
         responseType: 'blob',
     }).then((response) => {
@@ -44,7 +44,7 @@ const downloadZahtevHTML = (broj) => {
 
 const generateReport = (period) => {
     axios({
-        url: `http://localhost:8001/autorsko_pravo/resenje/report`,
+        url: `${this.$store.state.host}/resenje/report`,
         method: 'POST',
         data: period,
         headers: {

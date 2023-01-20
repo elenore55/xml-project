@@ -1,11 +1,11 @@
 <template>
     <div class="topnav">
         <div class="dropdown">
-            <a class="dropdown-link">Servis: {{ servis }}</a>
+            <a class="dropdown-link">Servis: {{ getServis }}</a>
             <div class="dropdown-content">
-                <a href="#" @click="setA1Servis" :class="servis == 'A1'? 'active': 'none'">Autorska prava</a>
-                <a href="#" @click="setP1Servis" :class="servis == 'P1'? 'active': 'none'">Patenti</a>
-                <a href="#" @click="setZ1Servis" :class="servis == 'Ž1'? 'active': 'none'">Žigovi</a>
+                <a @click="setA1Servis" :class="getServis == 'A1'? 'active': 'none'">Autorska prava</a>
+                <a @click="setP1Servis" :class="getServis == 'P1'? 'active': 'none'">Patenti</a>
+                <a @click="setZ1Servis" :class="getServis == 'Ž1'? 'active': 'none'">Žigovi</a>
             </div>
         </div>
         <a>Podnesi zahtev</a>
@@ -20,18 +20,20 @@
         data() {
             return {
                 selected: 1,
-                servis: 'A1'
             }
         },
         methods: {
             setA1Servis() {
-                this.servis = 'A1';
+                this.$store.state.servis = 'A1';
+                this.$store.state.host = 'http://localhost:8001/autorsko-pravo';
             },
             setP1Servis() {
-                this.servis = 'P1';
+                this.$store.state.servis = 'P1';
+                this.$store.state.host = 'http://localhost:8002/patent';
             },
             setZ1Servis() {
-                this.servis = 'Ž1';
+                this.$store.state.servis = 'Ž1';
+                this.$store.state.host = 'http://localhost:8003/zig';
             },
             logout() {
                 localStorage.removeItem('username');
@@ -41,6 +43,11 @@
                 localStorage.removeItem('role');
                 this.$router.push('/');
             }
+        },
+        computed: {
+            getServis() {
+                return this.$store.state.servis;
+            },
         }
     }
 </script>

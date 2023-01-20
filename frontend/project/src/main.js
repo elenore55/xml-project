@@ -7,6 +7,7 @@ import PodnosenjeZahteva from './components/a1/PodnosenjeZahteva.vue';
 import ZahtevPretraga from './components/commons/ZahtevPretraga.vue';
 import GenerisanjeIzvestaja from './components/commons/GenerisanjeIzvestaja.vue';
 import PocetnaStranica from './components/user/PocetnaStranica.vue';
+import store from './store';
 
 Vue.config.productionTip = false
 Vue.use(VueRouter);
@@ -27,4 +28,5 @@ const router = new VueRouter({
 new Vue({
   router,
   render: h => h(App),
+  store,
 }).$mount('#app')
