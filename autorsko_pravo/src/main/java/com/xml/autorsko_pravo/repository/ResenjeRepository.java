@@ -51,6 +51,13 @@ public class ResenjeRepository extends GenericRepository {
         return result;
     }
 
+    public List<String> getReferences() throws Exception {
+        var result = new ArrayList<String>();
+        for (var resenje : getAll())
+            result.add(resenje.getReferenca() + ".xml");
+        return result;
+    }
+
     public List<Resenje> search(String text, boolean matchCase) throws Exception {
         var result = new ArrayList<Resenje>();
         for (var resource : searchResources(text, matchCase))

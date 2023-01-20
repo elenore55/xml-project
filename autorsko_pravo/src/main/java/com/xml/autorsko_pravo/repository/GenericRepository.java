@@ -91,6 +91,27 @@ public abstract class GenericRepository {
         }
     }
 
+    protected List<XMLResource> getAllResourcesExcept(List<String> exceptions) throws Exception {
+        var conn = AuthUtil.loadProperties();
+        setup(conn.driver);
+        res = null;
+        var result = new ArrayList<XMLResource>();
+        try {
+            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col.setProperty(OutputKeys.INDENT, "yes");
+            for (var documentName : col.listResources()) {
+                if (!exceptions.contains(documentName)) {
+                    res = (XMLResource) col.getResource(documentName);
+                    if (res != null)
+                        result.add(res);
+                }
+            }
+            return result;
+        } finally {
+            cleanUp(res, col);
+        }
+    }
+
     protected List<XMLResource> searchResources(String text, boolean matchCase) throws Exception {
         var conn = AuthUtil.loadProperties();
         setup(conn.driver);

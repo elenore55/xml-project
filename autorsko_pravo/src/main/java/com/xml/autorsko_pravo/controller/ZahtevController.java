@@ -150,4 +150,9 @@ public class ZahtevController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(resource);
     }
+
+    @GetMapping(value = "zahtev/bezResenja")
+    public ResponseEntity<List<Zahtev>> getZahteviBezResenja() throws Exception {
+        return new ResponseEntity<>(zahtevService.getZahteviBezResenja(), HttpStatus.OK);
+    }
 }
