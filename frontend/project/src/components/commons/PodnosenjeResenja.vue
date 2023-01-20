@@ -41,7 +41,7 @@
                         </div>
                         <div v-if="odbijenSelected">
                             <label for="razlog">Razlog odbijanja</label>
-                            <textarea v-model="razlogOdbijanja" rows="3"></textarea>
+                            <textarea v-model="razlogOdbijanja" rows="3" id="ta-razlog-odbijanja"></textarea>
                         </div>
                         <button type="button" class="btn-potvrdi" @click="submitResenje(i)">Potvrdi</button>
                     </div>
@@ -94,7 +94,7 @@
             osnovnaPretraga() {
                 this.zahtevi = [];
                 let that = this;
-                CommonsService.osnovnaPretraga(this.tekst, this.matchCase)
+                CommonsService.osnovnaPretragaBezResenja(this.tekst, this.matchCase)
                 .then((response) => {
                     xml2js.parseString(response.data, function(_err, result) {
                         for (let i of result.List.item) {
@@ -158,10 +158,10 @@
 </script>
 
 <style scoped>
-    textarea, label[for="razlog"] {
+    #ta-razlog-odbijanja, label[for="razlog"] {
         display: block;
     }
-    textarea {
+    #ta-razlog-odbijanja {
         width: 250px;
         margin-top: 5px;
     }
@@ -173,9 +173,6 @@
     }
     .centered-text {
         text-align: center;
-    }
-    textarea {
-        width: 250px;
     }
     .centered {
         margin: auto;

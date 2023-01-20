@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -74,5 +75,29 @@ public class ZahtevService {
     public List<Zahtev> getZahteviBezResenja() throws Exception {
         var reseniZahteviNames = resenjeRepository.getReferences();
         return zahtevRepository.getAllExcept(reseniZahteviNames);
+    }
+
+    public List<Zahtev> searchZahteviBezResenja(String text, boolean matchCase) throws Exception {
+        var reseniZahteviNames = resenjeRepository.getReferences();
+        var zahtevi = zahtevRepository.search(text, matchCase);
+        var result = new ArrayList<Zahtev>();
+        for (var z : zahtevi) {
+            if (!reseniZahteviNames.contains(String.format("Zahtev%d.xml", z.getPopunjavaZavod().getBrojPrijave()))) {
+                result.add(z);
+            }
+        }
+        return result;
+    }
+
+    public List<Zahtev> searchZahteviBezResenjaByMetadata(String rawInput) throws Exception {
+        var reseniZahteviNames = resenjeRepository.getReferences();
+        var zahtevi = advancedMetadataSearch(rawInput);
+        var result = new ArrayList<Zahtev>();
+        for (var z : zahtevi) {
+            if (!reseniZahteviNames.contains(String.format("Zahtev%d.xml", z.getPopunjavaZavod().getBrojPrijave()))) {
+                result.add(z);
+            }
+        }
+        return result;
     }
 }

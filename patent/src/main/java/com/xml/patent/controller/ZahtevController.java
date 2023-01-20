@@ -93,12 +93,12 @@ public class ZahtevController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "metadata/simpleSearch/{name}/{value}")
+    @GetMapping(value = "metadata/simpleSearch/{name}/{value}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Zahtev>> simpleMetadataSearch(@PathVariable String name, @PathVariable String value) throws Exception {
         return new ResponseEntity<>(zahtevService.simpleMetadataSearch(name, value), HttpStatus.OK);
     }
 
-    @GetMapping(value = "metadata/advancedSearch/{rawInput}")
+    @GetMapping(value = "metadata/advancedSearch/{rawInput}", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Zahtev>> advancedMetadataSearch(@PathVariable String rawInput) throws Exception {
         return new ResponseEntity<>(zahtevService.advancedMetadataSearch(rawInput), HttpStatus.OK);
     }
@@ -130,5 +130,15 @@ public class ZahtevController {
     @GetMapping(value = "zahtev/bezResenja", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Zahtev>> getZahteviBezResenja() throws Exception {
         return new ResponseEntity<>(zahtevService.getZahteviBezResenja(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "zahtev/bezResenja/search/{text}/{matchCase}", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<Zahtev>> searchZahteviBezResenja(@PathVariable String text, @PathVariable boolean matchCase) throws Exception {
+        return new ResponseEntity<>(zahtevService.searchZahteviBezResenja(text, matchCase), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "metadata/bezResenja/advancedSearch/{rawInput}", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<Zahtev>> advancedMetadataSearchBezResenja(@PathVariable String rawInput) throws Exception {
+        return new ResponseEntity<>(zahtevService.searchZahteviBezResenjaByMetadata(rawInput), HttpStatus.OK);
     }
 }

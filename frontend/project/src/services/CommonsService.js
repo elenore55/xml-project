@@ -5,6 +5,10 @@ const osnovnaPretraga = (tekst, matchCase) => {
     return axios.get(`${store.state.host}/zahtev/search/${tekst}/${matchCase}`);
 }
 
+const osnovnaPretragaBezResenja = (tekst, matchCase) => {
+    return axios.get(`${store.state.host}/zahtev/bezResenja/search/${tekst}/${matchCase}`);
+}
+
 const getOne = (brojZahteva) => {
     return axios.get(`${store.state.host}/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
 }
@@ -121,4 +125,4 @@ const odbijZahtev = (xmlString) => {
 }
 
 export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport, getZahtevMetadata, 
-    getResenjeMetadata, getNereseniZahtevi, odobriZahtev, odbijZahtev }
+    getResenjeMetadata, getNereseniZahtevi, odobriZahtev, odbijZahtev, osnovnaPretragaBezResenja }
