@@ -6,6 +6,7 @@ import com.xml.autorsko_pravo.model.Resenje;
 import com.xml.autorsko_pravo.model.Zahtev;
 import com.xml.autorsko_pravo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -120,10 +121,18 @@ public class ResenjeService {
         return resenjeMetadataRepository.advancedMetadataSearch(operators, statements);
     }
 
-    public byte[] generateReport(TimePeriodDTO dto) throws Exception {
+    public void generateReport(TimePeriodDTO dto) throws Exception {
         int odobreni = resenjeMetadataRepository.countOdobreniZahtevi(dto.getStart(), dto.getEnd());
         int odbijeni = resenjeMetadataRepository.countOdbijeniZahtevi(dto.getStart(), dto.getEnd());
         int svi = zahtevMetadataRepository.countZahtevi(dto.getStart(), dto.getEnd());
-        return pdfTransformer.generateIzvestajPDF(dto, odobreni, odbijeni, svi);
+        pdfTransformer.generateIzvestajPDF(dto, odobreni, odbijeni, svi);
+    }
+
+    public InputStreamResource getAllMetadataAsJSON() throws Exception {
+        return resenjeMetadataRepository.getAllAsJSON();
+    }
+
+    public InputStreamResource getAllMetadataAsRDF() throws Exception {
+        return resenjeMetadataRepository.getAllAsRDF();
     }
 }

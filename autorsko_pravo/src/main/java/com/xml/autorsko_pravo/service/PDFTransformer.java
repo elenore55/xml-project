@@ -34,7 +34,7 @@ public class PDFTransformer {
         HtmlConverter.convertToPdf(new File(HTMLTransformer.HTML_FILE), new File(PDF_FILE));
     }
 
-    public byte[] generateIzvestajPDF(TimePeriodDTO dto, int odobreni, int odbijeni, int svi) throws Exception {
+    public void generateIzvestajPDF(TimePeriodDTO dto, int odobreni, int odbijeni, int svi) throws Exception {
         Document document = new Document(PageSize.A4);
         var out = new FileOutputStream(IZVESTAJ_PDF_FILE);
         PdfWriter.getInstance(document, out);
@@ -58,7 +58,6 @@ public class PDFTransformer {
 
         document.add(table);
         document.close();
-        return Files.readAllBytes(new File(IZVESTAJ_PDF_FILE).toPath());
     }
 
     private void writeTableHeader(PdfPTable table) {

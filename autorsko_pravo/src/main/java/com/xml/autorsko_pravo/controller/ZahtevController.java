@@ -132,4 +132,22 @@ public class ZahtevController {
         }
         return new ResponseEntity<>(fileName, HttpStatus.OK);
     }
+
+    @GetMapping(value = "metadata/all/json")
+    public ResponseEntity<InputStreamResource> getAllMetadataAsJSON() throws Exception {
+        var resource = zahtevService.getAllMetadataAsJSON();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=metadata.json")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(resource);
+    }
+
+    @GetMapping(value = "metadata/all/rdf")
+    public ResponseEntity<InputStreamResource> getAllMetadataAsRDF() throws Exception {
+        var resource = zahtevService.getAllMetadataAsRDF();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=metadata.rdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(resource);
+    }
 }
