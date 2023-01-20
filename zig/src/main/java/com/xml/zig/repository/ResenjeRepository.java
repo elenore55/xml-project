@@ -58,4 +58,11 @@ public class ResenjeRepository extends GenericRepository {
             result.add(marshalling.unmarshallResenjeContent(resource.getContentAsDOM()));
         return result;
     }
+
+    public List<String> getReferences() throws Exception {
+        var result = new ArrayList<String>();
+        for (var resenje : getAll())
+            result.add(resenje.getReferenca() + ".xml");
+        return result;
+    }
 }

@@ -1,6 +1,7 @@
 package com.xml.zig.controller;
 
 import com.xml.zig.model.Zahtev;
+import com.xml.zig.repository.ResenjeRepository;
 import com.xml.zig.service.HTMLTransformer;
 import com.xml.zig.service.PDFTransformer;
 import com.xml.zig.service.ZahtevService;
@@ -125,5 +126,10 @@ public class ZahtevController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=metadata.rdf")
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(resource);
+    }
+
+    @GetMapping(value = "zahtev/bezResenja")
+    public ResponseEntity<List<Zahtev>> getZahteviBezResenja() throws Exception {
+        return new ResponseEntity<>(zahtevService.getZahteviBezResenja(), HttpStatus.OK);
     }
 }
