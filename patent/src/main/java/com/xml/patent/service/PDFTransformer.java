@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 
 @Service
 public class PDFTransformer {
@@ -30,7 +29,7 @@ public class PDFTransformer {
         HtmlConverter.convertToPdf(new File(HTMLTransformer.HTML_FILE), new File(PDF_FILE));
     }
 
-    public byte[] generateReportPDF(TimePeriodDTO dto, int odobreni, int odbijeni, int svi) throws Exception {
+    public void generateReportPDF(TimePeriodDTO dto, int odobreni, int odbijeni, int svi) throws Exception {
         Document document = new Document(PageSize.A4);
         var out = new FileOutputStream(IZVESTAJ_PDF_FILE);
         PdfWriter.getInstance(document, out);
@@ -54,7 +53,6 @@ public class PDFTransformer {
 
         document.add(table);
         document.close();
-        return Files.readAllBytes(new File(IZVESTAJ_PDF_FILE).toPath());
     }
 
     private void writeTableHeader(PdfPTable table) {
