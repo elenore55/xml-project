@@ -5,6 +5,7 @@ import com.xml.zig.repository.Marshalling;
 import com.xml.zig.repository.ZahtevMetadataRepository;
 import com.xml.zig.repository.ZahtevRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +57,13 @@ public class ZahtevService {
     public void save() throws Exception {
         var zahtev = marshalling.unmarshalFromFile("z1.xml");
         zahtevRepository.save(zahtev);
+    }
+
+    public InputStreamResource getAllMetadataAsJSON() throws Exception {
+        return zahtevMetadataRepository.getAllAsJSON();
+    }
+
+    public InputStreamResource getAllMetadataAsRDF() throws Exception {
+        return zahtevMetadataRepository.getAllAsRDF();
     }
 }

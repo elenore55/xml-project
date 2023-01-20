@@ -7,6 +7,7 @@ import com.xml.zig.repository.ResenjeMetadataRepository;
 import com.xml.zig.repository.ResenjeRepository;
 import com.xml.zig.repository.ZahtevMetadataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -84,5 +85,13 @@ public class ResenjeService {
         int odbijeni = resenjeMetadataRepository.countOdbijeniZahtevi(dto.getStart(), dto.getEnd());
         int svi = zahtevMetadataRepository.countZahtevi(dto.getStart(), dto.getEnd());
         pdfTransformer.generateReportPDF(dto, odobreni, odbijeni, svi);
+    }
+
+    public InputStreamResource getAllMetadataAsJSON() throws Exception {
+        return resenjeMetadataRepository.getAllAsJSON();
+    }
+
+    public InputStreamResource getAllMetadataAsRDF() throws Exception {
+        return resenjeMetadataRepository.getAllAsRDF();
     }
 }
