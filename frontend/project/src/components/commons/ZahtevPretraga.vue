@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SluzbenikNav></SluzbenikNav>
+        <UserNavbar></UserNavbar>
         <div class="centered">
             <div class="flex-container">
                 <div class="flex-container-v item">
@@ -17,7 +17,6 @@
                     <button type="button" @click="naprednaPretraga">Napredna pretraga</button>
                 </div>
             </div>
-            
         </div>
         <hr/>
         <div class="fullscreen flex-container">
@@ -28,7 +27,10 @@
                         <button type="button" class="small" @click="downloadPDF(r.popunjavaZavod[0].brojPrijave[0])">PDF</button>
                 </div>
             </div>
-            <div v-html="htmlContent" id="div-html" class="item-big"></div>
+            <div v-if="htmlContent != ''" class="item-big">
+                <button id="ref-docs">Referencirajući dokumenti</button>
+                <div v-html="htmlContent" id="div-html"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -36,12 +38,12 @@
 <script>
     import * as xml2js from 'xml2js';
     import CommonsService from '@/services/CommonsService';
-    import SluzbenikNav from '../user/SluzbenikNav.vue';
+    import UserNavbar from '../user/UserNavbar.vue';
 
     export default {
         name: 'ZahtevPretraga',
         components: {
-            SluzbenikNav
+            UserNavbar
         },
         data() {
             return {
@@ -136,5 +138,12 @@
     }
     .link {
         margin: 20px 0;
+    }
+    #div-html {
+        border: 2px solid black;
+        padding: 10px;
+    }
+    #ref-docs {
+        margin: 10px 0;
     }
 </style>

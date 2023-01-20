@@ -98,4 +98,27 @@ const getResenjeMetadata = (type) => {
     });
 }
 
-export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport, getZahtevMetadata, getResenjeMetadata }
+const getNereseniZahtevi = () => {
+    return axios.get(`${store.state.host}/zahtev/bezResenja`);
+}
+
+const odobriZahtev = (xmlString) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/xml'
+        }
+    }
+    return axios.post(`${store.state.host}/resenje/accept`, xmlString, config);
+} 
+
+const odbijZahtev = (xmlString) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/xml'
+        }
+    }
+    return axios.post(`${store.state.host}/resenje/reject`, xmlString, config);
+}
+
+export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport, getZahtevMetadata, 
+    getResenjeMetadata, getNereseniZahtevi, odobriZahtev, odbijZahtev }

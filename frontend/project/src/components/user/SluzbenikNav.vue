@@ -8,11 +8,11 @@
                 <a @click="setZ1Servis" :class="getServis == 'Ž1'? 'active': 'none'">Žigovi</a>
             </div>
         </div>
-        <a>Podnesi rešenje</a>
+        <a @click="podnesiResenje">Podnesi rešenje</a>
         <div class="dropdown">
             <a class="dropdown-link">Pretraga</a>
             <div class="dropdown-content">
-                <a>Zahtevi</a>
+                <a @click="goToZahtevPretraga">Zahtevi</a>
                 <a>Rešenja</a>
             </div>
         </div>
@@ -74,6 +74,12 @@
             },
             downloadResenjeMetadata(type) {
                 CommonsService.getResenjeMetadata(type);
+            },
+            goToZahtevPretraga() {
+                this.$router.push('/zahtevPretraga');
+            },
+            podnesiResenje() {
+                this.$router.push('/podnosenjeResenja');
             }
         },
         computed: {

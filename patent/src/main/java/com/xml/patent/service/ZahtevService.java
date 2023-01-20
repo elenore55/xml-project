@@ -2,6 +2,7 @@ package com.xml.patent.service;
 
 import com.xml.patent.model.Zahtev;
 import com.xml.patent.repository.Marshalling;
+import com.xml.patent.repository.ResenjeRepository;
 import com.xml.patent.repository.ZahtevMetadataRepository;
 import com.xml.patent.repository.ZahtevRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,16 @@ public class ZahtevService {
     ZahtevMetadataRepository zahtevMetadataRepository;
     Marshalling marshalling;
 
+    ResenjeRepository resenjeRepository;
+
     @Autowired
-    public ZahtevService(MetadataSearchService metadataSearchService, ZahtevRepository zahtevRepository,
-                         ZahtevMetadataRepository zahtevMetadataRepository, Marshalling marshalling) {
+    public ZahtevService(MetadataSearchService metadataSearchService, ZahtevRepository zahtevRepository, Marshalling marshalling,
+                         ZahtevMetadataRepository zahtevMetadataRepository,  ResenjeRepository resenjeRepository) {
         this.metadataSearchService = metadataSearchService;
         this.zahtevRepository = zahtevRepository;
         this.zahtevMetadataRepository = zahtevMetadataRepository;
         this.marshalling = marshalling;
+        this.resenjeRepository = resenjeRepository;
     }
 
     public Zahtev getOne(String name) throws Exception {
@@ -65,5 +69,10 @@ public class ZahtevService {
 
     public InputStreamResource getAllMetadataAsRDF() throws Exception {
         return zahtevMetadataRepository.getAllAsRDF();
+    }
+
+    public List<Zahtev> getZahteviBezResenja() throws Exception {
+        var reseniZahteviNames = resenjeRepository.getReferences();
+        return zahtevRepository.getAllExcept(reseniZahteviNames);
     }
 }

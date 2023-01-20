@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class ResenjeRepository extends GenericRepository {
 
-    static final String collectionId = "/db/project/patent/resenje";
+    static final String collectionId = "/db/project/patent-resenje";
     Marshalling marshalling;
     ZahtevRepository zahtevRepository;
 
@@ -56,6 +56,13 @@ public class ResenjeRepository extends GenericRepository {
         var result = new ArrayList<Resenje>();
         for (var resource : searchResources(text, matchCase))
             result.add(marshalling.unmarshallResenjeContent(resource.getContentAsDOM()));
+        return result;
+    }
+
+    public List<String> getReferences() throws Exception {
+        var result = new ArrayList<String>();
+        for (var resenje : getAll())
+            result.add(resenje.getReferenca() + ".xml");
         return result;
     }
 }

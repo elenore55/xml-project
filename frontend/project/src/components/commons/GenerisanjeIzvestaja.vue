@@ -1,8 +1,11 @@
 <template>
-    <div class="centered">
-        <h2 class="centered-text">Generisanje izveštaja</h2>
-        <VremenskiPeriodUnos @updatePeriod="updatePeriod($event)"></VremenskiPeriodUnos>
-        <button type="button" @click="generate">Generiši</button>
+    <div>
+        <UserNavbar></UserNavbar>
+        <div class="centered">
+            <h2 class="centered-text">Generisanje izveštaja</h2>
+            <VremenskiPeriodUnos @updatePeriod="updatePeriod($event)"></VremenskiPeriodUnos>
+            <button type="button" @click="generate">Generiši</button>
+        </div>
     </div>
 </template>
 
@@ -10,11 +13,13 @@
     import * as js2xml from 'js2xmlparser';
     import CommonsService from '@/services/CommonsService';
     import VremenskiPeriodUnos from './VremenskiPeriodUnos.vue';
+    import UserNavbar from '@/components/user/UserNavbar.vue';
 
     export default {
         name: 'GenerisanjeIzvestaja',
         components: {
-            VremenskiPeriodUnos
+            VremenskiPeriodUnos,
+            UserNavbar
         },
         data() {
             return {

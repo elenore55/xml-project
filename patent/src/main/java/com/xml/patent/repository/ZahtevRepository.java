@@ -46,6 +46,13 @@ public class ZahtevRepository extends GenericRepository {
         return result;
     }
 
+    public List<Zahtev> getAllExcept(List<String> exceptions) throws Exception {
+        var result = new ArrayList<Zahtev>();
+        for (var resource : getAllResourcesExcept(exceptions))
+            result.add(marshalling.unmarshallContent(resource.getContentAsDOM()));
+        return result;
+    }
+
     public List<Zahtev> search(String text, boolean matchCase) throws Exception {
         var result = new ArrayList<Zahtev>();
         for (var resource : searchResources(text, matchCase))
