@@ -79,10 +79,10 @@ public class ResenjeService {
         return resenjeMetadataRepository.advancedMetadataSearch(operators, statements);
     }
 
-    public byte[] generateReport(TimePeriodDTO dto) throws Exception {
+    public void generateReport(TimePeriodDTO dto) throws Exception {
         int odobreni = resenjeMetadataRepository.countOdobreniZahtevi(dto.getStart(), dto.getEnd());
         int odbijeni = resenjeMetadataRepository.countOdbijeniZahtevi(dto.getStart(), dto.getEnd());
         int svi = zahtevMetadataRepository.countZahtevi(dto.getStart(), dto.getEnd());
-        return pdfTransformer.generateReportPDF(dto, odobreni, odbijeni, svi);
+        pdfTransformer.generateReportPDF(dto, odobreni, odbijeni, svi);
     }
 }

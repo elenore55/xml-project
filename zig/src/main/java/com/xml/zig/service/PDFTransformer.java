@@ -17,7 +17,7 @@ import java.nio.file.Files;
 @Service
 public class PDFTransformer {
     public static final String PDF_FILE = "src/main/resources/templates/z1.pdf";
-    public static final String REPORT_PDF_FILE = "src/main/resources/templates/izvestaj.pdf";
+    public static final String IZVESTAJ_PDF_FILE = "src/main/resources/templates/izvestaj.pdf";
     HTMLTransformer htmlTransformer;
 
     @Autowired
@@ -30,9 +30,9 @@ public class PDFTransformer {
         HtmlConverter.convertToPdf(new File(HTMLTransformer.HTML_FILE), new File(PDF_FILE));
     }
 
-    public byte[] generateReportPDF(TimePeriodDTO dto, int odobreni, int odbijeni, int svi) throws Exception {
+    public void generateReportPDF(TimePeriodDTO dto, int odobreni, int odbijeni, int svi) throws Exception {
         Document document = new Document(PageSize.A4);
-        var out = new FileOutputStream(REPORT_PDF_FILE);
+        var out = new FileOutputStream(IZVESTAJ_PDF_FILE);
         PdfWriter.getInstance(document, out);
         document.open();
 
@@ -54,7 +54,6 @@ public class PDFTransformer {
 
         document.add(table);
         document.close();
-        return Files.readAllBytes(new File(REPORT_PDF_FILE).toPath());
     }
 
     private void writeTableHeader(PdfPTable table) {
