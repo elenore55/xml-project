@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -108,5 +107,23 @@ public class ZahtevController {
     public ResponseEntity<Void> save() throws Exception {
         zahtevService.save();
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "metadata/all/json")
+    public ResponseEntity<InputStreamResource> getAllMetadataAsJSON() throws Exception {
+        var resource = zahtevService.getAllMetadataAsJSON();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=metadata.json")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(resource);
+    }
+
+    @GetMapping(value = "metadata/all/rdf")
+    public ResponseEntity<InputStreamResource> getAllMetadataAsRDF() throws Exception {
+        var resource = zahtevService.getAllMetadataAsRDF();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=metadata.rdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(resource);
     }
 }
