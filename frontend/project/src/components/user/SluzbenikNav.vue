@@ -17,18 +17,27 @@
             </div>
         </div>
         <div class="dropdown">
-            <a class="dropdown-link">Preuzimanje metapodataka</a>
+            <a class="dropdown-link">Metapodaci zahteva</a>
             <div class="dropdown-content">
-                <a>Zahtevi</a>
-                <a>Rešenja</a>
+                <a @click="downloadZahtevMetadata('json')">JSON</a>
+                <a @click="downloadZahtevMetadata('rdf')">RDF</a>
             </div>
         </div>
-        <a>Generisanje izveštaja</a>
+        <div class="dropdown">
+            <a class="dropdown-link">Metapodaci rešenja</a>
+            <div class="dropdown-content">
+                <a @click="downloadResenjeMetadata('json')">JSON</a>
+                <a @click="downloadResenjeMetadata('rdf')">RDF</a>
+            </div>
+        </div>
+        <a @click="goToIzvestaji">Generisanje izveštaja</a>
         <a @click="logout">Logout</a>
     </div>
 </template>
 
 <script>
+    import CommonsService from '@/services/CommonsService';
+
     export default {
         name: 'SluzbenikNav',
         data() {
@@ -56,6 +65,15 @@
                 localStorage.removeItem('surname');
                 localStorage.removeItem('role');
                 this.$router.push('/');
+            },
+            goToIzvestaji() {
+                this.$router.push('/generisanjeIzvestaja');
+            },
+            downloadZahtevMetadata(type) {
+                CommonsService.getZahtevMetadata(type);
+            },
+            downloadResenjeMetadata(type) {
+                CommonsService.getResenjeMetadata(type);
             }
         },
         computed: {
@@ -71,8 +89,6 @@
         background-color: #504e66;
         overflow: hidden;
     }
-
-    /* Style the links inside the navigation bar */
     .topnav a {
         float: left;
         color: white;

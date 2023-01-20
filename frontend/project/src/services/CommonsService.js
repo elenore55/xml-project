@@ -1,16 +1,17 @@
 import axios from 'axios';
+import store from '@/store';
 
 const osnovnaPretraga = (tekst, matchCase) => {
-    return axios.get(`${this.$store.state.host}/zahtev/search/${tekst}/${matchCase}`);
+    return axios.get(`${store.state.host}/zahtev/search/${tekst}/${matchCase}`);
 }
 
 const getOne = (brojZahteva) => {
-    return axios.get(`${this.$store.state.host}/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
+    return axios.get(`${store.state.host}/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
 }
 
 const downloadZahtevPDF = (broj) => {
     axios({
-        url: `${this.$store.state.host}/zahtev/pdf/Zahtev${broj}.xml`,
+        url: `${store.state.host}/zahtev/pdf/Zahtev${broj}.xml`,
         method: 'GET',
         responseType: 'blob',
     }).then((response) => {
@@ -27,7 +28,7 @@ const downloadZahtevPDF = (broj) => {
 
 const downloadZahtevHTML = (broj) => {
     axios({
-        url: `${this.$store.state.host}/zahtev/html/Zahtev${broj}.xml`,
+        url: `${store.state.host}/zahtev/html/Zahtev${broj}.xml`,
         method: 'GET',
         responseType: 'blob',
     }).then((response) => {
@@ -44,7 +45,7 @@ const downloadZahtevHTML = (broj) => {
 
 const generateReport = (period) => {
     axios({
-        url: `${this.$store.state.host}/resenje/report`,
+        url: `${store.state.host}/resenje/report`,
         method: 'POST',
         data: period,
         headers: {
@@ -63,4 +64,38 @@ const generateReport = (period) => {
     });
 }
 
-export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport }
+const getZahtevMetadata = (type) => {
+    axios({
+        url: `${store.state.host}/metadata/all/${type}`,
+        method: 'GET',
+        responseType: 'blob',
+    }).then((response) => {
+        const href = URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', `metadata.${type}`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+    });
+}
+
+const getResenjeMetadata = (type) => {
+    axios({
+        url: `${store.state.host}/resenje/metadata/all/${type}`,
+        method: 'GET',
+        responseType: 'blob',
+    }).then((response) => {
+        const href = URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', `metadata.${type}`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+    });
+}
+
+export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport, getZahtevMetadata, getResenjeMetadata }
