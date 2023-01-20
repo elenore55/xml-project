@@ -5,7 +5,8 @@ import LoginPage from './components/user/LoginPage.vue';
 import RegistrationPage from './components/user/RegistrationPage.vue';
 import PodnosenjeZahteva from './components/a1/PodnosenjeZahteva.vue';
 import ZahtevPretraga from './components/commons/ZahtevPretraga.vue';
-import GenerisanjeIzvestaja from './components/commons/GenerisanjeIzvestaja';
+import GenerisanjeIzvestaja from './components/commons/GenerisanjeIzvestaja.vue';
+import PocetnaStranica from './components/user/PocetnaStranica.vue';
 
 Vue.config.productionTip = false
 Vue.use(VueRouter);
@@ -18,7 +19,8 @@ const router = new VueRouter({
     { path: '/register', component: RegistrationPage },
     { path: '/a1/podnosenjeZahteva', component: PodnosenjeZahteva },
     { path: '/zahtevPretraga', component: ZahtevPretraga },
-    { path: '/generisanjeIzvestaja', component: GenerisanjeIzvestaja }
+    { path: '/generisanjeIzvestaja', component: GenerisanjeIzvestaja },
+    { path: '/home', component: PocetnaStranica },
   ]
 })
 

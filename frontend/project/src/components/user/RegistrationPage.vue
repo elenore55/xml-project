@@ -57,7 +57,7 @@
                     UserService.register({username: this.username, password: this.password, email: this.email, name: this.name, surname: this.surname})
                     .then((_response) => {
                         alert('Registration successful!');
-                        this.$router.push('/') 
+                        this.$router.push('/'); 
                     }).catch((err) => {
                         alert(JSON.stringify(err));
                     });

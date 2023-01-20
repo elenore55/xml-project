@@ -1,5 +1,6 @@
 <template>
     <div>
+        <SluzbenikNav></SluzbenikNav>
         <div class="centered">
             <div class="flex-container">
                 <div class="flex-container-v item">
@@ -35,9 +36,13 @@
 <script>
     import * as xml2js from 'xml2js';
     import CommonsService from '@/services/CommonsService';
+    import SluzbenikNav from '../user/SluzbenikNav.vue';
 
     export default {
         name: 'ZahtevPretraga',
+        components: {
+            SluzbenikNav
+        },
         data() {
             return {
                 tekst: '',
