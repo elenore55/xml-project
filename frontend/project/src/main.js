@@ -8,6 +8,7 @@ import ZahtevPretraga from './components/commons/ZahtevPretraga.vue';
 import GenerisanjeIzvestaja from './components/commons/GenerisanjeIzvestaja.vue';
 import PocetnaStranica from './components/user/PocetnaStranica.vue';
 import PodnosenjeResenja from './components/commons/PodnosenjeResenja';
+import PodnosenjeZahtevaZ1 from './components/z1/PodnosenjeZahtevaZ1';
 import store from './store';
 
 Vue.config.productionTip = false
@@ -24,6 +25,7 @@ const router = new VueRouter({
     { path: '/generisanjeIzvestaja', component: GenerisanjeIzvestaja },
     { path: '/home', component: PocetnaStranica },
     { path: '/podnosenjeResenja', component: PodnosenjeResenja },
+    { path: '/z1/podnosenjeZahteva', component: PodnosenjeZahtevaZ1 }
   ]
 })
 
