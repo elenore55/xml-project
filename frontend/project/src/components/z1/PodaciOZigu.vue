@@ -51,7 +51,8 @@
             </div>
             <div class="flex-container">
                 <input type="text" v-model="boja"/>
-                <button type="button" @click="dodajBoju">Dodaj boju</button>
+                <button v-if="boja" type="button" @click="dodajBoju">Dodaj boju</button>
+                <button v-else type="button" disabled>Dodaj boju</button>
             </div>
         </div>
 
@@ -118,8 +119,8 @@
                     transliteracija: this.transliteracija,
                     prevod: this.prevod,
                     opis: this.opis,
-                    boje: this.boje,
-                    nicanskaKlasifikacija: this.nicanskaKlasifikacija,
+                    bojeList: {boje: this.boje},
+                    nicanskaKlasifikacijaList: {nicanskaKlasifikacija: this.nicanskaKlasifikacija},
                     pravoPrvenstva: this.pravoPrvenstva
                 });
             },
@@ -181,6 +182,7 @@
         display: flex;
         gap: 0 5px;
         margin-bottom: 10px;
+        flex-wrap: wrap;
     }
     .flex-container-v {
         display: flex;

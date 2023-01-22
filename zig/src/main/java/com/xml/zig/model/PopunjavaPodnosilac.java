@@ -1,18 +1,42 @@
 package com.xml.zig.model;
 
+import com.xml.zig.dto.CreateZahtevDTO;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"podnosiociPrijave", "punomocnik", "zajednickiPredstavnik", "podaciOZigu",
         "pravoPrvenstva", "placeneTakse"})
 public class PopunjavaPodnosilac {
 
+    public PopunjavaPodnosilac(CreateZahtevDTO dto) {
+        podnosiociPrijave = new ArrayList<>();
+        for (var osoba : dto.getPodnosiociList()) {
+            if (osoba.isFizickoLice())
+                podnosiociPrijave.add(new Lice.FizickoLice(osoba));
+            else
+                podnosiociPrijave.add(new Lice.PravnoLice(osoba));
+        }
+        if (dto.getPunomocnik().getEmail() != null) {
+            if (dto.getPunomocnik().isFizickoLice()) punomocnik = new Lice.FizickoLice(dto.getPunomocnik());
+            else punomocnik = new Lice.PravnoLice(dto.getPunomocnik());
+        }
+        if (dto.getZajednickiPredstavnik().getEmail() != null) {
+            if (dto.getZajednickiPredstavnik().isFizickoLice()) zajednickiPredstavnik = new Lice.FizickoLice(dto.getZajednickiPredstavnik());
+            else zajednickiPredstavnik = new Lice.PravnoLice(dto.getZajednickiPredstavnik());
+        }
+        pravoPrvenstva = dto.getZig().getPravoPrvenstva();
+        placeneTakse = new PlaceneTakse(dto.getPlaceneTakse());
+        podaciOZigu = new PodaciOZigu(dto.getZig());
+    }
     @XmlElementWrapper(name = "Podnosioci_prijave", required = true)
     @XmlElement(name = "Podnosilac_prijave", required = true)
     List<Lice> podnosiociPrijave;

@@ -10,7 +10,7 @@
 
         <h3>Osnovni podaci</h3>
         <div v-if="tipPodnosioca == 1">
-            <LicniPodaci @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
+            <LicniPodaci ref="licniPodaci" @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
         </div>
         <div v-else>
             <div class="flex-container">
@@ -23,11 +23,11 @@
 
         <div>
             <h3>Adresa</h3>
-            <AdresaUnos @updateAdresa="updateAdresa($event)"></AdresaUnos>
+            <AdresaUnos ref="adresaUnos" @updateAdresa="updateAdresa($event)"></AdresaUnos>
         </div>
 
         <div>
-            <KontaktPodaci @updateKontaktPodaci="updateKontaktPodaci($event)"></KontaktPodaci>
+            <KontaktPodaci ref="kontaktPodaci" @updateKontaktPodaci="updateKontaktPodaci($event)"></KontaktPodaci>
         </div>
     </div>
 </template>
@@ -66,8 +66,9 @@
                     adresa: this.adresa,
                     telefon: this.telefon,
                     email: this.email,
-                    faks: this.faks 
-                })
+                    faks: this.faks,
+                    fizickoLice: this.tipPodnosioca == 1 
+                });
             },
             updateLicniPodaci(podaci) {
                 this.ime = podaci.ime;
@@ -82,6 +83,12 @@
                 this.email = podaci.email;
                 this.telefon = podaci.telefon;
                 this.faks = podaci.faks;
+            },
+            clear() {
+                this.poslovnoIme = '';
+                this.$refs.licniPodaci.clear();
+                this.$refs.adresaUnos.clear();
+                this.$refs.kontaktPodaci.clear();
             }
         }
     }

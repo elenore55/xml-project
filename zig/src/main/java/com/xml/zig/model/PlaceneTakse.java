@@ -1,18 +1,29 @@
 package com.xml.zig.model;
 
+import com.xml.zig.dto.PlaceneTakseDTO;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"osnovnaTaksa", "klasa", "grafickoResenje", "ukupno"})
 public class PlaceneTakse {
 
+    public PlaceneTakse(PlaceneTakseDTO dto) {
+        this.osnovnaTaksa = dto.getOsnovnaTaksa();
+        this.grafickoResenje = dto.getGrafickoResenje();
+        this.ukupno = dto.getUkupno();
+        this.klasa = new KlasaTaksa();
+        klasa.setNaziv(dto.getKlasa().getNaziv());
+        klasa.setVrednost(dto.getKlasa().getIznos());
+    }
     @XmlElement(name = "Osnovna_taksa", required = true)
     double osnovnaTaksa;
 

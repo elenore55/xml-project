@@ -26,6 +26,11 @@
                     ime: this.ime,
                     prezime: this.prezime
                 })
+            },
+            clear() {
+                this.ime = '';
+                this.prezime = '';
+                this.updateLicniPodaci();
             }
         }
     }

@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class ResenjeRepository extends GenericRepository {
 
-    static final String collectionId = "/db/project/zig/resenje";
+    static final String collectionId = "/db/project/zig-resenje";
     Marshalling marshalling;
     ZahtevRepository zahtevRepository;
 

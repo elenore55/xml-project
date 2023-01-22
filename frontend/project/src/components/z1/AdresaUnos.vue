@@ -22,7 +22,7 @@
         </div>
         <div class="flex-container-v">
             <label for="country-input">Država</label>
-            <input id="country-input" type="number" v-model="drzava" @input="updateAdresa"/>
+            <input id="country-input" v-model="drzava" @input="updateAdresa"/>
         </div>
     </div>
 </template>

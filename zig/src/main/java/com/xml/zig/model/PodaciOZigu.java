@@ -1,13 +1,17 @@
 package com.xml.zig.model;
 
+import com.xml.zig.dto.ZigDTO;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"tipZiga", "vrstaZnaka", "boje", "transliteracija", "prevod",
         "opis", "izgled", "nicanskaKlasifikacija"})
@@ -28,6 +32,18 @@ public class PodaciOZigu {
         public String toString() {
             return name;
         }
+    }
+
+    public PodaciOZigu(ZigDTO dto) {
+        this.tipZiga = TipZiga.valueOf(dto.getTipZiga());
+        this.vrstaZnaka = dto.getVrstaZnaka();
+        this.boje = new ArrayList<>();
+        boje.addAll(dto.getBojeList());
+        this.transliteracija = dto.getTransliteracija();
+        this.prevod = dto.getPrevod();
+        this.opis = dto.getOpis();
+        this.nicanskaKlasifikacija = new ArrayList<>();
+        nicanskaKlasifikacija.addAll(dto.getNicanskaKlasifikacijaList());
     }
 
     @XmlElement(name = "Tip_ziga", required = true)

@@ -30,7 +30,7 @@
                 <input v-if="opisDelaFlag" type="text" v-model="opisDela" />
                 <input v-else type="file" ref="file" id="file" @change="handleFileUpload($event)" />
             </div>
-            <button type="button" @click="submit">Predaj zahtev</button>
+            <button type="button" @click="submit">Podnesi zahtev</button>
         </div>
     </div>
 </template>

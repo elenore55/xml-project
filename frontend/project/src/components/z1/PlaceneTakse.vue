@@ -12,18 +12,7 @@
             <input type="text" id="klasa-input" v-model="klasa"/>
             
             <label id="klasa-iznos-lbl">Iznos (RSD)</label>
-            <input type="number" v-model="klasaIznos" id="klasa-iznos-input"/>
-
-            <button type="button" id="btn-dodaj-klasu" v-if="klasa && klasaIznos > 0" @click="dodajKlasu">Dodaj klasu</button>
-            <button type="button" id="btn-dodaj-klasu" v-else disabled>Dodaj klasu</button>
-
-            <p id="klase-list-p" v-if="klase.length > 0">Dodate klase:</p>
-            <ul id="klase-list-ul">
-                <li v-for="(k, i) in klase" :key="k.id">
-                    {{ k.klasa }}: {{ k.iznos }} RSD 
-                    <button type="button" @click="ukloniKlasu(i)">X</button>
-                </li>
-            </ul>
+            <input type="number" v-model="klasaIznos" id="klasa-iznos-input" @input="updatePlaceneTakse"/>
         </div>
     </div>
 </template>
@@ -41,34 +30,18 @@
             }
         },
         methods: {
-            dodajKlasu() {
-                if (this.klasa && this.klasaIznos) {
-                    this.klase.push({klasa: this.klasa, iznos: this.klasaIznos});
-                    this.klasa = '';
-                    this.klasaIznos = 0;
-                    this.updatePlaceneTakse();
-                }
-            },
-            ukloniKlasu(i) {
-                this.klase.splice(i, 1);
-                this.updatePlaceneTakse();
-            },
             updatePlaceneTakse() {
                 this.$emit('updatePlaceneTakse', {
-                    osnovnaTakse: this.osnovnaTaksa,
+                    osnovnaTaksa: this.osnovnaTaksa,
                     grafickoResenje: this.grafickoResenje,
-                    klase: this.klase,
+                    klasa: {naziv: this.klasa, iznos: this.klasaIznos},
                     ukupno: this.ukupno
                 });
             }
         },
         computed: {
             ukupno() {
-                let suma = this.osnovnaTaksa + this.grafickoResenje;
-                for (const k in this.klase) {
-                    suma += this.klase[k];
-                }
-                return suma;
+                return parseInt(this.osnovnaTaksa) + parseInt(this.grafickoResenje) + parseInt(this.klasaIznos);
             }
         }
     }

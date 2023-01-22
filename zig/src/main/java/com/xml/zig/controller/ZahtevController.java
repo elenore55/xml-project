@@ -1,7 +1,9 @@
 package com.xml.zig.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.xml.zig.dto.CreateZahtevDTO;
 import com.xml.zig.model.Zahtev;
-import com.xml.zig.repository.ResenjeRepository;
 import com.xml.zig.service.HTMLTransformer;
 import com.xml.zig.service.PDFTransformer;
 import com.xml.zig.service.ZahtevService;
@@ -11,10 +13,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +22,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "zig/")
@@ -104,12 +106,6 @@ public class ZahtevController {
         return new ResponseEntity<>(zahtevService.advancedMetadataSearch(rawInput), HttpStatus.OK);
     }
 
-    @GetMapping(value = "zahtev/save")
-    public ResponseEntity<Void> save() throws Exception {
-        zahtevService.save();
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @GetMapping(value = "metadata/all/json")
     public ResponseEntity<InputStreamResource> getAllMetadataAsJSON() throws Exception {
         var resource = zahtevService.getAllMetadataAsJSON();
@@ -132,4 +128,26 @@ public class ZahtevController {
     public ResponseEntity<List<Zahtev>> getZahteviBezResenja() throws Exception {
         return new ResponseEntity<>(zahtevService.getZahteviBezResenja(), HttpStatus.OK);
     }
+
+    @PostMapping(value = "zahtev/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Void> save(
+            @RequestParam("izgledZnaka") MultipartFile izgledZnaka, @RequestParam("primerakZnaka") MultipartFile primerakZnaka,
+            @RequestParam("spisakRobeIUsluga") MultipartFile spisakRobeIUsluga, @RequestParam(value = "punomocje", required = false) MultipartFile punomocje,
+            @RequestParam("dokazOPravuPrvenstva") MultipartFile dokazOPravuPrvenstva, @RequestParam("dokazOUplatiTakse") MultipartFile dokazOUplatiTakse,
+            @RequestParam(value = "opstiAkt", required = false) MultipartFile opstiAkt, @RequestParam("dto") String dto) throws Exception {
+        var mapper = new XmlMapper();
+        var zahtev = mapper.readValue(dto, CreateZahtevDTO.class);
+        zahtevService.save(zahtev, new HashMap<>(
+        ){{
+            put("izgledZnaka", izgledZnaka);
+            put("primerakZnaka", primerakZnaka);
+            put("spisakRobeIUsluga", spisakRobeIUsluga);
+            put("punomocje", punomocje);
+            put("opstiAkt", opstiAkt);
+            put("dokazOPravuPrvenstva", dokazOPravuPrvenstva);
+            put("dokazOUplatiTakse", dokazOUplatiTakse);
+        }});
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

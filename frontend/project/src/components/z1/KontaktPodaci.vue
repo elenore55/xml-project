@@ -35,6 +35,12 @@
                     email: this.email,
                     faks: this.faks
                 });
+            },
+            clear() {
+                this.telefon = '';
+                this.email = '';
+                this.faks = '';
+                this.updateKontaktPodaci();
             }
         }
     }
