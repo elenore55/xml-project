@@ -41,6 +41,7 @@ public class ResenjeService {
         resenje.setSifra(dto.getNazivDokumenta());
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
+        resenjeMetadataRepository.extract(resenje);
     }
 
     public void reject(CreateResenjeDTO.CreateOdbijenZahtevDTO dto) throws Exception {
@@ -51,6 +52,7 @@ public class ResenjeService {
         resenje.setObrazlozenje(dto.getObrazlozenje());
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
+        resenjeMetadataRepository.extract(resenje);
     }
 
     public Resenje getOne(String name) throws Exception {

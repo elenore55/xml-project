@@ -73,7 +73,7 @@ public class ZahtevService {
         var zahtev = new Zahtev();
         zahtev.setPopunjavaPodnosilac(popunjavaPodnosilac);
         zahtev.setPopunjavaZavod(popunjavaZavod);
-        // TODO: metadata
+        zahtevMetadataRepository.extract(zahtev);
         zahtevRepository.save(zahtev);
     }
 
@@ -88,7 +88,7 @@ public class ZahtevService {
         var zahtev = new Zahtev();
         zahtev.setPopunjavaPodnosilac(popunjavaPodnosilac);
         zahtev.setPopunjavaZavod(popunjavaZavod);
-        // TODO: metadata
+        zahtevMetadataRepository.extract(zahtev);
         zahtevRepository.save(zahtev);
     }
 

@@ -45,6 +45,7 @@ public class ResenjeService {
         resenje.setSifra(dto.getNazivDokumenta());
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
+        resenjeMetadataRepository.extract(resenje);
         notifyPodnosilac(resenje);
     }
 
@@ -56,6 +57,7 @@ public class ResenjeService {
         resenje.setObrazlozenje(dto.getObrazlozenje());
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
+        resenjeMetadataRepository.extract(resenje);
         notifyPodnosilac(resenje);
     }
 

@@ -108,6 +108,7 @@ public class ZahtevService {
         zahtev.setPopunjavaZavod(popunjavaZavod);
         zahtev.setPopunjavaPodnosilac(popunjavaPodnosilac);
         zahtevRepository.save(zahtev);
+        zahtevMetadataRepository.extract(zahtev);
     }
 
     private String saveFile(MultipartFile file) throws IOException {
