@@ -2,6 +2,7 @@
 <!DOCTYPE stylesheet [
         <!ENTITY nbsp "&#160;">
         ]>
+<!-- noinspection ALL -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:z1="http://www.ftn.com/z1" version="2.0">
     <xsl:template match="/">
@@ -82,6 +83,7 @@
                 <xsl:variable name="cnt3" select="$cnt2 + 2 + count(//z1:Transliteracija)"/>
                 <xsl:variable name="cnt4" select="$cnt3 + count(//z1:Prevod)"/>
                 <xsl:variable name="rows" select="2 + count(//z1:Transliteracija) + count(//z1:Prevod)"/>
+                <xsl:variable name="image" select="//z1:Izgled"/>
 
                 <div style="border-top: 1px solid black; border-right: 1px solid black; border-left: 1px solid black; width: 90%; margin: auto">
                     <div class="border-bot">
@@ -263,20 +265,17 @@
                             <tr>
                                 <td width="50%">
                                     <strong>
-                                        <xsl:value-of select="$cnt2"/>. Prijava se podnosi za
+                                        <xsl:value-of select="$cnt2"/>. Prijava se podnosi za:
                                     </strong>
                                 </td>
-                                <td rowspan="3">
-                                    <strong>
-                                        <xsl:value-of select="$cnt2 + 1"/>. Naznačenje boja iz kojih se znak sastoji:
-                                    </strong>
-                                    <ul>
-                                        <xsl:for-each select="//z1:Boja">
-                                            <li>
-                                                <xsl:value-of select="current()"/>
-                                            </li>
-                                        </xsl:for-each>
-                                    </ul>
+                                <td style="padding-left: 20px" rowspan="4">
+                                    <strong>c) Izgled znaka:</strong>
+                                    <br/><br/>
+                                    <img width="300" height="300" style="margin-left: 30px">
+                                        <xsl:attribute name="src">
+                                            <xsl:value-of select="concat('http://localhost:8003/', $image)"/>
+                                        </xsl:attribute>
+                                    </img>
                                 </td>
                             </tr>
                             <tr>
@@ -301,16 +300,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-left: 20px">
-                                    <strong>c) Izgled znaka:</strong>&nbsp;<xsl:value-of select="//z1:Izgled"/>
-                                </td>
-                                <td rowspan="{$rows}">
+                                <td>
                                     <strong>
-                                        <xsl:value-of select="$cnt4 + 1"/>. Brojevi klasa robe i usluga prema
-                                        Ničanskoj klasifikaciji
+                                        <xsl:value-of select="$cnt2 + 1"/>. Naznačenje boja iz kojih se znak sastoji:
                                     </strong>
                                     <ul>
-                                        <xsl:for-each select="//z1:Nicanska_klasifikacija/z1:Klasa">
+                                        <xsl:for-each select="//z1:Boja">
                                             <li>
                                                 <xsl:value-of select="current()"/>
                                             </li>
@@ -326,22 +321,51 @@
                                         </strong>
                                         <xsl:value-of select="//z1:Transliteracija"/>
                                     </td>
+
+                                    <td rowspan="{$rows - 1}">
+                                        <strong>
+                                            <xsl:value-of select="$cnt4 + 1"/>. Brojevi klasa robe i usluga prema
+                                            Ničanskoj klasifikaciji:
+                                        </strong>
+                                        <ul>
+                                            <xsl:for-each select="//z1:Nicanska_klasifikacija/z1:Klasa">
+                                                <li>
+                                                    <xsl:value-of select="current()"/>
+                                                </li>
+                                            </xsl:for-each>
+                                        </ul>
+                                    </td>
                                 </tr>
                             </xsl:if>
                             <xsl:if test="//z1:Prevod">
                                 <tr>
                                     <td>
                                         <strong>
-                                            <xsl:value-of select="$cnt3"/>. Prevod znaka
+                                            <xsl:value-of select="$cnt3"/>. Prevod znaka:
                                         </strong>
                                         <xsl:value-of select="//z1:Prevod"/>
                                     </td>
+                                    <xsl:if test="not(//z1:Transliteracija)">
+                                        <td rowspan="{$rows - 1}">
+                                            <strong>
+                                                <xsl:value-of select="$cnt4 + 1"/>. Brojevi klasa robe i usluga prema
+                                                Ničanskoj klasifikaciji:
+                                            </strong>
+                                            <ul>
+                                                <xsl:for-each select="//z1:Nicanska_klasifikacija/z1:Klasa">
+                                                    <li>
+                                                        <xsl:value-of select="current()"/>
+                                                    </li>
+                                                </xsl:for-each>
+                                            </ul>
+                                        </td>
+                                    </xsl:if>
                                 </tr>
                             </xsl:if>
                             <tr>
                                 <td style="border-bottom: 1px solid black">
                                     <strong>
-                                        <xsl:value-of select="$cnt4"/>. Opis znaka
+                                        <xsl:value-of select="$cnt4"/>. Opis znaka:
                                     </strong>
                                     <p class="padded">
                                         <xsl:value-of select="//z1:Opis"/>
@@ -450,20 +474,32 @@
                         </tr>
                         <xsl:if test="//z1:Punomocje">
                             <tr>
-                                <td>Punomocje</td>
+                                <td>Punomoćje</td>
                                 <td>
                                     <xsl:value-of select="//z1:Punomocje"/>
                                 </td>
                             </tr>
                         </xsl:if>
-                        <xsl:if test="//z1:Generalno_punomocje">
-                            <tr>
-                                <td>Generalno punomocje</td>
-                                <td>
-                                    <xsl:value-of select="//z1:Generalno_punomocje"/>
-                                </td>
-                            </tr>
-                        </xsl:if>
+
+                        <tr>
+                            <td>Generalno punomoćje ranije priloženo</td>
+                            <td>
+                                <xsl:choose>
+                                    <xsl:when test="//z1:Generalno_punomocje = 'true'">DA</xsl:when>
+                                    <xsl:otherwise>NE</xsl:otherwise>
+                                </xsl:choose>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Punomoćje će biti naknadno dostavljeno</td>
+                            <td>
+                                <xsl:choose>
+                                    <xsl:when test="//z1:Punomocje_naknadno_dostavljeno = 'true'">DA</xsl:when>
+                                    <xsl:otherwise>NE</xsl:otherwise>
+                                </xsl:choose>
+                            </td>
+                        </tr>
+
                         <xsl:if test="//z1:Opsti_akt">
                             <tr>
                                 <td>Opšti akt o kolektivnom žigu/žigu garancije</td>
@@ -487,13 +523,7 @@
                         <tr>
                             <td>Spisak robe i usluga</td>
                             <td>
-                                <ul>
-                                    <xsl:for-each select="//z1:Roba_ili_usluga">
-                                        <li>
-                                            <xsl:value-of select="current()"/>
-                                        </li>
-                                    </xsl:for-each>
-                                </ul>
+                                <xsl:value-of select="//z1:Spisak_robe_i_usluga"/>
                             </td>
                         </tr>
                     </tbody>
