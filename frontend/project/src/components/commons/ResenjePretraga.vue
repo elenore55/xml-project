@@ -13,7 +13,8 @@
                 </div>
                 <div class="flex-container-v item">
                     <h3>Upit</h3>
-                    <textarea rows="4"></textarea>
+                    <!-- <textarea rows="4"></textarea> -->
+                    <FilterUnos></FilterUnos>
                     <button type="button" @click="naprednaPretraga">Napredna pretraga</button>
                 </div>
             </div>
@@ -37,12 +38,14 @@
     import CommonsService from '@/services/CommonsService';
     import UserNavbar from '../user/UserNavbar.vue';
     import ResenjeZahteva from './ResenjeZahteva.vue';
+    import FilterUnos from './FilterUnos.vue';
 
     export default {
         name: 'ResenjePretraga',
         components: {
             UserNavbar,
-            ResenjeZahteva
+            ResenjeZahteva,
+            FilterUnos
         },
         data() {
             return {
@@ -110,7 +113,7 @@
     }
     .centered {
         margin: auto;
-        width: 60%;
+        width: 75%;
     }
     .flex-container {
         display: flex;
