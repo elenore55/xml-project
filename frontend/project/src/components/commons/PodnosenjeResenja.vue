@@ -136,7 +136,7 @@
                 }
                 if (this.odbijenSelected) {
                     resenje['obrazlozenje'] = this.razlogOdbijanja;
-                    CommonsService.odbijZahtev(js2xml.parse('resenje', resenje)).then((response) => {
+                    CommonsService.odbijZahtev(js2xml.parse('resenje', resenje)).then((_response) => {
                         alert('Zahtev odbijen!');
                         this.zahtevi.splice(i, 1);
                         this.deactivateZahtev();
@@ -144,7 +144,9 @@
                         console.log(err);
                     });
                 } else {
-                    CommonsService.odobriZahtev(js2xml.parse('resenje', resenje)).then((response) => {
+                    let string = js2xml.parse('resenje', resenje);
+                    console.log(string);
+                    CommonsService.odobriZahtev(string).then((_response) => {
                         alert('Zahtev odobren!');
                         this.zahtevi.splice(i, 1);
                         this.deactivateZahtev();

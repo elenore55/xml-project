@@ -30,6 +30,7 @@ public class ResenjeController {
 
     @PostMapping(value = "accept", consumes = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Void> accept(@RequestBody CreateResenjeDTO dto) {
+        System.out.println("HERE");
         try {
             resenjeService.accept(dto);
             return new ResponseEntity<>(HttpStatus.OK);

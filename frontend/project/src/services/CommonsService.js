@@ -5,12 +5,20 @@ const osnovnaPretraga = (tekst, matchCase) => {
     return axios.get(`${store.state.host}/zahtev/search/${tekst}/${matchCase}`);
 }
 
+const osnovnaPretragaResenje = (tekst, matchCase) => {
+    return axios.get(`${store.state.host}/resenje/search/${tekst}/${matchCase}`);
+}
+
 const osnovnaPretragaBezResenja = (tekst, matchCase) => {
     return axios.get(`${store.state.host}/zahtev/bezResenja/search/${tekst}/${matchCase}`);
 }
 
 const getOne = (brojZahteva) => {
     return axios.get(`${store.state.host}/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
+}
+
+const getOneResenje = (referenca) => {
+    return axios.get(`${store.state.host}/resenje/one/Resenje_${referenca}.xml`);
 }
 
 const downloadZahtevPDF = (broj) => {
@@ -125,4 +133,4 @@ const odbijZahtev = (xmlString) => {
 }
 
 export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport, getZahtevMetadata, 
-    getResenjeMetadata, getNereseniZahtevi, odobriZahtev, odbijZahtev, osnovnaPretragaBezResenja }
+    getResenjeMetadata, getNereseniZahtevi, odobriZahtev, odbijZahtev, osnovnaPretragaBezResenja, getOneResenje, osnovnaPretragaResenje }

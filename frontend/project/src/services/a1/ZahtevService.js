@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const saveWithPrilog = (formData) => {
-    return axios.post('http://localhost:8001/autorsko-pravo/zathev/saveWithPrilog', formData, {
+    return axios.post('http://localhost:8001/autorsko_pravo/zathev/saveWithPrilog', formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
@@ -14,7 +14,7 @@ const save = (xmlString) => {
             'Content-Type': 'application/xml'
         }
     }
-    return axios.post('http://localhost:8001/autorsko-pravo/zahtev/save', xmlString, config);
+    return axios.post('http://localhost:8001/autorsko_pravo/zahtev/save', xmlString, config);
 }
 
 export default { saveWithPrilog, save }

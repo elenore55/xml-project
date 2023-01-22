@@ -22,15 +22,12 @@
         <div class="fullscreen flex-container">
             <div class="item">
                 <div v-for="r in rezultati" :key="r.id" class="link flex-container-sm">
-                        <a href="#/zahtevPretraga" @click="prikaziZahtev(r.popunjavaZavod[0].brojPrijave[0])" >Zahtev-{{ r.popunjavaZavod[0].brojPrijave[0] }}</a>
-                        <button type="button" class="small" @click="downloadHTML(r.popunjavaZavod[0].brojPrijave[0])">HTML</button>
-                        <button type="button" class="small" @click="downloadPDF(r.popunjavaZavod[0].brojPrijave[0])">PDF</button>
+                        <a href="#/resenjePretraga" @click="prikaziResenje(r.referenca[0])" >Resenje-{{ r.referenca[0] }}</a>
                 </div>
             </div>
-            <div v-if="htmlContent != ''" class="item-big">
-                <button id="ref-docs">Referencirajući dokumenti</button>
-                <div v-html="htmlContent" id="div-html"></div>
-            </div>
+            <ResenjeZahteva v-if="resenje.referenca" :referenca="resenje.referenca" :imeSluzbenika="resenje.imeSluzbenika" :sifra="resenje.sifra"
+                :prezimeSluzbenika="resenje.prezimeSluzbenika" :obrazlozenje="resenje.obrazlozenje" :datum="resenje.datumResenja">
+            </ResenjeZahteva>
         </div>
     </div>
 </template>
@@ -39,11 +36,13 @@
     import * as xml2js from 'xml2js';
     import CommonsService from '@/services/CommonsService';
     import UserNavbar from '../user/UserNavbar.vue';
+    import ResenjeZahteva from './ResenjeZahteva.vue';
 
     export default {
-        name: 'ZahtevPretraga',
+        name: 'ResenjePretraga',
         components: {
-            UserNavbar
+            UserNavbar,
+            ResenjeZahteva
         },
         data() {
             return {
@@ -51,15 +50,16 @@
                 upit: '',
                 matchCase: false,
                 rezultati: [],
-                htmlContent: ''
+                resenje: {}
             }
         },
         methods: {
             osnovnaPretraga() {
                 this.rezultati = [];
                 let that = this;
-                CommonsService.osnovnaPretraga(this.tekst, this.matchCase)
+                CommonsService.osnovnaPretragaResenje(this.tekst, this.matchCase)
                 .then((response) => {
+                    console.log(response.data);
                     xml2js.parseString(response.data, function(_err, result) {
                         for (let i of result.List.item) {
                             that.rezultati.push(JSON.parse(JSON.stringify(i)));
@@ -73,20 +73,33 @@
             naprednaPretraga() {
 
             },
-            prikaziZahtev(broj) {
-                CommonsService.getOne(broj).then((response) => {
-                    console.log(response.data);
-                    this.htmlContent = response.data;
+            prikaziResenje(broj) {
+                CommonsService.getOneResenje(broj).then((response) => {
+                    xml2js.parseString(response.data, (_err, result) => {
+                        if (result['OdbijenZahtev']) {
+                            let odbijen = result['OdbijenZahtev'];
+                            this.resenje = {
+                                referenca: odbijen['referenca'][0],
+                                datumResenja: odbijen['datumResenja'][0],
+                                obrazlozenje: odbijen['obrazlozenje'][0],
+                                imeSluzbenika: odbijen['imeSluzbenika'][0],
+                                prezimeSluzbenika: odbijen['prezimeSluzbenika'][0]
+                            }
+                        } else {
+                            let odobren = result['OdobrenZahtev'];
+                            this.resenje = {
+                                referenca: odobren['referenca'][0],
+                                datumResenja: odobren['datumResenja'][0],
+                                sifra: odobren['sifra'][0],
+                                imeSluzbenika: odobren['imeSluzbenika'][0],
+                                prezimeSluzbenika: odobren['prezimeSluzbenika'][0]
+                        }
+                    }});
+                    console.log(this.resenje);
                 }).catch((err) => {
                     console.log(err);
                 });
             },
-            downloadPDF(broj) {
-                CommonsService.downloadZahtevPDF(broj);
-            },
-            downloadHTML(broj) {
-                CommonsService.downloadZahtevHTML(broj);
-            }
         }
     }
 </script>

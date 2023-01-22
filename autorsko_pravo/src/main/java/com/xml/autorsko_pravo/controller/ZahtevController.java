@@ -29,7 +29,7 @@ import java.util.UUID;
 import static com.xml.autorsko_pravo.util.Util.PRILOZI_DIR;
 
 @RestController
-@RequestMapping(value = "autorsko-pravo/")
+@RequestMapping(value = "autorsko_pravo/")
 public class ZahtevController {
 
     ZahtevService zahtevService;
@@ -151,7 +151,7 @@ public class ZahtevController {
                 .body(resource);
     }
 
-    @GetMapping(value = "zahtev/bezResenja")
+    @GetMapping(value = "zahtev/bezResenja", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Zahtev>> getZahteviBezResenja() throws Exception {
         return new ResponseEntity<>(zahtevService.getZahteviBezResenja(), HttpStatus.OK);
     }

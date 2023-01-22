@@ -6,6 +6,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         servis: 'A1',
-        host: 'http://localhost:8001/autorsko-pravo'
+        host: 'http://localhost:8001/autorsko_pravo'
     },
 });

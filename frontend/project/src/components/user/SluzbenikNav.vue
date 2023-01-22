@@ -13,7 +13,7 @@
             <a class="dropdown-link">Pretraga</a>
             <div class="dropdown-content">
                 <a @click="goToZahtevPretraga">Zahtevi</a>
-                <a>Rešenja</a>
+                <a @click="goToResenjePretraga">Rešenja</a>
             </div>
         </div>
         <div class="dropdown">
@@ -48,7 +48,7 @@
         methods: {
             setA1Servis() {
                 this.$store.state.servis = 'A1';
-                this.$store.state.host = 'http://localhost:8001/autorsko-pravo';
+                this.$store.state.host = 'http://localhost:8001/autorsko_pravo';
             },
             setP1Servis() {
                 this.$store.state.servis = 'P1';
@@ -77,6 +77,9 @@
             },
             goToZahtevPretraga() {
                 this.$router.push('/zahtevPretraga');
+            },
+            goToResenjePretraga() {
+                this.$router.push('/resenjePretraga');
             },
             podnesiResenje() {
                 this.$router.push('/podnosenjeResenja');

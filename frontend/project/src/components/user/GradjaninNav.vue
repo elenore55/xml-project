@@ -9,7 +9,7 @@
             </div>
         </div>
         <a>Podnesi zahtev</a>
-        <a>Pretraga rešenja</a>
+        <a @click="goToResenjePretraga">Pretraga rešenja</a>
         <a @click="logout">Logout</a>
     </div>
 </template>
@@ -25,7 +25,7 @@
         methods: {
             setA1Servis() {
                 this.$store.state.servis = 'A1';
-                this.$store.state.host = 'http://localhost:8001/autorsko-pravo';
+                this.$store.state.host = 'http://localhost:8001/autorsko_pravo';
             },
             setP1Servis() {
                 this.$store.state.servis = 'P1';
@@ -42,7 +42,10 @@
                 localStorage.removeItem('surname');
                 localStorage.removeItem('role');
                 this.$router.push('/');
-            }
+            },
+            goToResenjePretraga() {
+                this.$router.push('/resenjePretraga');
+            },
         },
         computed: {
             getServis() {
