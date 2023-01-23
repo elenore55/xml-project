@@ -469,14 +469,26 @@
                         <tr>
                             <td style="width: 30%">Primerak znaka</td>
                             <td>
-                                <xsl:value-of select="//z1:Primerak_znaka"/>
+                                <xsl:variable name="primerak" select="//z1:Primerak_znaka"/>
+                                <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of select="concat('http://localhost:8003/', $primerak)"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$primerak"/>
+                                </a>
                             </td>
                         </tr>
                         <xsl:if test="//z1:Punomocje">
                             <tr>
                                 <td>Punomoćje</td>
                                 <td>
-                                    <xsl:value-of select="//z1:Punomocje"/>
+                                    <xsl:variable name="punomocje" select="//z1:Punomocje"/>
+                                    <a>
+                                        <xsl:attribute name="href">
+                                            <xsl:value-of select="concat('http://localhost:8003/', $punomocje)"/>
+                                        </xsl:attribute>
+                                        <xsl:value-of select="$punomocje"/>
+                                    </a>
                                 </td>
                             </tr>
                         </xsl:if>
@@ -504,26 +516,50 @@
                             <tr>
                                 <td>Opšti akt o kolektivnom žigu/žigu garancije</td>
                                 <td>
-                                    <xsl:value-of select="//z1:Opsti_akt"/>
+                                    <xsl:variable name="opstiAkt" select="//z1:Opsti_akt"/>
+                                    <a>
+                                        <xsl:attribute name="href">
+                                            <xsl:value-of select="concat('http://localhost:8003/', $opstiAkt)"/>
+                                        </xsl:attribute>
+                                        <xsl:value-of select="$opstiAkt"/>
+                                    </a>
                                 </td>
                             </tr>
                         </xsl:if>
                         <tr>
                             <td>Dokaz o pravu prvenstva</td>
+                            <xsl:variable name="dokaz" select="//z1:Dokaz_o_pravu_prvenstva"/>
                             <td>
-                                <xsl:value-of select="//z1:Dokaz_o_pravu_prvenstva"/>
+                                <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of select="concat('http://localhost:8003/', $dokaz)"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$dokaz"/>
+                                </a>
                             </td>
                         </tr>
                         <tr>
                             <td>Dokaz o uplati takse</td>
+                            <xsl:variable name="dokaz" select="//z1:Dokaz_o_uplati_takse"/>
                             <td>
-                                <xsl:value-of select="//z1:Dokaz_o_uplati_takse"/>
+                                <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of select="concat('http://localhost:8003/', $dokaz)"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$dokaz"/>
+                                </a>
                             </td>
                         </tr>
                         <tr>
                             <td>Spisak robe i usluga</td>
+                            <xsl:variable name="spisak" select="//z1:Spisak_robe_i_usluga"/>
                             <td>
-                                <xsl:value-of select="//z1:Spisak_robe_i_usluga"/>
+                                <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of select="concat('http://localhost:8003/', $spisak)"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$spisak"/>
+                                </a>
                             </td>
                         </tr>
                     </tbody>
