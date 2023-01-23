@@ -141,4 +141,9 @@ public class ZahtevController {
     public ResponseEntity<List<Zahtev>> advancedMetadataSearchBezResenja(@PathVariable String rawInput) throws Exception {
         return new ResponseEntity<>(zahtevService.searchZahteviBezResenjaByMetadata(rawInput), HttpStatus.OK);
     }
+
+    @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<String>> getMetadataVariables() {
+        return new ResponseEntity<>(zahtevService.getMetadataVariables(), HttpStatus.OK);
+    }
 }

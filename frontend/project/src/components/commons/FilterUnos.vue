@@ -1,44 +1,44 @@
 <template>
     <div>
         <div class="flex-container">
-            <select class="log-select" v-model="rows[0].logical">
-                <option value="0">-</option>
-                <option value="1">NE</option>
+            <select class="log-select" v-model="rows[0].logical" @change="updateFilter">
+                <option>-</option>
+                <option>NE</option>
             </select>
-            <select v-model="rows[0].data">
-                <option v-for="(m, i) in metadata" :key="m.id" :value="i">{{ m }}</option>
+            <select v-model="rows[0].data" @change="updateFilter">
+                <option v-for="m in metadata" :key="m.id">{{ m }}</option>
             </select>
-            <select v-model="rows[0].cmp">
-                <option value="0">&le;</option>
-                <option value="1">&lt;</option>
-                <option value="2">&ge;</option>
-                <option value="3">&gt;</option>
-                <option value="4">=</option>
-                <option value="5">!=</option>
+            <select v-model="rows[0].cmp" @change="updateFilter">
+                <option>=</option>
+                <option>!=</option>
+                <option>&ge;</option>
+                <option>&gt;</option>
+                <option>&le;</option>
+                <option>&lt;</option>
             </select>
-            <input type="text" v-model="rows[0].value"/>
+            <input type="text" v-model="rows[0].value" @input="updateFilter"/>
             <button type="button" @click="addRow">+</button>
         </div>
         <div v-for="(r, i) in rows" :key="i">
             <div class="flex-container" v-if="i > 0">
-                <select class="log-select" v-model="rows[i].logical">
-                    <option value="0">I</option>
-                    <option value="1">ILI</option>
-                    <option value="2">I NE</option>
-                    <option value="3">ILI NE</option>
+                <select class="log-select" v-model="rows[i].logical" @change="updateFilter">
+                    <option>I</option>
+                    <option>ILI</option>
+                    <option>I NE</option>
+                    <option>ILI NE</option>
                 </select>
-                <select v-model="rows[i].data">
-                    <option v-for="(m, j) in metadata" :key="m.id" :value="j">{{ m }}</option>
+                <select v-model="rows[i].data" @change="updateFilter">
+                    <option v-for="m in metadata" :key="m.id">{{ m }}</option>
                 </select>
-                <select v-model="rows[i].cmp">
-                    <option value="0">&le;</option>
-                    <option value="1">&lt;</option>
-                    <option value="2">&ge;</option>
-                    <option value="3">&gt;</option>
-                    <option value="4">=</option>
-                    <option value="5">!=</option>
+                <select v-model="rows[i].cmp" @change="updateFilter">
+                    <option>=</option>
+                    <option>!=</option>
+                    <option>&ge;</option>
+                    <option>&gt;</option>
+                    <option>&le;</option>
+                    <option>&lt;</option>
                 </select>
-                <input type="text" v-model="rows[i].value"/>
+                <input type="text" v-model="rows[i].value" @input="updateFilter"/>
                 <button type="button" @click="addRow">+</button>
                 <button type="button" @click="removeRow(i)">-</button>
             </div>
@@ -47,36 +47,55 @@
 </template>
 
 <script>
+    import CommonsService from '@/services/CommonsService';
+    import * as xml2js from 'xml2js';
+
     export default {
         name: 'FilterUnos',
+        props: ['isZahtev'],
+        mounted() {
+            let fn = this.isZahtev? CommonsService.getZahtevMetadataVars : CommonsService.getResenjeMetadataVars;
+            fn().then((response) => {
+                xml2js.parseString(response.data, (_err, result) => {
+                    for (let item of result.List.item) {
+                        this.metadata.push(item);
+                    }
+                });
+                this.rows[0].data = this.metadata[0];
+            }).catch((err) => {
+                console.log(err);
+            });
+        },  
         data() {
             return {
                 numRows: 1,
+                metadata: [],
                 rows: [{
-                    logical: 0,
-                    data: 0,
-                    cmp: 0,
+                    logical: '-',
+                    data: '',
+                    cmp: '=',
                     value: ''
-                }],
-                metadata: ['Broj', 'Ime', 'Prezime']
+                }],   
             }
         },
         methods: {
             addRow() {
                 this.numRows++;
                 this.rows.push({
-                    logical: 0,
-                    data: 0,
-                    cmp: 0,
+                    logical: '',
+                    data: '',
+                    cmp: '',
                     value: ''
                 });
+                this.updateFilter();
             },
             removeRow(i) {
                 this.rows.splice(i, 1);
+                this.updateFilter();
             },
             updateFilter() {
-
-            }
+                this.$emit('updateFilter', this.rows);
+            },
         }
     }
 </script>

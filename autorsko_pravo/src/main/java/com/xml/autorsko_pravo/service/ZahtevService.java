@@ -109,4 +109,8 @@ public class ZahtevService {
         var reseniZahteviNames = resenjeRepository.getReferences();
         return zahtevRepository.getAllExcept(reseniZahteviNames);
     }
+
+    public List<String> getMetadataVariables() {
+        return zahtevMetadataRepository.getMetadataVariables();
+    }
 }

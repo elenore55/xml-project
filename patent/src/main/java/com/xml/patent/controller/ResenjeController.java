@@ -118,4 +118,9 @@ public class ResenjeController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(resource);
     }
+
+    @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<String>> getMetadataVariables() {
+        return new ResponseEntity<>(resenjeService.getMetadataVariables(), HttpStatus.OK);
+    }
 }

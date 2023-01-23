@@ -155,4 +155,9 @@ public class ZahtevController {
     public ResponseEntity<List<Zahtev>> getZahteviBezResenja() throws Exception {
         return new ResponseEntity<>(zahtevService.getZahteviBezResenja(), HttpStatus.OK);
     }
+
+    @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<String>> getMetadataVariables() {
+        return new ResponseEntity<>(zahtevService.getMetadataVariables(), HttpStatus.OK);
+    }
 }

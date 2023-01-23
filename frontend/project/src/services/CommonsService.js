@@ -13,6 +13,22 @@ const osnovnaPretragaBezResenja = (tekst, matchCase) => {
     return axios.get(`${store.state.host}/zahtev/bezResenja/search/${tekst}/${matchCase}`);
 }
 
+const naprednaPretraga = (rows) => {
+    let query = buildQuery(rows);
+    return axios.get(`${store.state.host}/metadata/advancedSearch/${query}`);
+}
+
+const naprednaPretragaResenje = (rows) => {
+    let query = buildQuery(rows);
+    console.log(query);
+    return axios.get(`${store.state.host}/resenje/metadata/advancedSearch/${query}`);
+}
+
+const naprednaPretragaBezResenja = (rows) => {
+    let query = buildQuery(rows);
+    return axios.get(`${store.state.host}/bezResenja/metadata/advancedSearch/${query}`);
+}
+
 const getOne = (brojZahteva) => {
     return axios.get(`${store.state.host}/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
 }
@@ -132,5 +148,33 @@ const odbijZahtev = (xmlString) => {
     return axios.post(`${store.state.host}/resenje/reject`, xmlString, config);
 }
 
+const getZahtevMetadataVars = () => {
+    return axios.get(`${store.state.host}/metadata/vars`);
+}
+
+const getResenjeMetadataVars = () => {
+    return axios.get(`${store.state.host}/resenje/metadata/vars`);
+}
+
+const buildQuery = (rows) => {
+    let result = []
+    if (rows[0].logical === 'NE') result.push('NE');
+    if (rows[0].data !== '' && rows[0].cmp !== '' && rows[0].value !== '') {
+        result.push(rows[0].data);
+        result.push(rows[0].cmp);
+        result.push(rows[0].value);
+        for (let i = 1; i < rows.length; i++) {
+            if (rows[i].logical !== '' && rows[i].data !== '' && rows[i].cmp !== '' && rows[i].value !== '') {
+                result.push(rows[i].logical);
+                result.push(rows[i].data);
+                result.push(rows[i].cmp);
+                result.push(rows[i].value);
+            }
+        }
+    }
+    return result.join(' ');
+}
+
 export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport, getZahtevMetadata, 
-    getResenjeMetadata, getNereseniZahtevi, odobriZahtev, odbijZahtev, osnovnaPretragaBezResenja, getOneResenje, osnovnaPretragaResenje }
+    getResenjeMetadata, getNereseniZahtevi, odobriZahtev, odbijZahtev, osnovnaPretragaBezResenja, getOneResenje, osnovnaPretragaResenje,
+    getResenjeMetadataVars, getZahtevMetadataVars, naprednaPretragaResenje }

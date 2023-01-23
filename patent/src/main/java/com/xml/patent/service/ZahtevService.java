@@ -100,4 +100,8 @@ public class ZahtevService {
         }
         return result;
     }
+
+    public List<String> getMetadataVariables() {
+        return zahtevMetadataRepository.getMetadataVariables();
+    }
 }

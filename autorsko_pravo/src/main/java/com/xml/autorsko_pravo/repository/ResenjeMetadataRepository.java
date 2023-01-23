@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -66,6 +67,10 @@ public class ResenjeMetadataRepository extends GenericMetadataRepository {
                 }""", conn.dataEndpoint + SPARQL_NAMED_GRAPH_URI, startDate, endDate);
         System.out.println(query);
         return searchMetadata(query).size();
+    }
+
+    public List<String> getMetadataVariables() {
+        return Arrays.asList("Naziv_fajla", "Datum_resenja", "Ime_sluzbenika", "Prezime_sluzbenika", "Odobren");
     }
 
     private List<Resenje> searchMetadata(String sparqlQuery) throws Exception {

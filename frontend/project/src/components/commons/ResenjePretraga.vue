@@ -13,8 +13,7 @@
                 </div>
                 <div class="flex-container-v item">
                     <h3>Upit</h3>
-                    <!-- <textarea rows="4"></textarea> -->
-                    <FilterUnos></FilterUnos>
+                    <FilterUnos @updateFilter="updateFilter($event)"></FilterUnos>
                     <button type="button" @click="naprednaPretraga">Napredna pretraga</button>
                 </div>
             </div>
@@ -53,19 +52,18 @@
                 upit: '',
                 matchCase: false,
                 rezultati: [],
-                resenje: {}
+                resenje: {},
+                rows: []
             }
         },
         methods: {
             osnovnaPretraga() {
                 this.rezultati = [];
-                let that = this;
                 CommonsService.osnovnaPretragaResenje(this.tekst, this.matchCase)
                 .then((response) => {
-                    console.log(response.data);
-                    xml2js.parseString(response.data, function(_err, result) {
+                    xml2js.parseString(response.data, (_err, result) => {
                         for (let i of result.List.item) {
-                            that.rezultati.push(JSON.parse(JSON.stringify(i)));
+                            this.rezultati.push(JSON.parse(JSON.stringify(i)));
                         }
                     });
                 })
@@ -74,7 +72,18 @@
                 });
             },
             naprednaPretraga() {
-
+                this.rezultati = [];
+                CommonsService.naprednaPretragaResenje(this.rows)
+                .then((response) => {
+                    xml2js.parseString(response.data, (_err, result) => {
+                        for (let i of result.List.item) {
+                            this.rezultati.push(JSON.parse(JSON.stringify(i)));
+                        }
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
             },
             prikaziResenje(broj) {
                 CommonsService.getOneResenje(broj).then((response) => {
@@ -103,6 +112,9 @@
                     console.log(err);
                 });
             },
+            updateFilter(rows) {
+                this.rows = rows;
+            }
         }
     }
 </script>
@@ -113,7 +125,7 @@
     }
     .centered {
         margin: auto;
-        width: 75%;
+        width: 95%;
     }
     .flex-container {
         display: flex;

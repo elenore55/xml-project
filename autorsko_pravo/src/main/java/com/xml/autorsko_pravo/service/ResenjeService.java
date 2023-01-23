@@ -137,4 +137,8 @@ public class ResenjeService {
     public InputStreamResource getAllMetadataAsRDF() throws Exception {
         return resenjeMetadataRepository.getAllAsRDF();
     }
+
+    public List<String> getMetadataVariables() {
+        return resenjeMetadataRepository.getMetadataVariables();
+    }
 }

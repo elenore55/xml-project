@@ -1,6 +1,5 @@
 package com.xml.zig.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.xml.zig.dto.CreateZahtevDTO;
 import com.xml.zig.model.Zahtev;
@@ -24,7 +23,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "zig/")
@@ -150,4 +148,8 @@ public class ZahtevController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<String>> getMetadataVariables() {
+        return new ResponseEntity<>(zahtevService.getMetadataVariables(), HttpStatus.OK);
+    }
 }
