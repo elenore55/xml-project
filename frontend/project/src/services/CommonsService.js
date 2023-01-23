@@ -2,15 +2,21 @@ import axios from 'axios';
 import store from '@/store';
 
 const osnovnaPretraga = (tekst, matchCase) => {
-    return axios.get(`${store.state.host}/zahtev/search/${tekst}/${matchCase}`);
+    if (tekst !== '')
+        return axios.get(`${store.state.host}/zahtev/search/${tekst}/${matchCase}`);
+    return axios.get(`${store.state.host}/zahtev/all`);
 }
 
 const osnovnaPretragaResenje = (tekst, matchCase) => {
-    return axios.get(`${store.state.host}/resenje/search/${tekst}/${matchCase}`);
+    if (tekst !== '')
+        return axios.get(`${store.state.host}/resenje/search/${tekst}/${matchCase}`);
+    return axios.get(`${store.state.host}/resenje/all`);
 }
 
 const osnovnaPretragaBezResenja = (tekst, matchCase) => {
-    return axios.get(`${store.state.host}/zahtev/bezResenja/search/${tekst}/${matchCase}`);
+    if (tekst !== '')
+        return axios.get(`${store.state.host}/zahtev/bezResenja/search/${tekst}/${matchCase}`);
+    return getNereseniZahtevi();
 }
 
 const naprednaPretraga = (rows) => {
@@ -20,13 +26,12 @@ const naprednaPretraga = (rows) => {
 
 const naprednaPretragaResenje = (rows) => {
     let query = buildQuery(rows);
-    console.log(query);
     return axios.get(`${store.state.host}/resenje/metadata/advancedSearch/${query}`);
 }
 
 const naprednaPretragaBezResenja = (rows) => {
     let query = buildQuery(rows);
-    return axios.get(`${store.state.host}/bezResenja/metadata/advancedSearch/${query}`);
+    return axios.get(`${store.state.host}/metadata/bezResenja/advancedSearch/${query}`);
 }
 
 const getOne = (brojZahteva) => {
@@ -177,4 +182,4 @@ const buildQuery = (rows) => {
 
 export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport, getZahtevMetadata, 
     getResenjeMetadata, getNereseniZahtevi, odobriZahtev, odbijZahtev, osnovnaPretragaBezResenja, getOneResenje, osnovnaPretragaResenje,
-    getResenjeMetadataVars, getZahtevMetadataVars, naprednaPretragaResenje }
+    getResenjeMetadataVars, getZahtevMetadataVars, naprednaPretragaResenje, naprednaPretraga, naprednaPretragaBezResenja }

@@ -127,6 +127,16 @@ public class ZahtevController {
         return new ResponseEntity<>(zahtevService.getZahteviBezResenja(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "zahtev/bezResenja/search/{text}/{matchCase}", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<Zahtev>> searchZahteviBezResenja(@PathVariable String text, @PathVariable boolean matchCase) throws Exception {
+        return new ResponseEntity<>(zahtevService.searchZahteviBezResenja(text, matchCase), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "metadata/bezResenja/advancedSearch/{rawInput}", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<Zahtev>> advancedMetadataSearchBezResenja(@PathVariable String rawInput) throws Exception {
+        return new ResponseEntity<>(zahtevService.searchZahteviBezResenjaByMetadata(rawInput), HttpStatus.OK);
+    }
+
     @PostMapping(value = "zahtev/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> save(
             @RequestParam("izgledZnaka") MultipartFile izgledZnaka, @RequestParam("primerakZnaka") MultipartFile primerakZnaka,

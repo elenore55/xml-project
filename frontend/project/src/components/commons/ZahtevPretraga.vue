@@ -13,7 +13,7 @@
                 </div>
                 <div class="flex-container-v item">
                     <h3>Upit</h3>
-                    <textarea rows="4"></textarea>
+                    <FilterUnos isZahtev="true" @updateFilter="updateFilter($event)"></FilterUnos>
                     <button type="button" @click="naprednaPretraga">Napredna pretraga</button>
                 </div>
             </div>
@@ -39,11 +39,13 @@
     import * as xml2js from 'xml2js';
     import CommonsService from '@/services/CommonsService';
     import UserNavbar from '../user/UserNavbar.vue';
+    import FilterUnos from './FilterUnos.vue';
 
     export default {
         name: 'ZahtevPretraga',
         components: {
-            UserNavbar
+            UserNavbar,
+            FilterUnos
         },
         data() {
             return {
@@ -51,27 +53,39 @@
                 upit: '',
                 matchCase: false,
                 rezultati: [],
-                htmlContent: ''
+                htmlContent: '',
+                rows: []
             }
         },
         methods: {
             osnovnaPretraga() {
                 this.rezultati = [];
-                let that = this;
                 CommonsService.osnovnaPretraga(this.tekst, this.matchCase)
                 .then((response) => {
-                    xml2js.parseString(response.data, function(_err, result) {
+                    xml2js.parseString(response.data, (_err, result) => {
                         for (let i of result.List.item) {
-                            that.rezultati.push(JSON.parse(JSON.stringify(i)));
+                            this.rezultati.push(JSON.parse(JSON.stringify(i)));
                         }
                     });
+                    this.htmlContent = '';
                 })
                 .catch((err) => {
                     console.log(err);
                 });
             },
             naprednaPretraga() {
-
+                this.rezultati = [];
+                CommonsService.naprednaPretraga(this.rows).then((response) => {
+                    console.log(response.data);
+                    xml2js.parseString(response.data, (_err, result) => {
+                        for (let i of result.List.item) {
+                            this.rezultati.push(JSON.parse(JSON.stringify(i)));
+                        }
+                    });
+                    this.htmlContent = '';
+                }).catch((err) => {
+                    console.log(err);
+                });
             },
             prikaziZahtev(broj) {
                 CommonsService.getOne(broj).then((response) => {
@@ -86,6 +100,9 @@
             },
             downloadHTML(broj) {
                 CommonsService.downloadZahtevHTML(broj);
+            },
+            updateFilter(rows) {
+                this.rows = rows;
             }
         }
     }
@@ -97,7 +114,7 @@
     }
     .centered {
         margin: auto;
-        width: 60%;
+        width: 90%;
     }
     .flex-container {
         display: flex;

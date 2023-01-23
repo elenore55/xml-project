@@ -87,6 +87,32 @@ public class ZahtevService {
         return zahtevRepository.getAllExcept(reseniZahteviNames);
     }
 
+    public List<Zahtev> searchZahteviBezResenja(String text, boolean matchCase) throws Exception {
+        var reseniZahteviNames = resenjeRepository.getReferences();
+        var zahtevi = zahtevRepository.search(text, matchCase);
+        var result = new ArrayList<Zahtev>();
+        for (var z : zahtevi) {
+            if (!reseniZahteviNames.contains(String.format("Zahtev%d-%d.xml", z.getPopunjavaZavod().getBrojPrijaveZiga().getId(),
+                    z.getPopunjavaZavod().getBrojPrijaveZiga().getGodina()))) {
+                result.add(z);
+            }
+        }
+        return result;
+    }
+
+    public List<Zahtev> searchZahteviBezResenjaByMetadata(String rawInput) throws Exception {
+        var reseniZahteviNames = resenjeRepository.getReferences();
+        var zahtevi = advancedMetadataSearch(rawInput);
+        var result = new ArrayList<Zahtev>();
+        for (var z : zahtevi) {
+            if (!reseniZahteviNames.contains(String.format("Zahtev%d-%d.xml", z.getPopunjavaZavod().getBrojPrijaveZiga().getId(),
+                    z.getPopunjavaZavod().getBrojPrijaveZiga().getGodina()))) {
+                result.add(z);
+            }
+        }
+        return result;
+    }
+
     public void save(CreateZahtevDTO dto, Map<String, MultipartFile> files) throws Exception {
         var popunjavaPodnosilac = new PopunjavaPodnosilac(dto);
         var fileNames = new HashMap<String, String>();

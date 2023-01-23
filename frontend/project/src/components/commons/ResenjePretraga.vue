@@ -125,7 +125,7 @@
     }
     .centered {
         margin: auto;
-        width: 95%;
+        width: 90%;
     }
     .flex-container {
         display: flex;
