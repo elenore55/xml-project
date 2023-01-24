@@ -1,7 +1,12 @@
 <template>
     <div>
-        <div class="flex-container">
-            <h2 class="item">{{ title }}</h2>
+        <div class="flex-container">    
+            <h2 class="item">Punomoćnik</h2>
+            <select v-model="tipPunomocnika">
+                <option value="1">PUNOMOĆNIK ZA ZASTUPANJE</option>
+                <option value="2">PUNOMOĆNIK ZA PRIJEM PISMENA</option>
+                <option value="3">ZAJEDNIČKI PREDSTAVNIK</option>
+            </select>
             <select v-model="tipPodnosioca">
                 <option value="1">Fizičko lice</option>
                 <option value="2">Pravno lice</option>
@@ -10,13 +15,13 @@
 
         <h3>Osnovni podaci</h3>
         <div v-if="tipPodnosioca == 1">
-            <LicniPodaci ref="licniPodaci" @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
+            <LicniPodaci ref="licniPodaci" drzavljanstvoPotrebno="true" @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
         </div>
         <div v-else>
             <div class="flex-container">
-                <div id="business-name" class="flex-container-v">
+                <div id="business-name" class="flex-container-v item">
                     <label for="business-name-input" class="item">Poslovno ime</label>
-                    <input id="business-name-input" type="text" class="item" v-model="poslovnoIme" @input="updatePodnosilac"/>
+                    <input id="business-name-input" type="text" class="item" v-model="poslovnoIme" @input="updatePunomocnik"/>
                 </div>
             </div>
         </div>
@@ -38,8 +43,7 @@
     import KontaktPodaci from './KontaktPodaci.vue';
 
     export default {
-        name: 'PodnosilacPrijave',
-        props: ['title'],
+        name: 'PunomocnikUnos',
         components: {
             LicniPodaci,
             AdresaUnos,
@@ -54,49 +58,53 @@
                 adresa: {},
                 telefon: '',
                 email: '',
-                faks: ''
+                tipPunomocnika: 1
             }
         },
         methods: {
-            updatePodnosilac() {
-                this.$emit('updatePodnosilac', {
+            updatePunomocnik() {
+                this.poslovnoIme = this.poslovnoIme.toUpperCase();
+                this.$emit('updatePunomocnik', {
                     ime: this.ime,
                     prezime: this.prezime,
                     poslovnoIme: this.poslovnoIme,
                     adresa: this.adresa,
                     telefon: this.telefon,
                     email: this.email,
-                    faks: this.faks,
-                    fizickoLice: this.tipPodnosioca == 1 
+                    fizickoLice: this.tipPodnosioca == 1,
+                    tipPunomocnika: this.tipPunomocnika
                 });
             },
             updateLicniPodaci(podaci) {
                 this.ime = podaci.ime;
                 this.prezime = podaci.prezime;
-                this.updatePodnosilac();
+                this.updatePunomocnik();
             },
             updateAdresa(adresa) {
                 this.adresa = adresa;
-                this.updatePodnosilac();
+                this.updatePunomocnik();
             },
             updateKontaktPodaci(podaci) {
                 this.email = podaci.email;
                 this.telefon = podaci.telefon;
                 this.faks = podaci.faks;
-                this.updatePodnosilac();
+                this.updatePunomocnik();
             },
             clear() {
                 this.poslovnoIme = '';
                 this.$refs.licniPodaci.clear();
                 this.$refs.adresaUnos.clear();
                 this.$refs.kontaktPodaci.clear();
-                this.updatePodnosilac();
+                this.updatePunomocnik();
             }
         }
     }
 </script>
 
 <style scoped>
+    #business-name-input {
+        width: 65%;
+    }
     h2 {
         margin-top: 50px;
     }

@@ -1,33 +1,22 @@
 <template>
     <div>
-        <div class="flex-container">
-            <h2 class="item">{{ title }}</h2>
-            <select v-model="tipPodnosioca">
-                <option value="1">Fizičko lice</option>
-                <option value="2">Pravno lice</option>
-            </select>
-        </div>
+        <h2 class="item">Pronalazač</h2>
 
-        <h3>Osnovni podaci</h3>
-        <div v-if="tipPodnosioca == 1">
+        <input type="checkbox" v-model="neZeliBitiNaveden" @input="updatePronalazac"/>
+        <label>Pronalazač ne želi da bude naveden u prijavi</label>
+
+        <div v-if="!neZeliBitiNaveden">
+            <h3>Osnovni podaci</h3>
             <LicniPodaci ref="licniPodaci" @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
-        </div>
-        <div v-else>
-            <div class="flex-container">
-                <div id="business-name" class="flex-container-v">
-                    <label for="business-name-input" class="item">Poslovno ime</label>
-                    <input id="business-name-input" type="text" class="item" v-model="poslovnoIme" @input="updatePodnosilac"/>
-                </div>
+
+            <div>
+                <h3>Adresa</h3>
+                <AdresaUnos drzavaPotrebna="true" ref="adresaUnos" @updateAdresa="updateAdresa($event)"></AdresaUnos>
             </div>
-        </div>
 
-        <div>
-            <h3>Adresa</h3>
-            <AdresaUnos ref="adresaUnos" @updateAdresa="updateAdresa($event)"></AdresaUnos>
-        </div>
-
-        <div>
-            <KontaktPodaci ref="kontaktPodaci" @updateKontaktPodaci="updateKontaktPodaci($event)"></KontaktPodaci>
+            <div>
+                <KontaktPodaci faksPotreban="true" ref="kontaktPodaci" @updateKontaktPodaci="updateKontaktPodaci($event)"></KontaktPodaci>
+            </div>
         </div>
     </div>
 </template>
@@ -38,8 +27,7 @@
     import KontaktPodaci from './KontaktPodaci.vue';
 
     export default {
-        name: 'PodnosilacPrijave',
-        props: ['title'],
+        name: 'PronalazacUnos',
         components: {
             LicniPodaci,
             AdresaUnos,
@@ -47,50 +35,48 @@
         },
         data() {
             return {
-                tipPodnosioca: 1,
                 ime: '',
                 prezime: '',
-                poslovnoIme: '',
                 adresa: {},
                 telefon: '',
                 email: '',
-                faks: ''
+                faks: '',
+                neZeliBitiNaveden: false
             }
         },
         methods: {
-            updatePodnosilac() {
-                this.$emit('updatePodnosilac', {
+            updatePronalazac() {
+                this.$emit('updatePronalazac', {
                     ime: this.ime,
                     prezime: this.prezime,
-                    poslovnoIme: this.poslovnoIme,
                     adresa: this.adresa,
                     telefon: this.telefon,
                     email: this.email,
                     faks: this.faks,
-                    fizickoLice: this.tipPodnosioca == 1 
+                    neZeliBitiNaveden: this.neZeliBitiNaveden
                 });
             },
             updateLicniPodaci(podaci) {
                 this.ime = podaci.ime;
                 this.prezime = podaci.prezime;
-                this.updatePodnosilac();
+                this.updatePronalazac();
             },
             updateAdresa(adresa) {
                 this.adresa = adresa;
-                this.updatePodnosilac();
+                this.updatePronalazac();
             },
             updateKontaktPodaci(podaci) {
                 this.email = podaci.email;
                 this.telefon = podaci.telefon;
                 this.faks = podaci.faks;
-                this.updatePodnosilac();
+                this.updatePronalazac();
             },
             clear() {
                 this.poslovnoIme = '';
                 this.$refs.licniPodaci.clear();
                 this.$refs.adresaUnos.clear();
                 this.$refs.kontaktPodaci.clear();
-                this.updatePodnosilac();
+                this.updatePronalazac();
             }
         }
     }

@@ -1,20 +1,23 @@
 <template>
     <div>
         <div class="flex-container">
-            <h2 class="item">{{ title }}</h2>
+            <h2 class="item">Podnosilac prijave</h2>
             <select v-model="tipPodnosioca">
                 <option value="1">Fizičko lice</option>
                 <option value="2">Pravno lice</option>
             </select>
         </div>
 
+        <input type="checkbox" v-model="pronalazac" @input="updatePodnosilac"/>
+        <label>Podnosilac prijave je i pronalazač</label>
+
         <h3>Osnovni podaci</h3>
         <div v-if="tipPodnosioca == 1">
-            <LicniPodaci ref="licniPodaci" @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
+            <LicniPodaci ref="licniPodaci" drzavljanstvoPotrebno="true" @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
         </div>
         <div v-else>
             <div class="flex-container">
-                <div id="business-name" class="flex-container-v">
+                <div id="business-name" class="flex-container-v item">
                     <label for="business-name-input" class="item">Poslovno ime</label>
                     <input id="business-name-input" type="text" class="item" v-model="poslovnoIme" @input="updatePodnosilac"/>
                 </div>
@@ -23,11 +26,11 @@
 
         <div>
             <h3>Adresa</h3>
-            <AdresaUnos ref="adresaUnos" @updateAdresa="updateAdresa($event)"></AdresaUnos>
+            <AdresaUnos drzavaPotrebna="true" ref="adresaUnos" @updateAdresa="updateAdresa($event)"></AdresaUnos>
         </div>
 
         <div>
-            <KontaktPodaci ref="kontaktPodaci" @updateKontaktPodaci="updateKontaktPodaci($event)"></KontaktPodaci>
+            <KontaktPodaci faksPotreban="true" ref="kontaktPodaci" @updateKontaktPodaci="updateKontaktPodaci($event)"></KontaktPodaci>
         </div>
     </div>
 </template>
@@ -39,7 +42,6 @@
 
     export default {
         name: 'PodnosilacPrijave',
-        props: ['title'],
         components: {
             LicniPodaci,
             AdresaUnos,
@@ -54,11 +56,13 @@
                 adresa: {},
                 telefon: '',
                 email: '',
-                faks: ''
+                faks: '',
+                pronalazac: false
             }
         },
         methods: {
             updatePodnosilac() {
+                this.poslovnoIme = this.poslovnoIme.toUpperCase();
                 this.$emit('updatePodnosilac', {
                     ime: this.ime,
                     prezime: this.prezime,
@@ -67,7 +71,8 @@
                     telefon: this.telefon,
                     email: this.email,
                     faks: this.faks,
-                    fizickoLice: this.tipPodnosioca == 1 
+                    fizickoLice: this.tipPodnosioca == 1,
+                    pronalazac: this.pronalazac
                 });
             },
             updateLicniPodaci(podaci) {
@@ -97,6 +102,9 @@
 </script>
 
 <style scoped>
+    #business-name-input {
+        width: 65%;
+    }
     h2 {
         margin-top: 50px;
     }
