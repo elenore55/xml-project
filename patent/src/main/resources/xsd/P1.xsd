@@ -101,7 +101,7 @@
                 <xs:element name="Broj" type="xs:positiveInteger"/>
                 <xs:element name="Postanski_broj" type="xs:positiveInteger"/>
                 <xs:element name="Mesto" type="xs:string"/>
-                <xs:element name="Drzava" type="xs:string"/>
+                <xs:element minOccurs="0" name="Drzava" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

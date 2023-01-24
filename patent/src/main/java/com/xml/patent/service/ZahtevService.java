@@ -1,5 +1,8 @@
 package com.xml.patent.service;
 
+import com.xml.patent.dto.CreateZahtevDTO;
+import com.xml.patent.model.PopunjavaPodnosilac;
+import com.xml.patent.model.PopunjavaZavod;
 import com.xml.patent.model.Zahtev;
 import com.xml.patent.repository.Marshalling;
 import com.xml.patent.repository.ResenjeRepository;
@@ -10,6 +13,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -103,5 +107,21 @@ public class ZahtevService {
 
     public List<String> getMetadataVariables() {
         return zahtevMetadataRepository.getMetadataVariables();
+    }
+
+    public void save(CreateZahtevDTO dto) throws Exception {
+        var popunjavaPodnosilac = new PopunjavaPodnosilac(dto);
+        var popunjavaZavod = new PopunjavaZavod();
+        popunjavaZavod.setDatumPodnosenja(new Date());
+        popunjavaZavod.setDatumPrijema(new Date());
+        popunjavaZavod.setBrojPrijave(zahtevRepository.generateNextId());
+
+        var zahtev = new Zahtev();
+        zahtev.setTipPrijave(Zahtev.TipPrijave.valueOf(dto.getVrstaPrijave()));
+        zahtev.setPopunjavaPodnosilac(popunjavaPodnosilac);
+        zahtev.setPopunjavaZavod(popunjavaZavod);
+        zahtev.setPronalazacNeZeliBitiNaveden(dto.getPronalazac().isAnoniman());
+        zahtevMetadataRepository.extract(zahtev);
+        zahtevRepository.save(zahtev);
     }
 }

@@ -1,7 +1,9 @@
 package com.xml.patent.model;
 
+import com.xml.patent.dto.PunomocnikDTO;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -37,9 +39,19 @@ public abstract class Punomocnik extends Lice {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TPunomocnik_fizicko_lice", propOrder = {"ime", "prezime"})
     public static class FizickoLice extends Punomocnik {
+
+        public FizickoLice(PunomocnikDTO dto) {
+            this.ime = dto.getIme();
+            this.prezime = dto.getPrezime();
+            this.adresa = new Adresa(dto.getAdresa());
+            this.ePosta = dto.getEmail();
+            this.brojTelefona = dto.getTelefon();
+            this.vrsta = VrstaPunomocnika.values()[dto.getTipPunomocnika() - 1];
+        }
 
         @XmlElement(name = "Ime", required = true)
         String ime;
@@ -55,10 +67,18 @@ public abstract class Punomocnik extends Lice {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TPunomocnik_pravno_lice", propOrder = {"poslovnoIme"})
     public static class PravnoLice extends Punomocnik {
 
+        public PravnoLice(PunomocnikDTO dto) {
+            this.poslovnoIme = dto.getPoslovnoIme();
+            this.adresa = new Adresa(dto.getAdresa());
+            this.ePosta = dto.getEmail();
+            this.brojTelefona = dto.getTelefon();
+            this.vrsta = VrstaPunomocnika.values()[dto.getTipPunomocnika() - 1];
+        }
         @XmlElement(name = "Poslovno_ime", required = true)
         String poslovnoIme;
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:pred="http://www.ftn.com/p1/pred/" xmlns:p1="http://www.ftn.com/p1">
-<rdf:Description rdf:about="http://www.ftn.com/p1/Zahtev-4">
-<pred:Naziv_fajla>Zahtev4.xml</pred:Naziv_fajla>
-<pred:Broj_prijave>4</pred:Broj_prijave>
-<pred:Datum_podnosenja>2022-10-08+02:00</pred:Datum_podnosenja>
-<pred:Datum_prijema>2022-10-10+02:00</pred:Datum_prijema>
+<rdf:Description rdf:about="http://www.ftn.com/p1/Zahtev-5">
+<pred:Naziv_fajla>Zahtev5.xml</pred:Naziv_fajla>
+<pred:Broj_prijave>5</pred:Broj_prijave>
+<pred:Datum_podnosenja>2023-01-24+01:00</pred:Datum_podnosenja>
+<pred:Datum_prijema>2023-01-24+01:00</pred:Datum_prijema>
 <pred:Tip_prijave>DOPUNSKA</pred:Tip_prijave>
-<pred:Ime_podnosioca>Marko</pred:Ime_podnosioca>
-<pred:Prezime_podnosioca>MARKOVIC</pred:Prezime_podnosioca>
+<pred:Ime_podnosioca>Milica</pred:Ime_podnosioca>
+<pred:Prezime_podnosioca>POPOVIC</pred:Prezime_podnosioca>
 </rdf:Description>
 </rdf:RDF>

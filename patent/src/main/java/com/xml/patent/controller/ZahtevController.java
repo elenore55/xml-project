@@ -1,5 +1,6 @@
 package com.xml.patent.controller;
 
+import com.xml.patent.dto.CreateZahtevDTO;
 import com.xml.patent.model.Zahtev;
 import com.xml.patent.service.HTMLTransformer;
 import com.xml.patent.service.PDFTransformer;
@@ -10,10 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -145,5 +143,11 @@ public class ZahtevController {
     @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<String>> getMetadataVariables() {
         return new ResponseEntity<>(zahtevService.getMetadataVariables(), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "zahtev/save", consumes = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<Void> save(@RequestBody CreateZahtevDTO dto) throws Exception {
+        zahtevService.save(dto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

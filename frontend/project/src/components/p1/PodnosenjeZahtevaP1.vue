@@ -9,7 +9,7 @@
             <h3 class="adresa">Adresa dostavljanja</h3>
             <p>(Ovo polje se popunjava ako podnosilac prijave, zajednički predstavnik ili punomoćnik želi da se dostavljanje podnesaka 
                 vrši na drugoj adresi od njegove navedene adrese)</p>
-            <AdresaUnos updateAdresa="updateAdresa($event)"></AdresaUnos>
+            <AdresaUnos @updateAdresa="updateAdresa($event)"></AdresaUnos>
             <h3>Način dostavljanja</h3>
             <div>
                 <input type="radio" name="nacin" @change="elektronskiSelected"/>
@@ -47,6 +47,8 @@
     import AdresaUnos from './AdresaUnos.vue';
     import RanijePrijave from './RanijePrijave.vue';
     import * as xml2js from 'xml2js';
+    import * as js2xml from 'js2xmlparser';
+    import ZahtevService from '@/services/p1/ZahtevService';
 
     export default {
         name: 'PodnosenjeZahtevaP1',
@@ -104,6 +106,25 @@
             },
             submit() {
                 this.parseXonomy();
+                const xmlString = js2xml.parse('zahtev', {
+                    nazivSrpski: this.nazivSrpski,
+                    nazivEngleski: this.nazivEngleski,
+                    adresaDostavljanja: this.adresaDostavljanja,
+                    vrstaPrijave: this.vrstaPrijave,
+                    datumPrvobitnePrijave: this.datumPrvobitnePrijave,
+                    brojPrvobitnePrijave: this.brojPrvobitnePrijave,
+                    nacinDostavljanja: this.nacinDostavljanja,
+                    podnosilac: this.podnosilac,
+                    pronalazac: this.pronalazac,
+                    punomocnik: this.punomocnik,
+                    ranijePrijaveList: {ranijePrijave: this.ranijePrijave}
+                });
+                console.log(xmlString);
+                ZahtevService.save(xmlString).then((_response) => {
+                    alert('Zahtev podnesen!');
+                }).catch((err) => {
+                    console.log(err);
+                })
             },
             parseXonomy() {
                 xml2js.parseString(this.xonomyData, (_err, result) => {

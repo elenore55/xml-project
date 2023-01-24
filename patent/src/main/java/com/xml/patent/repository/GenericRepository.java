@@ -198,4 +198,17 @@ public abstract class GenericRepository {
             return col;
         }
     }
+
+    protected int countDocuments() throws Exception {
+        var conn = AuthUtil.loadProperties();
+        setup(conn.driver);
+        res = null;
+        try {
+            col = getOrCreateCollection(conn);
+            col.setProperty(OutputKeys.INDENT, "yes");
+            return col.getResourceCount();
+        } finally {
+            cleanUp(res, col);
+        }
+    }
 }

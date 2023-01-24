@@ -1,17 +1,29 @@
 package com.xml.patent.model;
 
+import com.xml.patent.dto.AdresaDTO;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"ulica", "brojObjekta", "postanskiBroj", "mesto", "drzava"})
 public class Adresa {
+
+    public Adresa(AdresaDTO dto) {
+        this.ulica = dto.getUlica();
+        this.brojObjekta = dto.getBroj();
+        this.mesto = dto.getMesto();
+        this.postanskiBroj = dto.getPostanskiBroj();
+        if (dto.getDrzava() != null && !dto.getDrzava().equals(""))
+            this.drzava = dto.getDrzava();
+    }
 
     @XmlElement(name = "Ulica", required = true)
     String ulica;
@@ -24,7 +36,7 @@ public class Adresa {
     @XmlElement(name = "Mesto", required = true)
     String mesto;
 
-    @XmlElement(name = "Drzava", required = true)
+    @XmlElement(name = "Drzava")
     String drzava;
 
 

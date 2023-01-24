@@ -15,7 +15,7 @@
 
         <h3>Osnovni podaci</h3>
         <div v-if="tipPodnosioca == 1">
-            <LicniPodaci ref="licniPodaci" drzavljanstvoPotrebno="true" @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
+            <LicniPodaci ref="licniPodaci" @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
         </div>
         <div v-else>
             <div class="flex-container">

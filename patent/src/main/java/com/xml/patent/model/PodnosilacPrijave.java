@@ -1,7 +1,9 @@
 package com.xml.patent.model;
 
+import com.xml.patent.dto.PodnosilacDTO;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -26,9 +28,21 @@ public abstract class PodnosilacPrijave extends Lice {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TPodnosilac_fizicko_lice", propOrder = {"ime", "prezime", "drzavljanstvo"})
     public static class FizickoLice extends PodnosilacPrijave {
+
+        public FizickoLice(PodnosilacDTO dto) {
+            this.ime = dto.getIme();
+            this.prezime = dto.getPrezime();
+            this.ePosta = dto.getEmail();
+            this.drzavljanstvo = dto.getDrzavljanstvo();
+            this.brojTelefona = dto.getTelefon();
+            this.brojFaksa = dto.getFaks();
+            this.pronalazac = dto.isPronalazac();
+            this.adresa = new Adresa(dto.getAdresa());
+        }
 
         @XmlElement(name = "Ime", required = true)
         String ime;
@@ -47,9 +61,19 @@ public abstract class PodnosilacPrijave extends Lice {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "TPodnosilac_pravno_lice", propOrder = {"poslovnoIme"})
     public static class PravnoLice extends PodnosilacPrijave {
+
+        public PravnoLice(PodnosilacDTO dto) {
+            this.poslovnoIme = dto.getPoslovnoIme();
+            this.ePosta = dto.getEmail();
+            this.brojTelefona = dto.getTelefon();
+            this.brojFaksa = dto.getFaks();
+            this.pronalazac = dto.isPronalazac();
+            this.adresa = new Adresa(dto.getAdresa());
+        }
 
         @XmlElement(name = "Poslovno_ime", required = true)
         String poslovnoIme;
