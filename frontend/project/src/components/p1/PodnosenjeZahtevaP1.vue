@@ -14,7 +14,7 @@
             <div>
                 <input type="radio" name="nacin" @change="elektronskiSelected"/>
                 <label>Elektronskim putem u formi elektronskog dokumenta</label>
-                <input type="radio" name="nacin" class="second-radion" @change="papirSelected"/>
+                <input type="radio" name="nacin" class="second-radio" @change="papirSelected"/>
                 <label>U papirnoj formi</label>
             </div>
         </div>
@@ -35,6 +35,8 @@
                 </div>
             </div>
         </div>
+        <RanijePrijave @updateXonomyData="updateXonomyData($event)"></RanijePrijave>
+        <button type="button" @click="submit">Podnesi zahtev</button>
     </div>
 </template>
 
@@ -43,6 +45,8 @@
     import Pronalazac from './Pronalazac.vue';
     import PunomocnikUnos from './PunomocnikUnos.vue';
     import AdresaUnos from './AdresaUnos.vue';
+    import RanijePrijave from './RanijePrijave.vue';
+    import * as xml2js from 'xml2js';
 
     export default {
         name: 'PodnosenjeZahtevaP1',
@@ -50,7 +54,8 @@
             PodnosilacPrijave,
             Pronalazac,
             PunomocnikUnos,
-            AdresaUnos
+            AdresaUnos,
+            RanijePrijave
         },
         data() {
             return {
@@ -61,7 +66,11 @@
                 nacinDostavljanja: '',
                 vrstaPrijave: 'IZDVOJENA',
                 brojPrvobitnePrijave: '',
-                datumPrvobitnePrijave: ''
+                datumPrvobitnePrijave: '',
+                nazivSrpski: '',
+                nazivEngleski: '',
+                xonomyData: '',
+                ranijePrijave: []
             }
         },
         methods: {
@@ -88,12 +97,45 @@
             },
             dopunskaSelected() {
                 this.vrstaPrijave = 'DOPUNSKA';
+            },
+            updateXonomyData(data) {
+                this.xonomyData = data.replaceAll(" xml:space='preserve'", "").replaceAll("<b>", "").replaceAll("</b>", "").replaceAll("<i>", "").replaceAll("</i>", "");
+                
+            },
+            submit() {
+                this.parseXonomy();
+            },
+            parseXonomy() {
+                xml2js.parseString(this.xonomyData, (_err, result) => {
+                    let naziv1 = result.Podaci_o_patentu.Podaci_o_nazivu[0].Naziv[0]['_'];
+                    let jezik1 = result.Podaci_o_patentu.Podaci_o_nazivu[0].Naziv[0]['$'].jezik;
+                    let naziv2 = result.Podaci_o_patentu.Podaci_o_nazivu[0].Naziv[1]['_'];
+                    if (jezik1 === 'srpski') {
+                        this.nazivSrpski = naziv1;
+                        this.nazivEngleski = naziv2;
+                    } else {
+                        this.nazivSrpski = naziv2;
+                        this.nazivEngleski = naziv1;
+                    }
+                    let prijave = result.Podaci_o_patentu.Priznanje_prvenstva_iz_ranijih_prijava[0].Prijava;
+                    for (let p of prijave) {
+                        this.ranijePrijave.push({
+                            brojPrijave: +p.Broj_prijave[0],
+                            datumPodnosenja: p.Datum_podnosenja[0],
+                            oznaka: p.Dvoslovna_oznaka_organizacije[0]
+                        });
+                    }
+                });
             }
         }
     }
 </script>
 
 <style scoped>
+    button {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
     .text-centered {
         text-align: center;
     }
