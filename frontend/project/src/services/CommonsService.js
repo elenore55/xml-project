@@ -34,8 +34,9 @@ const naprednaPretragaBezResenja = (rows) => {
     return axios.get(`${store.state.host}/metadata/bezResenja/advancedSearch/${query}`);
 }
 
-const getOne = (brojZahteva) => {
-    return axios.get(`${store.state.host}/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
+const getOne = (brojZahteva, servis) => {
+    if (!servis) servis = store.state.host; 
+    return axios.get(`${servis}/zahtev/htmlString/Zahtev${brojZahteva}.xml`);
 }
 
 const getOneResenje = (referenca) => {
@@ -185,6 +186,7 @@ const getReferencirajuciDokumenti = (id, servis) => {
         return axios.get(`http://localhost:8001/autorsko_pravo/resenje/one/Resenje_Zahtev${id}.xml`);
     if (servis === 'Z1')
         return axios.get(`http://localhost:8003/zig/resenje/one/Resenje_Zahtev${id}.xml`);
+    return axios.get(`http://localhost:8002/patent/zahtev/getReferencing/${id}`);
 }
 
 const getId = (zahtev) => {

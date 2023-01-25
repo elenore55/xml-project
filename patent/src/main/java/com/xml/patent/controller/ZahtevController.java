@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -149,5 +150,10 @@ public class ZahtevController {
     public ResponseEntity<Void> save(@RequestBody CreateZahtevDTO dto) throws Exception {
         zahtevService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "zahtev/getReferencing/{brojPrijave}", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<List<Zahtev>> getReferencingDocuments(@PathVariable int brojPrijave) throws Exception {
+        return new ResponseEntity<>(zahtevService.getReferencingDocuments(brojPrijave), HttpStatus.OK);
     }
 }

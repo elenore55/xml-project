@@ -9,4 +9,8 @@ const save = (xmlString) => {
     return axios.post('http://localhost:8002/patent/zahtev/save', xmlString, config);
 }
 
-export default { save }
+const getResenje = (broj) => {
+    return axios.get(`http://localhost:8002/patent/resenje/one/Resenje_Zahtev${broj}.xml`);
+}
+
+export default { save, getResenje }

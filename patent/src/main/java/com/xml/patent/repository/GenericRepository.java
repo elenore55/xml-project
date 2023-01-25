@@ -123,6 +123,29 @@ public abstract class GenericRepository {
         }
     }
 
+    protected List<XMLResource> getReferencingResources(int brojPrijave) throws Exception {
+        var conn = AuthUtil.loadProperties();
+        setup(conn.driver);
+        res = null;
+        var retVal = new ArrayList<XMLResource>();
+        try {
+            col = getOrCreateCollection(conn);
+            col.setProperty(OutputKeys.INDENT, "yes");
+            var xPathQueryService = (XPathQueryService) col.getService("XPathQueryService", "1.0");
+            xPathQueryService.setNamespace("p1", "http://www.ftn.com/p1");
+            xPathQueryService.setProperty("indent", "yes");
+            String xPathExp = String.format("/p1:Zahtev[.//p1:Ranija_prijava/p1:Broj[text() = '%s']] | /p1:Zahtev[.//p1:Prvobitna_prijava/p1:Broj[text() = '%s']]", brojPrijave, brojPrijave);
+            var iter = xPathQueryService.query(xPathExp).getIterator();
+            while (iter.hasMoreResources()) {
+                res = (XMLResource) iter.nextResource();
+                retVal.add(res);
+            }
+            return retVal;
+        } finally {
+            cleanUp(res, col);
+        }
+    }
+
     private String createXPathExpression(String text, boolean matchCase) {
         if (matchCase) return String.format("/*[contains(., '%s')]", text);
         return String.format("/*[contains(lower-case(.), '%s')]", text.toLowerCase());

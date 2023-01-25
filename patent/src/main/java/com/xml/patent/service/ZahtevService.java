@@ -124,4 +124,8 @@ public class ZahtevService {
         zahtevMetadataRepository.extract(zahtev);
         zahtevRepository.save(zahtev);
     }
+
+    public List<Zahtev> getReferencingDocuments(int brojPrijave) throws Exception {
+        return zahtevRepository.getReferencingDocuments(brojPrijave);
+    }
 }

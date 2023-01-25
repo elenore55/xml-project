@@ -68,4 +68,11 @@ public class ZahtevRepository extends GenericRepository {
             return -1;
         }
     }
+
+    public List<Zahtev> getReferencingDocuments(int brojPrijave) throws Exception {
+        var result = new ArrayList<Zahtev>();
+        for (var resource : getReferencingResources(brojPrijave))
+            result.add(marshalling.unmarshallContent(resource.getContentAsDOM()));
+        return result;
+    }
 }
