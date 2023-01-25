@@ -17,8 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -53,7 +51,7 @@ public class ZahtevController {
     }
 
     @GetMapping(value = "zahtev/html/{name}")
-    public ResponseEntity<InputStreamResource> getHtml(@PathVariable String name) throws FileNotFoundException {
+    public ResponseEntity<InputStreamResource> getHtml(@PathVariable String name) throws Exception {
         htmlTransformer.generateHtml(name);
         var file = new File(HTMLTransformer.HTML_FILE);
         var resource = new InputStreamResource(new FileInputStream(file));
@@ -65,14 +63,14 @@ public class ZahtevController {
     }
 
     @GetMapping(value = "zahtev/htmlString/{name}")
-    public ResponseEntity<String> getHtmlString(@PathVariable String name) throws IOException {
+    public ResponseEntity<String> getHtmlString(@PathVariable String name) throws Exception {
         htmlTransformer.generateHtml(name);
-        String content = new String(Files.readAllBytes(Paths.get(HTMLTransformer.HTML_FILE)));
+        String content = Files.readString(Paths.get(HTMLTransformer.HTML_FILE));
         return new ResponseEntity<>(content, HttpStatus.OK);
     }
 
     @GetMapping(value = "zahtev/pdf/{name}", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> getPdf(@PathVariable String name) throws IOException {
+    public ResponseEntity<InputStreamResource> getPdf(@PathVariable String name) throws Exception {
         pdfTransformer.generatePDF(name);
         var file = new File(PDFTransformer.PDF_FILE);
         var resource = new InputStreamResource(new FileInputStream(file));

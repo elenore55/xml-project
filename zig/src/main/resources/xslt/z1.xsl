@@ -564,6 +564,14 @@
                         </tr>
                     </tbody>
                 </table>
+                <div style="display: flex; justify-content: center">
+                    <xsl:variable name="broj" select="concat(//z1:Broj_prijave_ziga/z1:Id, '-', //z1:Broj_prijave_ziga/z1:Godina)"/>
+                    <img>
+                        <xsl:attribute name="src">
+                            <xsl:value-of select="concat('http://localhost:8003/qr_codes/Zahtev', $broj, '.jpg')"/>
+                        </xsl:attribute>
+                    </img>
+                </div>
             </body>
         </html>
     </xsl:template>

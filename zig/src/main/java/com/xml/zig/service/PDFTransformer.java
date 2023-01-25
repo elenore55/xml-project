@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
 
 @Service
 public class PDFTransformer {
@@ -25,7 +23,7 @@ public class PDFTransformer {
         this.htmlTransformer = htmlTransformer;
     }
 
-    public void generatePDF(String documentName) throws IOException {
+    public void generatePDF(String documentName) throws Exception {
         htmlTransformer.generateHtml(documentName);
         HtmlConverter.convertToPdf(new File(HTMLTransformer.HTML_FILE), new File(PDF_FILE));
     }
