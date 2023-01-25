@@ -122,7 +122,7 @@ public class ZahtevController {
                 .body(resource);
     }
 
-    @GetMapping(value = "zahtev/bezResenja")
+    @GetMapping(value = "zahtev/bezResenja", produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<List<Zahtev>> getZahteviBezResenja() throws Exception {
         return new ResponseEntity<>(zahtevService.getZahteviBezResenja(), HttpStatus.OK);
     }

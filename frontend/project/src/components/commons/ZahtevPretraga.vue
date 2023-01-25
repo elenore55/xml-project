@@ -22,13 +22,15 @@
         <div class="fullscreen flex-container">
             <div class="item">
                 <div v-for="r in rezultati" :key="r.id" class="link flex-container-sm">
-                        <a href="#/zahtevPretraga" @click="prikaziZahtev(r.popunjavaZavod[0].brojPrijave[0])" >Zahtev-{{ r.popunjavaZavod[0].brojPrijave[0] }}</a>
-                        <button type="button" class="small" @click="downloadHTML(r.popunjavaZavod[0].brojPrijave[0])">HTML</button>
-                        <button type="button" class="small" @click="downloadPDF(r.popunjavaZavod[0].brojPrijave[0])">PDF</button>
+                        <a href="#/zahtevPretraga" @click="prikaziZahtev(getId(r))" >Zahtev-{{ getId(r) }}</a>
+                        <button type="button" class="small" @click="downloadHTML(getId(r))">HTML</button>
+                        <button type="button" class="small" @click="downloadPDF(getId(r))">PDF</button>
                 </div>
             </div>
             <div v-if="htmlContent != ''" class="item-big">
-                <button id="ref-docs">Referencirajući dokumenti</button>
+                <a target="_blank" rel="noreferrer" :href="`#/referencirajuci/${selectedZahtevId}/${servis}`" id="ref-docs">
+                    Referencirajući dokumenti
+                </a>
                 <div v-html="htmlContent" id="div-html"></div>
             </div>
         </div>
@@ -54,7 +56,8 @@
                 matchCase: false,
                 rezultati: [],
                 htmlContent: '',
-                rows: []
+                rows: [],
+                selectedZahtevId: ''
             }
         },
         methods: {
@@ -63,6 +66,7 @@
                 CommonsService.osnovnaPretraga(this.tekst, this.matchCase)
                 .then((response) => {
                     xml2js.parseString(response.data, (_err, result) => {
+                        console.log(result);
                         for (let i of result.List.item) {
                             this.rezultati.push(JSON.parse(JSON.stringify(i)));
                         }
@@ -76,7 +80,6 @@
             naprednaPretraga() {
                 this.rezultati = [];
                 CommonsService.naprednaPretraga(this.rows).then((response) => {
-                    console.log(response.data);
                     xml2js.parseString(response.data, (_err, result) => {
                         for (let i of result.List.item) {
                             this.rezultati.push(JSON.parse(JSON.stringify(i)));
@@ -88,8 +91,8 @@
                 });
             },
             prikaziZahtev(broj) {
+                this.selectedZahtevId = broj;
                 CommonsService.getOne(broj).then((response) => {
-                    console.log(response.data);
                     this.htmlContent = response.data;
                 }).catch((err) => {
                     console.log(err);
@@ -103,6 +106,14 @@
             },
             updateFilter(rows) {
                 this.rows = rows;
+            },
+            getId(zahtev) {
+                return CommonsService.getId(zahtev);
+            }
+        },
+        computed: {
+            servis() {
+                return CommonsService.getServis();
             }
         }
     }
@@ -134,10 +145,10 @@
         gap: 15px;
     }
     .item {
-        flex: 1
+        flex: 2
     }
     .item-big {
-        flex: 3
+        flex: 5
     }
     .fullscreen {
         width: 90%;

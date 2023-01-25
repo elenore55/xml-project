@@ -1,5 +1,6 @@
 package com.xml.patent.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ public class Resenje {
 
     @XmlElement(name = "Datum_resenja", required = true)
     @XmlSchemaType(name = "date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     protected Date datumResenja;
 
     @XmlElement(name = "Ime_sluzbenika", required = true)

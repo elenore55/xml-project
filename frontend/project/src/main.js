@@ -11,6 +11,7 @@ import PodnosenjeResenja from './components/commons/PodnosenjeResenja';
 import PodnosenjeZahtevaZ1 from './components/z1/PodnosenjeZahtevaZ1';
 import PodnosenjeZahtevaP1 from './components/p1/PodnosenjeZahtevaP1';
 import ResenjePretraga from './components/commons/ResenjePretraga';
+import ReferencirajuciDocs from './components/commons/ReferencirajuciDocs';
 import store from './store';
 
 Vue.config.productionTip = false
@@ -30,6 +31,7 @@ const router = new VueRouter({
     { path: '/podnosenjeResenja', component: PodnosenjeResenja },
     { path: '/z1/podnosenjeZahteva', component: PodnosenjeZahtevaZ1, },
     { path: '/p1/podnosenjeZahteva', component: PodnosenjeZahtevaP1, },
+    { path: '/referencirajuci/:id/:servis', component: ReferencirajuciDocs, },
   ]
 })
 

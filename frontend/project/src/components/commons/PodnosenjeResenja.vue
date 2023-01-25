@@ -23,7 +23,7 @@
             <div class="item">
                 <div v-for="(r, i) in zahtevi" :key="r.id">
                     <div class="link flex-container-sm">
-                        <a href="#" @click="prikaziZahtev(r.popunjavaZavod[0].brojPrijave[0])" >Zahtev-{{ r.popunjavaZavod[0].brojPrijave[0] }}</a>
+                        <a href="#" @click="prikaziZahtev(getId(r))" >Zahtev-{{ getId(r) }}</a>
                         <button v-if="activeZahtev == -1" type="button" @click="activateZahtev(i)">Podnesi rešenje</button>
                         <button v-else-if="activeZahtev != i" type="button" disabled>Podnesi rešenje</button>
                         <button v-else type="button" @click="deactivateZahtev">Odustani</button>
@@ -69,11 +69,10 @@
             FilterUnos
         },
         mounted() {
-            let that = this;
             CommonsService.getNereseniZahtevi().then((response) => {
-                xml2js.parseString(response.data, function(_err, result) {
+                xml2js.parseString(response.data, (_err, result) => {
                     for (let i of result.List.item) {
-                        that.zahtevi.push(JSON.parse(JSON.stringify(i)));
+                        this.zahtevi.push(JSON.parse(JSON.stringify(i)));
                     }
                 });
             }).catch((err) => {
@@ -96,11 +95,10 @@
         methods: {
             osnovnaPretraga() {
                 this.zahtevi = [];
-                let that = this;
                 CommonsService.osnovnaPretragaBezResenja(this.tekst, this.matchCase).then((response) => {
-                    xml2js.parseString(response.data, function(_err, result) {
+                    xml2js.parseString(response.data, (_err, result) => {
                         for (let i of result.List.item) {
-                            that.zahtevi.push(JSON.parse(JSON.stringify(i)));
+                            this.zahtevi.push(JSON.parse(JSON.stringify(i)));
                         }
                     });
                     this.htmlContent = '';
@@ -143,7 +141,7 @@
                 let resenje = {
                     imeSluzbenika: localStorage.getItem('name'),
                     prezimeSluzbenika: localStorage.getItem('surname'),
-                    nazivDokumenta: `Zahtev${this.zahtevi[i].popunjavaZavod[0].brojPrijave[0]}`
+                    nazivDokumenta: `Zahtev${this.getId(this.zahtevi[i])}`
                 }
                 if (this.odbijenSelected) {
                     resenje['obrazlozenje'] = this.razlogOdbijanja;
@@ -168,6 +166,9 @@
             },
             updateFilter(rows) {
                 this.rows = rows;
+            },
+            getId(zahtev) {
+                return CommonsService.getId(zahtev);
             }
         }
     }
@@ -212,10 +213,10 @@
         gap: 15px;
     }
     .item {
-        flex: 1
+        flex: 2
     }
     .item-big {
-        flex: 3
+        flex: 5
     }
     .fullscreen {
         width: 90%;
@@ -226,9 +227,6 @@
         margin-bottom: 5px;
     }
     button {
-        font-size: 16px;
-    }
-    button.small {
         font-size: 14px;
     }
     .link {

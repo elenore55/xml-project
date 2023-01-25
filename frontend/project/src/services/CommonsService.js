@@ -180,6 +180,24 @@ const buildQuery = (rows) => {
     return result.join(' ');
 }
 
-export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport, getZahtevMetadata, 
+const getReferencirajuciDokumenti = (id, servis) => {
+    if (servis === 'A1')
+        return axios.get(`http://localhost:8001/autorsko_pravo/resenje/one/Resenje_Zahtev${id}.xml`);
+    if (servis === 'Z1')
+        return axios.get(`http://localhost:8003/zig/resenje/one/Resenje_Zahtev${id}.xml`);
+}
+
+const getId = (zahtev) => {
+    if (store.state.servis != 'Ž1')
+        return zahtev.popunjavaZavod[0].brojPrijave[0];
+    return `${zahtev.popunjavaZavod[0].brojPrijaveZiga[0].id[0]}-${zahtev.popunjavaZavod[0].brojPrijaveZiga[0].godina[0]}`;
+}
+
+const getServis = () => {
+    if (store.state.servis != 'Ž1') return store.state.servis;
+    return 'Z1';
+}
+
+export default { osnovnaPretraga, getOne, downloadZahtevPDF, downloadZahtevHTML, generateReport, getZahtevMetadata, getServis,
     getResenjeMetadata, getNereseniZahtevi, odobriZahtev, odbijZahtev, osnovnaPretragaBezResenja, getOneResenje, osnovnaPretragaResenje,
-    getResenjeMetadataVars, getZahtevMetadataVars, naprednaPretragaResenje, naprednaPretraga, naprednaPretragaBezResenja }
+    getResenjeMetadataVars, getZahtevMetadataVars, naprednaPretragaResenje, naprednaPretraga, naprednaPretragaBezResenja, getId, getReferencirajuciDokumenti }
