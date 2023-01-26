@@ -8,7 +8,7 @@
                 <a @click="setZ1Servis" :class="getServis == 'Ž1'? 'active': 'none'">Žigovi</a>
             </div>
         </div>
-        <a>Podnesi zahtev</a>
+        <a @click="podnesiZahtev">Podnesi zahtev</a>
         <a @click="goToResenjePretraga">Pretraga rešenja</a>
         <a @click="logout">Logout</a>
     </div>
@@ -46,6 +46,11 @@
             goToResenjePretraga() {
                 this.$router.push('/resenjePretraga');
             },
+            podnesiZahtev() {
+                if (this.$store.state.servis === 'A1') this.$router.push('#/a1/podnosenjeZahteva');
+                else if (this.$store.state.servis === 'P1') this.$router.push('#/p1/podnosenjeZahteva');
+                else this.$router.push('/z1/podnosenjeZahteva');
+            }
         },
         computed: {
             getServis() {

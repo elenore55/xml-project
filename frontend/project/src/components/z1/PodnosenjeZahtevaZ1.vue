@@ -1,25 +1,28 @@
 <template>
-    <div class="centered">
-        <PodnosilacPrijave ref="podnosilac" @updatePodnosilac="updatePodnosilac($event)" title="Podnosioci prijave"></PodnosilacPrijave>
-        <button type="button" @click="dodajPodnosioca">Dodaj podnosioca</button>
-        <div>
-            <p>Dodati podnosioci:</p>
-            <ul>
-                <li v-for="p in podnosioci" :key="p.id">
-                    <div class="flex-container">
-                    <p v-if="p.ime">{{ p.ime }} {{ p.prezime }}, {{ p.adresa.ulica }} {{ p.adresa.broj }}, {{ p.adresa.postanskiBroj }} {{ p.adresa.mesto }}</p>
-                    <p v-else>{{ p.poslovnoIme }}, {{ p.adresa.ulica }} {{ p.adresa.broj }}, {{ p.adresa.postanskiBroj }} {{ p.adresa.mesto }}</p>
-                    <button type="button" @click="ukloniPodnosioca" class="btn-del">X</button>
-                    </div>
-                </li>
-            </ul>
+    <div>
+        <GradjaninNav></GradjaninNav>
+        <div class="centered">
+            <PodnosilacPrijave ref="podnosilac" @updatePodnosilac="updatePodnosilac($event)" title="Podnosioci prijave"></PodnosilacPrijave>
+            <button type="button" @click="dodajPodnosioca">Dodaj podnosioca</button>
+            <div>
+                <p>Dodati podnosioci:</p>
+                <ul>
+                    <li v-for="p in podnosioci" :key="p.id">
+                        <div class="flex-container">
+                        <p v-if="p.ime">{{ p.ime }} {{ p.prezime }}, {{ p.adresa.ulica }} {{ p.adresa.broj }}, {{ p.adresa.postanskiBroj }} {{ p.adresa.mesto }}</p>
+                        <p v-else>{{ p.poslovnoIme }}, {{ p.adresa.ulica }} {{ p.adresa.broj }}, {{ p.adresa.postanskiBroj }} {{ p.adresa.mesto }}</p>
+                        <button type="button" @click="ukloniPodnosioca" class="btn-del">X</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <PodnosilacPrijave @updatePodnosilac="updatePunomocnik($event)" title="Punomoćnik"></PodnosilacPrijave>
+            <PodnosilacPrijave @updatePodnosilac="updatePredstavnik($event)" v-if="podnosioci.length > 1" title="Zajednički predstavnik"></PodnosilacPrijave>
+            <PodaciOZigu @updateZig="updateZig($event)"></PodaciOZigu>
+            <PlaceneTakse @updatePlaceneTakse="updatePlaceneTakse($event)"></PlaceneTakse>
+            <PriloziUnos @updatePrilozi="updatePrilozi($event)"></PriloziUnos>
+            <button type="button" @click="submit">Podnesi zahtev</button>
         </div>
-        <PodnosilacPrijave @updatePodnosilac="updatePunomocnik($event)" title="Punomoćnik"></PodnosilacPrijave>
-        <PodnosilacPrijave @updatePodnosilac="updatePredstavnik($event)" v-if="podnosioci.length > 1" title="Zajednički predstavnik"></PodnosilacPrijave>
-        <PodaciOZigu @updateZig="updateZig($event)"></PodaciOZigu>
-        <PlaceneTakse @updatePlaceneTakse="updatePlaceneTakse($event)"></PlaceneTakse>
-        <PriloziUnos @updatePrilozi="updatePrilozi($event)"></PriloziUnos>
-        <button type="button" @click="submit">Podnesi zahtev</button>
     </div>
 </template>
 
@@ -30,6 +33,7 @@
     import PlaceneTakse from './PlaceneTakse.vue';
     import PriloziUnos from './PriloziUnos.vue';
     import * as js2xml from 'js2xmlparser';
+    import GradjaninNav from '../user/GradjaninNav.vue';
 
     export default {
         name: 'PodnosenjeZahtevaZ1',
@@ -37,7 +41,8 @@
             PodnosilacPrijave,
             PodaciOZigu,
             PlaceneTakse,
-            PriloziUnos
+            PriloziUnos,
+            GradjaninNav
         },
         data() {
             return {

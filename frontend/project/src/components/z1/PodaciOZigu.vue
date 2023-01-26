@@ -11,14 +11,14 @@
                 </select>
             </div>
             <div class="flex-container-v item">
-                <label>Vrsta znaka</label>
-                <select class="item" v-model="vrstaZnakaChoice" @change="vrstaChanged($event)">
-                    <option value="1">Verbalni znak</option>
-                    <option value="2">Grafički znak</option>
-                    <option value="3">Kombinovani znak</option>
-                    <option value="4">Trodimenzionalni znak</option>
-                    <option value="5">Ostalo</option>
-                </select>
+                <label>Vrsta znaka</label> 
+                <input type="text" list="vrsta" v-model="vrstaZnaka" @change="updateZig" />
+                <datalist id="vrsta">
+                    <option>Verbalni znak</option>
+                    <option>Grafički znak</option>
+                    <option>Kombinovani znak</option>
+                    <option>Trodimenzionalni znak</option>
+                </datalist>
             </div>
             <div class="flex-container-v item">
                 <label>Izgled znaka</label>
@@ -95,7 +95,7 @@
         data() {
             return {
                 tipZigaChoice: 1,
-                vrstaZnakaChoice: 1,
+                vrstaZnakaChoice: '',
                 vrstaZnaka: '',
                 vrstaZnakaInput: '',
                 izgledZnaka: '',
@@ -123,11 +123,6 @@
                     nicanskaKlasifikacijaList: {nicanskaKlasifikacija: this.nicanskaKlasifikacija},
                     pravoPrvenstva: this.pravoPrvenstva
                 });
-            },
-            vrstaChanged(e) {
-                if (this.vrstaZnakaChoice == 5) this.vrstaZnaka = '';
-                else this.vrstaZnaka = e.target.options[e.target.options.selectedIndex].text;
-                this.updateZig();
             },
             dodajBoju() {
                 if (this.boja) {
