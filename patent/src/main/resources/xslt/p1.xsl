@@ -5,7 +5,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:p1="http://www.ftn.com/p1" version="2.0">
     <xsl:template match="/">
-        <html>
+        <html lang="sr">
             <head>
                 <title>P1</title>
                 <style type="text/css">
@@ -382,8 +382,13 @@
                         </p>
                         <xsl:if test="//p1:Zahtev/@tip_prijave='DOPUNSKA'">
                             <p style="border-bottom: 1px solid black;" class="padded">
-                                Broj prvobitne prijave / osnovne prijave: &nbsp;<xsl:value-of
-                                    select="//p1:Prvobitna_prijava/p1:Broj"/>
+                                Broj prvobitne prijave / osnovne prijave: &nbsp;
+                                <a target="_blank">
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of select="concat('http://localhost:8002/patent/zahtev/htmlString/Zahtev', //p1:Prvobitna_prijava/p1:Broj, '.xml')"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="//p1:Prvobitna_prijava/p1:Broj"/>
+                                </a>
                             </p>
                             <p class="padded">
                                 Datum podnošenja prvobitne prijave / osnovne prijave: &nbsp;<xsl:value-of
@@ -420,7 +425,12 @@
                                             <xsl:value-of select="p1:Datum_podnosenja"/>
                                         </td>
                                         <td class="centered">
-                                            <xsl:value-of select="p1:Broj"/>
+                                            <a target="_blank">
+                                                <xsl:attribute name="href">
+                                                    <xsl:value-of select="concat('http://localhost:8002/patent/zahtev/htmlString/Zahtev', p1:Broj, '.xml')"/>
+                                                </xsl:attribute>
+                                                <xsl:value-of select="p1:Broj"/>
+                                            </a>
                                         </td>
                                         <td class="centered">
                                             <xsl:value-of select="p1:Oznaka"/>

@@ -21,18 +21,16 @@ public class ResenjeService {
     ResenjeMetadataRepository resenjeMetadataRepository;
     ZahtevMetadataRepository zahtevMetadataRepository;
     PDFTransformer pdfTransformer;
-    HTMLTransformer htmlTransformer;
 
     @Autowired
     public ResenjeService(MetadataSearchService metadataSearchService, ResenjeRepository resenjeRepository,
                           ResenjeMetadataRepository resenjeMetadataRepository, ZahtevMetadataRepository zahtevMetadataRepository,
-                          PDFTransformer pdfTransformer, HTMLTransformer htmlTransformer) {
+                          PDFTransformer pdfTransformer) {
         this.metadataSearchService = metadataSearchService;
         this.resenjeRepository = resenjeRepository;
         this.resenjeMetadataRepository = resenjeMetadataRepository;
         this.zahtevMetadataRepository = zahtevMetadataRepository;
         this.pdfTransformer = pdfTransformer;
-        this.htmlTransformer = htmlTransformer;
     }
 
     public void accept(CreateResenjeDTO dto) throws Exception {
@@ -44,7 +42,6 @@ public class ResenjeService {
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
         resenjeMetadataRepository.extract(resenje);
-        htmlTransformer.generateHtml(dto.getNazivDokumenta() + ".xml", String.format("content/zahtevi/%s.html", dto.getNazivDokumenta()));
     }
 
     public void reject(CreateResenjeDTO.CreateOdbijenZahtevDTO dto) throws Exception {
@@ -56,7 +53,6 @@ public class ResenjeService {
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
         resenjeMetadataRepository.extract(resenje);
-        htmlTransformer.generateHtml(dto.getNazivDokumenta() + ".xml", String.format("content/zahtevi/%s.html", dto.getNazivDokumenta()));
     }
 
     public Resenje getOne(String name) throws Exception {

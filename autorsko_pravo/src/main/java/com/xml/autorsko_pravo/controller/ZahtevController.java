@@ -71,7 +71,7 @@ public class ZahtevController {
     @GetMapping(value = "zahtev/htmlString/{name}")
     public ResponseEntity<String> getHtmlString(@PathVariable String name) throws IOException {
         htmlTransformer.generateHtml(name);
-        String content = new String(Files.readAllBytes(Paths.get(HTMLTransformer.HTML_FILE)));
+        String content = Files.readString(Paths.get(HTMLTransformer.HTML_FILE));
         return new ResponseEntity<>(content, HttpStatus.OK);
     }
 

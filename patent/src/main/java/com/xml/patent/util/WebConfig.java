@@ -17,6 +17,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        var dir = System.getProperty("user.dir");
+        var path = String.format("file:/%s/content/", dir);
+        registry.addResourceHandler("/**").addResourceLocations(path);
     }
 }

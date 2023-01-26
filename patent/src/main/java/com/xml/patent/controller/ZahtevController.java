@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class ZahtevController {
     @GetMapping(value = "zahtev/htmlString/{name}")
     public ResponseEntity<String> getHtmlString(@PathVariable String name) throws IOException {
         htmlTransformer.generateHtml(name);
-        String content = new String(Files.readAllBytes(Paths.get(HTMLTransformer.HTML_FILE)));
+        String content = Files.readString(Paths.get(HTMLTransformer.HTML_FILE), StandardCharsets.UTF_8);
         return new ResponseEntity<>(content, HttpStatus.OK);
     }
 

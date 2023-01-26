@@ -11,7 +11,7 @@
         
         <label>Službenik: {{ imeSluzbenika }} {{ prezimeSluzbenika }}</label>
         
-        <label>Referenca na zahtev:<a target="_blank" :href="`${getHost()}/zahtevi/${referenca}.html`"> {{ referenca }}</a></label>
+        <label>Referenca na zahtev:<a target="_blank" :href="`${getHost()}/zahtev/htmlString/${referenca}.xml`"> {{ referenca }}</a></label>
         
         <label v-if="sifra">Šifra zahteva: {{ sifra }}</label>
 
@@ -27,13 +27,12 @@
             getHost() {
                 if (this.servis) {
                     let port;
-                    if (this.servis === 'A1') port = 8001;
-                    else if (this.servis === 'P1') port = 8002;
-                    else port = 8003;
+                    if (this.servis === 'A1') port = '8001/autorsko_pravo';
+                    else if (this.servis === 'P1') port = '8002/patent';
+                    else port = '8003/zig';
                     return `http://localhost:${port}`;
                 }
-                let full = this.$store.state.host; 
-                return full.substring(0, full.lastIndexOf('/'));   
+                return this.$store.state.host; 
             }
         }
     }
