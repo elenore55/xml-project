@@ -38,6 +38,10 @@ public class HTMLTransformer {
     }
 
     public void generateHtml(String documentName) {
+        generateHtml(documentName, HTML_FILE);
+    }
+
+    public void generateHtml(String documentName, String path) {
         try {
             var transformSource = new StreamSource(new File(XSL_FILE));
             var transformer = transformerFactory.newTransformer(transformSource);
@@ -45,7 +49,7 @@ public class HTMLTransformer {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.METHOD, "xhtml");
             var source = new DOMSource(zahtevRepository.getAsNode(documentName));
-            var result = new StreamResult(new FileOutputStream(HTML_FILE));
+            var result = new StreamResult(new FileOutputStream(path));
             transformer.transform(source, result);
         } catch (Exception e) {
             e.printStackTrace();

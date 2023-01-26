@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:a1="http://www.ftn.com/a1" xmlns:pred="http://www.ftn.com/a1/pred/">
-<rdf:Description rdf:about="http://www.ftn.com/a1/Resenje-Zahtev25">
-<pred:Naziv_fajla>Resenje_Zahtev25.xml</pred:Naziv_fajla>
-<pred:Datum_resenja>2023-01-13+01:00</pred:Datum_resenja>
-<pred:Ime_sluzbenika>Pero</pred:Ime_sluzbenika>
-<pred:Prezime_sluzbenika>Peric</pred:Prezime_sluzbenika>
+<rdf:Description rdf:about="http://www.ftn.com/a1/Resenje-Zahtev9">
+<pred:Naziv_fajla>Resenje_Zahtev9.xml</pred:Naziv_fajla>
+<pred:Datum_resenja>2023-01-26+01:00</pred:Datum_resenja>
+<pred:Ime_sluzbenika>Milica</pred:Ime_sluzbenika>
+<pred:Prezime_sluzbenika>Milica</pred:Prezime_sluzbenika>
 <pred:Odobren>false</pred:Odobren>
 </rdf:Description>
 </rdf:RDF>

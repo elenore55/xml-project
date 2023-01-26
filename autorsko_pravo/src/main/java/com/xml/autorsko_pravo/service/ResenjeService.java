@@ -23,11 +23,12 @@ public class ResenjeService {
     ZahtevMetadataRepository zahtevMetadataRepository;
     PDFTransformer pdfTransformer;
     EmailSender emailSender;
+    HTMLTransformer htmlTransformer;
 
     @Autowired
     public ResenjeService(MetadataSearchService metadataSearchService, ResenjeRepository resenjeRepository, ZahtevRepository zahtevRepository,
                           ResenjeMetadataRepository resenjeMetadataRepository, ZahtevMetadataRepository zahtevMetadataRepository,
-                          PDFTransformer pdfTransformer, EmailSender emailSender) {
+                          PDFTransformer pdfTransformer, EmailSender emailSender, HTMLTransformer htmlTransformer) {
         this.metadataSearchService = metadataSearchService;
         this.resenjeRepository = resenjeRepository;
         this.zahtevRepository = zahtevRepository;
@@ -35,6 +36,7 @@ public class ResenjeService {
         this.zahtevMetadataRepository = zahtevMetadataRepository;
         this.pdfTransformer = pdfTransformer;
         this.emailSender = emailSender;
+        this.htmlTransformer = htmlTransformer;
     }
 
     public void accept(CreateResenjeDTO dto) throws Exception {
@@ -46,6 +48,7 @@ public class ResenjeService {
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
         resenjeMetadataRepository.extract(resenje);
+        htmlTransformer.generateHtml(dto.getNazivDokumenta() + ".xml", String.format("content/zahtevi/%s.html", dto.getNazivDokumenta()));
         notifyPodnosilac(resenje);
     }
 
@@ -58,6 +61,7 @@ public class ResenjeService {
         resenje.setReferenca(dto.getNazivDokumenta());
         resenjeRepository.save(resenje);
         resenjeMetadataRepository.extract(resenje);
+        htmlTransformer.generateHtml(dto.getNazivDokumenta() + ".xml", String.format("content/zahtevi/%s.html", dto.getNazivDokumenta()));
         notifyPodnosilac(resenje);
     }
 

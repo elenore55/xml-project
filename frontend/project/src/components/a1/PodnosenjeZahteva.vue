@@ -1,36 +1,39 @@
 <template>
     <div>
-        <h2 class="centered-text">ZAHTEV ZA UNOŠENJE U EVIDENCIJU I DEPONOVANJE AUTORSKIH DELA</h2>
-        <div class="centered">
-            <PodnosilacPrijaveUnos @updatePodnosilac="updatePodnosilac($event)"></PodnosilacPrijaveUnos>
+        <GradjaninNav></GradjaninNav>
+        <div>
+            <h2 class="centered-text">ZAHTEV ZA UNOŠENJE U EVIDENCIJU I DEPONOVANJE AUTORSKIH DELA</h2>
+            <div class="centered">
+                <PodnosilacPrijaveUnos @updatePodnosilac="updatePodnosilac($event)"></PodnosilacPrijaveUnos>
 
-            <AutorskoDeloUnos @updateAutorskoDelo="updateAutorskoDelo($event)"></AutorskoDeloUnos>
+                <AutorskoDeloUnos @updateAutorskoDelo="updateAutorskoDelo($event)"></AutorskoDeloUnos>
 
-            <h2>Autori dela</h2>
-            <div v-for="(autor, i) in autorList" :key="autor.id" class="indented flex-container">
-                <button type="button" @click="autorList.splice(i, 1)" class="btn-delete">-</button>
-                <AutorPrikaz :ime="autor.ime" :prezime="autor.prezime" :godinaSmrti="autor.godinaSmrti" :drzavljanstvo="autor.drzavljanstvo" 
-                    :adresa="autor.adresa" class="item"></AutorPrikaz>
-            </div>
-            
-            <AutorUnos @updateAutor="updateAutor($event)" @addAutor="addAutor"></AutorUnos>
-
-            <div>
-                <h2>Prilozi uz prijavu</h2>
-                <div class="flex-container">
-                    <div class="flex-container item">
-                        <input type="radio" name="prilog" checked @change="opisDelaSelected" />
-                        <span>Opis autorskog dela</span>
-                    </div>
-                    <div class="flex-container item">
-                        <input type="radio" name="prilog" @change="primerSelected"/>
-                        <span>Primer autorskog dela</span>
-                    </div>
+                <h2>Autori dela</h2>
+                <div v-for="(autor, i) in autorList" :key="autor.id" class="indented flex-container">
+                    <button type="button" @click="autorList.splice(i, 1)" class="btn-delete">-</button>
+                    <AutorPrikaz :ime="autor.ime" :prezime="autor.prezime" :godinaSmrti="autor.godinaSmrti" :drzavljanstvo="autor.drzavljanstvo" 
+                        :adresa="autor.adresa" class="item"></AutorPrikaz>
                 </div>
-                <input v-if="opisDelaFlag" type="text" v-model="opisDela" />
-                <input v-else type="file" ref="file" id="file" @change="handleFileUpload($event)" />
+                
+                <AutorUnos @updateAutor="updateAutor($event)" @addAutor="addAutor"></AutorUnos>
+
+                <div>
+                    <h2>Prilozi uz prijavu</h2>
+                    <div class="flex-container">
+                        <div class="flex-container item">
+                            <input type="radio" name="prilog" checked @change="opisDelaSelected" />
+                            <span>Opis autorskog dela</span>
+                        </div>
+                        <div class="flex-container item">
+                            <input type="radio" name="prilog" @change="primerSelected"/>
+                            <span>Primer autorskog dela</span>
+                        </div>
+                    </div>
+                    <input v-if="opisDelaFlag" type="text" v-model="opisDela" />
+                    <input v-else type="file" ref="file" id="file" @change="handleFileUpload($event)" />
+                </div>
+                <button type="button" @click="submit">Podnesi zahtev</button>
             </div>
-            <button type="button" @click="submit">Podnesi zahtev</button>
         </div>
     </div>
 </template>
@@ -41,6 +44,7 @@
     import AutorskoDeloUnos from '@/components/a1/AutorskoDeloUnos.vue';
     import AutorUnos from '@/components/a1/AutorUnos.vue';
     import AutorPrikaz from '@/components/a1/AutorPrikaz.vue';
+    import GradjaninNav from '../user/GradjaninNav.vue';
     import * as js2xml from 'js2xmlparser';
 
     export default {
@@ -49,7 +53,8 @@
             AutorskoDeloUnos,
             PodnosilacPrijaveUnos,
             AutorUnos,
-            AutorPrikaz
+            AutorPrikaz,
+            GradjaninNav
         },
         data() {
             return {

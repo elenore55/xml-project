@@ -410,9 +410,13 @@
                                     </strong>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        Primer autorskog dela: &nbsp;<strong>
-                                        <xsl:value-of select="//a1:Primer"/>
-                                    </strong>
+                                        Primer autorskog dela:&nbsp;
+                                        <a target="_blank">
+                                            <xsl:attribute name="href">
+                                                <xsl:value-of select="concat('http://localhost:8001/prilozi/', //a1:Primer)"/>
+                                            </xsl:attribute>
+                                            <xsl:value-of select="//a1:Primer"/>
+                                        </a>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </p>
@@ -421,9 +425,7 @@
                         <table style="margin: 80px 20px 20px auto; width: 40%;">
                             <tbody>
                                 <tr>
-                                    <td style="font-size: 20px; padding: 15px 0 5px 15px; border-bottom: white">Broj
-                                        prijave
-                                    </td>
+                                    <td style="font-size: 20px; padding: 15px 0 5px 15px; border-bottom: white">Broj prijave</td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 22px; font-weight: bold; padding: 5px 0 15px 15px; border-top: white">
@@ -432,9 +434,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size: 20px; padding: 15px 0 5px 15px; border-bottom: white">Datum
-                                        podnošenja:
-                                    </td>
+                                    <td style="font-size: 20px; padding: 15px 0 5px 15px; border-bottom: white">Datum podnošenja:</td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 22px; padding: 5px 0 15px 15px; border-top: white">
@@ -444,7 +444,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>            </body>
+                </div>
+            </body>
         </html>
     </xsl:template>
 </xsl:stylesheet>
