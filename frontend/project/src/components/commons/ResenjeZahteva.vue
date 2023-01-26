@@ -11,7 +11,7 @@
         
         <label>Službenik: {{ imeSluzbenika }} {{ prezimeSluzbenika }}</label>
         
-        <label>Referenca na zahtev: {{ referenca }}</label>
+        <label>Referenca na zahtev:<a target="_blank" :href="`${getHost()}/zahtevi/${referenca}.html`"> {{ referenca }}</a></label>
         
         <label v-if="sifra">Šifra zahteva: {{ sifra }}</label>
 
@@ -22,7 +22,20 @@
 <script>
     export default {
         name: 'ResenjeZahteva',
-        props: ['datum', 'imeSluzbenika', 'prezimeSluzbenika', 'referenca', 'sifra', 'obrazlozenje']
+        props: ['datum', 'imeSluzbenika', 'prezimeSluzbenika', 'referenca', 'sifra', 'obrazlozenje', 'servis'],
+        methods: {
+            getHost() {
+                if (this.servis) {
+                    let port;
+                    if (this.servis === 'A1') port = 8001;
+                    else if (this.servis === 'P1') port = 8002;
+                    else port = 8003;
+                    return `http://localhost:${port}`;
+                }
+                let full = this.$store.state.host; 
+                return full.substring(0, full.lastIndexOf('/'));   
+            }
+        }
     }
 </script>
 

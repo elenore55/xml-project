@@ -25,7 +25,7 @@
                         <a href="#/resenjePretraga" @click="prikaziResenje(r.referenca[0])" >Resenje-{{ r.referenca[0] }}</a>
                 </div>
             </div>
-            <ResenjeZahteva v-if="resenje.referenca" :referenca="resenje.referenca" :imeSluzbenika="resenje.imeSluzbenika" :sifra="resenje.sifra"
+            <ResenjeZahteva class="item-big" v-if="resenje.referenca" :referenca="resenje.referenca" :imeSluzbenika="resenje.imeSluzbenika" :sifra="resenje.sifra"
                 :prezimeSluzbenika="resenje.prezimeSluzbenika" :obrazlozenje="resenje.obrazlozenje" :datum="resenje.datumResenja">
             </ResenjeZahteva>
         </div>
@@ -145,7 +145,7 @@
         gap: 15px;
     }
     .item {
-        flex: 1
+        flex: 2
     }
     .item-big {
         flex: 3

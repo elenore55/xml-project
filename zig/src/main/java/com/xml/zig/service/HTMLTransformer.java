@@ -44,6 +44,10 @@ public class HTMLTransformer {
     }
 
     public void generateHtml(String documentName) throws Exception {
+        generateHtml(documentName, HTML_FILE);
+    }
+
+    public void generateHtml(String documentName, String path) throws Exception {
         generateQR(documentName);
 
         try {
@@ -53,7 +57,7 @@ public class HTMLTransformer {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.METHOD, "xhtml");
             var source = new DOMSource(zahtevRepository.getAsNode(documentName));
-            var result = new StreamResult(new FileOutputStream(HTML_FILE));
+            var result = new StreamResult(new FileOutputStream(path));
             transformer.transform(source, result);
         } catch (Exception e) {
             e.printStackTrace();

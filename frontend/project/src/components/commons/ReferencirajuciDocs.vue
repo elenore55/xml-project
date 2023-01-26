@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="centered">
         <h3>Dokumenti koji imaju referencu na Zahtev-{{ $route.params.id }}:</h3>
         <div v-if="docs.length == 0" style="margin-left: 30px">
             Nema rezultata
@@ -12,7 +12,7 @@
             </div>
             <div class="item-big">
                 <ResenjeZahteva v-if="resenjePrikaz" :datum="resenje.datumResenja" :imeSluzbenika="resenje.imeSluzbenika" :prezimeSluzbenika="resenje.prezimeSluzbenika"
-                    :referenca="resenje.referenca" :obrazlozenje="resenje.obrazlozenje" :sifra="resenje.sifra">
+                    :referenca="resenje.referenca" :obrazlozenje="resenje.obrazlozenje" :sifra="resenje.sifra" :servis="$route.params.servis">
                 </ResenjeZahteva>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="item-big">
                 <div v-if="htmlContent != ''" v-html="htmlContent" id="div-html"></div>
                 <ResenjeZahteva v-if="resenjePrikazP1" :datum="resenje.datumResenja" :imeSluzbenika="resenje.imeSluzbenika" :prezimeSluzbenika="resenje.prezimeSluzbenika"
-                    :referenca="resenje.referenca" :obrazlozenje="resenje.obrazlozenje" :sifra="resenje.sifra">
+                    :referenca="resenje.referenca" :obrazlozenje="resenje.obrazlozenje" :sifra="resenje.sifra" :servis="$route.params.servis">
                 </ResenjeZahteva>
             </div>
         </div>
@@ -142,6 +142,7 @@
         padding: 10px;
     }
     .centered {
+        width: 80%;
         margin: 5px auto;
     }
     h3 {

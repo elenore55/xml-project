@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:pred="http://www.ftn.com/z1/pred/" xmlns:z1="http://www.ftn.com/z1">
-<rdf:Description rdf:about="http://www.ftn.com/z1/Resenje-Zahtev6-2023">
-<pred:Naziv_fajla>Resenje_Zahtev6-2023.xml</pred:Naziv_fajla>
-<pred:Datum_resenja>2023-01-25+01:00</pred:Datum_resenja>
+<rdf:Description rdf:about="http://www.ftn.com/z1/Resenje-Zahtev9-2023">
+<pred:Naziv_fajla>Resenje_Zahtev9-2023.xml</pred:Naziv_fajla>
+<pred:Datum_resenja>2023-01-26+01:00</pred:Datum_resenja>
 <pred:Ime_sluzbenika>Milica</pred:Ime_sluzbenika>
 <pred:Prezime_sluzbenika>Milica</pred:Prezime_sluzbenika>
 <pred:Odobren>true</pred:Odobren>
