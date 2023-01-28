@@ -8,7 +8,7 @@
             </select>
         </div>
 
-        <input type="checkbox" v-model="pronalazac" name="pronalazac" @input="updatePodnosilac"/>
+        <input type="checkbox" v-model="pronalazac" name="pronalazac" @input="checkPronalazac($event)"/>
         <label>Podnosilac prijave je i pronalazač</label>
 
         <h3>Osnovni podaci</h3>
@@ -73,7 +73,7 @@
                     email: this.email,
                     faks: this.faks,
                     fizickoLice: this.tipPodnosioca == 1,
-                    pronalazac: !this.pronalazac,
+                    pronalazac: this.pronalazac,
                     drzavljanstvo: this.drzavljanstvo
                 });
             },
@@ -98,6 +98,10 @@
                 this.$refs.licniPodaci.clear();
                 this.$refs.adresaUnos.clear();
                 this.$refs.kontaktPodaci.clear();
+                this.updatePodnosilac();
+            },
+            checkPronalazac(event) {
+                this.pronalazac = event.target.checked;
                 this.updatePodnosilac();
             }
         }

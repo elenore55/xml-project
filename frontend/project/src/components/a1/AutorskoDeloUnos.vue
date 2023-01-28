@@ -5,25 +5,23 @@
                 <PodaciONaslovu @updateNaslov="updateNaslov($event)"></PodaciONaslovu>
 
                 <div class="flex-container">
-                    <div id="vrsta" class="flex-container-v item">
-                        <label for="vrsta-input" class="item">Vrsta autorskog dela</label>
-                        <select v-model="vrstaChoice" @change="updateAutorskoDelo">
-                            <option value="1">Književno delo</option>
-                            <option value="2">Muzičko delo</option>
-                            <option value="3">Likovno delo</option>
-                            <option value="4">Računarski program</option>
-                            <option value="5">Ostalo</option>
-                        </select>
-                        <input v-if="vrstaChoice == 5" id="vrsta-input" type="text" class="item" v-model="vrsta" @input="updateAutorskoDelo"/>
+                    <div class="flex-container-v item">
+                        <label>Vrsta autorskog dela</label> 
+                        <input type="text" list="vrsta" v-model="vrsta" @change="updateAutorskoDelo" />
+                        <datalist id="vrsta">
+                            <option>Književno delo</option>
+                            <option>Muzičko delo</option>
+                            <option>Likovno delo</option>
+                            <option>Računarski program</option>
+                        </datalist>
                     </div>
                     <div id="forma-zapisa" class="flex-container-v item">
                         <label for="forma-zapisa-input">Forma zapisa</label>
-                        <select v-model="formaChoice" @change="updateAutorskoDelo">
-                            <option value="1">Štampani tekst</option>
-                            <option value="2">Optički disk</option>
-                            <option value="3">Ostalo</option>
-                        </select>
-                        <input v-if="formaChoice == 3" id="forma-zapisa-input" type="text" v-model="formaZapisa" @input="updateAutorskoDelo"/>
+                        <input type="text" list="forma" v-model="formaZapisa" @change="updateAutorskoDelo" />
+                        <datalist id="forma">
+                            <option>Štampani tekst</option>
+                            <option>Optički disk</option>
+                        </datalist>
                     </div>
                     <div id="nacin-koriscenja" class="flex-container-v item">
                         <label for="nacin-koriscenja-input">Način korišćenja</label>
@@ -34,11 +32,11 @@
 
             <div class="flex-container">
                 <div class="flex-container item">
-                    <input type="checkbox" v-model="radniOdnos" @input="updateAutorskoDelo"/>
+                    <input type="checkbox" v-model="radniOdnos" @input="checkRadniOdnos($event)"/>
                     <span>Autorsko delo je stvoreno u radnom odnosu</span>
                 </div>
                 <div class="flex-container item">
-                    <input type="checkbox" v-model="deloPrerade" @input="updateAutorskoDelo"/>
+                    <input type="checkbox" v-model="deloPrerade" @input="checkDeloPrerade($event)"/>
                     <span>U pitanju je delo prerade</span>
                 </div>
             </div>
@@ -85,6 +83,7 @@
                 this.updateAutorskoDelo();
             },
             updateAutorskoDelo() {
+                console.log(this.deloPrerade);
                 this.$emit('updateAutorskoDelo', {
                     naslov: this.naslov,
                     altNaslov: this.altNaslov,
@@ -95,6 +94,14 @@
                     deloPrerade: this.deloPrerade,
                     izvornoDelo: this.izvornoDelo
                 });
+            },
+            checkDeloPrerade(event) {
+                this.deloPrerade = event.target.checked;
+                this.updateAutorskoDelo();
+            },
+            checkRadniOdnos(event) {
+                this.radniOdnos = event.target.checked;
+                this.updateAutorskoDelo();
             }
         }
     }

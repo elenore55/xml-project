@@ -2,7 +2,7 @@
     <div>
         <h2 class="item">Pronalazač</h2>
 
-        <input type="checkbox" v-model="anoniman" @input="updatePronalazac"/>
+        <input type="checkbox" v-model="anoniman" @input="checkAnoniman($event)"/>
         <label>Pronalazač ne želi da bude naveden u prijavi</label>
 
         <div v-if="!anoniman">
@@ -53,7 +53,7 @@
                     telefon: this.telefon,
                     email: this.email,
                     faks: this.faks,
-                    anoniman: !this.anoniman
+                    anoniman: this.anoniman
                 });
             },
             updateLicniPodaci(podaci) {
@@ -76,6 +76,10 @@
                 this.$refs.licniPodaci.clear();
                 this.$refs.adresaUnos.clear();
                 this.$refs.kontaktPodaci.clear();
+                this.updatePronalazac();
+            },
+            checkAnoniman(event) {
+                this.anoniman = event.target.checked;
                 this.updatePronalazac();
             }
         }

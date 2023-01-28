@@ -18,11 +18,11 @@
                 <input type="file" @change="punomocjeChanged"/>
             </div>
             <div class="item cb">
-                <input type="checkbox" v-model="generalnoPunomocjeRanijePrilozeno" @input="updatePrilozi"/>
+                <input type="checkbox" v-model="generalnoPunomocjeRanijePrilozeno" @input="checkRanijePrilozeno($event)"/>
                 <label>Generalno punomoćje ranije priloženo</label>
             </div>
             <div class="item cb">
-                <input type="checkbox" v-model="punomocjeNaknadnoDostavljeno" @input="updatePrilozi"/>
+                <input type="checkbox" v-model="punomocjeNaknadnoDostavljeno" @input="checkNaknadnoDostavljeno($event)"/>
                 <label>Punomoćje će biti naknadno dostavljeno</label>
             </div>    
         </div>
@@ -96,6 +96,14 @@
                 this.dokazOUplatiTakse = event.target.files[0];
                 this.updatePrilozi();
             },
+            checkRanijePrilozeno(event) {
+                this.generalnoPunomocjeRanijePrilozeno = event.target.checked;
+                this.updatePrilozi();
+            },
+            checkNaknadnoDostavljeno(event) {
+                this.punomocjeNaknadnoDostavljeno = event.target.checked;
+                this.updatePrilozi();
+            }
         }
     }
 </script>
