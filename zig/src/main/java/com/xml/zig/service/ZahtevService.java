@@ -1,10 +1,7 @@
 package com.xml.zig.service;
 
 import com.xml.zig.dto.CreateZahtevDTO;
-import com.xml.zig.model.PopunjavaPodnosilac;
-import com.xml.zig.model.PopunjavaZavod;
-import com.xml.zig.model.Prilozi;
-import com.xml.zig.model.Zahtev;
+import com.xml.zig.model.*;
 import com.xml.zig.repository.Marshalling;
 import com.xml.zig.repository.ResenjeRepository;
 import com.xml.zig.repository.ZahtevMetadataRepository;
@@ -47,11 +44,15 @@ public class ZahtevService {
     }
 
     public List<Zahtev> getAll() throws Exception {
-        return zahtevRepository.getAll();
+        var result = zahtevRepository.getAll();
+        result.sort(new ZahtevComparator());
+        return result;
     }
 
     public List<Zahtev> search(String text, boolean matchCase) throws Exception {
-        return zahtevRepository.search(text, matchCase);
+        var result = zahtevRepository.search(text, matchCase);
+        result.sort(new ZahtevComparator());
+        return result;
     }
 
     public void extractMetadata(String name) throws Exception {
@@ -66,7 +67,9 @@ public class ZahtevService {
         metadataSearchService.generate(rawInput);
         var operators = metadataSearchService.getOperators();
         var statements = metadataSearchService.getStatements();
-        return zahtevMetadataRepository.advancedMetadataSearch(operators, statements);
+        var result = zahtevMetadataRepository.advancedMetadataSearch(operators, statements);
+        result.sort(new ZahtevComparator());
+        return result;
     }
 
     public void save() throws Exception {
@@ -84,12 +87,18 @@ public class ZahtevService {
 
     public List<Zahtev> getZahteviBezResenja() throws Exception {
         var reseniZahteviNames = resenjeRepository.getReferences();
-        return zahtevRepository.getAllExcept(reseniZahteviNames);
+        var result = zahtevRepository.getAllExcept(reseniZahteviNames);
+        result.sort(new ZahtevComparator());
+        return result;
     }
 
     public List<Zahtev> searchZahteviBezResenja(String text, boolean matchCase) throws Exception {
         var reseniZahteviNames = resenjeRepository.getReferences();
         var zahtevi = zahtevRepository.search(text, matchCase);
+        return getBezResenja(reseniZahteviNames, zahtevi);
+    }
+
+    private List<Zahtev> getBezResenja(List<String> reseniZahteviNames, List<Zahtev> zahtevi) {
         var result = new ArrayList<Zahtev>();
         for (var z : zahtevi) {
             if (!reseniZahteviNames.contains(String.format("Zahtev%d-%d.xml", z.getPopunjavaZavod().getBrojPrijaveZiga().getId(),
@@ -97,20 +106,14 @@ public class ZahtevService {
                 result.add(z);
             }
         }
+        result.sort(new ZahtevComparator());
         return result;
     }
 
     public List<Zahtev> searchZahteviBezResenjaByMetadata(String rawInput) throws Exception {
         var reseniZahteviNames = resenjeRepository.getReferences();
         var zahtevi = advancedMetadataSearch(rawInput);
-        var result = new ArrayList<Zahtev>();
-        for (var z : zahtevi) {
-            if (!reseniZahteviNames.contains(String.format("Zahtev%d-%d.xml", z.getPopunjavaZavod().getBrojPrijaveZiga().getId(),
-                    z.getPopunjavaZavod().getBrojPrijaveZiga().getGodina()))) {
-                result.add(z);
-            }
-        }
-        return result;
+        return getBezResenja(reseniZahteviNames, zahtevi);
     }
 
     public void save(CreateZahtevDTO dto, Map<String, MultipartFile> files) throws Exception {

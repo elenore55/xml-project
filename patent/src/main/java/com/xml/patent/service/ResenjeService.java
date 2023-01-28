@@ -3,6 +3,7 @@ package com.xml.patent.service;
 import com.xml.patent.dto.CreateResenjeDTO;
 import com.xml.patent.dto.TimePeriodDTO;
 import com.xml.patent.model.Resenje;
+import com.xml.patent.model.ResenjeComparator;
 import com.xml.patent.repository.ResenjeMetadataRepository;
 import com.xml.patent.repository.ResenjeRepository;
 import com.xml.patent.repository.ZahtevMetadataRepository;
@@ -60,11 +61,15 @@ public class ResenjeService {
     }
 
     public List<Resenje> getAll() throws Exception {
-        return resenjeRepository.getAll();
+        var result = resenjeRepository.getAll();
+        result.sort(new ResenjeComparator());
+        return result;
     }
 
     public List<Resenje> search(String text, boolean matchCase) throws Exception {
-        return resenjeRepository.search(text, matchCase);
+        var result = resenjeRepository.search(text, matchCase);
+        result.sort(new ResenjeComparator());
+        return result;
     }
 
     public void extractMetadata(String name) throws Exception {
@@ -79,7 +84,9 @@ public class ResenjeService {
         metadataSearchService.generate(rawInput);
         var operators = metadataSearchService.getOperators();
         var statements = metadataSearchService.getStatements();
-        return resenjeMetadataRepository.advancedMetadataSearch(operators, statements);
+        var result = resenjeMetadataRepository.advancedMetadataSearch(operators, statements);
+        result.sort(new ResenjeComparator());
+        return result;
     }
 
     public void generateReport(TimePeriodDTO dto) throws Exception {

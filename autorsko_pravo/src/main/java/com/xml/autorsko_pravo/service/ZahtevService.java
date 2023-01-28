@@ -1,10 +1,7 @@
 package com.xml.autorsko_pravo.service;
 
 import com.xml.autorsko_pravo.dto.CreateZahtevDTO;
-import com.xml.autorsko_pravo.model.PopunjavaPodnosilac;
-import com.xml.autorsko_pravo.model.PopunjavaZavod;
-import com.xml.autorsko_pravo.model.Prilog;
-import com.xml.autorsko_pravo.model.Zahtev;
+import com.xml.autorsko_pravo.model.*;
 import com.xml.autorsko_pravo.repository.Marshalling;
 import com.xml.autorsko_pravo.repository.ResenjeRepository;
 import com.xml.autorsko_pravo.repository.ZahtevMetadataRepository;
@@ -41,11 +38,15 @@ public class ZahtevService {
     }
 
     public List<Zahtev> getAll() throws Exception {
-        return zahtevRepository.getAll();
+        var result = zahtevRepository.getAll();
+        result.sort(new ZahtevComparator());
+        return result;
     }
 
     public List<Zahtev> search(String text, boolean matchCase) throws Exception {
-        return zahtevRepository.search(text, matchCase);
+        var result = zahtevRepository.search(text, matchCase);
+        result.sort(new ZahtevComparator());
+        return result;
     }
 
     public void extractMetadata(String name) throws Exception {
@@ -60,7 +61,9 @@ public class ZahtevService {
         metadataSearchService.generate(rawInput);
         var operators = metadataSearchService.getOperators();
         var statements = metadataSearchService.getStatements();
-        return zahtevMetadataRepository.advancedMetadataSearch(operators, statements);
+        var result = zahtevMetadataRepository.advancedMetadataSearch(operators, statements);
+        result.sort(new ZahtevComparator());
+        return result;
     }
 
     public void save(CreateZahtevDTO dto, String prilog) throws Exception {
@@ -108,31 +111,32 @@ public class ZahtevService {
 
     public List<Zahtev> getZahteviBezResenja() throws Exception {
         var reseniZahteviNames = resenjeRepository.getReferences();
-        return zahtevRepository.getAllExcept(reseniZahteviNames);
+        var result = zahtevRepository.getAllExcept(reseniZahteviNames);
+        result.sort(new ZahtevComparator());
+        return result;
     }
 
     public List<Zahtev> searchZahteviBezResenja(String text, boolean matchCase) throws Exception {
         var reseniZahteviNames = resenjeRepository.getReferences();
         var zahtevi = zahtevRepository.search(text, matchCase);
+        return getDifference(reseniZahteviNames, zahtevi);
+    }
+
+    private List<Zahtev> getDifference(List<String> reseniZahteviNames, List<Zahtev> zahtevi) {
         var result = new ArrayList<Zahtev>();
         for (var z : zahtevi) {
             if (!reseniZahteviNames.contains(String.format("Zahtev%d.xml", z.getPopunjavaZavod().getBrojPrijave()))) {
                 result.add(z);
             }
         }
+        result.sort(new ZahtevComparator());
         return result;
     }
 
     public List<Zahtev> searchZahteviBezResenjaByMetadata(String rawInput) throws Exception {
         var reseniZahteviNames = resenjeRepository.getReferences();
         var zahtevi = advancedMetadataSearch(rawInput);
-        var result = new ArrayList<Zahtev>();
-        for (var z : zahtevi) {
-            if (!reseniZahteviNames.contains(String.format("Zahtev%d.xml", z.getPopunjavaZavod().getBrojPrijave()))) {
-                result.add(z);
-            }
-        }
-        return result;
+        return getDifference(reseniZahteviNames, zahtevi);
     }
 
     public List<String> getMetadataVariables() {

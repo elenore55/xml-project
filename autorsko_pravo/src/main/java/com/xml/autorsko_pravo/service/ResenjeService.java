@@ -3,6 +3,7 @@ package com.xml.autorsko_pravo.service;
 import com.xml.autorsko_pravo.dto.CreateResenjeDTO;
 import com.xml.autorsko_pravo.dto.TimePeriodDTO;
 import com.xml.autorsko_pravo.model.Resenje;
+import com.xml.autorsko_pravo.model.ResenjeComparator;
 import com.xml.autorsko_pravo.model.Zahtev;
 import com.xml.autorsko_pravo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,11 +102,15 @@ public class ResenjeService {
     }
 
     public List<Resenje> getAll() throws Exception {
-        return resenjeRepository.getAll();
+        var result = resenjeRepository.getAll();
+        result.sort(new ResenjeComparator());
+        return result;
     }
 
     public List<Resenje> search(String text, boolean matchCase) throws Exception {
-        return resenjeRepository.search(text, matchCase);
+        var result = resenjeRepository.search(text, matchCase);
+        result.sort(new ResenjeComparator());
+        return result;
     }
 
     public void extractMetadata(String name) throws Exception {
@@ -120,7 +125,9 @@ public class ResenjeService {
         metadataSearchService.generate(rawInput);
         var operators = metadataSearchService.getOperators();
         var statements = metadataSearchService.getStatements();
-        return resenjeMetadataRepository.advancedMetadataSearch(operators, statements);
+        var result = resenjeMetadataRepository.advancedMetadataSearch(operators, statements);
+        result.sort(new ResenjeComparator());
+        return result;
     }
 
     public void generateReport(TimePeriodDTO dto) throws Exception {
