@@ -52,9 +52,9 @@
             },
             clear() {
                 this.ulica = '';
-                this.broj = 0;
+                this.broj = '';
                 this.mesto = '';
-                this.postanskiBroj = 0;
+                this.postanskiBroj = '';
                 this.drzava = '';
                 this.updateAdresa();
             }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Podaci o izvornom delu</h3>
-        <PodaciONaslovu @updateNaslov="updateNaslov($event)"></PodaciONaslovu>
+        <PodaciONaslovu ref="naslov" @updateNaslov="updateNaslov($event)"></PodaciONaslovu>
         <h3 v-if="autorList.length > 0">Autori:</h3>
         <div v-for="(autor, i) in autorList" :key="autor.id" class="indented flex-container">
             <button type="button" @click="autorList.splice(i, 1)" class="btn-delete">-</button>
@@ -52,6 +52,12 @@
                     altNaslov: this.altNaslov,
                     autori: {autori: this.autorList} 
                 });
+            },
+            clear() {
+                this.$refs.naslov.clear();
+                this.autor = {};
+                this.autorList = [];
+                this.updateIzvornoDelo();
             }
         }
     }

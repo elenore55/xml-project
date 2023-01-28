@@ -27,6 +27,11 @@
                     naslov: this.naslov,
                     altNaslov: this.altNaslov
                 });
+            },
+            clear() {
+                this.naslov = '';
+                this.altNaslov = '';
+                this.updateNaslov();
             }
         }
     }

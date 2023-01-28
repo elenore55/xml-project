@@ -14,7 +14,7 @@
         </div>
         <div v-else>
             <div class="flex-container">
-                <div id="business-name" class="flex-container-v">
+                <div id="business-name" class="flex-container-v item">
                     <label for="business-name-input" class="item">Poslovno ime</label>
                     <input id="business-name-input" type="text" class="item" v-model="poslovnoIme" @input="updatePodnosilac"/>
                 </div>
@@ -87,7 +87,9 @@
             },
             clear() {
                 this.poslovnoIme = '';
-                this.$refs.licniPodaci.clear();
+                this.ime = '';
+                this.prezime = '';
+                if (this.tipPodnosioca === 1) this.$refs.licniPodaci.clear();
                 this.$refs.adresaUnos.clear();
                 this.$refs.kontaktPodaci.clear();
                 this.updatePodnosilac();
@@ -97,6 +99,9 @@
 </script>
 
 <style scoped>
+    #business-name-input {
+        width: 65%;
+    }
     h2 {
         margin-top: 50px;
     }

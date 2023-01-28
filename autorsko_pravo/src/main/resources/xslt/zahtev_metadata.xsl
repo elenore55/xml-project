@@ -19,7 +19,7 @@
                     <xsl:value-of select="//a1:Datum_podnosenja"/>
                 </pred:Datum_podnosenja>
                 <xsl:choose>
-                    <xsl:when test="//a1:Podnosilac/a1:Ime">
+                    <xsl:when test="//a1:Podnosilac/a1:Ime != ''">
                         <pred:Ime_podnosioca>
                             <xsl:value-of select="//a1:Podnosilac/a1:Ime"/>
                         </pred:Ime_podnosioca>

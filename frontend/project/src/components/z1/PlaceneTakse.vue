@@ -37,6 +37,14 @@
                     klasa: {naziv: this.klasa, iznos: this.klasaIznos},
                     ukupno: this.ukupno
                 });
+            },
+            clear() {
+                this.osnovnaTaksa = 0;
+                this.klasa = '';
+                this.klase = [];
+                this.klasaIznos = 0;
+                this.grafickoResenje = 0;
+                this.updatePlaceneTakse();
             }
         },
         computed: {

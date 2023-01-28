@@ -95,9 +95,12 @@
             },
             clear() {
                 this.poslovnoIme = '';
-                this.$refs.licniPodaci.clear();
+                this.ime = '';
+                this.prezime = '';
+                if (this.tipPodnosioca === 1) this.$refs.licniPodaci.clear();
                 this.$refs.adresaUnos.clear();
                 this.$refs.kontaktPodaci.clear();
+                this.tipPodnosioca = 1;
                 this.updatePodnosilac();
             },
             checkPronalazac(event) {

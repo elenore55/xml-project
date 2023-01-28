@@ -103,6 +103,17 @@
             checkNaknadnoDostavljeno(event) {
                 this.punomocjeNaknadnoDostavljeno = event.target.checked;
                 this.updatePrilozi();
+            },
+            clear() {
+                this.primerakZnaka = '';
+                this.spisakRobe = '';
+                this.punomocje =  '';
+                this.generalnoPunomocjeRanijePrilozeno = false;
+                this.punomocjeNaknadnoDostavljeno = false;
+                this.opstiAkt = '';
+                this.dokazOPravuPrvenstva = '';
+                this.dokazOUplatiTakse = '';
+                this.updatePrilozi();
             }
         }
     }

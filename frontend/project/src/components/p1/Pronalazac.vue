@@ -72,10 +72,18 @@
                 this.updatePronalazac();
             },
             clear() {
-                this.poslovnoIme = '';
-                this.$refs.licniPodaci.clear();
-                this.$refs.adresaUnos.clear();
-                this.$refs.kontaktPodaci.clear();
+                if (!this.anoniman) {
+                    this.$refs.licniPodaci.clear();
+                    this.$refs.adresaUnos.clear();
+                    this.$refs.kontaktPodaci.clear();
+                }
+                this.anoniman = false;
+                this.ime = '';
+                this.prezime = '';
+                this.adresa = {};
+                this.telefon = '';
+                this.email = '';
+                this.faks = '';
                 this.updatePronalazac();
             },
             checkAnoniman(event) {

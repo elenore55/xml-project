@@ -4,9 +4,9 @@
         <div>
             <h2 class="centered-text">ZAHTEV ZA UNOŠENJE U EVIDENCIJU I DEPONOVANJE AUTORSKIH DELA</h2>
             <div class="centered">
-                <PodnosilacPrijaveUnos @updatePodnosilac="updatePodnosilac($event)"></PodnosilacPrijaveUnos>
+                <PodnosilacPrijaveUnos ref="podnosilac" @updatePodnosilac="updatePodnosilac($event)"></PodnosilacPrijaveUnos>
 
-                <AutorskoDeloUnos @updateAutorskoDelo="updateAutorskoDelo($event)"></AutorskoDeloUnos>
+                <AutorskoDeloUnos ref="autorskoDelo" @updateAutorskoDelo="updateAutorskoDelo($event)"></AutorskoDeloUnos>
 
                 <h2>Autori dela</h2>
                 <div v-for="(autor, i) in autorList" :key="autor.id" class="indented flex-container">
@@ -105,7 +105,8 @@
                     });
                     console.log(xmlString);
                     ZahtevService.save(xmlString).then(() => {
-                        alert('added');
+                        alert('Zahtev je uspešno podnet!');
+                        this.clear();
                     }).catch((err) => {
                         console.log(err);
                     });
@@ -122,13 +123,23 @@
                     });
                     formData.append('dto', xmlString);
                     ZahtevService.saveWithPrilog(formData).then(() => {
-                        alert('added');
+                        alert('Zahtev je uspešno podnet!');
+                        this.clear();
                     }).catch((err) => {
                         console.log(err);
                     });
                 }
+            },
+            clear() {
+                this.$refs.podnosilac.clear();
+                this.$refs.autorskoDelo.clear();
+                this.autor = {};
+                this.autorList = [];
+                this.opisDelaFlag = true;
+                this.opisDela = '';
+                this.primerDela = '';
             }
-        },
+        }
     }
 </script>
 

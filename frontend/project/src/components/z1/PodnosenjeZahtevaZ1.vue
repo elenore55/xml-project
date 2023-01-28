@@ -16,11 +16,11 @@
                     </li>
                 </ul>
             </div>
-            <PodnosilacPrijave @updatePodnosilac="updatePunomocnik($event)" title="Punomoćnik"></PodnosilacPrijave>
-            <PodnosilacPrijave @updatePodnosilac="updatePredstavnik($event)" v-if="podnosioci.length > 1" title="Zajednički predstavnik"></PodnosilacPrijave>
-            <PodaciOZigu @updateZig="updateZig($event)"></PodaciOZigu>
-            <PlaceneTakse @updatePlaceneTakse="updatePlaceneTakse($event)"></PlaceneTakse>
-            <PriloziUnos @updatePrilozi="updatePrilozi($event)"></PriloziUnos>
+            <PodnosilacPrijave ref="punomocnik" @updatePodnosilac="updatePunomocnik($event)" title="Punomoćnik"></PodnosilacPrijave>
+            <PodnosilacPrijave ref="predstavnik" @updatePodnosilac="updatePredstavnik($event)" v-if="podnosioci.length > 1" title="Zajednički predstavnik"></PodnosilacPrijave>
+            <PodaciOZigu ref="zig" @updateZig="updateZig($event)"></PodaciOZigu>
+            <PlaceneTakse ref="takse" @updatePlaceneTakse="updatePlaceneTakse($event)"></PlaceneTakse>
+            <PriloziUnos ref="prilozi" @updatePrilozi="updatePrilozi($event)"></PriloziUnos>
             <button type="button" @click="submit">Podnesi zahtev</button>
         </div>
     </div>
@@ -103,11 +103,20 @@
                 console.log(xmlString);
                 formData.append('dto', xmlString);
 
-                ZahtevService.save(formData).then((response) => {
-                    console.log(response.data);
+                ZahtevService.save(formData).then((_response) => {
+                    alert('Zahtev je uspešno podnet!');
+                    this.clear();
                 }).catch((err) => {
                     console.log(err);
                 });
+            },
+            clear() {
+                this.$refs.punomocnik.clear();
+                if (this.podnosioci.length > 1) this.$refs.predstavnik.clear();
+                this.podnosioci = [];
+                this.$refs.zig.clear();
+                this.$refs.takse.clear();
+                this.$refs.prilozi.clear();
             }
         }
     }

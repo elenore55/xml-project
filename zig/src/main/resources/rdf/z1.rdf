@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:pred="http://www.ftn.com/z1/pred/" xmlns:z1="http://www.ftn.com/z1">
-<rdf:Description rdf:about="http://www.ftn.com/z1/Zahtev-9-2023">
-<pred:Naziv_fajla>Zahtev9-2023.xml</pred:Naziv_fajla>
-<pred:Id_prijave_ziga>9</pred:Id_prijave_ziga>
+<rdf:Description rdf:about="http://www.ftn.com/z1/Zahtev-10-2023">
+<pred:Naziv_fajla>Zahtev10-2023.xml</pred:Naziv_fajla>
+<pred:Id_prijave_ziga>10</pred:Id_prijave_ziga>
 <pred:Godina_prijave_ziga>2023</pred:Godina_prijave_ziga>
-<pred:Datum_podnosenja>2023-01-26+01:00</pred:Datum_podnosenja>
+<pred:Datum_podnosenja>2023-01-28+01:00</pred:Datum_podnosenja>
 <pred:Tip_ziga>KOLEKTIVNI_ZIG</pred:Tip_ziga>
-<pred:Ime_podnosioca>Milica</pred:Ime_podnosioca>
-<pred:Prezime_podnosioca>Popovic</pred:Prezime_podnosioca>
+<pred:Poslovno_ime_podnosioca>Poslovnica</pred:Poslovno_ime_podnosioca>
 </rdf:Description>
 </rdf:RDF>

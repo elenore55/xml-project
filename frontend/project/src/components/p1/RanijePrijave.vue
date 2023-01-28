@@ -142,6 +142,9 @@
                 html+="<input type='submit' value='OK'>";
                 html+="</form>";
                 return html;
+            },
+            clear() {
+                this.start();
             }
         }
     }

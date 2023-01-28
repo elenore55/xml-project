@@ -42,7 +42,7 @@ public abstract class Podnosilac {
             this.drzavljanstvo = dto.getDrzavljanstvo();
             this.telefon = dto.getTelefon();
             this.email = dto.getEmail();
-            if (!dto.getPseudonimAutora().equals(""))
+            if (dto.getPseudonimAutora() != null && !dto.getPseudonimAutora().equals(""))
                 this.pseudonim = dto.getPseudonimAutora();
             this.adresa = new Adresa(dto.getAdresa());
         }

@@ -1,15 +1,15 @@
 <template> 
     <div class="centered">
         <h2 class="text-centered">ZAHTEV ZA PRIZNANJE PATENTA</h2>
-        <PodnosilacPrijave @updatePodnosilac="updatePodnosilac($event)"></PodnosilacPrijave>
-        <Pronalazac @updatePronalazac="updatePronalazac($event)"></Pronalazac>
-        <PunomocnikUnos @updatePunomocnik="updatePunomocnik($event)"></PunomocnikUnos>
+        <PodnosilacPrijave ref="podnosilac" @updatePodnosilac="updatePodnosilac($event)"></PodnosilacPrijave>
+        <Pronalazac ref="pronalazac" @updatePronalazac="updatePronalazac($event)"></Pronalazac>
+        <PunomocnikUnos ref="punomocnik" @updatePunomocnik="updatePunomocnik($event)"></PunomocnikUnos>
         <div>
             <h2>Podaci o dostavljanju</h2>
             <h3 class="adresa">Adresa dostavljanja</h3>
             <p>(Ovo polje se popunjava ako podnosilac prijave, zajednički predstavnik ili punomoćnik želi da se dostavljanje podnesaka 
                 vrši na drugoj adresi od njegove navedene adrese)</p>
-            <AdresaUnos @updateAdresa="updateAdresa($event)"></AdresaUnos>
+            <AdresaUnos ref="adresaDostavljanja" @updateAdresa="updateAdresa($event)"></AdresaUnos>
             <h3>Način dostavljanja</h3>
             <div>
                 <input type="radio" name="nacin" @change="elektronskiSelected"/>
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <RanijePrijave @updateXonomyData="updateXonomyData($event)"></RanijePrijave>
+        <RanijePrijave ref="ranijePrijave" @updateXonomyData="updateXonomyData($event)"></RanijePrijave>
         <button type="button" @click="submit">Podnesi zahtev</button>
     </div>
 </template>
@@ -102,7 +102,6 @@
             },
             updateXonomyData(data) {
                 this.xonomyData = data.replaceAll(" xml:space='preserve'", "").replaceAll("<b>", "").replaceAll("</b>", "").replaceAll("<i>", "").replaceAll("</i>", "");
-                
             },
             submit() {
                 this.parseXonomy();
@@ -121,7 +120,8 @@
                 });
                 console.log(xmlString);
                 ZahtevService.save(xmlString).then((_response) => {
-                    alert('Zahtev podnesen!');
+                    alert('Zahtev je uspešno podnesen!');
+                    this.clear();
                 }).catch((err) => {
                     console.log(err);
                 })
@@ -147,6 +147,21 @@
                         });
                     }
                 });
+            },
+            clear() {
+                this.$refs.podnosilac.clear();
+                this.$refs.punomocnik.clear();
+                this.$refs.pronalazac.clear();
+                this.$refs.ranijePrijave.clear();
+                this.$refs.adresaDostavljanja.clear();
+                this.nacinDostavljanja = '';
+                this.vrstaPrijave = 'IZDVOJENA';
+                this.brojPrvobitnePrijave = '';
+                this.datumPrvobitnePrijave = '';
+                this.nazivSrpski = '';
+                this.nazivEngleski = '';
+                this.xonomyData = '';
+                this.ranijePrijave = [];
             }
         }
     }

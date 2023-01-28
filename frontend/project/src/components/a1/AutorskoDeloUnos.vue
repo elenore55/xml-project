@@ -2,7 +2,7 @@
     <div>
         <h2>Podaci o autorskom delu</h2>
             <div>
-                <PodaciONaslovu @updateNaslov="updateNaslov($event)"></PodaciONaslovu>
+                <PodaciONaslovu ref="naslov" @updateNaslov="updateNaslov($event)"></PodaciONaslovu>
 
                 <div class="flex-container">
                     <div class="flex-container-v item">
@@ -42,7 +42,7 @@
             </div>
 
             <div v-if="deloPrerade">
-                <IzvornoDeloUnos @updateIzvornoDelo="updateIzvornoDelo($event)"></IzvornoDeloUnos>
+                <IzvornoDeloUnos ref="izvornoDelo" @updateIzvornoDelo="updateIzvornoDelo($event)"></IzvornoDeloUnos>
             </div>
     </div>
 </template>
@@ -62,13 +62,10 @@
                 naslov: '',
                 altNaslov: '',
                 vrsta: '',
-                vrstaChoice: 1,
                 formaZapisa: '',
-                formaChoice: 1,
                 nacinKoriscenja: '',
                 radniOdnos: false,
                 deloPrerade: false,
-                ostaloVrstaIzabrano: false,
                 izvornoDelo: {}
             }
         },
@@ -102,6 +99,17 @@
             checkRadniOdnos(event) {
                 this.radniOdnos = event.target.checked;
                 this.updateAutorskoDelo();
+            },
+            clear() {
+                this.$refs.naslov.clear();
+                if (this.deloPrerade) {
+                    this.$refs.izvornoDelo.clear();
+                }
+                this.vrsta = '';
+                this.formaZapisa = '';
+                this.nacinKoriscenja = '';
+                this.radniOdnos = false;
+                this.deloPrerade = false;
             }
         }
     }

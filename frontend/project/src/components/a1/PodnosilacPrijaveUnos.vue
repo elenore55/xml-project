@@ -12,11 +12,11 @@
 
         <h3>Osnovni podaci</h3>
         <div v-if="tipPodnosioca != 2">
-            <LicniPodaci :drzavljanstvoPotrebno="tipPodnosioca == 1" @updateLicniPodaci="updateLicniPodaci($event)"></LicniPodaci>
+            <LicniPodaci :drzavljanstvoPotrebno="tipPodnosioca == 1" @updateLicniPodaci="updateLicniPodaci($event)" ref="licniPodaci"></LicniPodaci>
         </div>
         <div v-else>
             <div class="flex-container">
-                <div id="business-name" class="flex-container-v">
+                <div id="business-name" class="flex-container-v item">
                     <label for="business-name-input" class="item">Poslovno ime</label>
                     <input id="business-name-input" type="text" class="item" v-model="poslovnoIme" @input="updatePodnosilac"/>
                 </div>
@@ -25,7 +25,7 @@
 
         <div>
             <h3>Adresa</h3>
-            <AdresaUnos @updateAdresa="updateAdresa($event)"></AdresaUnos>
+            <AdresaUnos ref="adresa" @updateAdresa="updateAdresa($event)"></AdresaUnos>
         </div>
 
         <div>
@@ -75,8 +75,9 @@
                     drzavljanstvo: this.drzavljanstvo,
                     adresa: this.adresa,
                     telefon: this.telefon,
-                    email: this.email 
-                })
+                    email: this.email,
+                    tip: this.tipPodnosioca 
+                });
             },
             updateLicniPodaci(podaci) {
                 this.ime = podaci.ime;
@@ -87,12 +88,27 @@
             updateAdresa(adresa) {
                 this.adresa = adresa;
                 this.updatePodnosilac();
+            },
+            clear() {
+                if (this.tipPodnosioca != 2) this.$refs.licniPodaci.clear();
+                this.$refs.adresa.clear();
+                this.poslovnoIme = '';
+                this.ime = '';
+                this.prezime = '';
+                this.drzavljanstvo = '';
+                this.email = '';
+                this.telefon = '';
+                this.tipPodnosioca = 1;
+                this.updatePodnosilac();
             }
         }
     }
 </script>
 
 <style scoped>
+    #business-name-input {
+        width: 65%;
+    }
     h2 {
         margin-top: 50px;
     }

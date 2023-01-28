@@ -95,9 +95,7 @@
         data() {
             return {
                 tipZigaChoice: 1,
-                vrstaZnakaChoice: '',
                 vrstaZnaka: '',
-                vrstaZnakaInput: '',
                 izgledZnaka: '',
                 transliteracija: '',
                 prevod: '',
@@ -145,6 +143,19 @@
             },
             uploadSliku(event) {
                 this.izgledZnaka = event.target.files[0];
+                this.updateZig();
+            },
+            clear() {
+                this.tipZigaChoice = 1;
+                this.vrstaZnaka = '';
+                this.izgledZnaka = '';
+                this.transliteracija = '',
+                this.prevod = '',
+                this.opis = '',
+                this.boje = [],
+                this.nicanskaKlasifikacija = [],
+                this.pravoPrvenstva = '',
+                this.boja = '',
                 this.updateZig();
             } 
         },
