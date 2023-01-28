@@ -167,13 +167,19 @@ const buildQuery = (rows) => {
     if (rows[0].logical === 'NE') result.push('NE');
     if (rows[0].data !== '' && rows[0].cmp !== '' && rows[0].value !== '') {
         result.push(rows[0].data);
-        result.push(rows[0].cmp);
+        let temp = rows[0].cmp; 
+        if (temp === '≥') temp = '>=';
+        else if (temp === '≤') temp = '<=';
+        result.push(temp);
         result.push(rows[0].value);
         for (let i = 1; i < rows.length; i++) {
             if (rows[i].logical !== '' && rows[i].data !== '' && rows[i].cmp !== '' && rows[i].value !== '') {
                 result.push(rows[i].logical);
                 result.push(rows[i].data);
-                result.push(rows[i].cmp);
+                temp = rows[i].cmp; 
+                if (temp === '≥') temp = '>=';
+                else if (temp === '≤') temp = '<=';
+                result.push(temp);
                 result.push(rows[i].value);
             }
         }
