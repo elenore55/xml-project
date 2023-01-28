@@ -1,42 +1,45 @@
 <template> 
-    <div class="centered">
-        <h2 class="text-centered">ZAHTEV ZA PRIZNANJE PATENTA</h2>
-        <PodnosilacPrijave ref="podnosilac" @updatePodnosilac="updatePodnosilac($event)"></PodnosilacPrijave>
-        <Pronalazac ref="pronalazac" @updatePronalazac="updatePronalazac($event)"></Pronalazac>
-        <PunomocnikUnos ref="punomocnik" @updatePunomocnik="updatePunomocnik($event)"></PunomocnikUnos>
-        <div>
-            <h2>Podaci o dostavljanju</h2>
-            <h3 class="adresa">Adresa dostavljanja</h3>
-            <p>(Ovo polje se popunjava ako podnosilac prijave, zajednički predstavnik ili punomoćnik želi da se dostavljanje podnesaka 
-                vrši na drugoj adresi od njegove navedene adrese)</p>
-            <AdresaUnos ref="adresaDostavljanja" @updateAdresa="updateAdresa($event)"></AdresaUnos>
-            <h3>Način dostavljanja</h3>
+    <div>
+        <GradjaninNav></GradjaninNav>
+        <div class="centered">
+            <h2 class="text-centered">ZAHTEV ZA PRIZNANJE PATENTA</h2>
+            <PodnosilacPrijave ref="podnosilac" @updatePodnosilac="updatePodnosilac($event)"></PodnosilacPrijave>
+            <Pronalazac ref="pronalazac" @updatePronalazac="updatePronalazac($event)"></Pronalazac>
+            <PunomocnikUnos ref="punomocnik" @updatePunomocnik="updatePunomocnik($event)"></PunomocnikUnos>
             <div>
-                <input type="radio" name="nacin" @change="elektronskiSelected"/>
-                <label>Elektronskim putem u formi elektronskog dokumenta</label>
-                <input type="radio" name="nacin" class="second-radio" @change="papirSelected"/>
-                <label>U papirnoj formi</label>
-            </div>
-        </div>
-        <div>
-            <h2>Podaci o prijavi</h2>
-            <input type="radio" name="vrsta" @change="izdvojenaSelected" checked/>
-            <label>IZDVOJENA PRIJAVA</label>
-            <input type="radio" name="vrsta" class="second-radio" @change="dopunskaSelected"/>
-            <label>DOPUNSKA PRIJAVA</label>
-            <div v-if="vrstaPrijave == 'DOPUNSKA'" class="flex-container">
-                <div class="flex-container-v item">
-                    <label>Broj prvobitne prijave / osnovne prijave</label>
-                    <input type="number" v-model="brojPrvobitnePrijave" />
-                </div>
-                <div class="flex-container-v item">
-                    <label>Datum podnošenja prvobitne prijave / osnovne prijave</label>
-                    <input type="date" v-model="datumPrvobitnePrijave" />
+                <h2>Podaci o dostavljanju</h2>
+                <h3 class="adresa">Adresa dostavljanja</h3>
+                <p>(Ovo polje se popunjava ako podnosilac prijave, zajednički predstavnik ili punomoćnik želi da se dostavljanje podnesaka 
+                    vrši na drugoj adresi od njegove navedene adrese)</p>
+                <AdresaUnos ref="adresaDostavljanja" @updateAdresa="updateAdresa($event)"></AdresaUnos>
+                <h3>Način dostavljanja</h3>
+                <div>
+                    <input type="radio" name="nacin" @change="elektronskiSelected"/>
+                    <label>Elektronskim putem u formi elektronskog dokumenta</label>
+                    <input type="radio" name="nacin" class="second-radio" @change="papirSelected"/>
+                    <label>U papirnoj formi</label>
                 </div>
             </div>
+            <div>
+                <h2>Podaci o prijavi</h2>
+                <input type="radio" name="vrsta" @change="izdvojenaSelected" checked/>
+                <label>IZDVOJENA PRIJAVA</label>
+                <input type="radio" name="vrsta" class="second-radio" @change="dopunskaSelected"/>
+                <label>DOPUNSKA PRIJAVA</label>
+                <div v-if="vrstaPrijave == 'DOPUNSKA'" class="flex-container">
+                    <div class="flex-container-v item">
+                        <label>Broj prvobitne prijave / osnovne prijave</label>
+                        <input type="number" v-model="brojPrvobitnePrijave" />
+                    </div>
+                    <div class="flex-container-v item">
+                        <label>Datum podnošenja prvobitne prijave / osnovne prijave</label>
+                        <input type="date" v-model="datumPrvobitnePrijave" />
+                    </div>
+                </div>
+            </div>
+            <RanijePrijave ref="ranijePrijave" @updateXonomyData="updateXonomyData($event)"></RanijePrijave>
+            <button type="button" @click="submit">Podnesi zahtev</button>
         </div>
-        <RanijePrijave ref="ranijePrijave" @updateXonomyData="updateXonomyData($event)"></RanijePrijave>
-        <button type="button" @click="submit">Podnesi zahtev</button>
     </div>
 </template>
 
@@ -49,6 +52,7 @@
     import * as xml2js from 'xml2js';
     import * as js2xml from 'js2xmlparser';
     import ZahtevService from '@/services/p1/ZahtevService';
+    import GradjaninNav from '../user/GradjaninNav.vue';
 
     export default {
         name: 'PodnosenjeZahtevaP1',
@@ -57,7 +61,8 @@
             Pronalazac,
             PunomocnikUnos,
             AdresaUnos,
-            RanijePrijave
+            RanijePrijave,
+            GradjaninNav
         },
         data() {
             return {

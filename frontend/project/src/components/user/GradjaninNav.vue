@@ -24,16 +24,25 @@
         },
         methods: {
             setA1Servis() {
-                this.$store.state.servis = 'A1';
-                this.$store.state.host = 'http://localhost:8001/autorsko_pravo';
+                if (this.$store.state.servis !== 'A1') {
+                    this.$store.commit('setA1');
+                    if (this.$router.history.current.path !== '/home')
+                        this.$router.push('/home');
+                }
             },
             setP1Servis() {
-                this.$store.state.servis = 'P1';
-                this.$store.state.host = 'http://localhost:8002/patent';
+                if (this.$store.state.servis !== 'P1') {
+                    this.$store.commit('setP1');
+                    if (this.$router.history.current.path !== '/home')
+                        this.$router.push('/home');
+                }
             },
             setZ1Servis() {
-                this.$store.state.servis = 'Ž1';
-                this.$store.state.host = 'http://localhost:8003/zig';
+                if (this.$store.state.servis !== 'Ž1') {
+                    this.$store.commit('setZ1');
+                    if (this.$router.history.current.path !== '/home')
+                        this.$router.push('/home');
+                }
             },
             logout() {
                 localStorage.removeItem('username');

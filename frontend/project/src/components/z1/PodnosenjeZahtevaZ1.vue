@@ -2,6 +2,7 @@
     <div>
         <GradjaninNav></GradjaninNav>
         <div class="centered">
+            <h2 class="centered-text">ZAHTEV ZA PRIZNANJE ŽIGA</h2>
             <PodnosilacPrijave ref="podnosilac" @updatePodnosilac="updatePodnosilac($event)" title="Podnosioci prijave"></PodnosilacPrijave>
             <button type="button" @click="dodajPodnosioca">Dodaj podnosioca</button>
             <div>
