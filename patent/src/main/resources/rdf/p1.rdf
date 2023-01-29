@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:pred="http://www.ftn.com/p1/pred/" xmlns:p1="http://www.ftn.com/p1">
-<rdf:Description rdf:about="http://www.ftn.com/p1/Zahtev-6">
-<pred:Naziv_fajla>Zahtev6.xml</pred:Naziv_fajla>
-<pred:Broj_prijave>6</pred:Broj_prijave>
-<pred:Datum_podnosenja>2023-01-28+01:00</pred:Datum_podnosenja>
-<pred:Datum_prijema>2023-01-28+01:00</pred:Datum_prijema>
+<rdf:Description rdf:about="http://www.ftn.com/p1/Zahtev-8">
+<pred:Naziv_fajla>Zahtev8.xml</pred:Naziv_fajla>
+<pred:Broj_prijave>8</pred:Broj_prijave>
+<pred:Datum_podnosenja>2023-01-29+01:00</pred:Datum_podnosenja>
+<pred:Datum_prijema>2023-01-29+01:00</pred:Datum_prijema>
 <pred:Tip_prijave>IZDVOJENA</pred:Tip_prijave>
-<pred:Poslovno_ime_podnosioca>FTN NS</pred:Poslovno_ime_podnosioca>
+<pred:Ime_podnosioca>Sanda</pred:Ime_podnosioca>
+<pred:Prezime_podnosioca>POPOVIC</pred:Prezime_podnosioca>
 </rdf:Description>
 </rdf:RDF>

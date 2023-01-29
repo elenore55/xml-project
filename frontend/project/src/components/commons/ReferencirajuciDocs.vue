@@ -142,8 +142,8 @@
         padding: 10px;
     }
     .centered {
-        width: 80%;
-        margin: 5px auto;
+        width: 95%;
+        margin: 5px 10px;
     }
     h3 {
         margin: 20px 0 40px 20px;
@@ -163,6 +163,6 @@
         flex: 1
     }
     .item-big {
-        flex: 3
+        flex: 4
     }
 </style>

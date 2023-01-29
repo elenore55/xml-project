@@ -21,7 +21,7 @@
             <div class="flex-container">
                 <div id="business-name" class="flex-container-v item">
                     <label for="business-name-input" class="item">Poslovno ime</label>
-                    <input id="business-name-input" type="text" class="item" v-model="poslovnoIme" @input="updatePunomocnik"/>
+                    <input id="business-name-input" type="text" :class="isValidPoslovnoIme?'item':'item red-border'" v-model="poslovnoIme" @input="validatePoslovnoIme"/>
                 </div>
             </div>
         </div>
@@ -58,7 +58,8 @@
                 adresa: {},
                 telefon: '',
                 email: '',
-                tipPunomocnika: 1
+                tipPunomocnika: 1,
+                isValidPoslovnoIme: true
             }
         },
         methods: {
@@ -94,12 +95,27 @@
                 this.poslovnoIme = '';
                 this.ime = '';
                 this.prezime = '';
-                if (this.tipPodnosioca === 1) this.$refs.licniPodaci.clear();
+                if (this.tipPodnosioca == 1) this.$refs.licniPodaci.clear();
                 this.$refs.adresaUnos.clear();
                 this.$refs.kontaktPodaci.clear();
                 this.tipPodnosioca = 1;
                 this.tipPunomocnika = 1;
                 this.updatePunomocnik();
+            },
+            validatePoslovnoIme() {
+                this.isValidPoslovnoIme = (this.poslovnoIme != '');
+                this.updatePunomocnik();
+            },
+            isValidInput() {
+                let licniPodaci;
+                if (this.tipPodnosioca == 1) licniPodaci = this.$refs.licniPodaci.isValidInput();
+                else {
+                    this.validatePoslovnoIme();
+                    licniPodaci = this.isValidPoslovnoIme;
+                }
+                let adresa = this.$refs.adresaUnos.isValidInput();
+                let kontakt = this.$refs.kontaktPodaci.isValidInput();
+                return licniPodaci && adresa && kontakt;
             }
         }
     }

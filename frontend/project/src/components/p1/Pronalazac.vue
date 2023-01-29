@@ -89,6 +89,13 @@
             checkAnoniman(event) {
                 this.anoniman = event.target.checked;
                 this.updatePronalazac();
+            },
+            isValidInput() {
+                if (this.anoniman) return true;
+                let licniPodaci = this.$refs.licniPodaci.isValidInput();
+                let adresa = this.$refs.adresaUnos.isValidInput();
+                let kontakt = this.$refs.kontaktPodaci.isValidInput();
+                return licniPodaci && adresa && kontakt;
             }
         }
     }

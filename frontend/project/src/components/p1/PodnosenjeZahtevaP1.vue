@@ -11,10 +11,10 @@
                 <h3 class="adresa">Adresa dostavljanja</h3>
                 <p>(Ovo polje se popunjava ako podnosilac prijave, zajednički predstavnik ili punomoćnik želi da se dostavljanje podnesaka 
                     vrši na drugoj adresi od njegove navedene adrese)</p>
-                <AdresaUnos ref="adresaDostavljanja" @updateAdresa="updateAdresa($event)"></AdresaUnos>
+                <AdresaUnos optional="true" ref="adresaDostavljanja" @updateAdresa="updateAdresa($event)"></AdresaUnos>
                 <h3>Način dostavljanja</h3>
                 <div>
-                    <input type="radio" name="nacin" @change="elektronskiSelected"/>
+                    <input type="radio" name="nacin" @change="elektronskiSelected" checked/>
                     <label>Elektronskim putem u formi elektronskog dokumenta</label>
                     <input type="radio" name="nacin" class="second-radio" @change="papirSelected"/>
                     <label>U papirnoj formi</label>
@@ -29,11 +29,11 @@
                 <div v-if="vrstaPrijave == 'DOPUNSKA'" class="flex-container">
                     <div class="flex-container-v item">
                         <label>Broj prvobitne prijave / osnovne prijave</label>
-                        <input type="number" v-model="brojPrvobitnePrijave" />
+                        <input type="number" :class="valid.brojPrvobitne?'':'red-border'" v-model="brojPrvobitnePrijave" @input="validateBrojPrvobitnePrijave" />
                     </div>
                     <div class="flex-container-v item">
                         <label>Datum podnošenja prvobitne prijave / osnovne prijave</label>
-                        <input type="date" v-model="datumPrvobitnePrijave" />
+                        <input type="date" :class="valid.datumPrvobitne?'':'red-border'" v-model="datumPrvobitnePrijave" @input="validateDatumPrvobitnePrijave" />
                     </div>
                 </div>
             </div>
@@ -70,14 +70,18 @@
                 pronalazac: {},
                 punomocnik: {},
                 adresaDostavljanja: {},
-                nacinDostavljanja: '',
+                nacinDostavljanja: 'ELEKTRONSKI_DOKUMENT',
                 vrstaPrijave: 'IZDVOJENA',
                 brojPrvobitnePrijave: '',
                 datumPrvobitnePrijave: '',
                 nazivSrpski: '',
                 nazivEngleski: '',
                 xonomyData: '',
-                ranijePrijave: []
+                ranijePrijave: [],
+                valid: {
+                    brojPrvobitne: true,
+                    datumPrvobitne: true
+                }
             }
         },
         methods: {
@@ -110,30 +114,35 @@
             },
             submit() {
                 this.parseXonomy();
-                const xmlString = js2xml.parse('zahtev', {
-                    nazivSrpski: this.nazivSrpski,
-                    nazivEngleski: this.nazivEngleski,
-                    adresaDostavljanja: this.adresaDostavljanja,
-                    vrstaPrijave: this.vrstaPrijave,
-                    datumPrvobitnePrijave: this.datumPrvobitnePrijave,
-                    brojPrvobitnePrijave: this.brojPrvobitnePrijave,
-                    nacinDostavljanja: this.nacinDostavljanja,
-                    podnosilac: this.podnosilac,
-                    pronalazac: this.pronalazac,
-                    punomocnik: this.punomocnik,
-                    ranijePrijaveList: {ranijePrijave: this.ranijePrijave}
-                });
-                console.log(xmlString);
-                ZahtevService.save(xmlString).then((_response) => {
-                    alert('Zahtev je uspešno podnesen!');
-                    this.clear();
-                }).catch((err) => {
-                    console.log(err);
-                    alert('Greška!');
-                })
+                if (this.isValidInput()) {
+                    const xmlString = js2xml.parse('zahtev', {
+                        nazivSrpski: this.nazivSrpski,
+                        nazivEngleski: this.nazivEngleski,
+                        adresaDostavljanja: this.adresaDostavljanja,
+                        vrstaPrijave: this.vrstaPrijave,
+                        datumPrvobitnePrijave: this.datumPrvobitnePrijave,
+                        brojPrvobitnePrijave: this.brojPrvobitnePrijave,
+                        nacinDostavljanja: this.nacinDostavljanja,
+                        podnosilac: this.podnosilac,
+                        pronalazac: this.pronalazac,
+                        punomocnik: this.punomocnik,
+                        ranijePrijaveList: {ranijePrijave: this.ranijePrijave}
+                    });
+                    console.log(xmlString);
+                    ZahtevService.save(xmlString).then((_response) => {
+                        alert('Zahtev je uspešno podnesen!');
+                        this.clear();
+                    }).catch((err) => {
+                        console.log(err);
+                        alert('Greška!');
+                    });
+                } else {
+                    alert('Zahtev nije ispravno popunjen!');
+                }
             },
             parseXonomy() {
                 xml2js.parseString(this.xonomyData, (_err, result) => {
+                    if (!result) return false;
                     let naziv1 = result.Podaci_o_patentu.Podaci_o_nazivu[0].Naziv[0]['_'];
                     let jezik1 = result.Podaci_o_patentu.Podaci_o_nazivu[0].Naziv[0]['$'].jezik;
                     let naziv2 = result.Podaci_o_patentu.Podaci_o_nazivu[0].Naziv[1]['_'];
@@ -144,13 +153,16 @@
                         this.nazivSrpski = naziv2;
                         this.nazivEngleski = naziv1;
                     }
+                    this.ranijePrijave = [];
                     let prijave = result.Podaci_o_patentu.Priznanje_prvenstva_iz_ranijih_prijava[0].Prijava;
                     for (let p of prijave) {
-                        this.ranijePrijave.push({
-                            brojPrijave: +p.Broj_prijave[0],
-                            datumPodnosenja: p.Datum_podnosenja[0],
-                            oznaka: p.Dvoslovna_oznaka_organizacije[0]
-                        });
+                        if (p) {
+                            this.ranijePrijave.push({
+                                brojPrijave: +p.Broj_prijave[0],
+                                datumPodnosenja: p.Datum_podnosenja[0],
+                                oznaka: p.Dvoslovna_oznaka_organizacije[0]
+                            });
+                        }
                     }
                 });
             },
@@ -160,7 +172,7 @@
                 this.$refs.pronalazac.clear();
                 this.$refs.ranijePrijave.clear();
                 this.$refs.adresaDostavljanja.clear();
-                this.nacinDostavljanja = '';
+                this.nacinDostavljanja = 'ELEKTRONSKI_DOKUMENT';
                 this.vrstaPrijave = 'IZDVOJENA';
                 this.brojPrvobitnePrijave = '';
                 this.datumPrvobitnePrijave = '';
@@ -168,6 +180,21 @@
                 this.nazivEngleski = '';
                 this.xonomyData = '';
                 this.ranijePrijave = [];
+            },
+            validateBrojPrvobitnePrijave() {
+                this.valid.brojPrvobitne = (this.vrstaPrijave == 'IZDVOJENA' || this.brojPrvobitnePrijave != '');
+            },
+            validateDatumPrvobitnePrijave() {
+                this.valid.datumPrvobitne = (this.vrstaPrijave == 'IZDVOJENA' || this.datumPrvobitnePrijave != '');
+            },
+            isValidInput() {
+                this.validateBrojPrvobitnePrijave();
+                this.validateDatumPrvobitnePrijave();
+                let podnosilac = this.$refs.podnosilac.isValidInput();
+                let punomocnik = this.$refs.punomocnik.isValidInput();
+                let pronalazac = this.$refs.pronalazac.isValidInput();
+                let naziv = this.nazivSrpski != '' && this.nazivEngleski != '';
+                return podnosilac && punomocnik && pronalazac && naziv && this.valid.brojPrvobitne && this.valid.datumPrvobitne;
             }
         }
     }

@@ -119,7 +119,7 @@ public class PopunjavaPodnosilac {
         }
 
         public PodaciODostavljanju(AdresaDTO adresa, String nacin) {
-            this.adresa = new Adresa(adresa);
+            if (adresa != null && adresa.getUlica() != null) this.adresa = new Adresa(adresa);
             this.nacin = NacinDostavljanja.valueOf(nacin);
         }
 

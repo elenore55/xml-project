@@ -2,15 +2,15 @@
     <div class="flex-container">
         <div id="name" class="flex-container-v item">
             <label for="name-input" class="item">Ime</label>
-            <input id="name-input" type="text" class="item" v-model="ime" @input="updateLicniPodaci"/>
+            <input id="name-input" type="text" :class="valid.ime?'item':'item red-border'" v-model="ime" @input="validateIme"/>
         </div>
         <div id="surname" class="flex-container-v item">
             <label for="surname-input">Prezime</label>
-            <input id="surname-input" type="text" v-model="prezime" @input="updateLicniPodaci"/>
+            <input id="surname-input" type="text" :class="valid.prezime?'item':'item red-border'" v-model="prezime" @input="validatePrezime"/>
         </div>
         <div v-if="drzavljanstvoPotrebno" id="citizenship" class="flex-container-v item">
             <label for="citizenship-input">Državljanstvo</label>
-            <input id="citizenship-input" type="text" v-model="drzavljanstvo" @input="updateLicniPodaci"/>
+            <input id="citizenship-input" type="text" :class="valid.drzavljanstvo?'':'red-border'" v-model="drzavljanstvo" @input="validateDrzavljanstvo"/>
         </div>
     </div>
 </template>
@@ -23,7 +23,12 @@
             return {
                 ime: '',
                 prezime: '',
-                drzavljanstvo: ''
+                drzavljanstvo: '',
+                valid: {
+                    ime: true,
+                    prezime: true,
+                    drzavljanstvo: true
+                }
             }
         },
         methods: {
@@ -40,6 +45,24 @@
                 this.prezime = '';
                 this.drzavljanstvo = '';
                 this.updateLicniPodaci();
+            },
+            validateIme() {
+                this.valid.ime = (this.ime != '');
+                this.updateLicniPodaci();
+            },
+            validatePrezime() {
+                this.valid.prezime = (this.prezime != '');
+                this.updateLicniPodaci();
+            },
+            validateDrzavljanstvo() {
+                this.valid.drzavljanstvo = (!this.drzavljanstvoPotrebno || this.drzavljanstvo != '');
+                this.updateLicniPodaci();
+            },
+            isValidInput() {
+                this.validateIme();
+                this.validatePrezime();
+                this.validateDrzavljanstvo();
+                return this.valid.ime && this.valid.prezime && this.valid.drzavljanstvo;
             }
         }
     }

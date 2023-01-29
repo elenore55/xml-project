@@ -344,15 +344,22 @@
                         <p style="border-bottom: 1px solid black; padding: 0 15px 10px 15px; margin-bottom: 0px">
                             <strong>Polje broj V &nbsp;&nbsp;&nbsp;&nbsp;ADRESA ZA DOSTAVLJANJE</strong>
                         </p>
-                        <div class="padded">
-                            Ulica i broj, poštanski broj i mesto:
-                            <p style="font-size: 18px">
-                                <xsl:value-of select="//p1:Podaci_o_dostavljanju//p1:Ulica"/>&nbsp;<xsl:value-of
-                                    select="//p1:Podaci_o_dostavljanju//p1:Broj"/>,
-                                <xsl:value-of select="//p1:Podaci_o_dostavljanju//p1:Postanski_broj"/>&nbsp;<xsl:value-of
-                                    select="//p1:Podaci_o_dostavljanju//p1:Mesto"/>
-                            </p>
-                        </div>
+                        <xsl:choose>
+                            <xsl:when test="//p1:Podaci_o_dostavljanju//p1:Ulica">
+                                <div class="padded">
+                                    Ulica i broj, poštanski broj i mesto:
+                                    <p style="font-size: 18px">
+                                        <xsl:value-of select="//p1:Podaci_o_dostavljanju//p1:Ulica"/>&nbsp;<xsl:value-of
+                                            select="//p1:Podaci_o_dostavljanju//p1:Broj"/>,
+                                        <xsl:value-of select="//p1:Podaci_o_dostavljanju//p1:Postanski_broj"/>&nbsp;<xsl:value-of
+                                            select="//p1:Podaci_o_dostavljanju//p1:Mesto"/>
+                                    </p>
+                                </div>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <p class="padded">Nije navedena</p>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </div>
 
                     <div style="border-bottom: 2px solid black">

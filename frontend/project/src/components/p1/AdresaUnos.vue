@@ -3,26 +3,26 @@
         <div class="flex-container">
             <div id="street" class="flex-container-v item">
                 <label for="street-input" class="item">Ulica</label>
-                <input id="street-input" type="text" class="item" v-model="ulica" @input="updateAdresa"/>
+                <input id="street-input" type="text" :class="valid.ulica?'item':'item red-border'" v-model="ulica" @input="validateUlica"/>
             </div>
             <div id="num" class="flex-container-v">
                 <label for="num-input">Broj objekta</label>
-                <input id="num-input" type="number" v-model="broj" @input="updateAdresa"/>
+                <input id="num-input" type="number" :class="valid.broj?'':'red-border'" v-model="broj" @input="validateBroj"/>
             </div>
         </div>
         <div class="flex-container">
             <div id="city" class="flex-container-v item">
                 <label for="city-input" class="item">Mesto</label>
-                <input id="city-input" type="text" class="item" v-model="mesto" @input="updateAdresa"/>
+                <input id="city-input" type="text" :class="valid.mesto?'item':'item red-border'" v-model="mesto" @input="validateMesto"/>
             </div>
             <div id="zip" class="flex-container-v">
                 <label for="zip-input">Poštanski broj</label>
-                <input id="zip-input" type="number" v-model="postanskiBroj" @input="updateAdresa"/>
+                <input id="zip-input" type="number" :class="valid.postanskiBroj?'':'red-border'" v-model="postanskiBroj" @input="validatePostanskiBroj"/>
             </div>
         </div>
         <div v-if="drzavaPotrebna" class="flex-container-v">
             <label for="country-input">Država</label>
-            <input id="country-input" v-model="drzava" @input="updateAdresa"/>
+            <input id="country-input" :class="valid.drzava?'':'red-border'" v-model="drzava" @input="validateDrzava"/>
         </div>
     </div>
 </template>
@@ -30,14 +30,21 @@
 <script>
     export default {
         name: 'AdresaUnos',
-        props: ['drzavaPotrebna'],
+        props: ['drzavaPotrebna', 'optional'],
         data() {
             return {
                 ulica: '',
                 broj: '',
                 mesto: '',
                 postanskiBroj: '',
-                drzava: ''
+                drzava: '',
+                valid: {
+                    ulica: true,
+                    broj: true,
+                    mesto: true,
+                    postanskiBroj: true,
+                    drzava: true
+                }
             }
         },
         methods: {
@@ -57,6 +64,35 @@
                 this.postanskiBroj = '';
                 this.drzava = '';
                 this.updateAdresa();
+            },
+            validateUlica() {
+                this.valid.ulica = (this.optional || this.ulica != '');
+                this.updateAdresa();
+            },
+            validateBroj() {
+                this.valid.broj = (this.optional || this.broj != '');
+                this.updateAdresa();
+            },
+            validateMesto() {
+                this.valid.mesto = (this.optional || this.mesto != '');
+                this.updateAdresa();
+            },
+            validatePostanskiBroj() {
+                this.valid.postanskiBroj = (this.optional || this.postanskiBroj != '');
+                this.updateAdresa();
+            },
+            validateDrzava() {
+                this.valid.drzava = (!this.drzavaPotrebna || this.drzava != '');
+                this.updateAdresa();
+            },
+            isValidInput() {
+                if (this.optional) return true;
+                this.validateUlica();
+                this.validateBroj();
+                this.validateMesto();
+                this.validatePostanskiBroj();
+                this.validateDrzava();
+                return this.valid.ulica && this.valid.broj && this.valid.mesto && this.valid.postanskiBroj && this.valid.drzava;
             }
         }
     }
