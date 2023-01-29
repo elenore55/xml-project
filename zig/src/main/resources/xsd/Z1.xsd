@@ -105,11 +105,11 @@
                                     <xs:sequence>
                                         <xs:element name="Primerak_znaka" type="xs:string"/>
                                         <xs:element name="Spisak_robe_i_usluga" type="xs:string"/>
-                                        <xs:element name="Punomocje" type="xs:string"/>
+                                        <xs:element minOccurs="0" name="Punomocje" type="xs:string"/>
                                         <xs:element name="Generalno_punomocje" type="xs:boolean"/>
                                         <xs:element name="Punomocje_naknadno_dostavljeno"
                                             type="xs:boolean"/>
-                                        <xs:element name="Opsti_akt" type="xs:string"/>
+                                        <xs:element minOccurs="0" name="Opsti_akt" type="xs:string"/>
                                         <xs:element name="Dokaz_o_pravu_prvenstva" type="xs:string"/>
                                         <xs:element name="Dokaz_o_uplati_takse" type="xs:string"/>
                                     </xs:sequence>

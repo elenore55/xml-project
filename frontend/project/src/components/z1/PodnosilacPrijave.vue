@@ -54,7 +54,8 @@
                 adresa: {},
                 telefon: '',
                 email: '',
-                faks: ''
+                faks: '',
+                validPoslovnoIme: true
             }
         },
         methods: {
@@ -89,10 +90,25 @@
                 this.poslovnoIme = '';
                 this.ime = '';
                 this.prezime = '';
-                if (this.tipPodnosioca === 1) this.$refs.licniPodaci.clear();
+                if (this.tipPodnosioca == 1) this.$refs.licniPodaci.clear();
                 this.$refs.adresaUnos.clear();
                 this.$refs.kontaktPodaci.clear();
                 this.updatePodnosilac();
+            },
+            validatePoslovnoIme() {
+                this.validPoslovnoIme = (this.poslovnoIme != '');
+            },
+            isValidInput() {
+                let licniPodaci;
+                if (this.tipPodnosioca == 2) {
+                    this.validatePoslovnoIme();
+                    licniPodaci = this.validPoslovnoIme;
+                } else {
+                    licniPodaci = this.$refs.licniPodaci.isValidInput();
+                }
+                let adresa = this.$refs.adresaUnos.isValidInput();
+                let kontakt = this.$refs.kontaktPodaci.isValidInput();
+                return licniPodaci && adresa && kontakt;
             }
         }
     }

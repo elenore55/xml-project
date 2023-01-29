@@ -32,10 +32,10 @@ public class Prilozi {
     @XmlElement(name = "Primerak_znaka", required = true)
     String primerakZnaka;
 
-    @XmlElement(name = "Spisak_robe_i_usluga")
+    @XmlElement(name = "Spisak_robe_i_usluga", required = true)
     String spisakRobeIUsluga;
 
-    @XmlElement(name = "Punomocje", required = true)
+    @XmlElement(name = "Punomocje")
     String punomocje;
 
     @XmlElement(name = "Generalno_punomocje", required = true)
@@ -44,7 +44,7 @@ public class Prilozi {
     @XmlElement(name = "Punomocje_naknadno_dostavljeno", required = true)
     boolean punomocjeNaknadnoDostavljeno;
 
-    @XmlElement(name = "Opsti_akt", required = true)
+    @XmlElement(name = "Opsti_akt")
     String opstiAkt;
 
     @XmlElement(name = "Dokaz_o_pravu_prvenstva", required = true)

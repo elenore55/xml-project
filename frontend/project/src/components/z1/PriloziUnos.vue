@@ -1,22 +1,24 @@
 <template>
     <div>
         <h2>Prilozi</h2>
-        <div class="flex-container">
-            <div class="flex-container-v item">
-                <label>Primerak znaka</label>
-                <input type="file" @change="primerakZnakaChanged"/>
-            </div>
-            <div class="flex-container-v item">
-                <label>Opšti akt o kolektivnom žigu/žigu garancije</label>
-                <input type="file" @change="opstiAktChanged"/>
-            </div>
+
+        <div class="flex-container-v item">
+            <label>Primerak znaka</label>
+            <input type="file" @change="primerakZnakaChanged"/>
         </div>
 
+        <div class="flex-container-v item">
+            <label>Opšti akt o kolektivnom žigu/žigu garancije</label>
+            <input type="file" @change="opstiAktChanged"/>
+        </div>
+
+
+        
+        <div class="flex-container-v item">
+            <label>Punomoćje</label>
+            <input type="file" @change="punomocjeChanged"/>
+        </div>
         <div class="flex-container">
-            <div class="flex-container-v item">
-                <label>Punomoćje</label>
-                <input type="file" @change="punomocjeChanged"/>
-            </div>
             <div class="item cb">
                 <input type="checkbox" v-model="generalnoPunomocjeRanijePrilozeno" @input="checkRanijePrilozeno($event)"/>
                 <label>Generalno punomoćje ranije priloženo</label>
@@ -27,20 +29,20 @@
             </div>    
         </div>
 
-        <div class="flex-container">
-            <div class="flex-container-v item">
-                <label>Spisak robe i usluga</label>
-                <input type="file" @change="spisakRobeChanged"/>
-            </div>
-            <div class="flex-container-v item">
-                <label>Dokaz o pravu prvenstva</label>
-                <input type="file" @change="dokazPravoChanged"/>
-            </div>
-            <div class="flex-container-v item">
-                <label>Dokaz o uplati takse</label>
-                <input type="file" @change="dokazUplataChanged"/>
-            </div>
+
+        <div class="flex-container-v item">
+            <label>Spisak robe i usluga</label>
+            <input type="file" @change="spisakRobeChanged"/>
         </div>
+        <div class="flex-container-v item">
+            <label>Dokaz o pravu prvenstva</label>
+            <input type="file" @change="dokazPravoChanged"/>
+        </div>
+        <div class="flex-container-v item">
+            <label>Dokaz o uplati takse</label>
+            <input type="file" @change="dokazUplataChanged"/>
+        </div>
+
     </div>
 </template>
 
@@ -114,6 +116,9 @@
                 this.dokazOPravuPrvenstva = '';
                 this.dokazOUplatiTakse = '';
                 this.updatePrilozi();
+            },
+            isValidInput() {
+                return this.primerakZnaka && this.spisakRobe && this.dokazOUplatiTakse && this.dokazOPravuPrvenstva;
             }
         }
     }
@@ -123,17 +128,18 @@
     .flex-container {
         display: flex;
         gap: 0 20px;
-        margin-bottom: 45px;
     }
     .flex-container-v {
         display: flex;
         flex-direction: column;
         gap: 10px;
+        margin-bottom: 40px;
     }
     .item {
         flex: 1
     }
     .cb {
-        padding-top: 10px;
+        margin-bottom: 40px;
+        margin-top: -10px;
     }
 </style>

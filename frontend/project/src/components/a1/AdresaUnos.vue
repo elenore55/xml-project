@@ -47,7 +47,7 @@
                 this.updateAdresa();
             },
             updateBroj() {
-                this.validation.broj = (this.broj != '');
+                this.validation.broj = (this.broj != '' && this.broj != 0);
                 this.updateAdresa();
             },
             updateMesto() {
@@ -55,7 +55,7 @@
                 this.updateAdresa();
             },
             updatePostanskiBroj() {
-                this.validation.postanskiBroj = (this.postanskiBroj != '');
+                this.validation.postanskiBroj = (this.postanskiBroj != '' && this.postanskiBroj != 0);
                 this.updateAdresa();
             },
             updateAdresa() {

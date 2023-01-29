@@ -76,40 +76,46 @@
                 this.predstavnik = osoba;
             },
             dodajPodnosioca() {
-                this.podnosioci.push(this.podnosilac);
-                this.$refs.podnosilac.clear();
+                if (this.$refs.podnosilac.isValidInput()) {
+                    this.podnosioci.push(this.podnosilac);
+                    this.$refs.podnosilac.clear();
+                }
             },
             ukloniPodnosioca(i) {
                 this.podnosioci.splice(i, 1);
             },
             submit() {
-                let formData = new FormData();
-                formData.append('izgledZnaka', this.zig.izgledZnaka);
-                formData.append('primerakZnaka', this.prilozi.primerakZnaka);
-                formData.append('spisakRobeIUsluga', this.prilozi.spisakRobeIUsluga);
-                formData.append('punomocje', this.prilozi.punomocje);
-                formData.append('opstiAkt', this.prilozi.opstiAkt);
-                formData.append('dokazOPravuPrvenstva', this.prilozi.dokazOPravuPrvenstva);
-                formData.append('dokazOUplatiTakse', this.prilozi.dokazOUplatiTakse);
+                if (this.isValidInput()) {
+                    let formData = new FormData();
+                    formData.append('izgledZnaka', this.zig.izgledZnaka);
+                    formData.append('primerakZnaka', this.prilozi.primerakZnaka);
+                    formData.append('spisakRobeIUsluga', this.prilozi.spisakRobeIUsluga);
+                    formData.append('punomocje', this.prilozi.punomocje);
+                    formData.append('opstiAkt', this.prilozi.opstiAkt);
+                    formData.append('dokazOPravuPrvenstva', this.prilozi.dokazOPravuPrvenstva);
+                    formData.append('dokazOUplatiTakse', this.prilozi.dokazOUplatiTakse);
 
-                const xmlString = js2xml.parse('zahtev', {
-                    podnosiociList: {podnosioci:this.podnosioci},
-                    punomocnik: this.punomocnik,
-                    zajednickiPredstavnik: this.zajednickiPredstavnik,
-                    placeneTakse: this.placeneTakse,
-                    zig: this.zig,
-                    punomocjeRanijePrilozeno: this.prilozi.generalnoPunomocjeRanijePrilozeno,
-                    punomocjeNaknadnoDostavljeno: this.prilozi.punomocjeNaknadnoDostavljeno
-                });
-                formData.append('dto', xmlString);
+                    const xmlString = js2xml.parse('zahtev', {
+                        podnosiociList: {podnosioci:this.podnosioci},
+                        punomocnik: this.punomocnik,
+                        zajednickiPredstavnik: this.zajednickiPredstavnik,
+                        placeneTakse: this.placeneTakse,
+                        zig: this.zig,
+                        punomocjeRanijePrilozeno: this.prilozi.generalnoPunomocjeRanijePrilozeno,
+                        punomocjeNaknadnoDostavljeno: this.prilozi.punomocjeNaknadnoDostavljeno
+                    });
+                    formData.append('dto', xmlString);
 
-                ZahtevService.save(formData).then((_response) => {
-                    alert('Zahtev je uspešno podnet!');
-                    this.clear();
-                }).catch((err) => {
-                    console.log(err);
-                    alert('Greška!');
-                });
+                    ZahtevService.save(formData).then((_response) => {
+                        alert('Zahtev je uspešno podnet!');
+                        this.clear();
+                    }).catch((err) => {
+                        console.log(err);
+                        alert('Greška!');
+                    });
+                } else {
+                    alert('Zahtev nije ispravno popunjen!');
+                }
             },
             clear() {
                 this.$refs.punomocnik.clear();
@@ -118,6 +124,14 @@
                 this.$refs.zig.clear();
                 this.$refs.takse.clear();
                 this.$refs.prilozi.clear();
+            },
+            isValidInput() {
+                let punomocnik = this.$refs.punomocnik.isValidInput();
+                let predstavnik = true;
+                if (this.podnosioci.length > 1) predstavnik = this.$refs.predstavnik.isValidInput();
+                let prilozi = this.$refs.prilozi.isValidInput();
+                let zig = this.$refs.zig.isValidInput();
+                return punomocnik && predstavnik && prilozi && zig && this.podnosioci.length > 0;
             }
         }
     }

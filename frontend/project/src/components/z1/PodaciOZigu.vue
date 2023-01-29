@@ -12,7 +12,7 @@
             </div>
             <div class="flex-container-v item">
                 <label>Vrsta znaka</label> 
-                <input type="text" list="vrsta" v-model="vrstaZnaka" @change="updateZig" />
+                <input type="text" list="vrsta" :class="valid.vrsta?'':'red-border'" v-model="vrstaZnaka" @input="validateVrsta" />
                 <datalist id="vrsta">
                     <option>Verbalni znak</option>
                     <option>Grafički znak</option>
@@ -37,7 +37,7 @@
             </div>
             <div class="flex-container-v item">
                 <label>Opis znaka</label>
-                <input type="text" v-model="opis" @input="updateZig"/>
+                <input type="text" v-model="opis" :class="valid.opis?'':'red-border'" @input="validateOpis"/>
             </div>
         </div>
 
@@ -106,6 +106,11 @@
                 boja: '',
                 half1: [...Array(23).keys()].map(i => i + 1),
                 half2: [...Array(22).keys()].map(i => i + 24),
+                valid: {
+                    vrsta: true,
+                    izgled: true,
+                    opis: true
+                }
             }
         },
         methods: {
@@ -157,6 +162,24 @@
                 this.pravoPrvenstva = '',
                 this.boja = '',
                 this.updateZig();
+            },
+            validateVrsta() {
+                this.valid.vrsta = (this.vrstaZnaka != '');
+                this.updateZig();
+            },
+            validateOpis() {
+                this.valid.opis = (this.opis != '');
+                this.updateZig();
+            },
+            validateIzgled() {
+                this.valid.izgled = (this.izgledZnaka != '');
+                this.updateZig();
+            },
+            isValidInput() {
+                this.validateIzgled();
+                this.validateVrsta();
+                this.validateOpis();
+                return this.valid.vrsta && this.valid.opis && this.valid.izgled && this.boje.length > 0 && this.nicanskaKlasifikacija.length > 0;
             } 
         },
         computed: {
