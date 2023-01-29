@@ -15,7 +15,7 @@ export default {
     font-family: Arial, Helvetica, sans-serif;
   }
   .red-border {
-    border: 1px solid red;
+    border: 2px solid red;
   }
   select {
     font-size: 16px;

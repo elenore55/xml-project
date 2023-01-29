@@ -29,10 +29,10 @@
                             <span>Primer autorskog dela</span>
                         </div>
                     </div>
-                    <input v-if="opisDelaFlag" type="text" v-model="opisDela" />
+                    <input v-if="opisDelaFlag" type="text" :class="isValidOpis?'':'red-border'" v-model="opisDela" @input="validateOpis" />
                     <input v-else type="file" ref="file" id="file" @change="handleFileUpload($event)" />
                 </div>
-                <button type="button" @click="submit">Podnesi zahtev</button>
+                <button type="button" id="btn-submit" @click="submit">Podnesi zahtev</button>
             </div>
         </div>
     </div>
@@ -64,7 +64,8 @@
                 autor: {},
                 opisDelaFlag: true,
                 opisDela: '',
-                prilog: ''
+                prilog: '',
+                isValidOpis: true
             }
         },
         methods: {
@@ -94,40 +95,14 @@
                 this.prilog = event.target.files[0];
             },
             submit() {
-                if (this.opisDelaFlag) {
-                    const xmlString = js2xml.parse("zahtev", {
-                        podnosilac: this.podnosilacPrijave,
-                        autorskoDelo: this.autorskoDelo,
-                        autori: {
-                            autori: this.autorList
-                        },
-                        opisDela: this.opisDela
-                    });
-                    console.log(xmlString);
-                    ZahtevService.save(xmlString).then(() => {
-                        alert('Zahtev je uspešno podnet!');
-                        this.clear();
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-
+                if (this.isValidInput()) {
+                    if (this.opisDelaFlag || this.prilog == '') {
+                        this.submitWithoutPrilog();
+                    } else {
+                        this.submitWithPrilog();
+                    }
                 } else {
-                    let formData = new FormData();
-                    formData.append('prilog', this.prilog);
-                    const xmlString = js2xml.parse("zahtev", {
-                        podnosilac: this.podnosilacPrijave,
-                        autorskoDelo: this.autorskoDelo,
-                        autori: {
-                            autori: this.autorList
-                        }
-                    });
-                    formData.append('dto', xmlString);
-                    ZahtevService.saveWithPrilog(formData).then(() => {
-                        alert('Zahtev je uspešno podnet!');
-                        this.clear();
-                    }).catch((err) => {
-                        console.log(err);
-                    });
+                    alert('Zahtev nije ispravno popunjen!');
                 }
             },
             clear() {
@@ -135,15 +110,62 @@
                 this.$refs.autorskoDelo.clear();
                 this.autor = {};
                 this.autorList = [];
-                this.opisDelaFlag = true;
                 this.opisDela = '';
                 this.primerDela = '';
+            },
+            isValidInput() {
+                let podnosilacValid = this.$refs.podnosilac.isValidInput(); 
+                let deloValid = this.$refs.autorskoDelo.isValidInput();
+                return podnosilacValid && deloValid;
+            },
+            validateOpis() {
+                this.isValidOpis = (this.opisDela != '');
+            },
+            submitWithPrilog() {
+                let formData = new FormData();
+                formData.append('prilog', this.prilog);
+                const xmlString = js2xml.parse("zahtev", {
+                    podnosilac: this.podnosilacPrijave,
+                    autorskoDelo: this.autorskoDelo,
+                    autori: {
+                        autori: this.autorList
+                    }
+                });
+                formData.append('dto', xmlString);
+                ZahtevService.saveWithPrilog(formData).then(() => {
+                    alert('Zahtev je uspešno podnet!');
+                    this.clear();
+                }).catch((err) => {
+                    console.log(err);
+                    alert('Greška!');
+                });
+            },
+            submitWithoutPrilog() {
+                const xmlString = js2xml.parse("zahtev", {
+                    podnosilac: this.podnosilacPrijave,
+                    autorskoDelo: this.autorskoDelo,
+                    autori: {
+                        autori: this.autorList
+                    },
+                    opisDela: this.opisDela
+                });
+                ZahtevService.save(xmlString).then(() => {
+                    alert('Zahtev je uspešno podnet!');
+                    this.clear();
+                }).catch((err) => {
+                    console.log(err);
+                    alert('Greška!');
+                });
             }
         }
     }
 </script>
 
 <style scoped>
+    #btn-submit {
+        font-size: 18px;
+        margin: 30px 0;
+    }
     h2 {
         margin-top: 40px;
     }

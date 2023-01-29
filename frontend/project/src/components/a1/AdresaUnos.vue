@@ -3,21 +3,21 @@
         <div class="flex-container">
             <div id="street" class="flex-container-v item">
                 <label for="street-input" class="item">Ulica</label>
-                <input id="street-input" type="text" class="item" v-model="ulica" @input="updateAdresa"/>
+                <input id="street-input" type="text" :class="validation.ulica?'item':'item red-border'" v-model="ulica" @input="updateUlica"/>
             </div>
             <div id="num" class="flex-container-v">
                 <label for="num-input">Broj objekta</label>
-                <input id="num-input" type="number" v-model="broj" @input="updateAdresa"/>
+                <input id="num-input" type="number" :class="validation.broj?'none':'red-border'" v-model="broj" @input="updateBroj"/>
             </div>
         </div>
         <div class="flex-container">
             <div id="city" class="flex-container-v item">
                 <label for="city-input" class="item">Mesto</label>
-                <input id="city-input" type="text" class="item" v-model="mesto" @input="updateAdresa"/>
+                <input id="city-input" type="text" :class="validation.mesto?'item':'item red-border'" v-model="mesto" @input="updateMesto"/>
             </div>
             <div id="zip" class="flex-container-v">
                 <label for="zip-input">Poštanski broj</label>
-                <input id="zip-input" type="number" v-model="postanskiBroj" @input="updateAdresa"/>
+                <input id="zip-input" type="number" :class="validation.postanskiBroj?'none':'red-border'" v-model="postanskiBroj" @input="updatePostanskiBroj"/>
             </div>
         </div>
     </div>
@@ -32,21 +32,31 @@
                 ulica: '',
                 broj: '',
                 mesto: '',
-                postanskiBroj: ''
+                postanskiBroj: '',
+                validation: {
+                    ulica: true,
+                    broj: true,
+                    mesto: true,
+                    postanskiBroj: true
+                }
             }
         },
         methods: {
             updateUlica() {
-                this.$emit('updateUlica', this.ulica);
+                this.validation.ulica = (this.ulica != '');
+                this.updateAdresa();
             },
             updateBroj() {
-                this.$emit('updateBroj', this.broj);
+                this.validation.broj = (this.broj != '');
+                this.updateAdresa();
             },
             updateMesto() {
-                this.$emit('updateMesto', this.mesto);
+                this.validation.mesto = (this.mesto != '');
+                this.updateAdresa();
             },
             updatePostanskiBroj() {
-                this.$emit('updatePostanskiBroj', this.postanskiBroj);
+                this.validation.postanskiBroj = (this.postanskiBroj != '');
+                this.updateAdresa();
             },
             updateAdresa() {
                 this.$emit('updateAdresa', {
@@ -62,6 +72,13 @@
                 this.mesto = '';
                 this.postanskiBroj = '';
                 this.updateAdresa();
+            },
+            isValidInput() {
+                this.updateUlica();
+                this.updateBroj();
+                this.updateMesto();
+                this.updatePostanskiBroj();
+                return this.validation.ulica && this.validation.broj && this.validation.mesto && this.validation.postanskiBroj;
             }
         }
     }

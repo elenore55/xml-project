@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:a1="http://www.ftn.com/a1" xmlns:pred="http://www.ftn.com/a1/pred/">
-<rdf:Description rdf:about="http://www.ftn.com/a1/Zahtev-2">
-<pred:Naziv_fajla>Zahtev2.xml</pred:Naziv_fajla>
-<pred:Broj_prijave>2</pred:Broj_prijave>
-<pred:Datum_podnosenja>2023-01-28+01:00</pred:Datum_podnosenja>
-<pred:Ime_podnosioca>Marko</pred:Ime_podnosioca>
-<pred:Prezime_podnosioca>Markovic</pred:Prezime_podnosioca>
+<rdf:Description rdf:about="http://www.ftn.com/a1/Zahtev-3">
+<pred:Naziv_fajla>Zahtev3.xml</pred:Naziv_fajla>
+<pred:Broj_prijave>3</pred:Broj_prijave>
+<pred:Datum_podnosenja>2023-01-29+01:00</pred:Datum_podnosenja>
+<pred:Ime_podnosioca>Djuro</pred:Ime_podnosioca>
+<pred:Prezime_podnosioca>Djuric</pred:Prezime_podnosioca>
 <pred:Stvoreno_u_radnom_odnosu>true</pred:Stvoreno_u_radnom_odnosu>
 </rdf:Description>
 </rdf:RDF>

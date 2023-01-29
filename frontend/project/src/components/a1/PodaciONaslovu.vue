@@ -2,7 +2,7 @@
     <div class="flex-container">
         <div id="naslov" class="flex-container-v item">
             <label for="naslov-input" class="item">Naslov</label>
-            <input id="naslov-input" type="text" class="item" v-model="naslov" @input="updateNaslov"/>
+            <input id="naslov-input" type="text" :class="this.isNaslovValid?'item':'item red-border'" v-model="naslov" @input="validateNaslov"/>
         </div>
         <div id="alt-naslov" class="flex-container-v item">
             <label for="alt-naslov-input">Alternativni naslov</label>
@@ -18,7 +18,8 @@
         data() {
             return {
                 naslov: '',
-                altNaslov: ''
+                altNaslov: '',
+                isNaslovValid: true
             }
         },
         methods: {
@@ -32,6 +33,14 @@
                 this.naslov = '';
                 this.altNaslov = '';
                 this.updateNaslov();
+            },
+            validateNaslov() {
+                this.isNaslovValid = (this.naslov != '');
+                this.updateNaslov();
+            },
+            isValidInput() {
+                this.validateNaslov();
+                return this.naslov != '';
             }
         }
     }

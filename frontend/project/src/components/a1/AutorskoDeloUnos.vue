@@ -7,7 +7,7 @@
                 <div class="flex-container">
                     <div class="flex-container-v item">
                         <label>Vrsta autorskog dela</label> 
-                        <input type="text" list="vrsta" v-model="vrsta" @change="updateAutorskoDelo" />
+                        <input type="text" list="vrsta" :class="validation.vrsta?'':'red-border'" v-model="vrsta" @change="validateVrsta" />
                         <datalist id="vrsta">
                             <option>Književno delo</option>
                             <option>Muzičko delo</option>
@@ -17,7 +17,7 @@
                     </div>
                     <div id="forma-zapisa" class="flex-container-v item">
                         <label for="forma-zapisa-input">Forma zapisa</label>
-                        <input type="text" list="forma" v-model="formaZapisa" @change="updateAutorskoDelo" />
+                        <input type="text" list="forma" :class="validation.formaZapisa?'':'red-border'" v-model="formaZapisa" @change="validateFormaZapisa" />
                         <datalist id="forma">
                             <option>Štampani tekst</option>
                             <option>Optički disk</option>
@@ -66,7 +66,11 @@
                 nacinKoriscenja: '',
                 radniOdnos: false,
                 deloPrerade: false,
-                izvornoDelo: {}
+                izvornoDelo: {},
+                validation: {
+                    vrsta: true,
+                    formaZapisa: true
+                }
             }
         },
         methods: {
@@ -110,6 +114,22 @@
                 this.nacinKoriscenja = '';
                 this.radniOdnos = false;
                 this.deloPrerade = false;
+            },
+            validateVrsta() {
+                this.validation.vrsta = (this.vrsta != '');
+                this.updateAutorskoDelo();
+            },
+            validateFormaZapisa() {
+                this.validation.formaZapisa = (this.formaZapisa != '');
+                this.updateAutorskoDelo();
+            },
+            isValidInput() {
+                let izvornoDeloValid = true;
+                if (this.deloPrerade) izvornoDeloValid = this.$refs.izvornoDelo.isValidInput();
+                let naslovValid = this.$refs.naslov.isValidInput();
+                this.validateVrsta();
+                this.validateFormaZapisa();
+                return izvornoDeloValid && this.validation.vrsta && this.validation.formaZapisa && naslovValid;
             }
         }
     }

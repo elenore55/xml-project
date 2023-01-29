@@ -18,7 +18,7 @@
             <div class="flex-container">
                 <div id="business-name" class="flex-container-v item">
                     <label for="business-name-input" class="item">Poslovno ime</label>
-                    <input id="business-name-input" type="text" class="item" v-model="poslovnoIme" @input="updatePodnosilac"/>
+                    <input id="business-name-input" type="text" class="item" v-model="poslovnoIme" @input="validatePoslovnoIme"/>
                 </div>
             </div>
         </div>
@@ -33,11 +33,11 @@
             <div class="flex-container">
                 <div id="phone" class="flex-container-v item">
                     <label for="phone-input" class="item">Telefon</label>
-                    <input id="phone-input" type="text" class="item" v-model="telefon" @input="updatePodnosilac"/>
+                    <input id="phone-input" type="text" :class="validation.telefon?'item':'item red-border'" v-model="telefon" @input="validateTelefon"/>
                 </div>
                 <div id="email" class="flex-container-v item">
                     <label for="email-input">E-mail</label>
-                    <input id="email-input" type="text" v-model="email" @input="updatePodnosilac"/>
+                    <input id="email-input" type="email" :class="validation.email?'item':'item red-border'" v-model="email" @input="validateEmail"/>
                 </div>
             </div>
         </div>
@@ -64,6 +64,11 @@
                 adresa: {},
                 telefon: '',
                 email: '',
+                validation: {
+                    poslovnoIme: true,
+                    telefon: true,
+                    email: true
+                }
             }
         },
         methods: {
@@ -100,6 +105,28 @@
                 this.telefon = '';
                 this.tipPodnosioca = 1;
                 this.updatePodnosilac();
+            },
+            validatePoslovnoIme() {
+                this.validation.poslovnoIme = this.tipPodnosioca != 2 || (this.poslovnoIme != '');
+                this.updatePodnosilac();
+            },
+            validateTelefon() {
+                this.validation.telefon = (this.telefon != '');
+                this.updatePodnosilac();
+            },
+            validateEmail() {
+                this.validation.email = (this.email != '');
+                this.updatePodnosilac();
+            },
+            isValidInput() {
+                this.validateEmail();
+                this.validateTelefon();
+                this.validatePoslovnoIme();
+                let result;
+                if (this.tipPodnosioca != 2) result = this.$refs.licniPodaci.isValidInput();
+                else result = this.validation.poslovnoIme;
+                let adresaValid = this.$refs.adresa.isValidInput(); 
+                return result && adresaValid && this.validation.email && this.validation.telefon;
             }
         }
     }

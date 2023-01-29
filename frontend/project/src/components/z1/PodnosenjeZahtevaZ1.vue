@@ -101,7 +101,6 @@
                     punomocjeRanijePrilozeno: this.prilozi.generalnoPunomocjeRanijePrilozeno,
                     punomocjeNaknadnoDostavljeno: this.prilozi.punomocjeNaknadnoDostavljeno
                 });
-                console.log(xmlString);
                 formData.append('dto', xmlString);
 
                 ZahtevService.save(formData).then((_response) => {
@@ -109,6 +108,7 @@
                     this.clear();
                 }).catch((err) => {
                     console.log(err);
+                    alert('Greška!');
                 });
             },
             clear() {

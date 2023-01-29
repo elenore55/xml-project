@@ -129,6 +129,7 @@
                     this.clear();
                 }).catch((err) => {
                     console.log(err);
+                    alert('Greška!');
                 })
             },
             parseXonomy() {

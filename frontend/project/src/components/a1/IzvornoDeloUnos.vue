@@ -58,6 +58,9 @@
                 this.autor = {};
                 this.autorList = [];
                 this.updateIzvornoDelo();
+            },
+            isValidInput() {
+                return this.$refs.naslov.isValidInput() && this.autorList.length > 0;
             }
         }
     }
