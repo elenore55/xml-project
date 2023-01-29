@@ -20,12 +20,27 @@
         </div>
         <hr/>
         <div class="fullscreen flex-container">
-            <div class="item">
+            <!-- <div class="item">
                 <div v-for="r in rezultati" :key="r.id" class="link flex-container-sm">
                         <a href="#/zahtevPretraga" @click="prikaziZahtev(getId(r))" >Zahtev-{{ getId(r) }}</a>
                         <button type="button" class="small" @click="downloadHTML(getId(r))">HTML</button>
                         <button type="button" class="small" @click="downloadPDF(getId(r))">PDF</button>
                 </div>
+            </div> -->
+            <div class="item">
+                <table style="border: 1px solid white;">
+                    <tr v-for="r in rezultati" :key="r.id" style="border: 1px solid white" class="link">
+                        <td class="zahtev-name">
+                            <a href="#/zahtevPretraga" @click="prikaziZahtev(getId(r))" >Zahtev-{{ getId(r) }}</a>
+                        </td>
+                        <td style="border: 1px solid white">
+                            <button type="button" class="small" @click="downloadHTML(getId(r))">HTML</button>
+                        </td>
+                        <td style="border: 1px solid white">
+                            <button type="button" class="small" @click="downloadPDF(getId(r))">PDF</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div v-if="htmlContent != ''" class="item-big">
                 <a target="_blank" rel="noreferrer" :href="`#/referencirajuci/${selectedZahtevId}/${servis}`" id="ref-docs">
@@ -120,6 +135,15 @@
 </script>
 
 <style scoped>
+    td {
+        padding: 1px 2px 20px 1px;    
+    }
+    .zahtev-name {
+        padding-right: 20px;
+        text-align: right;
+        border: 1px solid white;
+        min-width: 120px;
+    }
     .centered-text {
         text-align: center;
     }
@@ -161,11 +185,11 @@
     button {
         font-size: 16px;
     }
-    button.small {
+    .small {
         font-size: 14px;
     }
     .link {
-        margin: 20px 0;
+        padding: 30px 0;
     }
     #div-html {
         border: 2px solid black;
