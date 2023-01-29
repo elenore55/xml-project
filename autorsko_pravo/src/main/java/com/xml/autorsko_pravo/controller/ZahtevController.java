@@ -68,7 +68,7 @@ public class ZahtevController {
                 .body(resource);
     }
 
-    @GetMapping(value = "zahtev/htmlString/{name}")
+    @GetMapping(value = "zahtev/htmlString/{name}", produces = "text/html;charset=UTF-8")
     public ResponseEntity<String> getHtmlString(@PathVariable String name) throws IOException {
         htmlTransformer.generateHtml(name);
         String content = Files.readString(Paths.get(HTMLTransformer.HTML_FILE));
