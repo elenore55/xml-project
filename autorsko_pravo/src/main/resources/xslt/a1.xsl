@@ -438,7 +438,7 @@
                                 </tr>
                                 <tr>
                                     <td style="font-size: 22px; padding: 5px 0 15px 15px; border-top: white">
-                                        <xsl:value-of select="//a1:Datum_podnosenja"/>
+                                        <xsl:value-of select="substring(//a1:Datum_podnosenja, 0, 11)"/>
                                     </td>
                                 </tr>
                             </tbody>

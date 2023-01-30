@@ -21,7 +21,7 @@
                     <xsl:value-of select="//z1:Popunjava_zavod/z1:Broj_prijave_ziga/z1:Godina"/>
                 </pred:Godina_prijave_ziga>
                 <pred:Datum_podnosenja>
-                    <xsl:value-of select="//z1:Popunjava_zavod/z1:Datum_podnosenja"/>
+                    <xsl:value-of select="substring(//z1:Popunjava_zavod/z1:Datum_podnosenja, 0, 11)"/>
                 </pred:Datum_podnosenja>
                 <pred:Tip_ziga>
                     <xsl:value-of select="//z1:Tip_ziga"/>

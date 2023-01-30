@@ -20,13 +20,6 @@
         </div>
         <hr/>
         <div class="fullscreen flex-container">
-            <!-- <div class="item">
-                <div v-for="r in rezultati" :key="r.id" class="link flex-container-sm">
-                        <a href="#/zahtevPretraga" @click="prikaziZahtev(getId(r))" >Zahtev-{{ getId(r) }}</a>
-                        <button type="button" class="small" @click="downloadHTML(getId(r))">HTML</button>
-                        <button type="button" class="small" @click="downloadPDF(getId(r))">PDF</button>
-                </div>
-            </div> -->
             <div class="item">
                 <table style="border: 1px solid white;">
                     <tr v-for="r in rezultati" :key="r.id" style="border: 1px solid white" class="link">
@@ -149,7 +142,7 @@
     }
     .centered {
         margin: auto;
-        width: 90%;
+        width: 95%;
     }
     .flex-container {
         display: flex;
@@ -175,7 +168,7 @@
         flex: 5
     }
     .fullscreen {
-        width: 90%;
+        width: 95%;
         margin: auto;
         margin-top: 30px;
     }

@@ -16,7 +16,7 @@
                     <xsl:value-of select="//a1:Broj_prijave"/>
                 </pred:Broj_prijave>
                 <pred:Datum_podnosenja>
-                    <xsl:value-of select="//a1:Datum_podnosenja"/>
+                    <xsl:value-of select="substring(//a1:Datum_podnosenja, 0, 11)"/>
                 </pred:Datum_podnosenja>
                 <xsl:choose>
                     <xsl:when test="//a1:Podnosilac/a1:Ime != ''">

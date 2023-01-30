@@ -462,7 +462,7 @@
                                     Datum podnošenja
                                 </div>
                                 <div style="text-align: center">
-                                    <xsl:value-of select="//z1:Datum_podnosenja"/>
+                                    <xsl:value-of select="substring(//z1:Datum_podnosenja, 0, 11)"/>
                                 </div>
                             </td>
                         </tr>

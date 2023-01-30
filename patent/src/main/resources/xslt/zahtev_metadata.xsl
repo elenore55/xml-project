@@ -16,10 +16,10 @@
                     <xsl:value-of select="//p1:Broj_prijave"/>
                 </pred:Broj_prijave>
                 <pred:Datum_podnosenja>
-                    <xsl:value-of select="//p1:Datum_podnosenja"/>
+                    <xsl:value-of select="substring(//p1:Datum_podnosenja, 0, 11)"/>
                 </pred:Datum_podnosenja>
                 <pred:Datum_prijema>
-                    <xsl:value-of select="//p1:Datum_prijema"/>
+                    <xsl:value-of select="substring(//p1:Datum_prijema, 0, 11)"/>
                 </pred:Datum_prijema>
                 <pred:Tip_prijave>
                     <xsl:value-of select="//p1:Zahtev/@tip_prijave"/>

@@ -12,7 +12,7 @@
             <rdf:Description rdf:about="{$Resenje_id}">
                 <pred:Naziv_fajla>Resenje_<xsl:value-of select="//a1:Referenca"/>.xml</pred:Naziv_fajla>
                 <pred:Datum_resenja>
-                    <xsl:value-of select="//a1:Datum_resenja"/>
+                    <xsl:value-of select="substring(//a1:Datum_resenja, 0, 11)"/>
                 </pred:Datum_resenja>
                 <pred:Ime_sluzbenika>
                     <xsl:value-of select="//a1:Ime_sluzbenika"/>

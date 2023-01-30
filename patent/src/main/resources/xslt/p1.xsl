@@ -84,13 +84,13 @@
                                     <td style="padding: 10px 0 0 10px; width: 50%">
                                         <span style="margin-top: 10px">Datum prijema:</span>
                                         <p style="font-size: 18px;">
-                                            <xsl:value-of select="//p1:Popunjava_zavod/p1:Datum_prijema"/>
+                                            <xsl:value-of select="substring(//p1:Popunjava_zavod/p1:Datum_prijema, 0, 11)"/>
                                         </p>
                                     </td>
                                     <td style="padding: 10px 0 0 10px; width: 50%">
                                         <span style="margin-top: 10px">Priznati datum podnošenja:</span>
                                         <p style="font-size: 18px;">
-                                            <xsl:value-of select="//p1:Popunjava_zavod/p1:Datum_podnosenja"/>
+                                            <xsl:value-of select="substring(//p1:Popunjava_zavod/p1:Datum_podnosenja, 0, 11)"/>
                                         </p>
                                     </td>
                                 </tr>
@@ -399,7 +399,7 @@
                             </p>
                             <p class="padded">
                                 Datum podnošenja prvobitne prijave / osnovne prijave: &nbsp;<xsl:value-of
-                                    select="//p1:Prvobitna_prijava/p1:Datum_podnosenja"/>
+                                    select="substring(//p1:Prvobitna_prijava/p1:Datum_podnosenja, 0, 11)"/>
                             </p>
                         </xsl:if>
                     </div>
@@ -429,7 +429,7 @@
                                             </strong>
                                         </td>
                                         <td class="centered">
-                                            <xsl:value-of select="p1:Datum_podnosenja"/>
+                                            <xsl:value-of select="substring(p1:Datum_podnosenja, 0, 11)"/>
                                         </td>
                                         <td class="centered">
                                             <a target="_blank">
