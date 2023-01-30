@@ -6,6 +6,6 @@ public class ZahtevComparator implements Comparator<Zahtev> {
 
     @Override
     public int compare(Zahtev o1, Zahtev o2) {
-        return o1.getPopunjavaZavod().getDatumPodnosenja().compareTo(o2.getPopunjavaZavod().getDatumPodnosenja());
+        return Integer.compare(o1.getPopunjavaZavod().getBrojPrijave(), o2.getPopunjavaZavod().getBrojPrijave());
     }
 }
