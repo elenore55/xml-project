@@ -9,7 +9,7 @@
                 :adresa="autor.adresa" class="item"></AutorPrikaz>
         </div>
         
-        <AutorUnos @updateAutor="updateAutor($event)" @addAutor="addAutor" title="Autor izvornog dela"></AutorUnos>
+        <AutorUnos ref="autorUnos" @updateAutor="updateAutor($event)" @addAutor="addAutor" title="Autor izvornog dela"></AutorUnos>
     </div>
 </template>
 
@@ -40,8 +40,10 @@
                 this.updateIzvornoDelo();
             },
             addAutor() {
-                this.autorList.push(this.autor);
-                this.updateIzvornoDelo();
+                if (this.$refs.autorUnos.isValidInput()) {
+                    this.autorList.push(this.autor);
+                    this.updateIzvornoDelo();
+                }
             },
             updateAutor(autor) {
                 this.autor = autor;

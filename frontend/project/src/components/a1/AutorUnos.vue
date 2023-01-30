@@ -87,9 +87,14 @@
                 this.adresa = {};
                 this.drzavljanstvo = '';
                 this.godinaSmrti = -1;
-                this.zivChoice = 1;
                 this.$refs.licniPodaci.clear();
                 this.$refs.adresaUnos.clear();
+            },
+            isValidInput() {
+                let podaci = this.$refs.licniPodaci.isValidInput();
+                if (this.zivChoice != 1) return podaci;
+                let adresa = this.$refs.adresaUnos.isValidInput();
+                return podaci && adresa;
             }
         }
     }

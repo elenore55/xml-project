@@ -15,7 +15,7 @@
                         :adresa="autor.adresa" class="item"></AutorPrikaz>
                 </div>
                 
-                <AutorUnos @updateAutor="updateAutor($event)" @addAutor="addAutor"></AutorUnos>
+                <AutorUnos ref="autorUnos" @updateAutor="updateAutor($event)" @addAutor="addAutor"></AutorUnos>
 
                 <div>
                     <h2>Prilozi uz prijavu</h2>
@@ -80,7 +80,8 @@
                 this.autorskoDelo = delo;
             },
             addAutor() {
-                this.autorList.push(this.autor);
+                if (this.$refs.autorUnos.isValidInput())
+                    this.autorList.push(this.autor);
             },
             updateAutor(autor) {
                 this.autor = autor;
