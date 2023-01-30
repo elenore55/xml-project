@@ -8,8 +8,8 @@
                 <a @click="setZ1Servis" :class="getServis == 'Ž1'? 'active': 'none'">Žigovi</a>
             </div>
         </div>
-        <a @click="podnesiResenje">Podnesi rešenje</a>
-        <div class="dropdown">
+        <a @click="podnesiResenje" :class="$router.history.current.path.endsWith('podnosenjeResenja')?'selected-item':''">Podnesi rešenje</a>
+        <div class="dropdown" :class="$router.history.current.path.endsWith('Pretraga')?'selected-item':''">
             <a class="dropdown-link">Pretraga</a>
             <div class="dropdown-content">
                 <a @click="goToZahtevPretraga">Zahtevi</a>
@@ -30,7 +30,7 @@
                 <a @click="downloadResenjeMetadata('rdf')">RDF</a>
             </div>
         </div>
-        <a @click="goToIzvestaji">Generisanje izveštaja</a>
+        <a @click="goToIzvestaji" :class="$router.history.current.path.endsWith('generisanjeIzvestaja')?'selected-item':''">Generisanje izveštaja</a>
         <a @click="logout">Logout</a>
     </div>
 </template>
@@ -122,6 +122,9 @@
     .topnav a.active {
         background-color: #706d85;
         color: white;
+    }
+    .selected-item {
+        background-color: #706d85;
     }
     .dropdown {
         float: left;

@@ -8,8 +8,8 @@
                 <a @click="setZ1Servis" :class="getServis == 'Ž1'? 'active': 'none'">Žigovi</a>
             </div>
         </div>
-        <a @click="podnesiZahtev">Podnesi zahtev</a>
-        <a @click="goToResenjePretraga">Pretraga rešenja</a>
+        <a @click="podnesiZahtev" :class="$router.history.current.path.endsWith('podnosenjeZahteva')?'selected-item':''">Podnesi zahtev</a>
+        <a @click="goToResenjePretraga" :class="$router.history.current.path.endsWith('resenjePretraga')?'selected-item':''">Pretraga rešenja</a>
         <a @click="logout">Logout</a>
     </div>
 </template>
@@ -19,7 +19,7 @@
         name: 'GradjaninNav',
         data() {
             return {
-                selected: 1,
+                selected: 0,
             }
         },
         methods: {
@@ -74,8 +74,6 @@
         background-color: #504e66;
         overflow: hidden;
     }
-
-    /* Style the links inside the navigation bar */
     .topnav a {
         float: left;
         color: white;
@@ -87,6 +85,9 @@
     .topnav a:hover {
         background-color: #ddd;
         color: black;
+    }
+    .selected-item {
+        background-color: #706d85;
     }
     .topnav a.active {
         background-color: #706d85;
