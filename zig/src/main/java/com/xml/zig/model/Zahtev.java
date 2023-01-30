@@ -21,4 +21,19 @@ public class Zahtev {
     public String toString() {
         return "\nZAHTEV Z1\n" + popunjavaPodnosilac + "\n" + popunjavaZavod + "\n";
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other instanceof Zahtev zahtev) {
+            return this.getPopunjavaZavod().getBrojPrijaveZiga().equals(zahtev.getPopunjavaZavod().getBrojPrijaveZiga());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        var str = String.format("%s-%s", popunjavaZavod.getBrojPrijaveZiga().getId(), popunjavaZavod.getBrojPrijaveZiga().getGodina());
+        return str.hashCode();
+    }
 }

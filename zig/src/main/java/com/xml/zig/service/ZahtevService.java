@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.Year;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.xml.zig.util.Util.PRILOZI_DIR;
 
@@ -69,12 +70,7 @@ public class ZahtevService {
         var statements = metadataSearchService.getStatements();
         var result = zahtevMetadataRepository.advancedMetadataSearch(operators, statements);
         result.sort(new ZahtevComparator());
-        return result;
-    }
-
-    public void save() throws Exception {
-        var zahtev = marshalling.unmarshalFromFile("z1.xml");
-        zahtevRepository.save(zahtev);
+        return result.stream().distinct().collect(Collectors.toList());
     }
 
     public InputStreamResource getAllMetadataAsJSON() throws Exception {

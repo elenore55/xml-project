@@ -44,5 +44,14 @@ public class PopunjavaZavod {
         public String toString() {
             return "\t- Broj prijave ziga: Z-" + id + "/" + godina;
         }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == null) return false;
+            if (other instanceof BrojPrijaveZiga broj) {
+                return broj.getId() == this.id && broj.getGodina() == this.godina;
+            }
+            return false;
+        }
     }
 }

@@ -23,7 +23,9 @@
             <div class="item">
                 <div v-for="(r, i) in zahtevi" :key="r.id">
                     <div class="link flex-container-sm">
-                        <a href="#" @click="prikaziZahtev(getId(r))" >Zahtev-{{ getId(r) }}</a>
+                        <div style="min-width: 130px; text-align: right;">
+                            <a href="#" @click="prikaziZahtev(getId(r))" >Zahtev-{{ getId(r) }}</a>
+                        </div>
                         <button v-if="activeZahtev == -1" type="button" @click="activateZahtev(i)">Podnesi rešenje</button>
                         <button v-else-if="activeZahtev != i" type="button" disabled>Podnesi rešenje</button>
                         <button v-else type="button" @click="deactivateZahtev">Odustani</button>
@@ -227,7 +229,7 @@
         margin-bottom: 5px;
     }
     button {
-        font-size: 14px;
+        font-size: 15px;
     }
     .link {
         margin: 20px 0;
