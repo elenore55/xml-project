@@ -3,6 +3,7 @@ package com.xml.autorsko_pravo.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.xml.autorsko_pravo.dto.CreateZahtevDTO;
+import com.xml.autorsko_pravo.dto.MetadataDTO;
 import com.xml.autorsko_pravo.model.Zahtev;
 import com.xml.autorsko_pravo.service.HTMLTransformer;
 import com.xml.autorsko_pravo.service.PDFTransformer;
@@ -167,7 +168,7 @@ public class ZahtevController {
     }
 
     @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<List<String>> getMetadataVariables() {
+    public ResponseEntity<List<MetadataDTO>> getMetadataVariables() {
         return new ResponseEntity<>(zahtevService.getMetadataVariables(), HttpStatus.OK);
     }
 }

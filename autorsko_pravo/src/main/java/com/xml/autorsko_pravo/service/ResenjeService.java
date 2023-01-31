@@ -1,6 +1,7 @@
 package com.xml.autorsko_pravo.service;
 
 import com.xml.autorsko_pravo.dto.CreateResenjeDTO;
+import com.xml.autorsko_pravo.dto.MetadataDTO;
 import com.xml.autorsko_pravo.dto.TimePeriodDTO;
 import com.xml.autorsko_pravo.model.Resenje;
 import com.xml.autorsko_pravo.model.ResenjeComparator;
@@ -145,7 +146,7 @@ public class ResenjeService {
         return resenjeMetadataRepository.getAllAsRDF();
     }
 
-    public List<String> getMetadataVariables() {
+    public List<MetadataDTO> getMetadataVariables() {
         return resenjeMetadataRepository.getMetadataVariables();
     }
 }

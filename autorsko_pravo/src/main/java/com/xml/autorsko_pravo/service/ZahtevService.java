@@ -1,6 +1,7 @@
 package com.xml.autorsko_pravo.service;
 
 import com.xml.autorsko_pravo.dto.CreateZahtevDTO;
+import com.xml.autorsko_pravo.dto.MetadataDTO;
 import com.xml.autorsko_pravo.model.*;
 import com.xml.autorsko_pravo.repository.Marshalling;
 import com.xml.autorsko_pravo.repository.ResenjeRepository;
@@ -139,7 +140,7 @@ public class ZahtevService {
         return getDifference(reseniZahteviNames, zahtevi);
     }
 
-    public List<String> getMetadataVariables() {
+    public List<MetadataDTO> getMetadataVariables() {
         return zahtevMetadataRepository.getMetadataVariables();
     }
 }
