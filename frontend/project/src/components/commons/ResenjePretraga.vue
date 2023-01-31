@@ -61,6 +61,7 @@
                 this.rezultati = [];
                 CommonsService.osnovnaPretragaResenje(this.tekst, this.matchCase)
                 .then((response) => {
+                    this.resenje = {};
                     xml2js.parseString(response.data, (_err, result) => {
                         for (let i of result.List.item) {
                             this.rezultati.push(JSON.parse(JSON.stringify(i)));
@@ -75,6 +76,7 @@
                 this.rezultati = [];
                 CommonsService.naprednaPretragaResenje(this.rows)
                 .then((response) => {
+                    this.resenje = {};
                     xml2js.parseString(response.data, (_err, result) => {
                         for (let i of result.List.item) {
                             this.rezultati.push(JSON.parse(JSON.stringify(i)));

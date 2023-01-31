@@ -1,6 +1,7 @@
 package com.xml.patent.service;
 
 import com.xml.patent.dto.CreateResenjeDTO;
+import com.xml.patent.dto.MetadataDTO;
 import com.xml.patent.dto.TimePeriodDTO;
 import com.xml.patent.model.Resenje;
 import com.xml.patent.model.ResenjeComparator;
@@ -104,7 +105,7 @@ public class ResenjeService {
         return resenjeMetadataRepository.getAllAsRDF();
     }
 
-    public List<String> getMetadataVariables() {
+    public List<MetadataDTO> getMetadataVariables() {
         return resenjeMetadataRepository.getMetadataVariables();
     }
 }

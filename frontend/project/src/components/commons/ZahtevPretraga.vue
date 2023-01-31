@@ -73,13 +73,13 @@
                 this.rezultati = [];
                 CommonsService.osnovnaPretraga(this.tekst, this.matchCase)
                 .then((response) => {
+                    this.htmlContent = '';
                     xml2js.parseString(response.data, (_err, result) => {
                         console.log(result);
                         for (let i of result.List.item) {
                             this.rezultati.push(JSON.parse(JSON.stringify(i)));
                         }
                     });
-                    this.htmlContent = '';
                 })
                 .catch((err) => {
                     console.log(err);
@@ -88,12 +88,12 @@
             naprednaPretraga() {
                 this.rezultati = [];
                 CommonsService.naprednaPretraga(this.rows).then((response) => {
+                    this.htmlContent = '';
                     xml2js.parseString(response.data, (_err, result) => {
                         for (let i of result.List.item) {
                             this.rezultati.push(JSON.parse(JSON.stringify(i)));
                         }
                     });
-                    this.htmlContent = '';
                 }).catch((err) => {
                     console.log(err);
                 });

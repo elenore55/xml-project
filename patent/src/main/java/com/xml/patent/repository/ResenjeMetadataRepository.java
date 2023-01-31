@@ -1,5 +1,6 @@
 package com.xml.patent.repository;
 
+import com.xml.patent.dto.MetadataDTO;
 import com.xml.patent.model.Resenje;
 import com.xml.patent.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.xml.patent.dto.MetadataDTO.Type.*;
 
 @Component
 public class ResenjeMetadataRepository extends GenericMetadataRepository {
@@ -69,8 +72,14 @@ public class ResenjeMetadataRepository extends GenericMetadataRepository {
         return searchMetadata(query).size();
     }
 
-    public List<String> getMetadataVariables() {
-        return Arrays.asList("Naziv_fajla", "Datum_resenja", "Ime_sluzbenika", "Prezime_sluzbenika", "Odobren");
+    public List<MetadataDTO> getMetadataVariables() {
+        return Arrays.asList(
+                new MetadataDTO("Naziv_fajla"),
+                new MetadataDTO("Datum_resenja", DATE),
+                new MetadataDTO("Ime_sluzbenika"),
+                new MetadataDTO("Prezime_sluzbenika"),
+                new MetadataDTO("Odobren", BOOL)
+        );
     }
 
     private List<Resenje> searchMetadata(String sparqlQuery) throws Exception {

@@ -1,6 +1,7 @@
 package com.xml.patent.controller;
 
 import com.xml.patent.dto.CreateResenjeDTO;
+import com.xml.patent.dto.MetadataDTO;
 import com.xml.patent.dto.TimePeriodDTO;
 import com.xml.patent.model.Resenje;
 import com.xml.patent.service.PDFTransformer;
@@ -120,7 +121,7 @@ public class ResenjeController {
     }
 
     @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<List<String>> getMetadataVariables() {
+    public ResponseEntity<List<MetadataDTO>> getMetadataVariables() {
         return new ResponseEntity<>(resenjeService.getMetadataVariables(), HttpStatus.OK);
     }
 }

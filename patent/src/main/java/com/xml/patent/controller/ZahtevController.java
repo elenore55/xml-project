@@ -1,6 +1,7 @@
 package com.xml.patent.controller;
 
 import com.xml.patent.dto.CreateZahtevDTO;
+import com.xml.patent.dto.MetadataDTO;
 import com.xml.patent.model.Zahtev;
 import com.xml.patent.service.HTMLTransformer;
 import com.xml.patent.service.PDFTransformer;
@@ -142,7 +143,7 @@ public class ZahtevController {
     }
 
     @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<List<String>> getMetadataVariables() {
+    public ResponseEntity<List<MetadataDTO>> getMetadataVariables() {
         return new ResponseEntity<>(zahtevService.getMetadataVariables(), HttpStatus.OK);
     }
 

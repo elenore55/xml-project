@@ -1,6 +1,7 @@
 package com.xml.patent.service;
 
 import com.xml.patent.dto.CreateZahtevDTO;
+import com.xml.patent.dto.MetadataDTO;
 import com.xml.patent.model.PopunjavaPodnosilac;
 import com.xml.patent.model.PopunjavaZavod;
 import com.xml.patent.model.Zahtev;
@@ -113,7 +114,7 @@ public class ZahtevService {
         return result;
     }
 
-    public List<String> getMetadataVariables() {
+    public List<MetadataDTO> getMetadataVariables() {
         return zahtevMetadataRepository.getMetadataVariables();
     }
 

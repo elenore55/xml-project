@@ -1,5 +1,6 @@
 package com.xml.patent.repository;
 
+import com.xml.patent.dto.MetadataDTO;
 import com.xml.patent.model.Zahtev;
 import com.xml.patent.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.xml.patent.dto.MetadataDTO.Type.*;
 
 @Component
 public class ZahtevMetadataRepository extends GenericMetadataRepository {
@@ -54,9 +57,16 @@ public class ZahtevMetadataRepository extends GenericMetadataRepository {
         return searchMetadata(query).size();
     }
 
-    public List<String> getMetadataVariables() {
-        return Arrays.asList("Naziv_fajla", "Broj_prijave", "Datum_podnosenja", "Ime_podnosioca", "Prezime_podnosioca",
-                "Poslovno_ime_podnosioca", "Datum_prijema", "Tip_prijave");
+    public List<MetadataDTO> getMetadataVariables() {
+        return Arrays.asList(
+                new MetadataDTO("Naziv_fajla"),
+                new MetadataDTO("Broj_prijave", NUM),
+                new MetadataDTO("Datum_podnosenja", DATE),
+                new MetadataDTO("Ime_podnosioca"),
+                new MetadataDTO("Prezime_podnosioca"),
+                new MetadataDTO("Poslovno_ime_podnosioca"),
+                new MetadataDTO("Datum_prijema", DATE),
+                new MetadataDTO("Tip_prijave"));
     }
 
     private List<Zahtev> searchMetadata(String sparqlQuery) throws Exception {
