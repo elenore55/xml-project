@@ -1,6 +1,7 @@
 package com.xml.zig.controller;
 
 import com.xml.zig.dto.CreateResenjeDTO;
+import com.xml.zig.dto.MetadataDTO;
 import com.xml.zig.dto.TimePeriodDTO;
 import com.xml.zig.model.Resenje;
 import com.xml.zig.service.PDFTransformer;
@@ -120,7 +121,7 @@ public class ResenjeController {
     }
 
     @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<List<String>> getMetadataVariables() {
+    public ResponseEntity<List<MetadataDTO>> getMetadataVariables() {
         return new ResponseEntity<>(resenjeService.getMetadataVariables(), HttpStatus.OK);
     }
 }

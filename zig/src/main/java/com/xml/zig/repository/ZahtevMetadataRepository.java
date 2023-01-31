@@ -1,5 +1,6 @@
 package com.xml.zig.repository;
 
+import com.xml.zig.dto.MetadataDTO;
 import com.xml.zig.model.Zahtev;
 import com.xml.zig.util.AuthUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.xml.zig.dto.MetadataDTO.Type.DATE;
+import static com.xml.zig.dto.MetadataDTO.Type.NUM;
 
 @Component
 public class ZahtevMetadataRepository extends GenericMetadataRepository {
@@ -54,9 +58,17 @@ public class ZahtevMetadataRepository extends GenericMetadataRepository {
         return searchMetadata(query).size();
     }
 
-    public List<String> getMetadataVariables() {
-        return Arrays.asList("Naziv_fajla", "Id_prijave_ziga", "Godina_prijave_ziga", "Datum_podnosenja", "Ime_podnosioca", "Prezime_podnosioca",
-                "Poslovno_ime_podnosioca", "Tip_ziga");
+    public List<MetadataDTO> getMetadataVariables() {
+        return Arrays.asList(
+                new MetadataDTO("Naziv_fajla"),
+                new MetadataDTO("Id_prijave_ziga", NUM),
+                new MetadataDTO("Godina_prijave_ziga", NUM),
+                new MetadataDTO("Datum_podnosenja", DATE),
+                new MetadataDTO("Ime_podnosioca"),
+                new MetadataDTO("Prezime_podnosioca"),
+                new MetadataDTO("Poslovno_ime_podnosioca"),
+                new MetadataDTO("Tip_ziga")
+        );
     }
 
     private List<Zahtev> searchMetadata(String sparqlQuery) throws Exception {

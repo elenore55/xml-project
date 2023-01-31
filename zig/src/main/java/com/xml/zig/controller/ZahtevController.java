@@ -2,6 +2,7 @@ package com.xml.zig.controller;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.xml.zig.dto.CreateZahtevDTO;
+import com.xml.zig.dto.MetadataDTO;
 import com.xml.zig.model.Zahtev;
 import com.xml.zig.service.HTMLTransformer;
 import com.xml.zig.service.PDFTransformer;
@@ -157,7 +158,7 @@ public class ZahtevController {
     }
 
     @GetMapping(value = "metadata/vars", produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<List<String>> getMetadataVariables() {
+    public ResponseEntity<List<MetadataDTO>> getMetadataVariables() {
         return new ResponseEntity<>(zahtevService.getMetadataVariables(), HttpStatus.OK);
     }
 }

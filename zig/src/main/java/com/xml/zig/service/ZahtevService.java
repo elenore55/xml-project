@@ -1,6 +1,7 @@
 package com.xml.zig.service;
 
 import com.xml.zig.dto.CreateZahtevDTO;
+import com.xml.zig.dto.MetadataDTO;
 import com.xml.zig.model.*;
 import com.xml.zig.repository.Marshalling;
 import com.xml.zig.repository.ResenjeRepository;
@@ -149,7 +150,7 @@ public class ZahtevService {
         return null;
     }
 
-    public List<String> getMetadataVariables() {
+    public List<MetadataDTO> getMetadataVariables() {
         return zahtevMetadataRepository.getMetadataVariables();
     }
 }

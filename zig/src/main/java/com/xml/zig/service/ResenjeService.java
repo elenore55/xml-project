@@ -1,6 +1,7 @@
 package com.xml.zig.service;
 
 import com.xml.zig.dto.CreateResenjeDTO;
+import com.xml.zig.dto.MetadataDTO;
 import com.xml.zig.dto.TimePeriodDTO;
 import com.xml.zig.model.Resenje;
 import com.xml.zig.model.ResenjeComparator;
@@ -104,7 +105,7 @@ public class ResenjeService {
         return resenjeMetadataRepository.getAllAsRDF();
     }
 
-    public List<String> getMetadataVariables() {
+    public List<MetadataDTO> getMetadataVariables() {
         return resenjeMetadataRepository.getMetadataVariables();
     }
 }
