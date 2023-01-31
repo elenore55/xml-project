@@ -19,8 +19,8 @@
 
             <input v-if="selectedMetadata[0].type == 'DATE'" type="date" v-model="rows[0].value" @input="updateFilter" />
             <input v-else-if="selectedMetadata[0].type == 'NUM'" type="number" min="1" v-model="rows[0].value" @input="updateFilter" />
-            <select v-else-if="selectedMetadata[0].type == 'BOOL'" v-model="rows[0].value" @change="updateFilter">
-                <option selected>true</option>
+            <select v-else-if="selectedMetadata[0].type == 'BOOL'" v-model="rows[0].value" @change="updateFilter" class="bool">
+                <option>true</option>
                 <option>false</option>
             </select>
             <input v-else type="text" v-model="rows[0].value" @input="updateFilter" />
@@ -49,8 +49,8 @@
 
                 <input v-if="selectedMetadata[i].type == 'DATE'" type="date" v-model="r.value" @input="updateFilter" />
                 <input v-else-if="selectedMetadata[i].type == 'NUM'" type="number" min="1" v-model="r.value" @input="updateFilter" />
-                <select v-else-if="selectedMetadata[i].type == 'BOOL'" v-model="r.value" @change="updateFilter">
-                    <option selected>true</option>
+                <select v-else-if="selectedMetadata[i].type == 'BOOL'" v-model="r.value" @change="updateFilter" class="bool">
+                    <option>true</option>
                     <option>false</option>
                 </select>
                 <input v-else type="text" v-model="r.value" @input="updateFilter" />
@@ -80,7 +80,7 @@
                         });
                     }
                 });
-                this.rows[0].data = this.metadata[0].name;
+
             }).catch((err) => {
                 console.log(err);
             });
@@ -121,6 +121,7 @@
             setSelectedMetadata(row) {
                 let index = document.getElementsByClassName('meta')[row].selectedIndex;
                 if (index != -1) {
+                    console.log(this.metadata[index]);
                     this.selectedMetadata[row] = this.metadata[index];
                     this.updateFilter();
                 }
@@ -133,7 +134,9 @@
     input[type='date'] {
         width: 228px;
     }
-    
+    select.bool {
+        width: 233px;
+    }
     .flex-container {
         display: flex;
         gap: 0 10px;
