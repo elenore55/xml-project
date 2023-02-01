@@ -42,4 +42,18 @@ public class Zahtev {
     public String toString() {
         return "\nZAHTEV P1 (" + tipPrijave + " prijava)\n" + popunjavaPodnosilac + "\n" + popunjavaZavod + "\n";
     }
+
+    @Override
+    public int hashCode() {
+        return this.popunjavaZavod.getBrojPrijave();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other instanceof Zahtev zahtev) {
+            return this.popunjavaZavod.getBrojPrijave() == zahtev.getPopunjavaZavod().getBrojPrijave();
+        }
+        return false;
+    }
 }

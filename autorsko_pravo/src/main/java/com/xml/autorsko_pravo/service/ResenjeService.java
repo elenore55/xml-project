@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @Service
 public class ResenjeService {
@@ -128,7 +129,7 @@ public class ResenjeService {
         var statements = metadataSearchService.getStatements();
         var result = resenjeMetadataRepository.advancedMetadataSearch(operators, statements);
         result.sort(new ResenjeComparator());
-        return result;
+        return result.stream().distinct().collect(Collectors.toList());
     }
 
     public void generateReport(TimePeriodDTO dto) throws Exception {

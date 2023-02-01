@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ZahtevService {
@@ -68,7 +69,7 @@ public class ZahtevService {
         var statements = metadataSearchService.getStatements();
         var result = zahtevMetadataRepository.advancedMetadataSearch(operators, statements);
         result.sort(new ZahtevComparator());
-        return result;
+        return result.stream().distinct().collect(Collectors.toList());
     }
 
     public void save() throws Exception {

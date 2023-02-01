@@ -28,6 +28,20 @@ public class Resenje {
     @XmlElement(name = "Referenca", required = true)
     protected String referenca;
 
+    @Override
+    public int hashCode() {
+        return this.referenca.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other instanceof Resenje resenje) {
+            return this.referenca.equals(resenje.getReferenca());
+        }
+        return false;
+    }
+
     @Getter
     @Setter
     @XmlAccessorType(XmlAccessType.FIELD)

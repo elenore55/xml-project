@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ZahtevService {
@@ -64,7 +65,7 @@ public class ZahtevService {
         var statements = metadataSearchService.getStatements();
         var result = zahtevMetadataRepository.advancedMetadataSearch(operators, statements);
         result.sort(new ZahtevComparator());
-        return result;
+        return result.stream().distinct().collect(Collectors.toList());
     }
 
     public void save(CreateZahtevDTO dto, String prilog) throws Exception {
@@ -94,11 +95,6 @@ public class ZahtevService {
         zahtev.setPopunjavaPodnosilac(popunjavaPodnosilac);
         zahtev.setPopunjavaZavod(popunjavaZavod);
         zahtevMetadataRepository.extract(zahtev);
-        zahtevRepository.save(zahtev);
-    }
-
-    public void save() throws Exception {
-        var zahtev = marshalling.unmarshalFromFile("a1.xml");
         zahtevRepository.save(zahtev);
     }
 

@@ -56,8 +56,8 @@
                 this.$router.push('/resenjePretraga');
             },
             podnesiZahtev() {
-                if (this.$store.state.servis === 'A1') this.$router.push('#/a1/podnosenjeZahteva');
-                else if (this.$store.state.servis === 'P1') this.$router.push('#/p1/podnosenjeZahteva');
+                if (this.$store.state.servis === 'A1') this.$router.push('/a1/podnosenjeZahteva');
+                else if (this.$store.state.servis === 'P1') this.$router.push('/p1/podnosenjeZahteva');
                 else this.$router.push('/z1/podnosenjeZahteva');
             }
         },

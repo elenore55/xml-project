@@ -18,6 +18,20 @@ public class Zahtev {
     PopunjavaZavod popunjavaZavod;
 
     @Override
+    public int hashCode() {
+        return this.popunjavaZavod.getBrojPrijave();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other instanceof Zahtev zahtev) {
+            return this.popunjavaZavod.getBrojPrijave() == zahtev.getPopunjavaZavod().getBrojPrijave();
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "ZAHTEV A1\n" + popunjavaPodnosilac + "\n" + popunjavaZavod + "\n";
     }

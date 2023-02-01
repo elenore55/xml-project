@@ -377,12 +377,14 @@
                             </p>
                             <p class="centered" style="font-size: 18px">
                                 <strong>
-                                    <xsl:if test="//a1:Autorsko_delo/@stvoreno_u_radnom_odnosu='true'">
-                                        Delo je stvoreno u radnom odnosu
-                                    </xsl:if>
-                                    <xsl:otherwise>
-                                        Delo nije stvoreno u radnom odnosu
-                                    </xsl:otherwise>
+                                    <xsl:choose>
+                                        <xsl:when test="//a1:Autorsko_delo/@stvoreno_u_radnom_odnosu='true'">
+                                            Delo je stvoreno u radnom odnosu
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            Delo nije stvoreno u radnom odnosu
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </strong>
                             </p>
                         </div>

@@ -41,6 +41,8 @@ public abstract class Autor {
             this.prezime = dto.getPrezime();
             this.adresa = new Adresa(dto.getAdresa());
             this.drzavljanstvo = dto.getDrzavljanstvo();
+            if (dto.getPseudonim() != null && !dto.getPseudonim().equals(""))
+                this.pseudonim = dto.getPseudonim();
         }
 
         @XmlElement(name = "Adresa", required = true)
@@ -66,6 +68,8 @@ public abstract class Autor {
             this.ime = dto.getIme();
             this.prezime = dto.getPrezime();
             this.godinaSmrti = dto.getGodinaSmrti();
+            if (dto.getPseudonim() != null && !dto.getPseudonim().equals(""))
+                this.pseudonim = dto.getPseudonim();
         }
 
         @XmlElement(name = "Godina_smrti", required = true)
