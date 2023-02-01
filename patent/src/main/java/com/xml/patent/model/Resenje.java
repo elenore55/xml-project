@@ -16,7 +16,7 @@ public class Resenje {
 
     @XmlElement(name = "Datum_resenja", required = true)
     @XmlSchemaType(name = "date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     protected Date datumResenja;
 
     @XmlElement(name = "Ime_sluzbenika", required = true)

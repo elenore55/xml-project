@@ -41,7 +41,6 @@
                     }
                     td:hover {
                     font-style: italic;
-                    background-color: #cbd4f2;
                     }
                     .centered {
                     text-align: center;

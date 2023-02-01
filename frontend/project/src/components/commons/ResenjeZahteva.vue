@@ -7,7 +7,7 @@
                 <span v-else>ODBIJEN</span>
             </label>
         </strong>
-        <label>Datum rešenja: {{ datum }}</label>
+        <label>Datum rešenja: {{ datumResenja }}</label>
         
         <label>Službenik: {{ imeSluzbenika }} {{ prezimeSluzbenika }}</label>
         
@@ -33,6 +33,13 @@
                     return `http://localhost:${port}`;
                 }
                 return this.$store.state.host; 
+            }
+        },
+        computed: {
+            datumResenja() {
+                let date = new Date(Date.parse(this.datum));
+                date.setDate(date.getDate() + 1);
+                return date.toISOString().split('T')[0];
             }
         }
     }
