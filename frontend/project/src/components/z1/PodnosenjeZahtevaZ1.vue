@@ -8,11 +8,11 @@
             <div>
                 <p>Dodati podnosioci:</p>
                 <ul>
-                    <li v-for="p in podnosioci" :key="p.id">
+                    <li v-for="(p, i) in podnosioci" :key="p.id">
                         <div class="flex-container">
                         <p v-if="p.ime">{{ p.ime }} {{ p.prezime }}, {{ p.adresa.ulica }} {{ p.adresa.broj }}, {{ p.adresa.postanskiBroj }} {{ p.adresa.mesto }}</p>
                         <p v-else>{{ p.poslovnoIme }}, {{ p.adresa.ulica }} {{ p.adresa.broj }}, {{ p.adresa.postanskiBroj }} {{ p.adresa.mesto }}</p>
-                        <button type="button" @click="ukloniPodnosioca" class="btn-del">X</button>
+                        <button type="button" @click="ukloniPodnosioca(i)" class="btn-del">X</button>
                         </div>
                     </li>
                 </ul>

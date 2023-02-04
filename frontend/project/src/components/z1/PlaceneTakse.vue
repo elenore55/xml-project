@@ -3,16 +3,16 @@
         <h2>Plaćene takse</h2>
         <div class="grid-container">
             <label id="osnovna-taksa-lbl">Osnovna taksa (RSD)</label>
-            <input type="number" v-model="osnovnaTaksa" id="osnovna-taksa-input" @input="updatePlaceneTakse"/>
+            <input type="number" min="0" v-model="osnovnaTaksa" id="osnovna-taksa-input" @input="updatePlaceneTakse"/>
 
             <label id="graf-lbl">Grafičko rešenje (RSD)</label>
-            <input type="number" id="graf-input" v-model="grafickoResenje" @input="updatePlaceneTakse"/>
+            <input type="number" min="0" id="graf-input" v-model="grafickoResenje" @input="updatePlaceneTakse"/>
             
             <label id="klasa-lbl">Klasa</label>
-            <input type="text" id="klasa-input" v-model="klasa"/>
+            <input type="text" min="0" id="klasa-input" v-model="klasa"/>
             
             <label id="klasa-iznos-lbl">Iznos (RSD)</label>
-            <input type="number" v-model="klasaIznos" id="klasa-iznos-input" @input="updatePlaceneTakse"/>
+            <input type="number" min="0" v-model="klasaIznos" id="klasa-iznos-input" @input="updatePlaceneTakse"/>
         </div>
     </div>
 </template>
@@ -31,6 +31,9 @@
         },
         methods: {
             updatePlaceneTakse() {
+                if (!this.osnovnaTaksa) this.osnovnaTaksa = 0;
+                if (!this.grafickoResenje) this.grafickoResenje = 0;
+                if (!this.klasaIznos) this.klasaIznos = 0;
                 this.$emit('updatePlaceneTakse', {
                     osnovnaTaksa: this.osnovnaTaksa,
                     grafickoResenje: this.grafickoResenje,

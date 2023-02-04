@@ -43,6 +43,7 @@ export default {
                         localStorage.setItem('surname', result.KorisnikDTO.prezime);
                         localStorage.setItem('role', result.KorisnikDTO.uloga);
                     });
+                    this.$store.commit('setA1');
                     this.$router.push('/home');
                 }).catch((err) => {
                     alert(JSON.stringify(err));
