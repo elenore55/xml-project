@@ -124,6 +124,7 @@
                 this.$refs.zig.clear();
                 this.$refs.takse.clear();
                 this.$refs.prilozi.clear();
+                document.location.reload(true)
             },
             isValidInput() {
                 let punomocnik = this.$refs.punomocnik.isValidInput();

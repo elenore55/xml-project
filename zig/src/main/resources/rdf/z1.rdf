@@ -3,9 +3,8 @@
 <pred:Naziv_fajla>Zahtev4-2023.xml</pred:Naziv_fajla>
 <pred:Id_prijave_ziga>4</pred:Id_prijave_ziga>
 <pred:Godina_prijave_ziga>2023</pred:Godina_prijave_ziga>
-<pred:Datum_podnosenja>2023-02-04</pred:Datum_podnosenja>
-<pred:Tip_ziga>KOLEKTIVNI_ZIG</pred:Tip_ziga>
-<pred:Ime_podnosioca>Petar</pred:Ime_podnosioca>
-<pred:Prezime_podnosioca>Stoiljkovic</pred:Prezime_podnosioca>
+<pred:Datum_podnosenja>2023-02-05</pred:Datum_podnosenja>
+<pred:Tip_ziga>INDIVIDUALNI_ZIG</pred:Tip_ziga>
+<pred:Poslovno_ime_podnosioca>JoPex</pred:Poslovno_ime_podnosioca>
 </rdf:Description>
 </rdf:RDF>

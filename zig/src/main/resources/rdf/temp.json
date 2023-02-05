@@ -4,29 +4,29 @@
   "results": {
     "bindings": [
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev2-2023" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev1-2023" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/z1/pred/Naziv_fajla" } ,
-        "o": { "type": "literal" , "value": "Resenje_Zahtev2-2023.xml" }
+        "o": { "type": "literal" , "value": "Resenje_Zahtev1-2023.xml" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev2-2023" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev1-2023" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/z1/pred/Odobren" } ,
         "o": { "type": "literal" , "value": "true" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev2-2023" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev1-2023" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/z1/pred/Prezime_sluzbenika" } ,
-        "o": { "type": "literal" , "value": "Milica" }
+        "o": { "type": "literal" , "value": "Popovic" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev2-2023" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev1-2023" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/z1/pred/Ime_sluzbenika" } ,
         "o": { "type": "literal" , "value": "Milica" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev2-2023" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev1-2023" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/z1/pred/Datum_resenja" } ,
-        "o": { "type": "literal" , "value": "2023-02-04" }
+        "o": { "type": "literal" , "value": "2023-02-05" }
       } ,
       { 
         "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev3-2023" } ,
@@ -41,7 +41,7 @@
       { 
         "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev3-2023" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/z1/pred/Prezime_sluzbenika" } ,
-        "o": { "type": "literal" , "value": "Milica" }
+        "o": { "type": "literal" , "value": "Popovic" }
       } ,
       { 
         "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev3-2023" } ,
@@ -51,7 +51,7 @@
       { 
         "s": { "type": "uri" , "value": "http://www.ftn.com/z1/Resenje-Zahtev3-2023" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/z1/pred/Datum_resenja" } ,
-        "o": { "type": "literal" , "value": "2023-02-04" }
+        "o": { "type": "literal" , "value": "2023-02-05" }
       }
     ]
   }
