@@ -21,26 +21,26 @@
     
 ### User service
 1. Open `cmd` and navigate to `xml-project/users`
-2. Run command `mvn spring-boot:run`
+2. Run command `mvn spring-boot:run -s settings.xml`
 
 ### *Autorsko pravo* service
 1. Open `cmd` and navigate to `xml-project/autorsko_pravo`
-2. Run command `mvn spring-boot:run`
+2. Run command `mvn spring-boot:run -s settings.xml`
 
 ### *Patent* service
 
 1. Open `cmd` and navigate to `xml-project/patent`
-2. Run command `mvn spring-boot:run`
+2. Run command `mvn spring-boot:run -s settings.xml`
 
 ### *Žig* service
 
 1. Open `cmd` and navigate to `xml-project/zig`
-2. Run command `mvn spring-boot:run`
+2. Run command `mvn spring-boot:run -s settings.xml`
 
 ### Frontend
 1. Open `cmd` and navigate to `xml-project/frontend/project`
 2. Install node modules with `npm install`
-3. Run command `npm run serve -- --port 8082`
+3. Run command `npm run serve`
 
 
 Go to <http://localhost:8082> to start using the application.
