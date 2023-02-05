@@ -102,6 +102,7 @@
                 this.$refs.adresaUnos.clear();
                 this.$refs.kontaktPodaci.clear();
                 this.tipPodnosioca = 1;
+                this.pronalazac = false;
                 this.updatePodnosilac();
             },
             checkPronalazac(event) {

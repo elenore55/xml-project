@@ -4,7 +4,7 @@
         <div class="centered">
             <h2 class="text-centered">ZAHTEV ZA PRIZNANJE PATENTA</h2>
             <PodnosilacPrijave ref="podnosilac" @updatePodnosilac="updatePodnosilac($event)"></PodnosilacPrijave>
-            <Pronalazac ref="pronalazac" @updatePronalazac="updatePronalazac($event)"></Pronalazac>
+            <Pronalazac v-if="!podnosilacJePronalazac" ref="pronalazac" @updatePronalazac="updatePronalazac($event)"></Pronalazac>
             <PunomocnikUnos ref="punomocnik" @updatePunomocnik="updatePunomocnik($event)"></PunomocnikUnos>
             <div>
                 <h2>Podaci o dostavljanju</h2>
@@ -81,12 +81,14 @@
                 valid: {
                     brojPrvobitne: true,
                     datumPrvobitne: true
-                }
+                },
+                podnosilacJePronalazac: false
             }
         },
         methods: {
             updatePodnosilac(osoba) {
                 this.podnosilac = osoba;
+                this.podnosilacJePronalazac = osoba.pronalazac;
             },
             updatePronalazac(osoba) {
                 this.pronalazac = osoba;
@@ -128,7 +130,6 @@
                         punomocnik: this.punomocnik,
                         ranijePrijaveList: {ranijePrijave: this.ranijePrijave}
                     });
-                    console.log(xmlString);
                     ZahtevService.save(xmlString).then((_response) => {
                         alert('Zahtev je uspešno podnesen!');
                         this.clear();
@@ -169,17 +170,18 @@
             clear() {
                 this.$refs.podnosilac.clear();
                 this.$refs.punomocnik.clear();
-                this.$refs.pronalazac.clear();
+                if (!this.podnosilacJePronalazac)
+                    this.$refs.pronalazac.clear();
                 this.$refs.ranijePrijave.clear();
                 this.$refs.adresaDostavljanja.clear();
                 this.nacinDostavljanja = 'ELEKTRONSKI_DOKUMENT';
-                this.vrstaPrijave = 'IZDVOJENA';
                 this.brojPrvobitnePrijave = '';
                 this.datumPrvobitnePrijave = '';
                 this.nazivSrpski = '';
                 this.nazivEngleski = '';
                 this.xonomyData = '';
                 this.ranijePrijave = [];
+                this.podnosilacJePronalazac = false;
             },
             validateBrojPrvobitnePrijave() {
                 this.valid.brojPrvobitne = (this.vrstaPrijave == 'IZDVOJENA' || this.brojPrvobitnePrijave != '');
@@ -192,7 +194,9 @@
                 this.validateDatumPrvobitnePrijave();
                 let podnosilac = this.$refs.podnosilac.isValidInput();
                 let punomocnik = this.$refs.punomocnik.isValidInput();
-                let pronalazac = this.$refs.pronalazac.isValidInput();
+                let pronalazac = true;
+                if (!this.podnosilacJePronalazac)
+                    pronalazac = this.$refs.pronalazac.isValidInput();
                 let naziv = this.nazivSrpski != '' && this.nazivEngleski != '';
                 return podnosilac && punomocnik && pronalazac && naziv && this.valid.brojPrvobitne && this.valid.datumPrvobitne;
             }

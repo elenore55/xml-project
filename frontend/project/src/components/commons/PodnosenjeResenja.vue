@@ -135,6 +135,7 @@
                 this.activeZahtev = -1;
                 this.odbijenSelected = false;
                 this.razlogOdbijanja = '';
+                this.htmlContent = '';
             },
             setOdbijenSelected(value) {
                 this.odbijenSelected = value;

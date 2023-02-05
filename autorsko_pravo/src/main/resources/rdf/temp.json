@@ -4,29 +4,29 @@
   "results": {
     "bindings": [
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev5" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
-        "o": { "type": "literal" , "value": "Resenje_Zahtev6.xml" }
+        "o": { "type": "literal" , "value": "Resenje_Zahtev5.xml" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev5" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Odobren" } ,
         "o": { "type": "literal" , "value": "true" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev5" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_sluzbenika" } ,
-        "o": { "type": "literal" , "value": "Milica" }
+        "o": { "type": "literal" , "value": "Popovic" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev5" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Ime_sluzbenika" } ,
         "o": { "type": "literal" , "value": "Milica" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev5" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_resenja" } ,
-        "o": { "type": "literal" , "value": "2023-02-01" }
+        "o": { "type": "literal" , "value": "2023-02-05" }
       } ,
       { 
         "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev2" } ,
@@ -41,7 +41,7 @@
       { 
         "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev2" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_sluzbenika" } ,
-        "o": { "type": "literal" , "value": "Milica" }
+        "o": { "type": "literal" , "value": "Popovic" }
       } ,
       { 
         "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev2" } ,
@@ -51,32 +51,7 @@
       { 
         "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev2" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_resenja" } ,
-        "o": { "type": "literal" , "value": "2023-02-01" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
-        "o": { "type": "literal" , "value": "Resenje_Zahtev7.xml" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Odobren" } ,
-        "o": { "type": "literal" , "value": "true" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_sluzbenika" } ,
-        "o": { "type": "literal" , "value": "Milica" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Ime_sluzbenika" } ,
-        "o": { "type": "literal" , "value": "Milica" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_resenja" } ,
-        "o": { "type": "literal" , "value": "2023-02-04" }
+        "o": { "type": "literal" , "value": "2023-02-05" }
       }
     ]
   }

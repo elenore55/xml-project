@@ -46,7 +46,7 @@ export default {
                     this.$store.commit('setA1');
                     this.$router.push('/home');
                 }).catch((err) => {
-                    alert(JSON.stringify(err));
+                    alert('Nisu ispravni kredencijali!');
                 });
             }
             
