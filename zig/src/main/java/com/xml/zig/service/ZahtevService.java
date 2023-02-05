@@ -12,8 +12,10 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.Year;
@@ -140,7 +142,7 @@ public class ZahtevService {
     private String saveFile(MultipartFile file) throws IOException {
         if (file != null) {
             String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
-            var dirPath = Paths.get(PRILOZI_DIR);
+            var dirPath = getPriloziPath();
             var destinationFile = dirPath.resolve(Paths.get(fileName)).normalize().toAbsolutePath();
             try (var inputStream = file.getInputStream()) {
                 Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
@@ -148,6 +150,13 @@ public class ZahtevService {
             return fileName;
         }
         return null;
+    }
+
+    private Path getPriloziPath() {
+        var dir = new File(PRILOZI_DIR);
+        if (!dir.exists())
+            dir.mkdirs();
+        return Paths.get(PRILOZI_DIR);
     }
 
     public List<MetadataDTO> getMetadataVariables() {

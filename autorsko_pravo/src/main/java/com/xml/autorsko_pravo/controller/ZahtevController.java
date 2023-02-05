@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
@@ -121,7 +122,7 @@ public class ZahtevController {
         var mapper = new XmlMapper();
         var zahtev = mapper.readValue(dto, CreateZahtevDTO.class);
         try {
-            var dirPath = Paths.get(PRILOZI_DIR);
+            var dirPath = getPriloziPath();
             var destinationFile = dirPath.resolve(Paths.get(fileName)).normalize().toAbsolutePath();
             try (var inputStream = prilog.getInputStream()) {
                 Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
@@ -132,6 +133,13 @@ public class ZahtevController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
         return new ResponseEntity<>(fileName, HttpStatus.OK);
+    }
+
+    private Path getPriloziPath() {
+        var dir = new File(PRILOZI_DIR);
+        if (!dir.exists())
+            dir.mkdirs();
+        return Paths.get(PRILOZI_DIR);
     }
 
     @GetMapping(value = "metadata/all/json")
