@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:a1="http://www.ftn.com/a1" xmlns:pred="http://www.ftn.com/a1/pred/">
-<rdf:Description rdf:about="http://www.ftn.com/a1/Zahtev-6">
-<pred:Naziv_fajla>Zahtev6.xml</pred:Naziv_fajla>
-<pred:Broj_prijave>6</pred:Broj_prijave>
-<pred:Datum_podnosenja>2023-02-01</pred:Datum_podnosenja>
-<pred:Poslovno_ime_podnosioca>Some name</pred:Poslovno_ime_podnosioca>
-<pred:Stvoreno_u_radnom_odnosu>false</pred:Stvoreno_u_radnom_odnosu>
+<rdf:Description rdf:about="http://www.ftn.com/a1/Zahtev-7">
+<pred:Naziv_fajla>Zahtev7.xml</pred:Naziv_fajla>
+<pred:Broj_prijave>7</pred:Broj_prijave>
+<pred:Datum_podnosenja>2023-02-04</pred:Datum_podnosenja>
+<pred:Ime_podnosioca>Pera</pred:Ime_podnosioca>
+<pred:Prezime_podnosioca>Peric</pred:Prezime_podnosioca>
+<pred:Stvoreno_u_radnom_odnosu>true</pred:Stvoreno_u_radnom_odnosu>
 </rdf:Description>
 </rdf:RDF>

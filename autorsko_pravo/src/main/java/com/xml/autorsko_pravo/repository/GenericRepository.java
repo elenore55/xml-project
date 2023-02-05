@@ -31,7 +31,7 @@ public abstract class GenericRepository {
         setup(conn.driver);
         res = null;
         try {
-            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col = getOrCreateCollection(conn);
             col.setProperty(OutputKeys.INDENT, "yes");
             res = (XMLResource) col.getResource(documentName);
             if (res == null) {
@@ -50,7 +50,7 @@ public abstract class GenericRepository {
         setup(conn.driver);
         res = null;
         try {
-            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col = getOrCreateCollection(conn);
             col.setProperty(OutputKeys.INDENT, "yes");
             res = (XMLResource) col.getResource(documentName);
             return res;
@@ -97,7 +97,7 @@ public abstract class GenericRepository {
         res = null;
         var result = new ArrayList<XMLResource>();
         try {
-            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col = getOrCreateCollection(conn);
             col.setProperty(OutputKeys.INDENT, "yes");
             for (var documentName : col.listResources()) {
                 if (!exceptions.contains(documentName)) {
@@ -118,7 +118,7 @@ public abstract class GenericRepository {
         res = null;
         var retVal = new ArrayList<XMLResource>();
         try {
-            col = DatabaseManager.getCollection(conn.uri + collectionId);
+            col = getOrCreateCollection(conn);
             col.setProperty(OutputKeys.INDENT, "yes");
             var xPathQueryService = (XPathQueryService) col.getService("XPathQueryService", "1.0");
             xPathQueryService.setProperty("indent", "yes");

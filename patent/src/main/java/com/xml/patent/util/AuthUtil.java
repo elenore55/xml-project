@@ -34,8 +34,12 @@ public class AuthUtil {
         public String queryEndpoint;
         public String updateEndpoint;
         public String dataEndpoint;
+        public String user;
+        public String password;
 
         public FusekiConnectionProperties(Properties props) {
+            user = props.getProperty("conn.user").trim();
+            password = props.getProperty("conn.password").trim();
             dataset = props.getProperty("conn.dataset").trim();
             endpoint = props.getProperty("conn.endpoint").trim();
             queryEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.query").trim());

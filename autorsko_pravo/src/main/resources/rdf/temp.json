@@ -4,174 +4,79 @@
   "results": {
     "bindings": [
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-1" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Stvoreno_u_radnom_odnosu" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
+        "o": { "type": "literal" , "value": "Resenje_Zahtev6.xml" }
+      } ,
+      { 
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Odobren" } ,
         "o": { "type": "literal" , "value": "true" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-1" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Poslovno_ime_podnosioca" } ,
-        "o": { "type": "literal" , "value": "Neka firma" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-1" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_podnosenja" } ,
-        "o": { "type": "literal" , "value": "2023-01-28" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-1" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Broj_prijave" } ,
-        "o": { "type": "literal" , "value": "1" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-1" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
-        "o": { "type": "literal" , "value": "Zahtev1.xml" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-2" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Stvoreno_u_radnom_odnosu" } ,
-        "o": { "type": "literal" , "value": "true" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-2" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_podnosenja" } ,
-        "o": { "type": "literal" , "value": "2023-01-28" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-2" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Broj_prijave" } ,
-        "o": { "type": "literal" , "value": "2" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-2" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
-        "o": { "type": "literal" , "value": "Zahtev2.xml" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-2" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_podnosioca" } ,
-        "o": { "type": "literal" , "value": "Markovic" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-2" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Ime_podnosioca" } ,
-        "o": { "type": "literal" , "value": "Marko" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-3" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Stvoreno_u_radnom_odnosu" } ,
-        "o": { "type": "literal" , "value": "true" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-3" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_podnosenja" } ,
-        "o": { "type": "literal" , "value": "2023-01-29" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-3" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Broj_prijave" } ,
-        "o": { "type": "literal" , "value": "3" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-3" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
-        "o": { "type": "literal" , "value": "Zahtev3.xml" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-3" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_podnosioca" } ,
-        "o": { "type": "literal" , "value": "Djuric" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-3" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Ime_podnosioca" } ,
-        "o": { "type": "literal" , "value": "Djuro" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-4" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Stvoreno_u_radnom_odnosu" } ,
-        "o": { "type": "literal" , "value": "false" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-4" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_podnosenja" } ,
-        "o": { "type": "literal" , "value": "2023-02-01" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-4" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Broj_prijave" } ,
-        "o": { "type": "literal" , "value": "4" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-4" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
-        "o": { "type": "literal" , "value": "Zahtev4.xml" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-4" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_podnosioca" } ,
-        "o": { "type": "literal" , "value": "Stojanovic" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-4" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Ime_podnosioca" } ,
-        "o": { "type": "literal" , "value": "Stojan" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-5" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Stvoreno_u_radnom_odnosu" } ,
-        "o": { "type": "literal" , "value": "false" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-5" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_podnosenja" } ,
-        "o": { "type": "literal" , "value": "2023-02-01" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-5" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Broj_prijave" } ,
-        "o": { "type": "literal" , "value": "5" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-5" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
-        "o": { "type": "literal" , "value": "Zahtev5.xml" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-5" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_podnosioca" } ,
-        "o": { "type": "literal" , "value": "Popovic" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-5" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Ime_podnosioca" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_sluzbenika" } ,
         "o": { "type": "literal" , "value": "Milica" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-6" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Stvoreno_u_radnom_odnosu" } ,
-        "o": { "type": "literal" , "value": "false" }
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Ime_sluzbenika" } ,
+        "o": { "type": "literal" , "value": "Milica" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-6" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Poslovno_ime_podnosioca" } ,
-        "o": { "type": "literal" , "value": "Some name" }
-      } ,
-      { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-6" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_podnosenja" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev6" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_resenja" } ,
         "o": { "type": "literal" , "value": "2023-02-01" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-6" } ,
-        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Broj_prijave" } ,
-        "o": { "type": "literal" , "value": "6" }
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev2" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
+        "o": { "type": "literal" , "value": "Resenje_Zahtev2.xml" }
       } ,
       { 
-        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Zahtev-6" } ,
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev2" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Odobren" } ,
+        "o": { "type": "literal" , "value": "false" }
+      } ,
+      { 
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev2" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_sluzbenika" } ,
+        "o": { "type": "literal" , "value": "Milica" }
+      } ,
+      { 
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev2" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Ime_sluzbenika" } ,
+        "o": { "type": "literal" , "value": "Milica" }
+      } ,
+      { 
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev2" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_resenja" } ,
+        "o": { "type": "literal" , "value": "2023-02-01" }
+      } ,
+      { 
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
         "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Naziv_fajla" } ,
-        "o": { "type": "literal" , "value": "Zahtev6.xml" }
+        "o": { "type": "literal" , "value": "Resenje_Zahtev7.xml" }
+      } ,
+      { 
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Odobren" } ,
+        "o": { "type": "literal" , "value": "true" }
+      } ,
+      { 
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Prezime_sluzbenika" } ,
+        "o": { "type": "literal" , "value": "Milica" }
+      } ,
+      { 
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Ime_sluzbenika" } ,
+        "o": { "type": "literal" , "value": "Milica" }
+      } ,
+      { 
+        "s": { "type": "uri" , "value": "http://www.ftn.com/a1/Resenje-Zahtev7" } ,
+        "p": { "type": "uri" , "value": "http://www.ftn.com/a1/pred/Datum_resenja" } ,
+        "o": { "type": "literal" , "value": "2023-02-04" }
       }
     ]
   }
