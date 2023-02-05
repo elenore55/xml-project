@@ -2,8 +2,8 @@
 <rdf:Description rdf:about="http://www.ftn.com/p1/Zahtev-1">
 <pred:Naziv_fajla>Zahtev1.xml</pred:Naziv_fajla>
 <pred:Broj_prijave>1</pred:Broj_prijave>
-<pred:Datum_podnosenja>2023-02-04</pred:Datum_podnosenja>
-<pred:Datum_prijema>2023-02-04</pred:Datum_prijema>
+<pred:Datum_podnosenja>2023-02-05</pred:Datum_podnosenja>
+<pred:Datum_prijema>2023-02-05</pred:Datum_prijema>
 <pred:Tip_prijave>IZDVOJENA</pred:Tip_prijave>
 <pred:Ime_podnosioca>Milica</pred:Ime_podnosioca>
 <pred:Prezime_podnosioca>POPOVIC</pred:Prezime_podnosioca>
